@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/fill in.css" />
+    <link rel="icon" href="image/logo.ico" type="image/x-icon" />
+    <title>LeisurePace_個人資料填寫</title>
+  </head>
+  <body class="page6">
+    <form id="healthForm">
+      <div class="column">
+        <label for="name">姓名:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="birthday">生日:</label>
+        <input type="date" id="birthday" name="birthday" required />
+
+        <label>性别:</label>
+        <label><input type="radio" name="gender" value="male" /> 男性</label>
+        <label><input type="radio" name="gender" value="female" /> 女性</label>
+        <label><input type="radio" name="gender" value="other" /> 其他</label>
+
+        <label for="height">身高 (cm):</label>
+        <input type="number" id="height" name="height" required />
+
+        <label for="weight">體重 (kg):</label>
+        <input type="number" id="weight" name="weight" required />
+
+        <label>運動频率:</label>
+        <select name="exerciseFrequency">
+          <option value="daily">每天運動</option>
+          <option value="weekly">一週 0 - 1 次</option>
+          <option value="occasionally">一週 2 - 3 次</option>
+          <option value="occasionally">一週 4 - 6 次</option>
+        </select>
+
+        <label>運動目的:</label>
+        <label
+          ><input type="checkbox" name="exercisePurpose" value="stayhealthy" />
+          保持健康</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            name="exercisePurpose"
+            value="Relievestress"
+          />
+          舒壓</label
+        >
+        <label
+          ><input type="checkbox" name="exercisePurpose" value="Cellulite" />
+          消脂</label
+        >
+
+        <label
+          ><input type="checkbox" name="exercisePurpose" value="Buildmuscle" />
+          增肌</label
+        >
+
+        <label
+          ><input type="checkbox" name="exercisePurpose" value="other" />
+          其他</label
+        >
+      </div>
+      <button type="submit">提交</button>
+    </form>
+
+    <script>
+      const healthForm = document.getElementById("healthForm");
+
+      healthForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // 阻止表单提交的默认行为
+
+        // 在这里添加将数据提交到 Firebase 或其他服务器的代码
+        // 你可以使用 JavaScript 来获取表单元素的值，并将其发送到服务器
+        const formData = new FormData(healthForm);
+        const dataObject = {};
+
+        formData.forEach(function (value, key) {
+          dataObject[key] = value;
+        });
+
+        console.log("表单数据:", dataObject);
+        // 这里你可以将数据发送到服务器，或者根据需要进行其他处理
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="icon" href="image/logo.ico" type="image/x-icon" />
+    <!-- 使用 Firebase 8 版本 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js/main.js"></script>
+    <title>LeisurePace_登入</title>
+  </head>
+  <body class="page3">
+    <form action="action_page.php" method="post">
+      <h1>登入</h1>
+      <p>登入帳戶</p>
+      <hr />
+
+      <div class="container">
+        <label for="email"><b>電子信箱</b></label>
+        <input
+          type="text"
+          placeholder="Enter Email"
+          id="email"
+          name="email"
+          required
+        />
+
+        <label for="psw"><b>密碼</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          id="psw"
+          name="psw"
+          required
+        />
+
+        <hr />
+        <button type="submit">登入</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember" /> 記住我
+        </label>
+        <span class="psw">忘記 <a href="forget.html">密碼?</a></span>
+      </div>
+
+      <div class="container" style="background-color: #f1f1f1">
+        <button
+          id="google-login-btn"
+          class="button1 third-party-btn"
+          onclick="loginWithGoogleRedirect()"
+        >
+          Google 登录
+        </button>
+
+        <button
+          class="button2 third-party-btn"
+          type="button"
+          onclick="loginWithFacebook()"
+        >
+          Facebook 登入
+        </button>
+
+        <button
+          class="button3"
+          type="button"
+          class="third-party-btn"
+          onclick="loginWithApple()"
+        >
+          Apple 登入
+        </button>
+      </div>
+      <hr />
+
+      <div class="container signin">
+        <p>還沒有帳戶了? <a href="register.html">註冊</a>.</p>
+      </div>
+    </form>
+  </body>
+</html>

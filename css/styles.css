@@ -1,0 +1,281 @@
+/* 共用樣式 */
+body {
+  font-family: "Arial", sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* index 的樣式 */
+.page8 {
+  margin: 0;
+  overflow: hidden;
+}
+
+/* index 的樣式 */
+/*導覽列*/
+.logo1 {
+  display: flex;
+  align-items: center;
+  width: 180px;
+  height: auto;
+  margin: 10px;
+}
+
+header {
+  background-color: #333;
+  padding: 15px;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.logo1 img {
+  width: 50px;
+}
+
+.logo1 .title {
+  color: #fff; /* 設定標題文字顏色 */
+  font-size: 16px; /* 設定標題文字大小 */
+  font-weight: bold; /* 設定標題文字粗細 */
+  text-decoration: none; /* 移除標題文字下劃線 */
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  margin-left: auto; /* 將 menu 靠右 */
+}
+
+.menu li {
+  margin-right: 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  padding: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.menu a:hover {
+  background-color: #555;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  top: 100%; /* 從 dropdown 的底部延伸出來 */
+  right: 0; /* 靠右對齊 */
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+section {
+  padding: 20px;
+}
+
+/*home*/
+.hero-section {
+  position: relative;
+}
+
+.banner {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 創建一個4列的網格 */
+  grid-template-rows: auto auto; /* 自動大小的兩行 */
+  grid-gap: 16px; /* 網格間隙 */
+}
+
+.grid-item {
+  background: #f0f0f0;
+  /*padding: 16px;*/
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 第1個元素 - 大的正方形，佔用兩列兩行 */
+.grid-item.large {
+  grid-column: span 2;
+  grid-row: span 30;
+}
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {
+  opacity: 0.7;
+}
+
+.grid-item.large {
+  position: relative;
+}
+
+.image-overlay {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.image-overlay:hover .overlay-content {
+  opacity: 1;
+}
+
+.overlay-content p {
+  margin: 0;
+}
+
+.overlay-content i {
+  font-size: 30px; /* 调整图标大小 */
+}
+
+/*icons*/
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* 第2和第3個元素 - 垂直的長方形，各佔用一列兩行 */
+.grid-item.vertical {
+  grid-column: span 1;
+  grid-row: span 30;
+}
+
+/* 第4、第5和第6個元素 - 橫向的長方形，各佔用一列一行 */
+.grid-item.horizontal {
+  grid-column: span 2;
+  grid-row: span 15;
+}
+
+/*about*/
+.about-section {
+  position: relative;
+}
+
+/*function*/
+.function-section {
+  position: relative;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: gray;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: whitesmoke;
+}
+
+/* Caption text */
+.text {
+  color: #333;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* 自動撥放時的動畫 */
+.fade {
+  animation: fade 1.5s ease-in-out infinite;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  20%,
+  80% {
+    opacity: 1;
+  }
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  bottom: 0;
+  width: 97%;
+  border-radius: 20px;
+  margin: 20px; /* 上下左邊外邊距 */
+}

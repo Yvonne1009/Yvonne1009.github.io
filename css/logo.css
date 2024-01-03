@@ -1,0 +1,48 @@
+/* 共用樣式 */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* logo 的樣式 */
+.page1 {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #ccefea,
+    #ffc17c,
+    #ffd57b
+  ); /* 漸層背景色 */
+}
+
+/* logo 的樣式 */
+.animation-container {
+  text-align: center;
+  opacity: 0;
+}
+
+.logo {
+  width: 180px; /* 調整 logo 的大小 */
+  height: auto;
+  margin-bottom: 20px; /* 調整 logo 和文字之間的距離 */
+}
+
+.animated-text {
+  font-size: 78px;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.logo-text-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; /* 可根據需要進行調整 */
+  gap: 20px; /* 設定 logo 和文字之間的水平間距 */
+}

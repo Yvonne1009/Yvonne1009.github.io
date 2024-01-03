@@ -1,0 +1,83 @@
+/* 共用樣式 */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fill in 1 的樣式 */
+.page6 {
+  background-size: cover;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../image/bg2.png"); /* 設定背景圖片 */
+}
+
+#healthForm {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px; /* 调整表单的宽度 */
+  margin: 20px; /* 让表单水平居中 */
+  flex-wrap: wrap; /* 允许在需要时换行到下一行 */
+}
+
+.column {
+  flex: 1; /* 使两列平分父容器的宽度 */
+  margin-right: 15px; /* 两列之间的间距 */
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input,
+select,
+button {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Optional: Adjust styles for radio and checkbox labels */
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Optional: Style radio and checkbox labels */
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  font-weight: normal;
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 15px;
+}
+
+/* Optional: Style radio and checkbox when checked */
+input[type="radio"]:checked + label,
+input[type="checkbox"]:checked + label {
+  font-weight: bold;
+  color: #4caf50;
+}

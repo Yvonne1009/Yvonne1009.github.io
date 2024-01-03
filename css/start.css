@@ -1,0 +1,75 @@
+/* 共用樣式 */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* start 的樣式 */
+.page2 {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #ccefea,
+    #ffc17c,
+    #ffd57b
+  ); /* 漸層背景色 */
+  background-size: cover;
+  color: #fff; /* 設定文字顏色 */
+}
+
+/* start 的樣式 */
+.logo-container {
+  text-align: center;
+}
+
+.welcome-message {
+  font-size: 32px;
+  margin-top: 20px;
+  font-family: ABeeZee;
+  font-weight: 400;
+  color: black;
+}
+
+.description {
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+  font-family: ABeeZee;
+  font-weight: 400;
+}
+
+.buttons-container {
+  margin-top: 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: Montserrat;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.login-button {
+  background-color: #f6d58a;
+  color: white;
+}
+
+.register-button {
+  background-color: #f4900c;
+  color: white;
+}
