@@ -12,43 +12,57 @@ body {
 }
 
 /* index 的樣式 */
+
 /*導覽列*/
+#navbar {
+  background-color: #333;
+  position: fixed;
+  width: 98%;
+  display: flex; /* 使用 flexbox 進行排列 */
+  justify-content: space-between; /* 左右對齊 */
+  align-items: center; /* 垂直居中對齊 */
+  box-sizing: border-box; /* 避免寬度超過 100% 造成橫向滾動條 */
+  z-index: 1000; /* 設置一個足夠大的 z-index，以確保它在其他元素之上 */
+  border-radius: 20px;
+  margin: 10px; /* 上下左邊外邊距 */
+  top: -65px; /* Hide the navbar 50 px outside of the top view */
+  transition: top 0.3s; /* Transition effect when sliding down (and up) */
+}
+
+#navbar a {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* 新的導覽列結構 */
 .logo1 {
   display: flex;
   align-items: center;
-  width: 180px;
-  height: auto;
-  margin: 10px;
-}
-
-header {
-  background-color: #333;
-  padding: 15px;
-  border-radius: 20px;
-  margin: 20px;
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
 }
 
 .logo1 img {
   width: 50px;
 }
 
-.logo1 .title {
-  color: #fff; /* 設定標題文字顏色 */
-  font-size: 16px; /* 設定標題文字大小 */
-  font-weight: bold; /* 設定標題文字粗細 */
-  text-decoration: none; /* 移除標題文字下劃線 */
+.logo1 a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 10px;
 }
 
 .menu {
   list-style: none;
   display: flex;
-  margin-left: auto; /* 將 menu 靠右 */
 }
 
 .menu li {
@@ -77,11 +91,10 @@ header {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  top: 100%; /* 從 dropdown 的底部延伸出來 */
-  right: 0; /* 靠右對齊 */
+  top: 100%;
+  right: 0;
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -98,9 +111,6 @@ section {
 }
 
 /*home*/
-.hero-section {
-  position: relative;
-}
 
 .banner {
   align-items: center;
@@ -138,10 +148,6 @@ section {
 
 #myImg:hover {
   opacity: 0.7;
-}
-
-.grid-item.large {
-  position: relative;
 }
 
 .image-overlay {
