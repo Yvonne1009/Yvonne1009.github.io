@@ -5,13 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/login.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
-    <!-- 使用 Firebase 8 版本 -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.1/firebase-auth.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="js/main.js"></script>
+
     <title>LeisurePace_登入</title>
   </head>
+  <script>
+    // 替換以下的配置為你的 Firebase 專案配置
+    const firebaseConfig = {
+      apiKey: "AIzaSyAjT0TJInGf5t8YV3BnCF7TOFGqe3ty-IA",
+      authDomain: "leisurepace-a3d51.firebaseapp.com",
+      databaseURL: "https://leisurepace-a3d51-default-rtdb.firebaseio.com",
+      projectId: "leisurepace-a3d51",
+      storageBucket: "leisurepace-a3d51.appspot.com",
+      messagingSenderId: "955257567601",
+      appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+      measurementId: "G-MHZ967Y676",
+    };
+    // 初始化 Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // 設定 Google 登入提供者
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+    // 處理登入按鈕點擊事件
+    document.getElementById("loginButton").addEventListener("click", () => {
+      firebase
+        .auth()
+        .signInWithPopup(googleProvider)
+        .then((result) => {
+          // 登入成功處理
+          const user = result.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          // 登入失敗處理
+          console.error(error.message);
+        });
+    });
+
+    // 登出處理
+    document.getElementById("logoutButton").addEventListener("click", () => {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          // 登出成功處理
+          console.log("User signed out");
+        })
+        .catch((error) => {
+          // 登出失敗處理
+          console.error(error.message);
+        });
+    });
+  </script>
   <body class="page3">
     <form action="action_page.php" method="post">
       <h1>登入</h1>
@@ -49,7 +97,7 @@
         <button
           id="google-login-btn"
           class="button1 third-party-btn"
-          onclick="loginWithGoogleRedirect()"
+          onclick="signInWithGoogle()"
         >
           Google 登录
         </button>
@@ -77,5 +125,23 @@
         <p>還沒有帳戶了? <a href="register.html">註冊</a>.</p>
       </div>
     </form>
+
+    <script>
+      // 處理 Google 登入按鈕點擊事件
+      function signInWithGoogle() {
+        firebase
+          .auth()
+          .signInWithPopup(googleProvider)
+          .then((result) => {
+            // 登入成功處理
+            const user = result.user;
+            console.log(user);
+          })
+          .catch((error) => {
+            // 登入失敗處理
+            console.error(error.message);
+          });
+      }
+    </script>
   </body>
 </html>
