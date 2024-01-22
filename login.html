@@ -97,7 +97,7 @@
         <button
           id="google-login-btn"
           class="button1 third-party-btn"
-          onclick="signInWithGoogle()"
+          onclick="google_login()"
         >
           Google 登录
         </button>
@@ -105,7 +105,7 @@
         <button
           class="button2 third-party-btn"
           type="button"
-          onclick="loginWithFacebook()"
+          onclick="fb_login()"
         >
           Facebook 登入
         </button>
@@ -126,22 +126,7 @@
       </div>
     </form>
 
-    <script>
-      // 處理 Google 登入按鈕點擊事件
-      function signInWithGoogle() {
-        firebase
-          .auth()
-          .signInWithPopup(googleProvider)
-          .then((result) => {
-            // 登入成功處理
-            const user = result.user;
-            console.log(user);
-          })
-          .catch((error) => {
-            // 登入失敗處理
-            console.error(error.message);
-          });
-      }
-    </script>
+    <script src="./js/login.js"></script>
+    <script src="./js/Firebase/firebase.js"></script>
   </body>
 </html>
