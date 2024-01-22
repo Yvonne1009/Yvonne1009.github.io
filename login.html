@@ -11,55 +11,6 @@
 
     <title>LeisurePace_登入</title>
   </head>
-  <script>
-    // 替換以下的配置為你的 Firebase 專案配置
-    const firebaseConfig = {
-      apiKey: "AIzaSyAjT0TJInGf5t8YV3BnCF7TOFGqe3ty-IA",
-      authDomain: "leisurepace-a3d51.firebaseapp.com",
-      databaseURL: "https://leisurepace-a3d51-default-rtdb.firebaseio.com",
-      projectId: "leisurepace-a3d51",
-      storageBucket: "leisurepace-a3d51.appspot.com",
-      messagingSenderId: "955257567601",
-      appId: "1:955257567601:web:2e06661d84707065fe9ed0",
-      measurementId: "G-MHZ967Y676",
-    };
-    // 初始化 Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    // 設定 Google 登入提供者
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
-
-    // 處理登入按鈕點擊事件
-    document.getElementById("loginButton").addEventListener("click", () => {
-      firebase
-        .auth()
-        .signInWithPopup(googleProvider)
-        .then((result) => {
-          // 登入成功處理
-          const user = result.user;
-          console.log(user);
-        })
-        .catch((error) => {
-          // 登入失敗處理
-          console.error(error.message);
-        });
-    });
-
-    // 登出處理
-    document.getElementById("logoutButton").addEventListener("click", () => {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          // 登出成功處理
-          console.log("User signed out");
-        })
-        .catch((error) => {
-          // 登出失敗處理
-          console.error(error.message);
-        });
-    });
-  </script>
   <body class="page3">
     <form action="action_page.php" method="post">
       <h1>登入</h1>
