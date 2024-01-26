@@ -5,76 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/login.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
-    <script src="https://www.gstatic.com/firebasejs/10.0.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.0.1/firebase-auth.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>LeisurePace_登入</title>
   </head>
   <body class="page3">
-    <form action="action_page.php" method="post">
-      <h1>登入</h1>
-      <p>登入帳戶</p>
-      <hr />
-
-      <div class="container">
-        <label for="email"><b>電子信箱</b></label>
-        <input
-          type="text"
-          placeholder="Enter Email"
-          id="email"
-          name="email"
-          required
-        />
-
-        <label for="psw"><b>密碼</b></label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          id="psw"
-          name="psw"
-          required
-        />
-
-        <hr />
-        <button type="submit">登入</button>
-        <label>
-          <input type="checkbox" checked="checked" name="remember" /> 記住我
-        </label>
-        <span class="psw">忘記 <a href="forget.html">密碼?</a></span>
+    <div id="login_div" class="main-div">
+      <h3>Firebase Web login</h3>
+      <input type="email" placeholder="Email..." id="email_field" />
+      <input type="password" placeholder="Password..." id="password_field" />
+      <a id="forget" href="./forget.html">忘記你的帳戶或密碼</a>
+      <button onclick="login()">Login to Account</button>
+      <div class="division-line">
+        <hr id="left-line" />
+        <span>OR</span>
+        <hr id="right-line" />
       </div>
-
-      <div class="container" style="background-color: #f1f1f1">
-        <button class="button1 third-party-btn" onclick="google_login()">
-          Google 登录
-        </button>
-
-        <button
-          class="button2 third-party-btn"
-          type="button"
-          onclick="fb_login()"
-        >
-          Facebook 登入
-        </button>
-
-        <button
-          class="button3"
-          type="button"
-          class="third-party-btn"
-          onclick="loginWithApple()"
-        >
-          Apple 登入
-        </button>
+      <div class="other-login">
+        <div id="img">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/webfirebase-88e1c.appspot.com/o/%E7%99%BB%E5%85%A5%E9%80%A3%E5%8B%95icon-01.png?alt=media&token=016687b8-3366-429d-93a6-216078678c5b"
+            alt="other_login"
+            onclick="fb_login()"
+          />
+        </div>
+        <div id="img">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/webfirebase-88e1c.appspot.com/o/%E7%99%BB%E5%85%A5%E9%80%A3%E5%8B%95icon-02%20(1).png?alt=media&token=fe6f1ca2-0d57-488f-8c93-4670951c9c01"
+            alt="other_login"
+            onclick="google_login()"
+          />
+        </div>
+        <div id="img">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/fir-demo-2a2b1.appspot.com/o/phone.png?alt=media&token=b71a2502-7a22-4eb8-b3a7-6658484b23f2"
+            alt="other_login"
+            onclick="phone_login()"
+          />
+        </div>
       </div>
-      <hr />
+      <a href="./register.html" id="create-account"
+        >尚未註冊？立即建立您的帳戶</a
+      >
+    </div>
 
-      <div class="container signin">
-        <p>還沒有帳戶了? <a href="register.html">註冊</a>.</p>
-      </div>
-    </form>
+    <div id="recaptcha-container"></div>
+
+    <div id="user_div" class="loggedin-div">
+      <h3>Welcome User</h3>
+      <p id="user_para">
+        Welcome to Firebase web login Example. You're currently logged in.
+      </p>
+      <button onclick="logout()">Logout</button>
+    </div>
 
     <script src="./js/login.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.1/firebase.js"></script>
     <script src="./js/Firebase/firebase.js"></script>
   </body>
 </html>

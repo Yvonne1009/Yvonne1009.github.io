@@ -207,6 +207,7 @@ section {
 /*about*/
 .about-section {
   position: relative;
+  background: url(../image/) repeat;
 }
 
 /*function*/
