@@ -328,6 +328,13 @@ section {
   padding-top: 80px;
 }
 
+ul,
+ol {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
 @media (max-width: 767px) {
   .footer-widget {
     padding-top: 30px;

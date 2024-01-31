@@ -243,9 +243,6 @@ select {
 [type="button"],
 [type="reset"],
 [type="submit"],
-button {
-  -webkit-appearance: button;
-}
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
 [type="submit"]:not(:disabled),
@@ -267,9 +264,6 @@ input[type="radio"] {
 input[type="date"],
 input[type="datetime-local"],
 input[type="month"],
-input[type="time"] {
-  -webkit-appearance: listbox;
-}
 textarea {
   overflow: auto;
   resize: vertical;
@@ -298,10 +292,7 @@ progress {
 [type="number"]::-webkit-outer-spin-button {
   height: auto;
 }
-[type="search"] {
-  outline-offset: -2px;
-  -webkit-appearance: none;
-}
+
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
