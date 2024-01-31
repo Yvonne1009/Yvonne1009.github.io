@@ -13,7 +13,6 @@
     <title>LeisurePace</title>
   </head>
   <body>
-    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <header>
       <div id="navbar" class="navbar">
         <div class="logo1">
@@ -21,12 +20,12 @@
         </div>
         <ul class="menu">
           <li class="dropdown">
-            <a href="#about"
+            <a href="about.html"
               >關於LeisurePace<i class="fas fa-caret-down"></i
             ></a>
             <div class="dropdown-content">
               <a href="#">LeisurePace</a>
-              <a href="#">超慢跑</a>
+              <a href="#">超慢跑介紹</a>
               <a href="#">製作團隊</a>
             </div>
           </li>
@@ -147,10 +146,90 @@
       <div class="person-section"></div>
     </section>
 
-    <footer>
-      <!-- 底部信息 -->
-      <p>&copy; LeisurePace</p>
+    <footer id="footer" class="footer-area">
+      <div class="footer-widget pt-80 pb-130">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-8">
+              <div class="footer-logo mt-50">
+                <a href="#">
+                  <img src="image/logo.png" alt="Logo" />
+                </a>
+
+                <ul class="footer-social mt-20">
+                  <li>
+                    <a href="#"><i class="lni-facebook-filled"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-twitter-original"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-google"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-instagram"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <!-- footer logo -->
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <div class="f-title">
+                  <h4 class="title">關於LeisurePace</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="#">LeisurePace</a></li>
+                  <li><a href="#">超慢跑介紹</a></li>
+                  <li><a href="#">製作團隊</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <div class="f-title">
+                  <h4 class="title">超慢跑</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="#">單人遊玩</a></li>
+                  <li><a href="#">好友連線</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-5 col-sm-8">
+              <div class="footer-newsleter mt-45">
+                <div class="f-title">
+                  <h4 class="title">每日簽到</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="#">簽到</a></li>
+                  <li><a href="#">商店</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- footer widget -->
+      <div class="copyright-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="copyright text-center">
+                <p>&copy; LeisurePace</p>
+              </div>
+              <!-- copyright -->
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- copyright-area -->
     </footer>
+    <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
     <script>
       /*幻燈片效果*/
       let slideIndex = 0;

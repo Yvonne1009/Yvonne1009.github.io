@@ -1,0 +1,12 @@
+/* 共用樣式 */
+body {
+  font-family: "Arial", sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* index 的樣式 */
+.page8 {
+  margin: 0;
+  overflow: hidden;
+}
