@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/about.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
     <script src="js/about.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
     <title>關於LeisurePace</title>
   </head>
   <body>
@@ -47,18 +48,376 @@
         </div>
       </div>
     </header>
-    <section id="logo">
-      <div></div>
+    <section id="logo" class="about-area pt-80 pb-130">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="about-image mt-50 clearfix">
+              <div class="single-image float-left">
+                <img src="image/logo.png" alt="logo" />
+              </div>
+            </div>
+            <!-- about image -->
+          </div>
+          <div class="col-lg-6">
+            <div class="about-content mt-45">
+              <h4 class="about-welcome">關於我們</h4>
+              <h3 class="about-title mt-10">LeisurePace</h3>
+              <br />
+              <p class="mt-25">
+                "LeisurePace"這個名字傳遞了一種悠閒、輕鬆地跑步體驗。
+                "Leisure"表示悠閒、休閒，而"Pace"則指代步調、速度。
+                整體來說，這個名字傳遞出超慢跑的核心理念——
+                以輕鬆的步調享受運動，注重健康和愉悅。
+                <br />
+                這個名字也暗示著放慢腳步，讓人們遠離繁忙的生活節奏，
+                以更和平的步伐體驗跑步的樂趣。選取這個名字有助於用戶心中建立積極、愉悅的形象，
+                使其願意選擇這個APP來實現輕鬆慢跑目標。
+              </p>
+            </div>
+            <!-- about content -->
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
     </section>
-    <section id="run">
-      <div></div>
+
+    <section
+      class="pb_section pb_bg-half"
+      data-section="practicing-areas"
+      id="run"
+    >
+      <div class="container">
+        <div class="row justify-content-md-center text-center mb-5">
+          <div class="col-lg-7">
+            <h2 class="mt-0 heading-border-top font-weight-normal">
+              什麼是超慢跑?
+            </h2>
+            <p>
+              超慢跑是一種強度低、步伐小、速度慢到可聊天甚至唱歌的跑步運動，因為把強度控制在個人的乳酸閥值之下，跑步者較不易感到疲憊和痠痛，所以可以跑得更久，達到改善心肺功能和燃脂減重的功效。
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="single-item pb_slide_v2">
+              <div>
+                <div class="d-lg-flex d-md-block slide_content">
+                  <div
+                    class="pb_content-media"
+                    style="
+                      background-image: url(assets/images/1900x1200_img_4.jpg);
+                    "
+                  ></div>
+                  <div class="slide_content-text text-center">
+                    <div class="pb_icon_v1">
+                      <i class="flaticon text-primary flaticon-handcuffs"></i>
+                    </div>
+                    <h3 class="font-weight-normal mt-0 mb-4">
+                      超慢跑的3大好處
+                    </h3>
+                    <p>
+                      1.提升整體健康：超慢跑是有氧運動，可增強心肺耐力，讓心臟每次跳動能夠輸送更多的血液和氧氣到全身，對呼吸、心臟、循環和肌肉等系統的健康大有裨益，不只能預防疾病、改善慢性病，還能紓解壓力，提高睡眠品質。有研究發現，比起激烈的運動，低強度的超慢跑更能有效地降低死亡風險。
+                    </p>
+                    <p>
+                      2.輕鬆燃脂減重：超慢跑每分鐘燃燒的卡路里比高強度的運動少，但好處在於可以跑更長時間，也比較不容易造成傷害。低強度的運動還能促使肌肉燃燒脂肪，而不是以存儲的肝醣為主要能量來源，所以是安全、輕鬆又有效的減重方式。
+                    </p>
+                    <p>
+                      3.適合作為慢跑的基礎訓練：超慢跑是以「微笑速度」跑步，也就是能保持微笑，邊跑邊輕鬆地談天說地，很適合有健走基礎的人作為慢跑的入門訓練。練習超慢跑一段時間後，因為心肺功能增強了，微笑速度自然提升，這時就可以開始嘗試慢跑。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="d-lg-flex d-md-block slide_content">
+                  <div
+                    class="pb_content-media"
+                    style="
+                      background-image: url(assets/images/1900x1200_img_2.jpg);
+                    "
+                  ></div>
+                  <div class="slide_content-text text-center">
+                    <div class="pb_icon_v1">
+                      <i class="flaticon text-primary flaticon-wallet"></i>
+                    </div>
+                    <h3 class="font-weight-normal mt-0 mb-4">
+                      超慢跑的訓練方法和技巧
+                    </h3>
+                    <p>
+                      一、速度控制
+                      超慢跑的時速約5～6公里，跟健走差不多，或稍微快一點，目的是讓心率處於最大心率的50～60％或60～70％區間，避免對心臟造成負擔，又有利於燃燒脂肪。
+                    </p>
+
+                    <p>
+                      二、呼吸技巧
+                      超慢跑只需自然呼吸，穩定不急促就好，如果會喘就表示跑太快，要把速度慢下來。
+                    </p>
+
+                    <p>
+                      三、心理建設
+                      想到要進行一次強度大的運動訓練，你可能就提不起勁來。超慢跑不必擔心頻率、速度或里程，是一種能對運動保持積極態度的好方法。你可以先在家邊看電視邊練習，然後逐步轉為在戶外與朋友一起輕鬆練跑。不喘不累會讓你更容易堅持下去，很快就能建立起運動的習慣。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="d-lg-flex d-md-block slide_content">
+                  <div
+                    class="pb_content-media"
+                    style="
+                      background-image: url(assets/images/1900x1200_img_3.jpg);
+                    "
+                  ></div>
+                  <div class="slide_content-text text-center">
+                    <div class="pb_icon_v1">
+                      <i
+                        class="flaticon text-primary flaticon-computer-security"
+                      ></i>
+                    </div>
+                    <h3 class="font-weight-normal mt-0 mb-4">
+                      超慢跑注意事項：運動傷害和解決方法
+                    </h3>
+                    <p>超慢跑是很安全的運動，但仍需注意姿勢的正確性。</p>
+                    <p>
+                      1.跑步時要看前方，不要低頭，以免後頸張力過大，在跑步時身體晃動的情況下容易受傷。
+                      <br />
+                      2.保持膝蓋微彎在30度以內，大腿和小腿之間的軟骨就不會產生磨擦力，可以保持彈性，避免震動傷害。
+                    </p>
+                    <p>
+                      超慢跑主張以前腳掌先著地，但這有個缺點，就是容易變成踮腳跑步，對小腿、阿基里斯腱和足底筋膜造成負擔，所以有專家建議，以中足，也就是足弓間的位置著地，同時注意腰線不要下沉，大腿向上提起，如此可減少對關節的壓力，小腿不會使用過度，也就不會有跑完後小腿痠痛的問題。
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="d-lg-flex d-md-block slide_content">
+                  <div
+                    class="pb_content-media"
+                    style="
+                      background-image: url(assets/images/1900x1200_img_4.jpg);
+                    "
+                  ></div>
+                  <div class="slide_content-text text-center">
+                    <div class="pb_icon_v1">
+                      <i class="flaticon text-primary flaticon-courthouse"></i>
+                    </div>
+                    <h3 class="font-weight-normal mt-0 mb-4">
+                      誰適合超慢跑運動？
+                    </h3>
+                    <p>
+                      超慢跑很適合運動新手、跑步初學者、年長者、肥胖族群等沒有運動習慣的人，就連骨質疏鬆、患有退化性關節炎，或膝蓋動過手術的人，在諮詢過醫師的意見後也可以考慮練習。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-    <section id="teams">
-      <div></div>
+    <section id="teams" class="services-area pt-125 pb-130 gray-bg">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <div class="section-title text-center pb-20">
+              <h2 class="title">製作團隊</h2>
+              <br />
+            </div>
+            <!-- section title -->
+          </div>
+        </div>
+        <!-- row -->
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 col-sm-8">
+            <div
+              class="single-services text-center mt-30 wow fadeInUp"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.4s"
+            >
+              <div class="services-icon">
+                <i class="lni-paint-roller"></i>
+              </div>
+              <div class="services-content mt-15">
+                <h4 class="services-title">吳懿芳(11014060)</h4>
+                <p class="mt-20">文字</p>
+              </div>
+            </div>
+            <!-- single services -->
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-8">
+            <div
+              class="single-services text-center mt-30 wow fadeInUp"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.8s"
+            >
+              <div class="services-icon">
+                <i class="lni-blackboard"></i>
+              </div>
+              <div class="services-content mt-15">
+                <h4 class="services-title">黃鈺棋(11014068)</h4>
+                <p class="mt-20">文字</p>
+              </div>
+            </div>
+            <!-- single services -->
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-8">
+            <div
+              class="single-services text-center mt-30 wow fadeInUp"
+              data-wow-duration="1.5s"
+              data-wow-delay="1.2s"
+            >
+              <div class="services-icon">
+                <i class="lni-home"></i>
+              </div>
+              <div class="services-content mt-15">
+                <h4 class="services-title">張秉涵(11014081)</h4>
+                <p class="mt-20">文字</p>
+              </div>
+            </div>
+            <!-- single services -->
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-8">
+            <div
+              class="single-services text-center mt-30 wow fadeInUp"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.4s"
+            >
+              <div class="services-icon">
+                <i class="lni-briefcase"></i>
+              </div>
+              <div class="services-content mt-15">
+                <h4 class="services-title">劉筵宸(11014105)</h4>
+                <p class="mt-20">文字</p>
+              </div>
+            </div>
+            <!-- single services -->
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-8">
+            <div
+              class="single-services text-center mt-30 wow fadeInUp"
+              data-wow-duration="1.5s"
+              data-wow-delay="0.8s"
+            >
+              <div class="services-icon">
+                <i class="lni-handshake"></i>
+              </div>
+              <div class="services-content mt-15">
+                <h4 class="services-title">秦仕庭(11014109)</h4>
+                <p class="mt-20">文字</p>
+              </div>
+            </div>
+            <!-- single services -->
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-8">
+            <div
+              class="single-services text-center mt-30 wow fadeInUp"
+              data-wow-duration="1.5s"
+              data-wow-delay="1.2s"
+            >
+              <div class="services-icon">
+                <i class="lni-grow"></i>
+              </div>
+              <div class="services-content mt-15">
+                <h4 class="services-title">李修伃(11014126)</h4>
+                <p class="mt-20">文字</p>
+              </div>
+            </div>
+            <!-- single services -->
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
     </section>
-    <footer>
-      <!-- 底部信息 -->
-      <p>&copy; LeisurePace</p>
+    <!-- footer 開始 -->
+    <footer id="footer" class="footer-area">
+      <div class="footer-widget pt-80 pb-130">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-8">
+              <div class="footer-logo mt-50">
+                <a href="#">
+                  <img src="image/logo.png" alt="Logo" />
+                </a>
+
+                <ul class="footer-social mt-20">
+                  <li>
+                    <a href="#"><i class="lni-facebook-filled"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-twitter-original"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-google"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-instagram"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <!-- footer logo -->
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <div class="f-title">
+                  <h4 class="title">關於LeisurePace</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="#">LeisurePace</a></li>
+                  <li><a href="#">超慢跑介紹</a></li>
+                  <li><a href="#">製作團隊</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <div class="f-title">
+                  <h4 class="title">超慢跑</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="#">單人遊玩</a></li>
+                  <li><a href="#">好友連線</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-5 col-sm-8">
+              <div class="footer-newsleter mt-45">
+                <div class="f-title">
+                  <h4 class="title">每日簽到</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="#">簽到</a></li>
+                  <li><a href="#">商店</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- footer widget -->
+      <div class="copyright-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="copyright text-center">
+                <p>&copy; LeisurePace</p>
+              </div>
+              <!-- copyright -->
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- copyright-area -->
     </footer>
+    <!-- footer 結束 -->
   </body>
 </html>
