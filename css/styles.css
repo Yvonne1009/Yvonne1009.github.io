@@ -205,130 +205,39 @@ section {
 }
 
 /*about*/
-.featureArea {
-  background: #000;
-}
-.featureArea ul {
-  margin-bottom: 0 !important;
-}
-.featureArea li {
-  position: relative;
-  padding: 0;
-}
-.featureArea li:hover .item {
-  opacity: 1;
-}
-.featureArea li:hover .Txt h3 {
-  transform: translateY(0px);
-  opacity: 1;
-}
-.featureArea li:hover .Txt p {
-  opacity: 1;
-}
-.featureArea .Img {
-  overflow: hidden;
-}
-.featureArea .Img a {
-  display: block;
-}
-.featureArea .Img img {
-  display: block;
-  width: 100%;
-  transition: all 0.8s;
-}
-.featureArea .item {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(27, 27, 27, 0.8);
-  padding: 0 100px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: all 0.8s;
-}
-.featureArea .inner {
-  text-align: center;
-}
-.featureArea .Txt {
-  color: #fff;
-}
-.featureArea .Txt h3 {
-  text-align: center;
-  padding-bottom: 25px;
-  opacity: 0;
-  transform: translateY(-15px);
-  transition: all 0.8s;
-}
-.featureArea .Txt h3 a {
-  color: #fff;
-  font-family: "cwTeXFangSong", serif;
-  font-weight: normal;
-  font-size: 64px;
-  letter-spacing: 0.1em;
-}
-.featureArea .Txt h3 a em {
-  display: block;
-  font-size: 24px;
-  margin-top: 25px;
-}
-.featureArea .Txt p {
-  font-size: 15px;
-  color: #cdcdcd;
-  letter-spacing: 0.1em;
-  line-height: 33px;
-  padding: 45px 20px;
-  box-sizing: border-box;
-  text-align: center;
-  border: 1px dashed #fff;
-  border-right: 0;
-  border-left: 0;
-  opacity: 0;
-  transition: all 0.8s 0.2s;
-}
-.featureArea .btn {
-  display: inline-block;
-  margin-top: 150px;
-}
-.featureArea .slick-dots {
-  bottom: 15px;
-}
-.featureArea .slick-dots li.slick-active button:before {
-  opacity: 1;
-  color: #fff;
-}
-.featureArea .slick-dots li button:before {
-  opacity: 0.5;
-  color: #fff;
+@media (max-width: 767px) {
+  .about-area {
+    padding-top: 30px;
+    padding-bottom: 80px;
+  }
 }
 
-.btn01R {
-  background: #af0d12;
-  color: #fff;
-  border-color: #af0d12;
+.about-content .about-welcome {
+  font-size: 24px;
+  color: #80bef5;
+  text-transform: uppercase;
 }
-.btn01 {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  padding: 20px 90px;
-  border: 1px solid rgba(13, 4, 9, 0.5);
-  font-family: "cwTeXFangSong", serif;
-  font-size: 18px;
-  letter-spacing: 0.1em;
-  color: #666;
+@media (max-width: 767px) {
+  .about-content .about-welcome {
+    font-size: 18px;
+  }
 }
-a {
-  cursor: pointer;
-  color: #444;
-  transition: all 0.4s ease;
+
+.about-content .about-title {
+  font-size: 35px;
+  text-transform: uppercase;
 }
-a {
-  text-decoration: none;
+@media (max-width: 767px) {
+  .about-content .about-title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 767px) {
+  .services-area {
+    padding-top: 75px;
+    padding-bottom: 80px;
+  }
 }
 
 /*function*/

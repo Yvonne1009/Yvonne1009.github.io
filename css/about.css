@@ -5,6 +5,11 @@ body {
   box-sizing: border-box;
 }
 
+/*icon css*/
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
 /*導覽列*/
 #navbar {
   background-color: #333;
@@ -480,7 +485,6 @@ p {
   }
 }
 
-/* Slider */
 .slick-slider {
   position: relative;
   display: block;
