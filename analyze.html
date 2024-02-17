@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/analyze.css" />
+    <link rel="icon" href="image/logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="js/analyze.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <!-- 引入 jQuery 库 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 引入 jQuery UI 库 -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- 引入 Chart.js 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 引入 jQuery UI CSS 文件 -->
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <title>LeisurePace_分析</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>運動數據分析</h1>
+      <div class="calendar">
+        <div class="calendar-header">February 2024</div>
+        <div class="calendar-body">
+          <!-- 使用 JavaScript 动态生成日期 -->
+        </div>
+      </div>
+
+      <div id="chart-container">
+        <!-- 此處用於動態添加圖表 -->
+      </div>
+
+      <div id="activity-tracking">
+        <!-- 這裡將包含地圖和活動追蹤數據的顯示 -->
+      </div>
+
+      <div id="fitness-plan">
+        <!-- 這裡將包含表單元素用於設定健身計劃和目標 -->
+      </div>
+
+      <div id="personal-report">
+        <!-- 這裡將包含個人化報告和分析數據的顯示 -->
+      </div>
+    </div>
+
+    <script>
+      // 获取日历主体元素
+      var calendarBody = document.querySelector(".calendar-body");
+
+      // 获取当前月份的天数
+      function getDaysInMonth(month, year) {
+        return new Date(year, month + 1, 0).getDate();
+      }
+
+      // 获取当前年份
+      var currentYear = new Date().getFullYear();
+      // 获取当前月份
+      var currentMonth = new Date().getMonth();
+
+      // 动态生成日期
+      function generateDates(year, month) {
+        // 清空日历主体内容
+        calendarBody.innerHTML = "";
+
+        // 获取当前月份的天数
+        var daysInMonth = getDaysInMonth(month, year);
+
+        // 创建日期元素并添加到日历主体
+        for (var i = 1; i <= daysInMonth; i++) {
+          var dateElement = document.createElement("div");
+          dateElement.classList.add("calendar-date");
+          dateElement.textContent = i;
+          // 使用自定义属性保存日期信息
+          dateElement.setAttribute("data-date", i);
+          dateElement.setAttribute("data-month", month);
+          dateElement.setAttribute("data-year", year);
+          // 添加点击事件监听器
+          dateElement.addEventListener("click", function () {
+            var clickedDate = this.getAttribute("data-date");
+            var clickedMonth = this.getAttribute("data-month");
+            var clickedYear = this.getAttribute("data-year");
+            alert(
+              "Clicked date: " +
+                clickedYear +
+                "-" +
+                (parseInt(clickedMonth) + 1) +
+                "-" +
+                clickedDate
+            );
+          });
+          calendarBody.appendChild(dateElement);
+        }
+      }
+
+      // 调用函数生成当前月份的日期
+      generateDates(currentYear, currentMonth);
+    </script>
+  </body>
+</html>

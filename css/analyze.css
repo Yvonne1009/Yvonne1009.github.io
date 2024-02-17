@@ -1,0 +1,65 @@
+/* 共用樣式 */
+body {
+  font-family: "Arial", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#chart-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+/*月曆*/
+/* 自定义 CSS 样式 */
+/* Custom CSS for Calendar Layout */
+.calendar {
+  width: 300px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.calendar-header {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-date {
+  padding: 10px;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  cursor: pointer; /* 添加鼠标指针样式 */
+}
+
+.calendar-date:hover {
+  background-color: #f0f0f0; /* 鼠标悬停时的背景色 */
+}
+
+.calendar-date:nth-child(7n) {
+  border-right: none;
+}
+
+.calendar-date:last-child {
+  border-bottom: none;
+}
