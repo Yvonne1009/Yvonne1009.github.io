@@ -29,10 +29,16 @@
     <div class="container">
       <h1>運動數據分析</h1>
       <div class="calendar">
-        <div class="calendar-header">February 2024</div>
-        <div class="calendar-body">
-          <!-- 使用 JavaScript 动态生成日期 -->
+        <div class="calendar-header" id="header"></div>
+        <div class="calendar-body" id="months">
+          <!-- 月份会被动态生成 -->
         </div>
+      </div>
+
+      <div class="record" id="recordSection" style="display: none">
+        <div class="record-item" id="calories">Daily Calories:</div>
+        <div class="record-item" id="exercise">Exercise Record:</div>
+        <div class="record-item" id="steps">Daily Steps:</div>
       </div>
 
       <div id="chart-container">
@@ -53,56 +59,115 @@
     </div>
 
     <script>
-      // 获取日历主体元素
-      var calendarBody = document.querySelector(".calendar-body");
+      // 获取日历头部元素和月份显示区域元素
+      const header = document.getElementById("header");
+      const monthsContainer = document.getElementById("months");
+      // 获取记录区域元素
+      const recordSection = document.getElementById("recordSection");
+      const caloriesRecord = document.getElementById("calories");
+      const exerciseRecord = document.getElementById("exercise");
+      const stepsRecord = document.getElementById("steps");
 
-      // 获取当前月份的天数
-      function getDaysInMonth(month, year) {
-        return new Date(year, month + 1, 0).getDate();
+      // 获取当前日期信息
+      const currentDate = new Date();
+      let currentYear = currentDate.getFullYear();
+      let currentMonth = currentDate.getMonth();
+
+      // 生成月份选择器
+      function generateMonthSelector() {
+        header.innerHTML = `<button onclick="prevYear()">Prev Year</button>
+                              <button onclick="prevMonth()">Prev Month</button>
+                              ${currentYear}年${currentMonth + 1}月
+                              <button onclick="nextMonth()">Next Month</button>
+                              <button onclick="nextYear()">Next Year</button>`;
       }
 
-      // 获取当前年份
-      var currentYear = new Date().getFullYear();
-      // 获取当前月份
-      var currentMonth = new Date().getMonth();
+      // 生成日历
+      function generateCalendar(year, month) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const daysContainer = document.createElement("div");
+        daysContainer.classList.add("days");
 
-      // 动态生成日期
-      function generateDates(year, month) {
-        // 清空日历主体内容
-        calendarBody.innerHTML = "";
-
-        // 获取当前月份的天数
-        var daysInMonth = getDaysInMonth(month, year);
-
-        // 创建日期元素并添加到日历主体
-        for (var i = 1; i <= daysInMonth; i++) {
-          var dateElement = document.createElement("div");
-          dateElement.classList.add("calendar-date");
-          dateElement.textContent = i;
-          // 使用自定义属性保存日期信息
-          dateElement.setAttribute("data-date", i);
-          dateElement.setAttribute("data-month", month);
-          dateElement.setAttribute("data-year", year);
-          // 添加点击事件监听器
-          dateElement.addEventListener("click", function () {
-            var clickedDate = this.getAttribute("data-date");
-            var clickedMonth = this.getAttribute("data-month");
-            var clickedYear = this.getAttribute("data-year");
-            alert(
-              "Clicked date: " +
-                clickedYear +
-                "-" +
-                (parseInt(clickedMonth) + 1) +
-                "-" +
-                clickedDate
-            );
-          });
-          calendarBody.appendChild(dateElement);
+        // 添加空白天数
+        for (let i = 0; i < firstDayOfMonth; i++) {
+          const emptyDay = document.createElement("div");
+          emptyDay.classList.add("day");
+          emptyDay.textContent = "";
+          daysContainer.appendChild(emptyDay);
         }
+
+        // 添加日期
+        for (let i = 1; i <= daysInMonth; i++) {
+          const day = document.createElement("div");
+          day.classList.add("day");
+          day.textContent = i;
+          day.addEventListener("click", () => {
+            updateRecords(year, month, i);
+          });
+          daysContainer.appendChild(day);
+        }
+
+        monthsContainer.innerHTML = "";
+        monthsContainer.appendChild(daysContainer);
       }
 
-      // 调用函数生成当前月份的日期
-      generateDates(currentYear, currentMonth);
+      // 更新记录
+      function updateRecords(year, month, day) {
+        recordSection.style.display = "block"; // 显示记录区域
+        // 这里可以添加您自己的逻辑来获取和更新记录数据
+        caloriesRecord.textContent = `Daily Calories on ${year}-${
+          month + 1
+        }-${day}: `;
+        exerciseRecord.textContent = `Exercise Record on ${year}-${
+          month + 1
+        }-${day}: `;
+        stepsRecord.textContent = `Daily Steps on ${year}-${
+          month + 1
+        }-${day}: `;
+      }
+
+      // 显示前一个月份
+      function prevMonth() {
+        if (currentMonth === 0) {
+          currentYear--;
+          currentMonth = 11;
+        } else {
+          currentMonth--;
+        }
+        generateMonthSelector();
+        generateCalendar(currentYear, currentMonth);
+      }
+
+      // 显示下一个月份
+      function nextMonth() {
+        if (currentMonth === 11) {
+          currentYear++;
+          currentMonth = 0;
+        } else {
+          currentMonth++;
+        }
+        generateMonthSelector();
+        generateCalendar(currentYear, currentMonth);
+      }
+
+      // 显示前一年
+      function prevYear() {
+        currentYear--;
+        generateMonthSelector();
+        generateCalendar(currentYear, currentMonth);
+      }
+
+      // 显示下一年
+      function nextYear() {
+        currentYear++;
+        generateMonthSelector();
+        generateCalendar(currentYear, currentMonth);
+      }
+
+      // 初始化日历
+      generateMonthSelector();
+      generateCalendar(currentYear, currentMonth);
     </script>
   </body>
 </html>

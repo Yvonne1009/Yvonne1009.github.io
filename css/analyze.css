@@ -22,44 +22,50 @@ h1 {
 }
 
 /*月曆*/
-/* 自定义 CSS 样式 */
-/* Custom CSS for Calendar Layout */
 .calendar {
-  width: 300px;
-  margin: 20px auto;
+  max-width: 800px;
+  margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
 }
-
 .calendar-header {
   background-color: #f2f2f2;
   padding: 10px;
   text-align: center;
   font-weight: bold;
 }
-
 .calendar-body {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  display: flex;
+  flex-wrap: wrap;
 }
-
-.calendar-date {
+.month {
+  width: calc(100% / 3);
   padding: 10px;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+}
+.month-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.days {
+  display: flex;
+  flex-wrap: wrap;
+}
+.day {
+  width: calc(100% / 7);
   text-align: center;
-  cursor: pointer; /* 添加鼠标指针样式 */
+  padding: 5px;
+  cursor: pointer;
 }
-
-.calendar-date:hover {
-  background-color: #f0f0f0; /* 鼠标悬停时的背景色 */
+.day:hover {
+  background-color: #f0f0f0;
 }
-
-.calendar-date:nth-child(7n) {
-  border-right: none;
+.record {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
-
-.calendar-date:last-child {
-  border-bottom: none;
+.record-item {
+  margin-bottom: 10px;
 }
