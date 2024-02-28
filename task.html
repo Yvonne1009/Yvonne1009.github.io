@@ -3,59 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/analyze.css" />
+    <link rel="stylesheet" href="css/task.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <script src="js/analyze.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/task.js"></script>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-    <!-- 引入 jQuery 库 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- 引入 jQuery UI 库 -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <!-- 引入 Chart.js 库 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- 引入 jQuery UI CSS 文件 -->
     <link
       rel="stylesheet"
-      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha384-kB+HoBWE0e8+eAxj0NwD3wGwQ52cMUlw1U5NDzYrUSrWrjvaLq63fhp5R2+OOQ4b"
+      crossorigin="anonymous"
     />
-    <title>LeisurePace_分析</title>
+    <title>LeisurePace_任務</title>
   </head>
   <body>
-    <div class="container">
-      <h1>運動數據分析</h1>
-      <div class="calendar">
-        <div class="calendar-header" id="header"></div>
-        <div class="calendar-body" id="months">
-          <!-- 月份会被动态生成 -->
-        </div>
+    <h1>任務</h1>
+    <div class="calendar">
+      <div class="calendar-header" id="header"></div>
+      <div class="calendar-body" id="months">
+        <!-- 月份会被动态生成 -->
       </div>
+    </div>
 
-      <div class="record" id="recordSection">
-        <div class="record-item" id="calories">Daily Calories:</div>
-        <div class="record-item" id="exercise">Exercise Record:</div>
-        <div class="record-item" id="steps">Daily Steps:</div>
-      </div>
+    <div class="record" id="recordSection">
+      <div class="record-item" id="calories">Daily Calories:</div>
+      <div class="record-item" id="exercise">Exercise Record:</div>
+      <div class="record-item" id="steps">Daily Steps:</div>
+    </div>
+    <button class="add-task" onclick="showAddTaskDialog()">新增任务</button>
 
-      <div id="chart-container">
-        <!-- 此處用於動態添加圖表 -->
-      </div>
-
-      <div id="activity-tracking">
-        <!-- 這裡將包含地圖和活動追蹤數據的顯示 -->
-      </div>
-
-      <div id="fitness-plan">
-        <!-- 這裡將包含表單元素用於設定健身計劃和目標 -->
-      </div>
-
-      <div id="personal-report">
-        <!-- 這裡將包含個人化報告和分析數據的顯示 -->
-      </div>
+    <div>
+      <input type="date" value="2024-02-29" />
     </div>
 
     <script>
@@ -114,7 +95,6 @@
 
       // 更新记录
       function updateRecords(year, month, day) {
-        recordSection.classList.add("show"); // 显示记录区域
         // 这里可以添加您自己的逻辑来获取和更新记录数据
         caloriesRecord.textContent = `Daily Calories on ${year}-${
           month + 1
@@ -125,6 +105,35 @@
         stepsRecord.textContent = `Daily Steps on ${year}-${
           month + 1
         }-${day}: `;
+      }
+
+      // 显示任务输入框
+      function showTaskInput(year, month, day) {
+        const task = prompt(`Enter task for ${year}-${month + 1}-${day}`);
+        if (task !== null) {
+          const isCompleted = confirm("Is task completed?");
+          // 这里可以添加保存任务的逻辑
+          addTaskToRecord(task, isCompleted);
+        }
+      }
+
+      // 将任务添加到记录区域
+      function addTaskToRecord(task, isCompleted) {
+        const taskItem = document.createElement("div");
+        taskItem.textContent = `${task} (Completed: ${
+          isCompleted ? "Yes" : "No"
+        })`;
+        recordSection.appendChild(taskItem);
+      }
+
+      // 显示增加任务对话框
+      function showAddTaskDialog() {
+        const task = prompt("Enter new task:");
+        if (task !== null) {
+          const isCompleted = confirm("Is task completed?");
+          // 这里可以添加保存任务的逻辑
+          addTaskToRecord(task, isCompleted);
+        }
       }
 
       // 显示前一个月份

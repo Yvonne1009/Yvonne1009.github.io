@@ -6,22 +6,11 @@ body {
   box-sizing: border-box;
 }
 
-.container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 0 20px;
-}
-
 h1 {
   text-align: center;
 }
 
-#chart-container {
-  border: 1px solid #ccc;
-  padding: 20px;
-}
-
-/*月曆*/
+/*任務月曆*/
 .calendar {
   max-width: 500px;
   margin: 0 auto;
@@ -70,11 +59,19 @@ h1 {
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: none;
+  display: block; /* 固定显示记录区域 */
 }
 .record.show {
   display: block;
 }
 .record-item {
   margin-bottom: 10px;
+}
+
+.add-task {
+  bottom: 5px;
+  right: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  color: blue;
 }
