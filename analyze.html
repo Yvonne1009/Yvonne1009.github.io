@@ -23,9 +23,71 @@
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
     />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <title>LeisurePace_分析</title>
   </head>
   <body>
+    <!-- menu 開始 -->
+    <header id="masthead" class="site-header" role="banner">
+      <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target=".navbar-ex1-collapse"
+            ></button>
+            <a class="navbar-brand" href="index.html"> LeisurePace </a>
+          </div>
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="index.html">首頁</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  >關於LeisurePace <i class="fa fa-angle-double-down"></i
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="about.html">LeisurePace</a></li>
+                  <li><a href="about.html">超慢跑介紹</a></li>
+
+                  <li><a href="about.html">製作團隊</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  >超慢跑 <i class="fa fa-angle-double-down"></i
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">單人遊玩</a></li>
+                  <li><a href="#">好友連線</a></li>
+                </ul>
+              </li>
+              <li class="active" class="dropdown">
+                <a href="analyze.html">分析</a>
+              </li>
+              <li class="dropdown">
+                <a href="task.html">任務 </a>
+              </li>
+              <li class="dropdown">
+                <a href="login.html">登入 </a>
+              </li>
+            </ul>
+            <!-- /.nav -->
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+      </nav>
+      <!-- /.navbar -->
+    </header>
+    <!-- menu 結束 -->
+
     <div class="container">
       <h1>運動數據分析</h1>
       <div class="calendar">

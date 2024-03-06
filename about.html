@@ -11,48 +11,70 @@
       href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400"
       rel="stylesheet"
     />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>關於LeisurePace</title>
   </head>
   <body>
-    <header>
-      <div id="navbar" class="navbar">
-        <div class="logo1">
-          <a href="index.html">LeisurePace</a>
+    <!-- menu 開始 -->
+    <header id="masthead" class="site-header" role="banner">
+      <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target=".navbar-ex1-collapse"
+            ></button>
+            <a class="navbar-brand" href="index.html"> LeisurePace </a>
+          </div>
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="index.html">首頁</a></li>
+              <li class="active" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  >關於LeisurePace <i class="fa fa-angle-double-down"></i
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#logo">LeisurePace</a></li>
+                  <li><a href="#run">超慢跑介紹</a></li>
+
+                  <li><a href="#teams">製作團隊</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  >超慢跑 <i class="fa fa-angle-double-down"></i
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">單人遊玩</a></li>
+                  <li><a href="#">好友連線</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="analyze.html">分析</a>
+              </li>
+              <li class="dropdown">
+                <a href="task.html">任務 </a>
+              </li>
+              <li class="dropdown">
+                <a href="login.html">登入 </a>
+              </li>
+            </ul>
+            <!-- /.nav -->
+          </div>
+          <!-- /.navbar-collapse -->
         </div>
-        <ul class="menu">
-          <li class="dropdown">
-            <a href="about.html"
-              >關於LeisurePace<i class="fas fa-caret-down"></i
-            ></a>
-            <div class="dropdown-content">
-              <a href="#logo">LeisurePace</a>
-              <a href="#run">超慢跑</a>
-              <a href="#teams">製作團隊</a>
-            </div>
-          </li>
-          <li class="dropdown">
-            <a href="#">超慢跑<i class="fas fa-caret-down"></i></a>
-            <div class="dropdown-content">
-              <a href="#">單人遊玩</a>
-              <a href="#">好友連線</a>
-            </div>
-          </li>
-          <li class="dropdown">
-            <a href="#">設定<i class="fas fa-caret-down"></i></a>
-            <div class="dropdown-content">
-              <a href="#">介紹超慢跑</a>
-              <a href="#">Option 2</a>
-              <a href="#">Option 3</a>
-            </div>
-          </li>
-          <li><a href="#">每日簽到</a></li>
-        </ul>
-        <div class="login">
-          <a href="login.html">登入</a>
-        </div>
-      </div>
+        <!-- /.container -->
+      </nav>
+      <!-- /.navbar -->
     </header>
+    <!-- menu 結束 -->
+
     <section id="logo" class="about-area pt-80 pb-130">
       <div class="container">
         <div class="row">
