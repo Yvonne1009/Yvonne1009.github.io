@@ -75,7 +75,17 @@
                 <a href="task.html">任務 </a>
               </li>
               <li class="dropdown">
-                <a href="#">設定</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img
+                    src="<?php echo $imagePath; ?>"
+                    class="profile-picture"
+                  />
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="bgstore.html">背景商店</a></li>
+                  <li><a href="#">設定</a></li>
+                  <li><a href="#">登出</a></li>
+                </ul>
               </li>
             </ul>
             <!-- /.nav -->
@@ -231,5 +241,29 @@
       generateMonthSelector();
       generateCalendar(currentYear, currentMonth);
     </script>
+    <script>
+      // Toggle dropdown menu visibility
+      function toggleDropdown() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+
+      // Close the dropdown menu if the user clicks outside of it
+      window.onclick = function (event) {
+        if (!event.target.matches(".dropbtn")) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains("show")) {
+              openDropdown.classList.remove("show");
+            }
+          }
+        }
+      };
+    </script>
+    <?php
+    // 假設你已經連接到資料庫並準備好了資料
+    // 這裡假設 $imagePath 是資料庫中圖片的路徑
+    $imagePath = "path/to/your/image.jpg";
+    ?>
   </body>
 </html>

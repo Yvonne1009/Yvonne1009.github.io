@@ -383,7 +383,7 @@ section {
 
 .about-content .about-welcome {
   font-size: 24px;
-  color: #80bef5;
+  color: #d9d9d9;
   text-transform: uppercase;
 }
 @media (max-width: 767px) {
@@ -411,7 +411,6 @@ section {
 
 /*run css*/
 .pb_section {
-  padding: 9em 0;
   position: relative;
   display: block;
 }
@@ -952,4 +951,12 @@ ol {
 .copyright-area {
   border-top: 1px solid #eceff8;
   padding: 13px 0;
+}
+
+img {
+  border-radius: 50%;
+}
+.profile-picture {
+  width: 20px; /* 調整寬度 */
+  height: 20px; /* 高度會自動調整以保持原始比例 */
 }

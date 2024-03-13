@@ -63,7 +63,17 @@
                 <a href="task.html">任務 </a>
               </li>
               <li class="dropdown">
-                <a href="#">設定</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img
+                    src="<?php echo $imagePath; ?>"
+                    class="profile-picture"
+                  />
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="bgstore.html">背景商店</a></li>
+                  <li><a href="#">設定</a></li>
+                  <li><a href="#">登出</a></li>
+                </ul>
               </li>
             </ul>
             <!-- /.nav -->
@@ -104,8 +114,10 @@
                 >
               </div>
             </div>
-            <div class="grid-item vertical">2</div>
-            <div class="grid-item vertical">3</div>
+            <div class="grid-item vertical">好友連線</div>
+            <div class="grid-item vertical">
+              ios手機圖片，點擊可以看到apple商店的連結
+            </div>
             <div class="grid-item horizontal">
               <img
                 style="
