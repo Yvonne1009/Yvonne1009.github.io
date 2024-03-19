@@ -1,11 +1,11 @@
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
-    // User is signed in.
+    // 使用者已登入。
     document.getElementById("user_div").style.display = "block";
     document.getElementById("login_div").style.display = "none";
 
     var user = firebase.auth().currentUser;
-    // Get idToken
+    // 獲取idToken
     user.getIdToken().then(function (token) {
       console.log(token);
     });
@@ -14,7 +14,7 @@ firebase.auth().onAuthStateChanged(function (user) {
       document.getElementById("user_para").innerHTML = "User : " + email_id;
     }
   } else {
-    // No user is signed in.
+    // 沒有使用者登入。
 
     document.getElementById("user_div").style.display = "none";
     document.getElementById("login_div").style.display = "block";
@@ -29,7 +29,7 @@ function login() {
     .auth()
     .signInWithEmailAndPassword(userEmail, userPass)
     .catch(function (error) {
-      // Handle Errors here.
+      // 在這裡處理錯誤。
       var errorCode = error.code;
       var errorMessage = error.message;
 
@@ -48,19 +48,19 @@ function fb_login() {
     .auth()
     .signInWithPopup(provider)
     .then(function (result) {
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      //這將為您提供 Facebook 存取權令牌。您可以使用它來存取 Facebook API。
       var token = result.credential.accessToken;
-      // The signed-in user info.
+      // 登入的用戶資訊。
       var user = result.user;
       // ...
     })
     .catch(function (error) {
-      // Handle Errors here.
+      // 在這裡處理錯誤。
       var errorCode = error.code;
       var errorMessage = error.message;
-      // The email of the user's account used.
+      // 使用的使用者帳戶的電子郵件。
       var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
+      // 使用的 firebase.auth.AuthCredential 類型。
       var credential = error.credential;
       // ...
       console.log(errorMessage);

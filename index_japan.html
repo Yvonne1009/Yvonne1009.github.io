@@ -6,53 +6,88 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
     <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>LeisurePace</title>
   </head>
   <body>
-    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-    <header>
-      <div id="navbar" class="navbar">
-        <div class="logo1">
-          <a href="index.html">LeisurePace</a>
-        </div>
-        <ul class="menu">
-          <li class="dropdown">
-            <a href="#about"
-              >關於LeisurePace<i class="fas fa-caret-down"></i
-            ></a>
-            <div class="dropdown-content">
-              <a href="#">LeisurePace</a>
-              <a href="#">ウルトラジョギング</a>
-              <a href="#">制作チーム</a>
-            </div>
-          </li>
-          <li class="dropdown">
-            <a href="#">ウルトラジョギング<i class="fas fa-caret-down"></i></a>
-            <div class="dropdown-content">
-              <a href="#">ソロプレイ</a>
-              <a href="#">友達のつながり</a>
-            </div>
-          </li>
-          <li class="dropdown">
-            <a href="設定_japan.html">設定<i class="fas fa-caret-down"></i></a>
-            <div class="dropdown-content">
-              <a href="#">ウルトラジョギングのご紹介</a>
-              <a href="#">Option 2</a>
-              <a href="#">Option 3</a>
-            </div>
-          </li>
-          <li><a href="#">毎日のチェックイン</a></li>
-        </ul>
-        <div class="login">
-          <a href="login.html">ログイン</a>
-        </div>
-      </div>
-    </header>
+    <!-- menu 開始 -->
+    <header id="masthead" class="site-header" role="banner">
+      <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target=".navbar-ex1-collapse"
+            ></button>
+            <a class="navbar-brand" href="index_japan.html"> LeisurePace </a>
+          </div>
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active">
+                <a href="index_japan.html">ホームページ</a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  >LeisurePaceについて <i class="fa fa-angle-double-down"></i
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">LeisurePace</a></li>
+                  <li><a href="#">スーパージョギング紹介</a></li>
 
+                  <li><a href="#">制作チーム</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  >スローランニング <i class="fa fa-angle-double-down"></i
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">一人遊び</a></li>
+                  <li><a href="#">友達との接続</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#">分析</a>
+              </li>
+              <li class="dropdown">
+                <a href="#">ミッション </a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img
+                    src="<?php echo $imagePath; ?>"
+                    class="profile-picture"
+                  />
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">背景ショップ</a></li>
+                  <li><a href="#">設定</a></li>
+                  <li><a href="#">ログアウト</a></li>
+                </ul>
+              </li>
+            </ul>
+            <!-- /.nav -->
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+      </nav>
+      <!-- /.navbar -->
+    </header>
+    <!-- menu 結束 -->
+
+    <!-- banner 開始 -->
     <section id="home">
       <div class="hero-section">
         <div class="banner">
@@ -71,17 +106,19 @@
                 "
               />
               <div class="overlay-content">
-                <h1>ウルトラジョギング</h1>
-                <p>ゆったりとスポーツを楽しみながら、<br>健康と楽しみに重点を置く</p>
+                <h1>スローランニング</h1>
+                <p>リラックスしたペースで運動を楽しみ、健康と喜びを重視する</p>
                 <span class="material-symbols-outlined"
-                  ><a href="run.html" class="image-overlay">
+                  ><a href="#" class="image-overlay">
                     arrow_circle_right
                   </a></span
                 >
               </div>
             </div>
-            <div class="grid-item vertical">2</div>
-            <div class="grid-item vertical">3</div>
+            <div class="grid-item vertical">友達との接続</div>
+            <div class="grid-item vertical">
+              iOS携帯の画像、クリックするとApple Storeのリンクが表示されます
+            </div>
             <div class="grid-item horizontal">
               <img
                 style="
@@ -114,11 +151,30 @@
         </div>
       </div>
     </section>
+    <!-- banner 結束 -->
 
+    <!-- 關於 開始 -->
     <section id="about">
-      <div class="about-section"></div>
+      <div class="container">
+        <div class="about-content mt-45">
+          <h4 class="about-welcome">私たちについて</h4>
+          <h3 class="about-title mt-10">LeisurePace</h3>
+          <br />
+          <p class="mt-25">
+            「LeisurePace」この名前は、のんびりとリラックスしたランニング体験を表現しています。
+            「LeisurePace」は、のんびりとしたペース、軽快なスピードを表しています。
+            全体的に言えば、この名前はスーパージョギングの核心理念を伝えています——リラックスしたペースで運動を楽しみ、健康と喜びを重視する。
+            <br />
+            この名前はまた、足を遅くすることを示唆しており、人々が忙しい生活のリズムから離れ、より穏やかな歩みでランニングの楽しみを体験することを意味します。この名前を選択することで、ユーザーに積極的で楽しいイメージを心に刻み、彼らがこのアプリを選んでリラックスしたランニングの目標を達成する意欲を高めるのに役立ちます。
+          </p>
+        </div>
+        <!-- about content -->
+      </div>
+      <!-- container -->
     </section>
+    <!-- 關於 結束 -->
 
+    <!-- 功能 開始 -->
     <section id="function">
       <div class="function-section">
         <!-- Slideshow container -->
@@ -129,11 +185,11 @@
           </div>
 
           <div class="mySlides fade">
-            <div class="text">足音検知</div>
+            <div class="text">歩数検知</div>
           </div>
 
           <div class="mySlides fade">
-            <div class="text">データの同期</div>
+            <div class="text">データ同期</div>
           </div>
 
           <!-- Next and previous buttons -->
@@ -142,15 +198,98 @@
         </div>
       </div>
     </section>
+    <!-- 功能 結束 -->
 
-    <section id="person">
-      <div class="person-section"></div>
-    </section>
+    <!-- footer 開始 -->
+    <footer id="footer" class="footer-area">
+      <div class="footer-widget pt-80 pb-130">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-8">
+              <div class="footer-logo mt-50">
+                <a href="#">
+                  <img src="image/logo.png" alt="Logo" />
+                </a>
 
-    <footer>
-      <!-- 底部信息 -->
-      <p>&copy; LeisurePace</p>
+                <ul class="footer-social mt-20">
+                  <li>
+                    <a href="#"><i class="lni-facebook-filled"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-twitter-original"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-google"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-instagram"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <!-- footer logo -->
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <div class="f-title">
+                  <h4 class="title">LeisurePaceについて</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="#">LeisurePace</a></li>
+                  <li><a href="#">スーパージョギング紹介</a></li>
+                  <li><a href="#">制作チーム</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <div class="f-title">
+                  <h4 class="title">スローランニング</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="#">一人遊び</a></li>
+                  <li><a href="#">友達との接続</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <ul class="mt-15">
+                  <li><a href="#">分析</a></li>
+                  <li><a href="#">ミッション</a></li>
+                  <li><a href="#">背景ショップ</a></li>
+                  <li><a href="#">設定</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- footer widget -->
+      <div class="copyright-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="copyright text-center">
+                <p>&copy; LeisurePace</p>
+              </div>
+              <!-- copyright -->
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- copyright-area -->
     </footer>
+    <!-- footer 結束 -->
+
+    <!-- back-to-top 開始 -->
+    <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
+    <!-- back-to-top 結束 -->
+
     <script>
       /*幻燈片效果*/
       let slideIndex = 0;

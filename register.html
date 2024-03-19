@@ -1,54 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/register.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
-    <title>LeisurePace_註冊</title>
+    <title>Firebase Sign up</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:400,600,700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/register.css" />
   </head>
-  <body class="page4">
-    <form action="action_page.php">
-      <div class="container">
-        <h1>註冊</h1>
-        <p>建立帳戶</p>
-        <hr />
 
-        <label for="email"><b>電子信箱</b></label>
-        <input
-          type="text"
-          placeholder="Enter Email"
-          name="email"
-          id="email"
-          required
-        />
+  <body>
+    <div id="login_div" class="main-div">
+      <h3>LeisurePace Web 註冊</h3>
+      <input type="email" placeholder="Email..." id="email_field" />
+      <input type="password" placeholder="Password..." id="password_field" />
 
-        <label for="psw"><b>密碼</b></label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          name="psw"
-          id="psw"
-          required
-        />
+      <button onclick="login()">Create an Account</button>
+      <a href="login.html" id="login-account">已有帳號？登入</a>
+    </div>
 
-        <label for="psw-repeat"><b>確認密碼</b></label>
-        <input
-          type="password"
-          placeholder="Repeat Password"
-          name="psw-repeat"
-          id="psw-repeat"
-          required
-        />
-        <hr />
+    <div id="user_div" class="loggedin-div">
+      <h3>Welcome User</h3>
+      <p id="user_para">
+        Welcome to Firebase web login Example. You're currently logged in.
+      </p>
+      <button onclick="logout()">Logout</button>
+      <a href="         " id="Go to home page">前往首頁</a>
+    </div>
 
-        <button type="submit" class="registerbtn">註冊</button>
-      </div>
-      <hr />
-
-      <div class="container signin">
-        <p>已經有帳戶了? <a href="login.html">登入</a>.</p>
-      </div>
-    </form>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script src="./js/Firebase/firebase.js"></script>
+    <script src="./js/register.js"></script>
   </body>
 </html>
