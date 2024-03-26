@@ -254,7 +254,7 @@ body {
 }
 
 section {
-  padding: 60px;
+  padding: 90px;
 }
 
 /*home*/
@@ -423,6 +423,10 @@ section {
     padding-top: 75px;
     padding-bottom: 80px;
   }
+}
+
+.gray-bg {
+  background: #fffcec;
 }
 
 /*function*/
