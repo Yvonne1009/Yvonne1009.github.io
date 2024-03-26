@@ -254,7 +254,7 @@ body {
 }
 
 section {
-  padding: 20px;
+  padding: 60px;
 }
 
 /*home*/
@@ -341,7 +341,7 @@ section {
 /* 第2和第3個元素 - 垂直的長方形，各佔用一列兩行 */
 .grid-item.vertical {
   grid-column: span 1;
-  grid-row: span 30;
+  grid-row: span 15;
 }
 
 /* 第4、第5和第6個元素 - 橫向的長方形，各佔用一列一行 */
