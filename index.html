@@ -133,8 +133,7 @@
               />
             </div>
             <div class="grid-item horizontal">
-              <img
-                style="
+              <img id="popupImage"  style="
                   max-width: 100%;
                   height: auto;
                   width: 100%;
@@ -143,8 +142,18 @@
                   background-size: cover;
                   background-position: center;
                   border-radius: 8px;
-                "
-              />
+              "/>
+          </div>
+          
+          <!-- 彈出視窗 -->
+          <div id="myModal" class="modal">
+              <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <!-- 在這裡放置彈出視窗內容，如功能介紹和購買按鈕 -->
+                  <p>這裡是解鎖後的功能介紹。</p>
+                  <button id="buyButton">購買</button>
+              </div>
+          </div>          
             </div>
           </div>
         </div>
@@ -313,6 +322,41 @@
         slides[slideIndex - 1].style.display = "block";
         setTimeout(showSlides, 10000); // 切換到下一張幻燈片的時間（毫秒）
       }
+    </script>
+    <script>
+      /// 獲取彈出視窗
+      var modal = document.getElementById("myModal");
+
+      // 獲取圖片元素
+      var img = document.getElementById("popupImage");
+
+      // 獲取關閉按鈕
+      var span = document.getElementsByClassName("close")[0];
+
+      // 圖片點擊時彈出視窗
+      img.onclick = function () {
+        modal.style.display = "block";
+      };
+
+      // 關閉按鈕點擊時關閉視窗
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // 當用戶點擊視窗之外的地方，關閉視窗
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      // 獲取購買按鈕
+      var buyButton = document.getElementById("buyButton");
+
+      // 購買按鈕點擊時導向到結帳畫面
+      buyButton.onclick = function () {
+        window.location.href = "checkout.html"; // 假設結帳畫面的文件名是checkout.html
+      };
     </script>
   </body>
 </html>
