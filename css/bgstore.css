@@ -249,9 +249,6 @@ section {
   padding: 20px;
 }
 
-img {
-  border-radius: 50%;
-}
 .profile-picture {
   width: 20px; /* 調整寬度 */
   height: 20px; /* 高度會自動調整以保持原始比例 */
@@ -320,4 +317,359 @@ h1 {
 .btn.active {
   background-color: #666;
   color: white;
+}
+
+/*彈跳視窗*/
+/* 模態框樣式 */
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {
+  opacity: 0.7;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption2 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+#caption3 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+#caption4 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+#caption5 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+#caption6 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+#caption7 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+#caption8 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+#caption9 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+#caption10 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content,
+#caption {
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+  .modal-content {
+    width: 100%;
+  }
+}
+
+/*footer css*/
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.pb-130 {
+  padding-bottom: 80px;
+}
+
+.pt-80 {
+  padding-top: 80px;
+}
+
+ul,
+ol {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+@media (max-width: 767px) {
+  .footer-widget {
+    padding-top: 30px;
+    padding-bottom: 80px;
+  }
+}
+
+.footer-logo a img {
+  width: 140px;
+}
+
+.footer-logo p {
+  line-height: 26px;
+  font-size: 16px;
+}
+
+.footer-logo .footer-info li {
+  margin-top: 20px;
+}
+.footer-logo .footer-info li .single-info {
+  position: relative;
+}
+.footer-logo .footer-info li .single-info .info-icon {
+  position: absolute;
+  top: 3px;
+  left: 0;
+}
+
+.footer-logo .footer-info li .single-info .info-content {
+  padding-left: 30px;
+}
+
+.footer-logo .footer-social li {
+  display: inline-block;
+  margin-left: 15px;
+}
+.footer-logo .footer-social li:first-child {
+  margin-left: 0;
+}
+.footer-logo .footer-social li a {
+  width: 35px;
+  height: 35px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #fff5f1;
+  color: #646464;
+  font-size: 16px;
+  -webkit-box-shadow: 0px 5px 21px 0px rgba(254, 119, 101, 0.4);
+  -moz-box-shadow: 0px 5px 21px 0px rgba(254, 119, 101, 0.4);
+  box-shadow: 0px 5px 21px 0px rgba(254, 119, 101, 0.4);
+  -webkit-transition: all 0.4s ease-out 0s;
+  -moz-transition: all 0.4s ease-out 0s;
+  -ms-transition: all 0.4s ease-out 0s;
+  -o-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+}
+.footer-logo .footer-social li a:hover {
+  background-color: #eb3656;
+  color: #fff;
+}
+
+.f-title .title {
+  font-size: 22px;
+  font-family: "Barlow", sans-serif;
+  font-weight: 600;
+}
+
+.footer-link ul li {
+  padding-top: 5px;
+}
+.footer-link ul li a {
+  font-size: 16px;
+  color: #646464;
+  font-family: "Hind", sans-serif;
+  -webkit-transition: all 0.4s ease-out 0s;
+  -moz-transition: all 0.4s ease-out 0s;
+  -ms-transition: all 0.4s ease-out 0s;
+  -o-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+}
+.footer-link ul li a:hover {
+  color: #eb3656;
+}
+
+.footer-newsleter p {
+  line-height: 26px;
+  font-size: 16px;
+}
+
+.footer-newsleter .newsleter {
+  position: relative;
+}
+.footer-newsleter .newsleter input {
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  border: 1px solid #eb3656;
+  background-color: #ffeae1;
+}
+.footer-newsleter .newsleter button {
+  border: 0;
+  width: 66px;
+  text-align: center;
+  padding: 0;
+  height: 50px;
+  background: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #eb3656;
+  font-size: 20px;
+  line-height: 57px;
+  cursor: pointer;
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .footer-newsleter .newsleter button {
+    width: 45px;
+  }
+}
+.footer-newsleter .newsleter button::before {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 0;
+  width: 1px;
+  height: 36px;
+  background-color: #eb3656;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.copyright-area {
+  border-top: 1px solid #eceff8;
+  padding: 13px 0;
 }
