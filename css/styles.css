@@ -11,8 +11,6 @@ body {
   overflow: hidden;
 }
 
-/* index 的樣式 */
-
 /*導覽列*/
 #masthead .navbar {
   margin-bottom: 0;
@@ -389,117 +387,84 @@ section {
   cursor: pointer;
 }
 
-/*about*/
+/*about  開始*/
+.about-welcome {
+  text-align: center;
+}
+.about-title {
+  font-size: 4rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.about-description {
+  font-size: 2.5rem;
+  line-height: 1.6;
+  color: #666;
+  text-align: center;
+}
+
+/* 媒體查詢 */
 @media (max-width: 767px) {
-  .about-area {
-    padding-top: 30px;
-    padding-bottom: 80px;
+  .about-title {
+    font-size: 1.8rem;
+  }
+
+  .about-description {
+    font-size: 1rem;
   }
 }
 
-.about-content .about-welcome {
-  font-size: 24px;
-  color: #80bef5;
-  text-transform: uppercase;
-}
-@media (max-width: 767px) {
-  .about-content .about-welcome {
-    font-size: 18px;
-  }
-}
-
-.about-content .about-title {
-  font-size: 35px;
-  text-transform: uppercase;
-}
-@media (max-width: 767px) {
-  .about-content .about-title {
-    font-size: 26px;
-  }
-}
-
-@media (max-width: 767px) {
-  .services-area {
-    padding-top: 75px;
-    padding-bottom: 80px;
-  }
-}
-
+/* 背景色 */
 .gray-bg {
-  background: #fffcec;
+  background: #f9f9f9;
 }
+/*about  結束*/
 
-/*function*/
+/*功能  開始 */
 .function-section {
   position: relative;
 }
 
-/* Slideshow container */
-.slideshow-container {
-  position: relative;
-  margin: auto;
-}
-
-/* Hide the images by default */
-.mySlides {
-  display: none;
-}
-
-/* Next & previous buttons */
-.prev,
-.next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: gray;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
-  background-color: whitesmoke;
-}
-
-/* Caption text */
-.text {
-  color: #333;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
+.sbox,
+.sbox:hover {
+  display: block;
+  padding: 35px 0;
   text-align: center;
+  color: #95a5a6 !important;
 }
 
-/* 自動撥放時的動畫 */
-.fade {
-  animation: fade 1.5s ease-in-out infinite;
+.sbox-inner {
+  padding: 35px 25px;
+  border: 1px solid #ecf0f1;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
-@keyframes fade {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-  20%,
-  80% {
-    opacity: 1;
-  }
+.sbox-inner .sbox-icon {
+  width: 75px;
+  height: 75px;
+  background-color: #59ab02;
+  border-radius: 100%;
+  display: inline-block;
+  color: #fff;
+  font-size: 25px;
+  line-height: 75px;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
+
+.sbox-inner .sbox-title {
+  text-transform: uppercase;
+  color: #2c3e50;
+  margin: 15px 0;
+}
+
+.sbox:hover .sbox-inner .sbox-icon {
+  background-color: #000;
+}
+/*功能  結束 */
 
 /*滾動返回頂部按鈕*/
 .back-to-top {
