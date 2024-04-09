@@ -92,123 +92,241 @@
     </header>
     <!-- menu 結束 -->
 
-    <h1>任務</h1>
-    <div class="calendar">
-      <div class="calendar-header" id="header"></div>
-      <div class="calendar-body" id="months">
-        <!-- 月份会被动态生成 -->
+    <div class="container">
+      <div class="calendar">
+        <div class="calendar-header" id="header"></div>
+        <div class="calendar-nav">
+          <button onclick="prevMonth()">Prev Month</button>
+          <select id="monthSelect" onchange="changeMonth()">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+          </select>
+          <select id="yearSelect" onchange="changeYear()"></select>
+          <button onclick="nextMonth()">Next Month</button>
+        </div>
+        <div class="calendar-body" id="calendar"></div>
       </div>
-    </div>
 
-    <div class="record" id="recordSection">
-      <div class="record-item" id="calories">Daily Calories:</div>
-      <div class="record-item" id="exercise">Exercise Record:</div>
-      <div class="record-item" id="steps">Daily Steps:</div>
-    </div>
-    <button class="add-task" onclick="showAddTaskDialog()">新增任务</button>
+      <h2 id="todoTitle">To-Do List -</h2>
+      <input type="text" id="taskInput" placeholder="Add new task..." />
+      <button onclick="addTask()">Add</button>
 
-    <div>
-      <input type="date" value="2024-02-29" />
+      <div id="taskList">
+        <!-- Tasks will be dynamically added here -->
+      </div>
     </div>
 
     <script>
       // 获取日历头部元素和月份显示区域元素
       const header = document.getElementById("header");
-      const monthsContainer = document.getElementById("months");
-      // 获取记录区域元素
-      const recordSection = document.getElementById("recordSection");
-      const caloriesRecord = document.getElementById("calories");
-      const exerciseRecord = document.getElementById("exercise");
-      const stepsRecord = document.getElementById("steps");
+      const calendarContainer = document.getElementById("calendar");
+      const monthSelect = document.getElementById("monthSelect");
+      const yearSelect = document.getElementById("yearSelect");
 
       // 获取当前日期信息
-      const currentDate = new Date();
+      let currentDate = new Date();
       let currentYear = currentDate.getFullYear();
       let currentMonth = currentDate.getMonth();
 
-      // 生成月份选择器
-      function generateMonthSelector() {
-        header.innerHTML = `<button onclick="prevYear()">Prev Year</button>
-                              <button onclick="prevMonth()">Prev Month</button>
-                              ${currentYear}年${currentMonth + 1}月
-                              <button onclick="nextMonth()">Next Month</button>
-                              <button onclick="nextYear()">Next Year</button>`;
+      // 初始化月份选择框
+      for (let i = 0; i < 12; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.text = new Date(0, i).toLocaleString("en", { month: "long" });
+        monthSelect.appendChild(option);
+      }
+      monthSelect.selectedIndex = currentMonth;
+
+      // 初始化年份选择框
+      for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.text = i;
+        yearSelect.appendChild(option);
+      }
+      yearSelect.selectedIndex = 10; // 设置选中当前年份
+
+      // 初始化日历和任务列表
+      generateCalendar(currentYear, currentMonth);
+      displayTasks(currentYear, currentMonth, currentDate.getDate());
+
+      // 函数：生成月份选择框
+      function changeMonth() {
+        currentMonth = parseInt(monthSelect.value);
+        generateCalendar(currentYear, currentMonth);
       }
 
-      // 生成日历
+      // 函数：生成年份选择框
+      function changeYear() {
+        currentYear = parseInt(yearSelect.value);
+        generateCalendar(currentYear, currentMonth);
+      }
+
+      // 函数：生成月份选择器
+      function generateMonthSelector() {
+        header.innerText = `${currentYear}年${currentMonth + 1}月`;
+      }
+
+      // 函数：生成日历
       function generateCalendar(year, month) {
         const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const firstDayOfMonth = new Date(year, month, 1).getDay();
-        const daysContainer = document.createElement("div");
-        daysContainer.classList.add("days");
+        const firstDay = new Date(year, month, 1).getDay();
+        const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-        // 添加空白天数
-        for (let i = 0; i < firstDayOfMonth; i++) {
-          const emptyDay = document.createElement("div");
-          emptyDay.classList.add("day");
-          emptyDay.textContent = "";
-          daysContainer.appendChild(emptyDay);
+        // 清空日历容器
+        calendarContainer.innerHTML = "";
+
+        // 添加星期标题
+        for (let i = 0; i < 7; i++) {
+          const weekday = document.createElement("div");
+          weekday.classList.add("calendar-day");
+          weekday.textContent = weekdays[i];
+          calendarContainer.appendChild(weekday);
         }
 
         // 添加日期
+        for (let i = 0; i < firstDay; i++) {
+          const emptyDay = document.createElement("div");
+          emptyDay.classList.add("calendar-day");
+          emptyDay.textContent = "";
+          calendarContainer.appendChild(emptyDay);
+        }
+
         for (let i = 1; i <= daysInMonth; i++) {
           const day = document.createElement("div");
-          day.classList.add("day");
+          day.classList.add("calendar-day");
           day.textContent = i;
-          day.addEventListener("click", () => {
-            updateRecords(year, month, i);
-          });
-          daysContainer.appendChild(day);
-        }
-
-        monthsContainer.innerHTML = "";
-        monthsContainer.appendChild(daysContainer);
-      }
-
-      // 更新记录
-      function updateRecords(year, month, day) {
-        // 这里可以添加您自己的逻辑来获取和更新记录数据
-        caloriesRecord.textContent = `Daily Calories on ${year}-${
-          month + 1
-        }-${day}: `;
-        exerciseRecord.textContent = `Exercise Record on ${year}-${
-          month + 1
-        }-${day}: `;
-        stepsRecord.textContent = `Daily Steps on ${year}-${
-          month + 1
-        }-${day}: `;
-      }
-
-      // 显示任务输入框
-      function showTaskInput(year, month, day) {
-        const task = prompt(`Enter task for ${year}-${month + 1}-${day}`);
-        if (task !== null) {
-          const isCompleted = confirm("Is task completed?");
-          // 这里可以添加保存任务的逻辑
-          addTaskToRecord(task, isCompleted);
+          day.setAttribute("data-day", i); // 添加日期属性
+          day.addEventListener("click", () => displayTasks(year, month, i)); // 添加点击事件
+          calendarContainer.appendChild(day);
         }
       }
 
-      // 将任务添加到记录区域
-      function addTaskToRecord(task, isCompleted) {
-        const taskItem = document.createElement("div");
-        taskItem.textContent = `${task} (Completed: ${
-          isCompleted ? "Yes" : "No"
-        })`;
-        recordSection.appendChild(taskItem);
-      }
+      // 函数：添加任务
+      function addTask() {
+        const input = document.getElementById("taskInput");
+        const taskText = input.value.trim();
 
-      // 显示增加任务对话框
-      function showAddTaskDialog() {
-        const task = prompt("Enter new task:");
-        if (task !== null) {
-          const isCompleted = confirm("Is task completed?");
-          // 这里可以添加保存任务的逻辑
-          addTaskToRecord(task, isCompleted);
+        if (taskText !== "") {
+          // 创建一个任务对象
+          const task = {
+            id: Date.now(), // 为了简单起见，使用当前时间戳作为任务的唯一标识符
+            text: taskText,
+            completed: false,
+          };
+
+          // 将任务添加到本地存储中
+          let storedTasks = localStorage.getItem("tasks");
+          if (!storedTasks) {
+            storedTasks = "[]";
+          }
+          storedTasks = JSON.parse(storedTasks);
+          storedTasks.push(task);
+          localStorage.setItem("tasks", JSON.stringify(storedTasks));
+
+          // 清空输入框
+          input.value = "";
+
+          // 更新任务列表显示
+          displayTasks(currentYear, currentMonth, currentDate.getDate());
         }
       }
 
-      // 显示前一个月份
+      // 函数：显示任务列表
+      function displayTasks(year, month, day) {
+        const taskList = document.getElementById("taskList");
+        taskList.innerHTML = "";
+
+        let storedTasks = localStorage.getItem("tasks");
+        if (!storedTasks) {
+          storedTasks = "[]";
+        }
+        storedTasks = JSON.parse(storedTasks);
+
+        const selectedDateTasks = storedTasks.filter((task) => {
+          const taskDate = new Date(task.id);
+          return (
+            taskDate.getFullYear() === year &&
+            taskDate.getMonth() === month &&
+            taskDate.getDate() === day
+          );
+        });
+
+        selectedDateTasks.forEach((task) => {
+          const taskElement = document.createElement("div");
+          taskElement.classList.add("task");
+          if (task.completed) {
+            taskElement.classList.add("completed");
+          }
+
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.checked = task.completed;
+          checkbox.addEventListener("change", () =>
+            toggleTaskCompletion(task.id)
+          );
+
+          const taskText = document.createElement("span");
+          taskText.textContent = task.text;
+
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "Delete";
+          deleteButton.addEventListener("click", () => deleteTask(task.id));
+
+          taskElement.appendChild(checkbox);
+          taskElement.appendChild(taskText);
+          taskElement.appendChild(deleteButton);
+
+          taskList.appendChild(taskElement);
+        });
+      }
+
+      // 函数：标记任务完成或未完成
+      function toggleTaskCompletion(taskId) {
+        let storedTasks = localStorage.getItem("tasks");
+        if (!storedTasks) {
+          return;
+        }
+        storedTasks = JSON.parse(storedTasks);
+
+        storedTasks = storedTasks.map((task) => {
+          if (task.id === taskId) {
+            return { ...task, completed: !task.completed };
+          }
+          return task;
+        });
+
+        localStorage.setItem("tasks", JSON.stringify(storedTasks));
+
+        displayTasks(currentYear, currentMonth, currentDate.getDate());
+      }
+
+      // 函数：删除任务
+      function deleteTask(taskId) {
+        let storedTasks = localStorage.getItem("tasks");
+        if (!storedTasks) {
+          return;
+        }
+        storedTasks = JSON.parse(storedTasks);
+
+        storedTasks = storedTasks.filter((task) => task.id !== taskId);
+
+        localStorage.setItem("tasks", JSON.stringify(storedTasks));
+
+        displayTasks(currentYear, currentMonth, currentDate.getDate());
+      }
+
+      // 函数：显示前一个月份
       function prevMonth() {
         if (currentMonth === 0) {
           currentYear--;
@@ -218,9 +336,10 @@
         }
         generateMonthSelector();
         generateCalendar(currentYear, currentMonth);
+        displayTasks(currentYear, currentMonth, currentDate.getDate());
       }
 
-      // 显示下一个月份
+      // 函数：显示下一个月份
       function nextMonth() {
         if (currentMonth === 11) {
           currentYear++;
@@ -230,25 +349,18 @@
         }
         generateMonthSelector();
         generateCalendar(currentYear, currentMonth);
+        displayTasks(currentYear, currentMonth, currentDate.getDate());
       }
 
-      // 显示前一年
-      function prevYear() {
-        currentYear--;
-        generateMonthSelector();
-        generateCalendar(currentYear, currentMonth);
+      // 函数：生成月份选择器
+      function generateMonthSelector() {
+        monthSelect.selectedIndex = currentMonth;
       }
 
-      // 显示下一年
-      function nextYear() {
-        currentYear++;
-        generateMonthSelector();
-        generateCalendar(currentYear, currentMonth);
+      // 函数：生成年份选择器
+      function generateYearSelector() {
+        yearSelect.selectedIndex = 10; // 设置选中当前年份
       }
-
-      // 初始化日历
-      generateMonthSelector();
-      generateCalendar(currentYear, currentMonth);
     </script>
     <!-- footer 開始 -->
     <footer id="footer" class="footer-area">

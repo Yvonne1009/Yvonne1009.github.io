@@ -100,33 +100,52 @@
 
     <div class="container">
       <h1>運動數據分析</h1>
-      <div class="calendar">
-        <div class="calendar-header" id="header"></div>
-        <div class="calendar-body" id="months">
-          <!-- 月份会被动态生成 -->
+      <div class="container">
+        <div class="calendar">
+          <div class="calendar-header" id="header"></div>
+          <div class="calendar-body" id="months">
+            <!-- 月份会被动态生成 -->
+          </div>
+        </div>
+
+        <div class="record" id="recordSection">
+          <div class="record-item" id="calories">Daily Calories: 0</div>
+          <div class="record-item" id="exercise">Exercise Record: None</div>
+          <div class="record-item" id="steps">Daily Steps: 0</div>
         </div>
       </div>
 
-      <div class="record" id="recordSection">
-        <div class="record-item" id="calories">Daily Calories:</div>
-        <div class="record-item" id="exercise">Exercise Record:</div>
-        <div class="record-item" id="steps">Daily Steps:</div>
-      </div>
-
       <div id="chart-container">
-        <!-- 此處用於動態添加圖表 -->
+        <canvas id="myChart"></canvas>
       </div>
 
       <div id="activity-tracking">
-        <!-- 這裡將包含地圖和活動追蹤數據的顯示 -->
+        <!-- 这里将包含地图和活动追踪数据的显示 -->
       </div>
 
       <div id="fitness-plan">
-        <!-- 這裡將包含表單元素用於設定健身計劃和目標 -->
+        <h2>Fitness Plan</h2>
+        <form id="fitness-form">
+          <label for="target-steps">Target Daily Steps:</label>
+          <input type="number" id="target-steps" name="target-steps" min="0" />
+          <br />
+          <label for="target-calories">Target Daily Calories:</label>
+          <input
+            type="number"
+            id="target-calories"
+            name="target-calories"
+            min="0"
+          />
+          <br />
+          <button type="submit">Set Targets</button>
+        </form>
       </div>
 
       <div id="personal-report">
-        <!-- 這裡將包含個人化報告和分析數據的顯示 -->
+        <h2>Personal Report</h2>
+        <div id="report-content">
+          <!-- 这里将包含个性化报告和分析数据的显示 -->
+        </div>
       </div>
     </div>
 
@@ -186,17 +205,18 @@
 
       // 更新记录
       function updateRecords(year, month, day) {
-        recordSection.classList.add("show"); // 显示记录区域
-        // 这里可以添加您自己的逻辑来获取和更新记录数据
+        // 显示记录区域
+        recordSection.classList.add("show");
+        // 更新记录内容为零
         caloriesRecord.textContent = `Daily Calories on ${year}-${
           month + 1
-        }-${day}: `;
+        }-${day}: 0`;
         exerciseRecord.textContent = `Exercise Record on ${year}-${
           month + 1
-        }-${day}: `;
+        }-${day}: None`;
         stepsRecord.textContent = `Daily Steps on ${year}-${
           month + 1
-        }-${day}: `;
+        }-${day}: 0`;
       }
 
       // 显示前一个月份
@@ -242,23 +262,57 @@
       generateCalendar(currentYear, currentMonth);
     </script>
     <script>
-      // Toggle dropdown menu visibility
-      function toggleDropdown() {
-        document.getElementById("myDropdown").classList.toggle("show");
-      }
+      // 在适当的位置引入 Chart.js 库
 
-      // Close the dropdown menu if the user clicks outside of it
-      window.onclick = function (event) {
-        if (!event.target.matches(".dropbtn")) {
-          var dropdowns = document.getElementsByClassName("dropdown-content");
-          for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains("show")) {
-              openDropdown.classList.remove("show");
-            }
-          }
-        }
-      };
+      // 在页面加载时创建图表
+      document.addEventListener("DOMContentLoaded", function () {
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+            ],
+            datasets: [
+              {
+                label: "Exercise Record",
+                data: [12, 19, 3, 5, 2, 3, 9], // 示例数据，请根据实际情况修改
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                borderColor: "rgba(255, 99, 132, 1)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          },
+        });
+      });
+
+      // 处理健身计划表单提交
+      document
+        .getElementById("fitness-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // 防止表单默认提交行为
+          var targetSteps = document.getElementById("target-steps").value;
+          var targetCalories = document.getElementById("target-calories").value;
+          // 在此处添加处理设置目标的逻辑，可以将目标存储在本地存储或发送到服务器等
+          alert("Targets set successfully!");
+        });
     </script>
     <?php
     // 假設你已經連接到資料庫並準備好了資料
