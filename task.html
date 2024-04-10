@@ -126,6 +126,7 @@
       let currentDate = new Date();
       let currentYear = currentDate.getFullYear();
       let currentMonth = currentDate.getMonth();
+      let currentDay = currentDate.getDate();
 
       // 初始化月份选择框
       for (let i = 0; i < 12; i++) {
@@ -145,14 +146,65 @@
       }
       yearSelect.selectedIndex = 10; // 设置选中当前年份
 
-      // 初始化日历和任务列表
-      generateCalendar(currentYear, currentMonth);
-      displayTasks(currentYear, currentMonth, currentDate.getDate());
+      // 函数：生成月份选择器
+      function generateMonthSelector() {
+        monthSelect.selectedIndex = currentMonth;
+      }
 
-      // 函数：生成月份选择框
-      function changeMonth() {
-        currentMonth = parseInt(monthSelect.value);
-        generateCalendar(currentYear, currentMonth);
+      // 函数：生成日历
+      function generateCalendar(year, month) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDay = new Date(year, month, 1).getDay();
+        const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+        // 清空日历容器
+        calendarContainer.innerHTML = "";
+
+        // 添加星期标题
+        for (let i = 0; i < 7; i++) {
+          const weekday = document.createElement("div");
+          weekday.classList.add("calendar-day");
+          weekday.textContent = weekdays[i];
+          calendarContainer.appendChild(weekday);
+        }
+
+        // 添加空白日期
+        for (let i = 0; i < firstDay; i++) {
+          const emptyDay = document.createElement("div");
+          emptyDay.classList.add("calendar-day");
+          emptyDay.textContent = "";
+          calendarContainer.appendChild(emptyDay);
+        }
+
+        // 添加日期
+        for (let i = 1; i <= daysInMonth; i++) {
+          const day = document.createElement("div");
+          day.classList.add("calendar-day");
+          day.textContent = i;
+          day.setAttribute("data-day", i); // 添加日期属性
+          day.addEventListener("click", () => {
+            console.log(`Clicked on day ${i}`);
+            updateHeader(year, month, i);
+          });
+
+          // 函数：处理日期点击事件
+          function handleDayClick(year, month, day) {
+            currentDay = day; // 更新当前日期
+            updateHeader(year, month, currentDay); // 更新标题
+            displayTasks(year, month, currentDay); // 重新显示任务列表
+          }
+
+          // 如果是今天的日期，则添加红色背景
+          if (
+            year === currentYear &&
+            month === currentMonth &&
+            i === currentDay
+          ) {
+            day.classList.add("today");
+          }
+
+          calendarContainer.appendChild(day);
+        }
       }
 
       // 函数：生成年份选择框
@@ -161,87 +213,41 @@
         generateCalendar(currentYear, currentMonth);
       }
 
-      // 函数：生成月份选择器
-      function generateMonthSelector() {
-        monthSelect.selectedIndex = currentMonth;
+      // 函数：生成月份选择框
+      function changeMonth() {
+        currentMonth = parseInt(monthSelect.value);
+        generateCalendar(currentYear, currentMonth);
       }
+
+      // 函数：更新标题显示选定的年份、月份和日期
+      function updateHeader(year, month, day) {
+        header.innerText = `${year}年${month + 1}月${day}日`;
+      }
+
+      // 初始化日历
+      generateCalendar(currentYear, currentMonth);
 
       // 在生成日历的地方调用updateHeader函数
       updateHeader(currentYear, currentMonth, currentDate.getDate());
 
-      // 函数：生成日历
-      function generateCalendar(year, month) {
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const firstDay = new Date(year, month, 1).getDay();
-        const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      // 在页面加载时初始化任务列表
+      initTaskList();
 
-        for (let i = 1; i <= daysInMonth; i++) {
-          const day = document.createElement("div");
-          day.classList.add("calendar-day");
-          day.textContent = i;
-          day.setAttribute("data-day", i); // 添加日期属性
-          day.addEventListener(
-            "click",
-            (function (dayOfMonth) {
-              return function () {
-                console.log(`Clicked on day ${dayOfMonth}`);
-                updateHeader(year, month, dayOfMonth);
-              };
-            })(i)
-          );
-
-          // 在生成日期后调用updateHeader函数
-          updateHeader(year, month, currentDate.getDate());
-
-          // 获取今天的日期
-          const today = new Date();
-          const currentYear = today.getFullYear();
-          const currentMonth = today.getMonth();
-          const currentDay = today.getDate();
-
-          // 函数：更新标题显示选定的年份、月份和日期
-          function updateHeader(year, month, day) {
-            header.innerText = `${year}年${month + 1}月${day}日`;
-          }
-
-          // 清空日历容器
-          calendarContainer.innerHTML = "";
-
-          // 添加星期标题
-          for (let i = 0; i < 7; i++) {
-            const weekday = document.createElement("div");
-            weekday.classList.add("calendar-day");
-            weekday.textContent = weekdays[i];
-            calendarContainer.appendChild(weekday);
-          }
-
-          // 添加日期
-          for (let i = 0; i < firstDay; i++) {
-            const emptyDay = document.createElement("div");
-            emptyDay.classList.add("calendar-day");
-            emptyDay.textContent = "";
-            calendarContainer.appendChild(emptyDay);
-          }
-
-          for (let i = 1; i <= daysInMonth; i++) {
-            const day = document.createElement("div");
-            day.classList.add("calendar-day");
-            day.textContent = i;
-            day.setAttribute("data-day", i); // 添加日期属性
-            day.addEventListener("click", () => displayTasks(year, month, i)); // 添加点击事件
-
-            // 如果是今天的日期，则添加红色背景
-            if (
-              year === currentYear &&
-              month === currentMonth &&
-              i === currentDay
-            ) {
-              day.classList.add("today");
-            }
-
-            calendarContainer.appendChild(day);
-          }
+      // 函数：初始化任务列表
+      function initTaskList() {
+        // 检查本地存储中是否有存储的任务列表
+        let storedTasks = localStorage.getItem("tasks");
+        if (!storedTasks) {
+          // 如果没有存储的任务列表，则初始化一个空数组并存储到本地存储中
+          storedTasks = "[]";
+          localStorage.setItem("tasks", storedTasks);
         }
+
+        // 将本地存储中的任务列表解析为数组
+        storedTasks = JSON.parse(storedTasks);
+
+        // 更新任务列表显示
+        displayTasks(currentYear, currentMonth, currentDay, storedTasks);
       }
 
       // 函数：添加任务
@@ -252,40 +258,35 @@
         if (taskText !== "") {
           // 创建一个任务对象
           const task = {
-            id: Date.now(), // 为了简单起见，使用当前时间戳作为任务的唯一标识符
+            id: Date.now(), // 使用当前时间戳作为任务的唯一标识符
             text: taskText,
             completed: false,
           };
 
-          // 将任务添加到本地存储中
-          let storedTasks = localStorage.getItem("tasks");
-          if (!storedTasks) {
-            storedTasks = "[]";
-          }
-          storedTasks = JSON.parse(storedTasks);
+          // 从本地存储中获取任务列表
+          let storedTasks = JSON.parse(localStorage.getItem("tasks"));
+
+          // 将新任务添加到任务列表中
           storedTasks.push(task);
+
+          // 将更新后的任务列表重新存储到本地存储中
           localStorage.setItem("tasks", JSON.stringify(storedTasks));
 
           // 清空输入框
           input.value = "";
 
           // 更新任务列表显示
-          displayTasks(currentYear, currentMonth, currentDate.getDate());
+          displayTasks(currentYear, currentMonth, currentDay, storedTasks);
         }
       }
 
       // 函数：显示任务列表
-      function displayTasks(year, month, day) {
+      function displayTasks(year, month, day, tasks) {
         const taskList = document.getElementById("taskList");
         taskList.innerHTML = "";
 
-        let storedTasks = localStorage.getItem("tasks");
-        if (!storedTasks) {
-          storedTasks = "[]";
-        }
-        storedTasks = JSON.parse(storedTasks);
-
-        const selectedDateTasks = storedTasks.filter((task) => {
+        // 根据日期筛选任务列表
+        const selectedDateTasks = tasks.filter((task) => {
           const taskDate = new Date(task.id);
           return (
             taskDate.getFullYear() === year &&
@@ -294,6 +295,7 @@
           );
         });
 
+        // 遍历筛选后的任务列表，并创建任务列表项
         selectedDateTasks.forEach((task) => {
           const taskElement = document.createElement("div");
           taskElement.classList.add("task");
@@ -305,7 +307,7 @@
           checkbox.type = "checkbox";
           checkbox.checked = task.completed;
           checkbox.addEventListener("change", () =>
-            toggleTaskCompletion(task.id)
+            toggleTaskCompletion(task.id, tasks)
           );
 
           const taskText = document.createElement("span");
@@ -313,7 +315,9 @@
 
           const deleteButton = document.createElement("button");
           deleteButton.textContent = "Delete";
-          deleteButton.addEventListener("click", () => deleteTask(task.id));
+          deleteButton.addEventListener("click", () =>
+            deleteTask(task.id, tasks)
+          );
 
           taskElement.appendChild(checkbox);
           taskElement.appendChild(taskText);
@@ -324,75 +328,41 @@
       }
 
       // 函数：标记任务完成或未完成
-      function toggleTaskCompletion(taskId) {
-        let storedTasks = localStorage.getItem("tasks");
-        if (!storedTasks) {
-          return;
-        }
-        storedTasks = JSON.parse(storedTasks);
-
-        storedTasks = storedTasks.map((task) => {
+      function toggleTaskCompletion(taskId, tasks) {
+        // 在任务列表中查找对应的任务并更新完成状态
+        const updatedTasks = tasks.map((task) => {
           if (task.id === taskId) {
             return { ...task, completed: !task.completed };
           }
           return task;
         });
 
-        localStorage.setItem("tasks", JSON.stringify(storedTasks));
+        // 更新本地存储中的任务列表
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
 
-        displayTasks(currentYear, currentMonth, currentDate.getDate());
+        // 重新显示任务列表
+        displayTasks(currentYear, currentMonth, currentDay, updatedTasks);
       }
 
       // 函数：删除任务
-      function deleteTask(taskId) {
-        let storedTasks = localStorage.getItem("tasks");
-        if (!storedTasks) {
-          return;
-        }
-        storedTasks = JSON.parse(storedTasks);
+      function deleteTask(taskId, tasks) {
+        // 在任务列表中过滤掉要删除的任务
+        const updatedTasks = tasks.filter((task) => task.id !== taskId);
 
-        storedTasks = storedTasks.filter((task) => task.id !== taskId);
+        // 更新本地存储中的任务列表
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
 
-        localStorage.setItem("tasks", JSON.stringify(storedTasks));
-
-        displayTasks(currentYear, currentMonth, currentDate.getDate());
+        // 重新显示任务列表
+        displayTasks(currentYear, currentMonth, currentDay, updatedTasks);
       }
 
-      // 函数：显示前一个月份
-      function prevMonth() {
-        if (currentMonth === 0) {
-          currentYear--;
-          currentMonth = 11;
-        } else {
-          currentMonth--;
-        }
-        generateMonthSelector();
-        generateCalendar(currentYear, currentMonth);
-        displayTasks(currentYear, currentMonth, currentDate.getDate());
-      }
-
-      // 函数：显示下一个月份
-      function nextMonth() {
-        if (currentMonth === 11) {
-          currentYear++;
-          currentMonth = 0;
-        } else {
-          currentMonth++;
-        }
-        generateMonthSelector();
-        generateCalendar(currentYear, currentMonth);
-        displayTasks(currentYear, currentMonth, currentDate.getDate());
-      }
-
-      // 函数：生成月份选择器
-      function generateMonthSelector() {
-        monthSelect.selectedIndex = currentMonth;
-      }
-
-      // 函数：生成年份选择器
-      function generateYearSelector() {
-        yearSelect.selectedIndex = 10; // 设置选中当前年份
-      }
+      // 在点击日期时更新当前日期并重新显示任务列表
+      day.addEventListener("click", () => {
+        console.log(`Clicked on day ${i}`);
+        currentDay = i; // 更新当前日期
+        updateHeader(year, month, currentDay); // 更新标题
+        displayTasks(currentYear, currentMonth, currentDay); // 重新显示任务列表
+      });
     </script>
     <!-- footer 開始 -->
     <footer id="footer" class="footer-area">
