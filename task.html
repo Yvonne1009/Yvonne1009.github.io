@@ -97,32 +97,21 @@
         <div class="calendar-header" id="header"></div>
         <div class="calendar-nav">
           <button onclick="prevMonth()">Prev Month</button>
-          <select id="monthSelect" onchange="changeMonth()">
-            <option value="0">January</option>
-            <option value="1">February</option>
-            <option value="2">March</option>
-            <option value="3">April</option>
-            <option value="4">May</option>
-            <option value="5">June</option>
-            <option value="6">July</option>
-            <option value="7">August</option>
-            <option value="8">September</option>
-            <option value="9">October</option>
-            <option value="10">November</option>
-            <option value="11">December</option>
-          </select>
+          <select id="monthSelect" onchange="changeMonth()"></select>
           <select id="yearSelect" onchange="changeYear()"></select>
           <button onclick="nextMonth()">Next Month</button>
         </div>
         <div class="calendar-body" id="calendar"></div>
       </div>
 
-      <h2 id="todoTitle">To-Do List -</h2>
-      <input type="text" id="taskInput" placeholder="Add new task..." />
-      <button onclick="addTask()">Add</button>
+      <div class="container">
+        <h2 id="todoTitle">To-Do List -</h2>
+        <input type="text" id="taskInput" placeholder="Add new task..." />
+        <button onclick="addTask()">Add</button>
 
-      <div id="taskList">
-        <!-- Tasks will be dynamically added here -->
+        <div id="taskList">
+          <!-- Tasks will be dynamically added here -->
+        </div>
       </div>
     </div>
 
@@ -174,8 +163,11 @@
 
       // 函数：生成月份选择器
       function generateMonthSelector() {
-        header.innerText = `${currentYear}年${currentMonth + 1}月`;
+        monthSelect.selectedIndex = currentMonth;
       }
+
+      // 在生成日历的地方调用updateHeader函数
+      updateHeader(currentYear, currentMonth, currentDate.getDate());
 
       // 函数：生成日历
       function generateCalendar(year, month) {
@@ -183,32 +175,72 @@
         const firstDay = new Date(year, month, 1).getDay();
         const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-        // 清空日历容器
-        calendarContainer.innerHTML = "";
-
-        // 添加星期标题
-        for (let i = 0; i < 7; i++) {
-          const weekday = document.createElement("div");
-          weekday.classList.add("calendar-day");
-          weekday.textContent = weekdays[i];
-          calendarContainer.appendChild(weekday);
-        }
-
-        // 添加日期
-        for (let i = 0; i < firstDay; i++) {
-          const emptyDay = document.createElement("div");
-          emptyDay.classList.add("calendar-day");
-          emptyDay.textContent = "";
-          calendarContainer.appendChild(emptyDay);
-        }
-
         for (let i = 1; i <= daysInMonth; i++) {
           const day = document.createElement("div");
           day.classList.add("calendar-day");
           day.textContent = i;
           day.setAttribute("data-day", i); // 添加日期属性
-          day.addEventListener("click", () => displayTasks(year, month, i)); // 添加点击事件
-          calendarContainer.appendChild(day);
+          day.addEventListener(
+            "click",
+            (function (dayOfMonth) {
+              return function () {
+                console.log(`Clicked on day ${dayOfMonth}`);
+                updateHeader(year, month, dayOfMonth);
+              };
+            })(i)
+          );
+
+          // 在生成日期后调用updateHeader函数
+          updateHeader(year, month, currentDate.getDate());
+
+          // 获取今天的日期
+          const today = new Date();
+          const currentYear = today.getFullYear();
+          const currentMonth = today.getMonth();
+          const currentDay = today.getDate();
+
+          // 函数：更新标题显示选定的年份、月份和日期
+          function updateHeader(year, month, day) {
+            header.innerText = `${year}年${month + 1}月${day}日`;
+          }
+
+          // 清空日历容器
+          calendarContainer.innerHTML = "";
+
+          // 添加星期标题
+          for (let i = 0; i < 7; i++) {
+            const weekday = document.createElement("div");
+            weekday.classList.add("calendar-day");
+            weekday.textContent = weekdays[i];
+            calendarContainer.appendChild(weekday);
+          }
+
+          // 添加日期
+          for (let i = 0; i < firstDay; i++) {
+            const emptyDay = document.createElement("div");
+            emptyDay.classList.add("calendar-day");
+            emptyDay.textContent = "";
+            calendarContainer.appendChild(emptyDay);
+          }
+
+          for (let i = 1; i <= daysInMonth; i++) {
+            const day = document.createElement("div");
+            day.classList.add("calendar-day");
+            day.textContent = i;
+            day.setAttribute("data-day", i); // 添加日期属性
+            day.addEventListener("click", () => displayTasks(year, month, i)); // 添加点击事件
+
+            // 如果是今天的日期，则添加红色背景
+            if (
+              year === currentYear &&
+              month === currentMonth &&
+              i === currentDay
+            ) {
+              day.classList.add("today");
+            }
+
+            calendarContainer.appendChild(day);
+          }
         }
       }
 

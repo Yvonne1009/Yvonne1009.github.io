@@ -494,13 +494,15 @@ ol {
 }
 
 /*任務*/
+/* 样式可以根据需要进行修改 */
 body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 .container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
 }
 input[type="text"] {
   width: 70%;
@@ -534,6 +536,7 @@ button:hover {
   margin-bottom: 20px;
 }
 .calendar-header {
+  text-align: center;
   font-size: 24px;
   margin-bottom: 10px;
 }
@@ -543,7 +546,38 @@ button:hover {
   gap: 5px;
 }
 .calendar-day {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin-right: 5px;
+  margin-bottom: 5px;
   padding: 5px;
-  border: 1px solid #ddd;
   cursor: pointer;
+}
+
+/*多增加的*/
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.calendar-nav button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.calendar-nav button:hover {
+  background-color: #0056b3;
+}
+
+.today {
+  background-color: #ff0000;
+  color: #fff;
+  border-radius: 50%; /* 将日期框的边界半径设置为50%，使其呈现圆形 */
 }
