@@ -183,16 +183,13 @@
           day.textContent = i;
           day.setAttribute("data-day", i); // 添加日期属性
           day.addEventListener("click", () => {
-            console.log(`Clicked on day ${i}`);
-            updateHeader(year, month, i);
-          });
-
-          // 函数：处理日期点击事件
-          function handleDayClick(year, month, day) {
-            currentDay = day; // 更新当前日期
+            const clickedDay = parseInt(day.getAttribute("data-day"));
+            console.log(`Clicked on day ${clickedDay}`);
+            currentDay = clickedDay; // 更新当前日期
             updateHeader(year, month, currentDay); // 更新标题
-            displayTasks(year, month, currentDay); // 重新显示任务列表
-          }
+            const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+            displayTasks(year, month, currentDay, storedTasks); // 重新显示任务列表
+          });
 
           // 如果是今天的日期，则添加红色背景
           if (
@@ -261,8 +258,10 @@
             id: Date.now(), // 使用当前时间戳作为任务的唯一标识符
             text: taskText,
             completed: false,
+            year: currentYear,
+            month: currentMonth,
+            day: currentDay,
           };
-
           // 从本地存储中获取任务列表
           let storedTasks = JSON.parse(localStorage.getItem("tasks"));
 
@@ -363,6 +362,32 @@
         updateHeader(year, month, currentDay); // 更新标题
         displayTasks(currentYear, currentMonth, currentDay); // 重新显示任务列表
       });
+
+      // 函数：显示前一个月份
+      function prevMonth() {
+        if (currentMonth === 0) {
+          currentYear--;
+          currentMonth = 11;
+        } else {
+          currentMonth--;
+        }
+        generateMonthSelector();
+        generateCalendar(currentYear, currentMonth);
+        displayTasks(currentYear, currentMonth, currentDate.getDate());
+      }
+
+      // 函数：显示下一个月份
+      function nextMonth() {
+        if (currentMonth === 11) {
+          currentYear++;
+          currentMonth = 0;
+        } else {
+          currentMonth++;
+        }
+        generateMonthSelector();
+        generateCalendar(currentYear, currentMonth);
+        displayTasks(currentYear, currentMonth, currentDate.getDate());
+      }
     </script>
     <!-- footer 開始 -->
     <footer id="footer" class="footer-area">
