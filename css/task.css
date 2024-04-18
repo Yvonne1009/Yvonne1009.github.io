@@ -320,9 +320,6 @@ section {
   padding: 20px;
 }
 
-img {
-  border-radius: 50%;
-}
 .profile-picture {
   width: 20px; /* 調整寬度 */
   height: 20px; /* 高度會自動調整以保持原始比例 */
@@ -339,7 +336,7 @@ img {
 }
 
 .pb-130 {
-  padding-bottom: 80px;
+  padding-bottom: 130px;
 }
 
 .pt-80 {

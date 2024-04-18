@@ -323,9 +323,6 @@ section {
   padding: 20px;
 }
 
-img {
-  border-radius: 50%;
-}
 .profile-picture {
   width: 20px; /* 調整寬度 */
   height: 20px; /* 高度會自動調整以保持原始比例 */

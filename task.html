@@ -73,10 +73,11 @@
                   <img
                     src="<?php echo $imagePath; ?>"
                     class="profile-picture"
+                    style="border-radius: 50%"
                   />
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="bgstore.html">背景商店</a></li>
+                  <li><a href="bgstore.html">背景介紹</a></li>
                   <li><a href="設定.html">設定</a></li>
                   <li><a href="#">登出</a></li>
                 </ul>
@@ -92,7 +93,7 @@
     </header>
     <!-- menu 結束 -->
 
-    <div class="container">
+    <div class="container pt-80 pt-130">
       <div class="calendar">
         <div class="calendar-header" id="header"></div>
         <div class="calendar-nav">
@@ -183,12 +184,13 @@
           day.textContent = i;
           day.setAttribute("data-day", i); // 添加日期属性
           day.addEventListener("click", () => {
-            const clickedDay = parseInt(day.getAttribute("data-day"));
-            console.log(`Clicked on day ${clickedDay}`);
-            currentDay = clickedDay; // 更新当前日期
-            updateHeader(year, month, currentDay); // 更新标题
+            // 点击日期时更新当前日期
+            currentYear = year;
+            currentMonth = month;
+            currentDay = i;
+            updateHeader(currentYear, currentMonth, currentDay); // 更新标题
             const storedTasks = JSON.parse(localStorage.getItem("tasks"));
-            displayTasks(year, month, currentDay, storedTasks); // 重新显示任务列表
+            displayTasks(currentYear, currentMonth, currentDay, storedTasks); // 重新显示任务列表
           });
 
           // 如果是今天的日期，则添加红色背景
@@ -260,10 +262,16 @@
             completed: false,
             year: currentYear,
             month: currentMonth,
-            day: currentDay,
+            day: currentDay, // 更新为当前选择的日期
           };
+
           // 从本地存储中获取任务列表
           let storedTasks = JSON.parse(localStorage.getItem("tasks"));
+
+          // 如果没有存储的任务列表，则初始化一个空数组
+          if (!storedTasks) {
+            storedTasks = [];
+          }
 
           // 将新任务添加到任务列表中
           storedTasks.push(task);
@@ -391,7 +399,7 @@
     </script>
     <!-- footer 開始 -->
     <footer id="footer" class="footer-area">
-      <div class="footer-widget pt-80 pb-130">
+      <div class="footer-widget pt-80">
         <div class="container">
           <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-8">
@@ -445,7 +453,7 @@
                 <ul class="mt-15">
                   <li><a href="analyze.html">分析</a></li>
                   <li><a href="task.html">任務</a></li>
-                  <li><a href="bgstore.html">背景商店</a></li>
+                  <li><a href="bgstore.html">背景介紹</a></li>
                   <li><a href="設定.html">設定</a></li>
                 </ul>
               </div>

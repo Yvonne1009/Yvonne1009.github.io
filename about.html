@@ -16,6 +16,20 @@
 
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Include Slick CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+
+    <!-- Include Slick Theme CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
+    />
     <title>關於LeisurePace</title>
   </head>
   <body>
@@ -66,10 +80,11 @@
                   <img
                     src="<?php echo $imagePath; ?>"
                     class="profile-picture"
+                    style="border-radius: 50%"
                   />
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a href="bgstore.html">背景商店</a></li>
+                  <li><a href="bgstore.html">背景介紹</a></li>
                   <li><a href="設定.html">設定</a></li>
                   <li><a href="#">登出</a></li>
                 </ul>
@@ -85,6 +100,7 @@
     </header>
     <!-- menu 結束 -->
 
+    <!-- logo 開始 -->
     <section id="logo" class="about-area pt-80 pb-130">
       <div class="container">
         <div class="row">
@@ -119,7 +135,9 @@
       </div>
       <!-- container -->
     </section>
-
+    <!-- logo 結束 -->
+    <!-- run 開始 -->
+    <!-- run 開始 -->
     <section
       class="pb_section pb_bg-half"
       data-section="practicing-areas"
@@ -235,6 +253,8 @@
         </div>
       </div>
     </section>
+    <!-- run 結束 -->
+    <!-- teams 開始 -->
     <section id="teams" class="services-area pt-125 pb-130 gray-bg">
       <div class="container">
         <div class="row justify-content-center">
@@ -333,9 +353,10 @@
       </div>
       <!-- container -->
     </section>
+    <!-- teams 結束 -->
     <!-- footer 開始 -->
     <footer id="footer" class="footer-area">
-      <div class="footer-widget pt-80 pb-130">
+      <div class="footer-widget pt-80">
         <div class="container">
           <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-8">
@@ -389,7 +410,7 @@
                 <ul class="mt-15">
                   <li><a href="analyze.html">分析</a></li>
                   <li><a href="task.html">任務</a></li>
-                  <li><a href="bgstore.html">背景商店</a></li>
+                  <li><a href="bgstore.html">背景介紹</a></li>
                   <li><a href="設定.html">設定</a></li>
                 </ul>
               </div>
@@ -417,5 +438,26 @@
       <!-- copyright-area -->
     </footer>
     <!-- footer 結束 -->
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include Slick JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+
+    <!-- Initialize Slick Carousel -->
+    <script>
+      $(document).ready(function () {
+        $(".single-item").slick({
+          dots: true, // Show navigation dots
+          infinite: true, // Enable infinite loop
+          speed: 180, // Animation speed
+          slidesToShow: 1, // Number of slides to show at a time
+          adaptiveHeight: true, // Adjust slide height based on content
+        });
+      });
+    </script>
   </body>
 </html>
