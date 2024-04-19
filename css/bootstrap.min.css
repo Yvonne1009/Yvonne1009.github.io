@@ -15433,13 +15433,12 @@ button.list-group-item-danger.active:hover {
 }
 .close {
   float: right;
-  font-size: 21px;
+  font-size: 50px;
   font-weight: 700;
   line-height: 1;
-  color: #000;
+  color: #fff;
   text-shadow: 0 1px 0 #fff;
   filter: alpha(opacity=20);
-  opacity: 0.2;
 }
 .close:focus,
 .close:hover {
