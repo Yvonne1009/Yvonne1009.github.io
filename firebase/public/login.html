@@ -1,91 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Page</title>
-    <link rel="stylesheet" href="css/login.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
+    <title>Firebase Login</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:400,600,700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/login.css" />
   </head>
 
   <body>
-    <section>
-      <div class="image">
-        <img src="image/bg2.png" alt="background-image" />
+    <div id="login_div" class="main-div">
+      <h3>LeisurePace Web login</h3>
+      <input type="email" placeholder="Email..." id="email_field" />
+      <input type="password" placeholder="Password..." id="password_field" />
+      <a id="forget" href="./forget.html">忘記你的帳戶或密碼</a>
+      <button onclick="login()">登入帳戶</button>
+      <div class="division-line">
+        <hr id="left-line" />
+        <span>OR</span>
+        <hr id="right-line" />
       </div>
 
-      <div class="content">
-        <div class="from">
-          <h2>Login</h2>
-          <from action="#">
-            <div class="input">
-              <span>Uername</span>
-              <input type="text" name="" required />
-            </div>
-
-            <div class="input">
-              <span>Password</span>
-              <input type="password" name="" required />
-            </div>
-
-            <div class="remmber-me">
-              <label> <input type="checkbox" name="" />Remember me? </label>
-            </div>
-
-            <div class="input">
-              <input type="submit" value="Login" name="" id="submit-button" />
-            </div>
-            <div class="input">
-              <p>Dont have an account?<a href="#">Create one.</a></p>
-            </div>
-
-            <div class="input">
-              <button id="google-login-btn" class="google-button">
-                <i class="fab fa-google"></i> Login with Google
-              </button>
-            </div>
-          </from>
+      <div class="other-login">
+        <div id="img">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/leisurepace-a3d51.appspot.com/o/%E7%99%BB%E5%85%A5%E9%80%A3%E5%8B%95icon-01.png?alt=media&token="
+            alt="other_login"
+            onclick="fb_login()"
+          />
+        </div>
+        <div id="img">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/leisurepace-a3d51.appspot.com/o/%E7%99%BB%E5%85%A5%E9%80%A3%E5%8B%95icon-02.png?alt=media&token="
+            alt="other_login"
+            onclick="google_login()"
+          />
         </div>
       </div>
-    </section>
+      <a href="./register.html" id="create-account"
+        >尚未註冊？立即建立您的帳戶</a
+      >
+    </div>
 
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <div id="recaptcha-container"></div>
 
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+    <div id="user_div" class="loggedin-div">
+      <h3>Welcome User</h3>
+      <p id="user_para">
+        Welcome to Firebase web login Example. You're currently logged in.
+      </p>
+      <button onclick="logout()">Logout</button>
+    </div>
 
-    <script>
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyCkMa2jz6kDse8j3BSsXYKru8LYA_Sb2M0",
-        authDomain: "leisurepace-a3d51.firebaseapp.com",
-        projectId: "leisurepace-a3d51",
-        storageBucket: "leisurepace-a3d51.appspot.com",
-        messagingSenderId: "955257567601",
-        appId: "1:955257567601:web:2e06661d84707065fe9ed0",
-      };
-
-      // initializeApp firebase
-      firebase.initializeApp(firebaseConfig);
-      const auth = firebase.auth();
-      auth.languageCode = "en";
-      const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-
-      const googleLogin = document.getElementById("google-log-btn");
-      googleLogin.addEventListener("click", function () {
-        signInWithPopup(auth, provider)
-          .then((result) => {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const user = result.user;
-            console.log(user);
-            window, (location.href = "");
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-          });
-      });
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase.js"></script>
+    <!-- Import the basic jquery lib. -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Import the associated firebase lib which the order is fixed. -->
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
+    ></script>
+    <!-- Set the firebsae config and initialize it. -->
+    <script defer src="init-firebase.js"></script>
+    <script src="./js/Firebase/firebase.js"></script>
+    <script src="./js/login.js"></script>
   </body>
 </html>
