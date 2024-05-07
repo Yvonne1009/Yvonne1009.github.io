@@ -1,4 +1,3 @@
-import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js";
 import {
   getAuth,
