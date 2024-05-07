@@ -1,176 +1,363 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Welcome to Firebase Hosting</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="image/logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="js/index.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- update the version number as needed -->
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app-compat.js"
-    ></script>
-    <!-- include only the Firebase features as you need -->
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth-compat.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database-compat.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore-compat.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-functions-compat.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-messaging-compat.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage-compat.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics-compat.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-remote-config-compat.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-performance-compat.js"
-    ></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <style media="screen">
-      body {
-        background: #eceff1;
-        color: rgba(0, 0, 0, 0.87);
-        font-family: Roboto, Helvetica, Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-      #message {
-        background: white;
-        max-width: 360px;
-        margin: 100px auto 16px;
-        padding: 32px 24px;
-        border-radius: 3px;
-      }
-      #message h2 {
-        color: #ffa100;
-        font-weight: bold;
-        font-size: 16px;
-        margin: 0 0 8px;
-      }
-      #message h1 {
-        font-size: 22px;
-        font-weight: 300;
-        color: rgba(0, 0, 0, 0.6);
-        margin: 0 0 16px;
-      }
-      #message p {
-        line-height: 140%;
-        margin: 16px 0 24px;
-        font-size: 14px;
-      }
-      #message a {
-        display: block;
-        text-align: center;
-        background: #039be5;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: white;
-        padding: 16px;
-        border-radius: 4px;
-      }
-      #message,
-      #message a {
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-      }
-      #load {
-        color: rgba(0, 0, 0, 0.4);
-        text-align: center;
-        font-size: 13px;
-      }
-      @media (max-width: 600px) {
-        body,
-        #message {
-          margin-top: 0;
-          background: white;
-          box-shadow: none;
-        }
-        body {
-          border-top: 16px solid #ffa100;
-        }
-      }
-    </style>
+    <title>LeisurePace</title>
   </head>
   <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>
-        You're seeing this because you've successfully setup Firebase Hosting.
-        Now it's time to go build something extraordinary!
-      </p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/"
-        >Open Hosting Documentation</a
-      >
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <!-- menu 開始 -->
+    <header id="masthead" class="site-header" role="banner">
+      <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target=".navbar-ex1-collapse"
+            ></button>
+            <a class="navbar-brand" href="index.html"> LeisurePace </a>
+          </div>
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="index.html">首頁</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  >關於LeisurePace <i class="fa fa-angle-double-down"></i
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="about.html">LeisurePace</a></li>
+                  <li><a href="about.html">超慢跑介紹</a></li>
+
+                  <li><a href="about.html">製作團隊</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  >超慢跑 <i class="fa fa-angle-double-down"></i
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">單人遊玩</a></li>
+                  <li><a href="#">好友連線</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="analyze.html">分析</a>
+              </li>
+              <li class="dropdown">
+                <a href="task.html">任務 </a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img
+                    src="<?php echo $imagePath; ?>"
+                    class="profile-picture"
+                    style="border-radius: 50%"
+                  />
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="bgstore.html">背景介紹</a></li>
+                  <li><a href="設定.html">設定</a></li>
+                  <li><a href="#">登出</a></li>
+                </ul>
+              </li>
+            </ul>
+            <!-- /.nav -->
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+      </nav>
+      <!-- /.navbar -->
+    </header>
+    <!-- menu 結束 -->
+
+    <!-- banner 開始 -->
+    <section id="home">
+      <div class="hero-section">
+        <div class="banner">
+          <div class="grid-container">
+            <div class="grid-item large">
+              <img
+                style="
+                  max-width: 100%;
+                  height: auto;
+                  width: 100%;
+                  height: 623px;
+                  background-image: url('image/run.jpg');
+                  background-size: cover;
+                  background-position: center;
+                  border-radius: 8px;
+                "
+              />
+              <div class="overlay-content">
+                <h1>超慢跑</h1>
+                <p>以輕鬆的步調享受運動，注重健康和愉悅</p>
+                <span class="material-symbols-outlined"
+                  ><a href="#" class="image-overlay">
+                    arrow_circle_right
+                  </a></span
+                >
+              </div>
+            </div>
+            <div class="grid-item vertical">
+              <img
+                style="
+                  max-width: 100%;
+                  height: 100%;
+                  width: 100%;
+
+                  background-image: url('image/AI.jpg');
+                  background-size: cover;
+                  background-position: center;
+                  border-radius: 8px;
+                "
+              />
+            </div>
+            <div class="grid-item vertical">
+              ios手機圖片，點擊可以看到apple商店的連結
+            </div>
+
+            <div class="grid-item horizontal">
+              <img
+                id="popupImage"
+                style="
+                  max-width: 100%;
+                  height: 100%;
+                  width: 100%;
+                  background-image: url('image/shopping.jpg');
+                  background-size: cover;
+                  background-position: center;
+                  border-radius: 8px;
+                "
+              />
+            </div>
+
+            <!-- 彈出視窗 -->
+            <div id="myModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <!-- 在這裡放置彈出視窗內容，如功能介紹和購買按鈕 -->
+                <p>這裡是解鎖後的功能介紹。</p>
+                <button id="buyButton">購買</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- banner 結束 -->
+
+    <!-- 關於 開始 -->
+    <section id="about" class="gray-bg">
+      <div class="container">
+        <div class="about-content mt-45">
+          <h4 class="about-welcome">關於我們</h4>
+          <h3 class="about-title mt-10">LeisurePace</h3>
+          <!-- 您可以在這裡加入更多有關應用的描述 -->
+
+          <div class="about-description mt-25">
+            <p>"LeisurePace"這個名字傳遞了一種悠閒、輕鬆地跑步體驗。</p>
+            <p>"Leisure"表示悠閒、休閒，而"Pace"則指代步調、速度。</p>
+            <p>
+              整體來說，這個名字傳遞出超慢跑的核心理念——以輕鬆的步調享受運動，注重健康和愉悅。
+            </p>
+            <p>
+              這個名字也暗示著放慢腳步，讓人們遠離繁忙的生活節奏，以更和平的步伐體驗跑步的樂趣。
+            </p>
+            <p>
+              選取這個名字有助於用戶心中建立積極、愉悅的形象，使其願意選擇這個應用來實現輕鬆慢跑目標。
+            </p>
+          </div>
+          <!-- about-description -->
+        </div>
+        <!-- about-content -->
+      </div>
+      <!-- container -->
+    </section>
+    <!-- 關於 結束 -->
+
+    <!-- 功能 開始 -->
+    <section id="function" class="function-section">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <a href="" class="sbox">
+            <div class="sbox-inner">
+              <h3 class="sbox-title">AI導覽</h3>
+              <p>
+                此功能介紹何木火大師的畫作，利用AI的NLP模型來介紹以及說出每幅畫的意義跟感想讓所有使用者能體會畫家的作畫風格與畫作背後的含義。
+              </p>
+              <br />
+            </div>
+          </a>
+        </div>
+        <!-- /.col-sm-4 -->
+        <div class="col-xs-12 col-sm-4">
+          <a href="" class="sbox">
+            <div class="sbox-inner">
+              <h3 class="sbox-title">腳步偵測功能</h3>
+              <p>
+                為了方便使用者在超慢跑時能計步設計了腳步偵測功能，結合OpenCV使用者的電腦或手機攝像頭來偵測使用者腳步的活動軌跡並且利用Mediapipe掌握使用者的身體節點來準確計算每一步超慢跑步數。
+              </p>
+            </div>
+          </a>
+        </div>
+        <!-- /.col-sm-4 -->
+        <div class="col-xs-12 col-sm-4">
+          <a href="" class="sbox">
+            <div class="sbox-inner">
+              <h3 class="sbox-title">姿勢糾正功能</h3>
+              <p>
+                AI姿勢糾正功能，協助使用者能夠順利完成超慢跑運動，並防止肌肉拉傷或其他運動傷害，幫助使用者暖身與糾正運動傷害等問題。
+              </p>
+              <br />
+            </div>
+          </a>
+        </div>
+        <!-- /.col-sm-4 -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- 功能 結束 -->
+
+    <!-- footer 開始 -->
+    <footer id="footer" class="footer-area">
+      <div class="footer-widget pt-80">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-8">
+              <div class="footer-logo mt-50">
+                <a href="#">
+                  <img src="image/logo.png" alt="Logo" />
+                </a>
+
+                <ul class="footer-social mt-20">
+                  <li>
+                    <a href="#"><i class="lni-facebook-filled"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-twitter-original"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-google"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-instagram"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <!-- footer logo -->
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <div class="f-title">
+                  <h4 class="title">關於LeisurePace</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="about.html">LeisurePace</a></li>
+                  <li><a href="about.html">超慢跑介紹</a></li>
+                  <li><a href="about.html">製作團隊</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <div class="f-title">
+                  <h4 class="title">超慢跑</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="#">單人遊玩</a></li>
+                  <li><a href="#">好友連線</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <ul class="mt-15">
+                  <li><a href="analyze.html">分析</a></li>
+                  <li><a href="task.html">任務</a></li>
+                  <li><a href="bgstore.html">背景介紹</a></li>
+                  <li><a href="設定.html">設定</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- footer widget -->
+      <div class="copyright-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="copyright text-center">
+                <p>&copy; LeisurePace</p>
+              </div>
+              <!-- copyright -->
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- copyright-area -->
+    </footer>
+    <!-- footer 結束 -->
+
+    <!-- back-to-top 開始 -->
+    <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
+    <!-- back-to-top 結束 -->
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const loadEl = document.querySelector("#load");
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+      /// 獲取彈出視窗
+      var modal = document.getElementById("myModal");
 
-        try {
-          let app = firebase.app();
-          let features = [
-            "auth",
-            "database",
-            "firestore",
-            "functions",
-            "messaging",
-            "storage",
-            "analytics",
-            "remoteConfig",
-            "performance",
-          ].filter((feature) => typeof app[feature] === "function");
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(
-            ", "
-          )}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent =
-            "Error loading the Firebase SDK, check the console.";
+      // 獲取圖片元素
+      var img = document.getElementById("popupImage");
+
+      // 獲取關閉按鈕
+      var span = document.getElementsByClassName("close")[0];
+
+      // 圖片點擊時彈出視窗
+      img.onclick = function () {
+        modal.style.display = "block";
+      };
+
+      // 關閉按鈕點擊時關閉視窗
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // 當用戶點擊視窗之外的地方，關閉視窗
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
         }
-      });
+      };
+
+      // 獲取購買按鈕
+      var buyButton = document.getElementById("buyButton");
+
+      // 購買按鈕點擊時導向到結帳畫面
+      buyButton.onclick = function () {
+        window.location.href = "checkout.html"; // 假設結帳畫面的文件名是checkout.html
+      };
     </script>
   </body>
 </html>
