@@ -1,117 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <script src="js/main.js" defer type="module"></script>
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="icon" href="image/logo.ico" type="image/x-icon" />
+  </head>
 
-<head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Login Page</title>
- <script src="js/main.js" defer type="module"></script>
- <link rel="stylesheet" href="css/login.css" />
- <link rel="icon" href="image/logo.ico" type="image/x-icon" />
-</head>
-
-<body>
- <!--Navbar-->
- <nav class="navbar navbar-expand-sm navbar-light bg-light shadow-sm">
-  <div class="container">
-   <a href="#" class="navbar-brand logo">
-    <h1></h1>
-   </a>
-   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-    <span class="navbar-toggler-icon"></span>
-   </button>
-   <div class="collapse navbar-collapse" id="menu">
-    <ul class="navbar-nav ms-auto">
-     <li><i>Not a member?</i></li>
-     <li><a href="register.html"><button class="register">Sign up now</button></a>
-     </li>
-    </ul>
-   </div>
-  </div>
- </nav>
-
- <!--form and hero-->
- <div class="d-md-flex container py-2">
-
-  <div class="showcase p-1">
-   <div class="text hero">
-    <h4>DOWNLOAD STUDY MATERIALS</h4>
-    <p>
-     Download study resources ( past exam papers , memos , assignments
-     and projects) from the
-     <strong><a href="#"> University of Limpopo.</a></strong> Student
-     Intellect's primary goal is to make <i>quality tutoring</i> and
-     <i>resources</i> accessible to all students with ease , promoting
-     better learning in South African Universities.
-    </p>
-
-    <div class="images">
-     <div class="cards">
-      <div class="card-img">
-       <img src="images/male-student.jpg" alt="Picture of University student" />
+  <body>
+    <section>
+      <div class="image">
+        <img src="image/bg2.png" alt="background-image" />
       </div>
-     </div>
 
-     <div class="cards">
-      <div class="card-img-1">
-       <img src="images/female-student.jpg" alt="A picture of female university student" />
+      <div class="content">
+        <div class="from">
+          <h2>Login</h2>
+          <from action="#">
+            <div class="input">
+              <span>Uername</span>
+              <input type="text" name="" required />
+            </div>
+
+            <div class="input">
+              <span>Password</span>
+              <input type="password" name="" required />
+            </div>
+
+            <div class="remmber-me">
+              <label> <input type="checkbox" name="" />Remember me? </label>
+            </div>
+
+            <div class="input">
+              <input type="submit" value="Login" name="" id="submit-button" />
+            </div>
+            <div class="input">
+              <p>Dont have an account?<a href="#">Create one.</a></p>
+            </div>
+
+            <div class="input">
+              <button id="google-login-btn" class="google-button">
+                <i class="fab fa-google"></i> Login with Google
+              </button>
+            </div>
+          </from>
+        </div>
       </div>
-     </div>
-    </div>
-    <a href="https://play.google.com/store/apps/details/Student_Intellect?id=com.avidco.studentintellect&gl=US&pli=1"
-     target="_new"><img class="googleplay" title="Download Our App" style="height: 2.5rem" src="images/google.png"
-      alt="download our app from the googleplaystore" /></a>
-   </div>
-  </div>
-
-  <div class="login-form p-1">
-   <div class="form">
-    <button class="google-log-btn" class="google-button">
-     Log in with
-     Google
-    </button>
-    <h6 class="text-center">-or-</h6>
-    <form action="#" class="form-group">
-
-     <div class="form-item">
-      <label class="form-label" for="email">Email</label>
-      <input type="text" class="input form-control" placeholder="Enter your email" required />
-     </div>
-
-
-     <div class="form-item">
-      <label class="form-label" for="password">Password</label>
-      <input type="password" class="input form-control" placeholder="Password" required />
-     </div>
-
-     <div class="form-item form-check">
-      <label for="form-label remember"> Remember me? </label>
-      <input class="check form-check-input" type="checkbox" />
-     </div>
-
-     <div class="form-item">
-      <input type="submit" value="Login" class="login rounded" onclick="login()" />
-      <div class="form-ite md-grid my-2 ">
-       <p>Fogort your password? <a href="#">Recover password</a></p>
-      </div>
-    </form>
-   </div>
-  </div>
- </div>
- </div>
- <!--Footer-->
- <div class="footer bg-light shadow-sm text-center">
-  <p>
-   Copyrights &copy;
-   <a href="#" title="STUDENT INTELLECT">Student Intellect </a>2023
-  </p>
-  <nav class="bottom-nav">
-   <ul>
-    <li><a href="#">About Us</a></li>
-    <li><a href="#">Privacy</a></li>
-    <li><a href="#">Terms </a></li>
-   </ul>
-  </nav>
- </div>
-</body>
+    </section>
+  </body>
 </html>
