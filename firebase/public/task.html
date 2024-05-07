@@ -116,6 +116,28 @@
       </div>
     </div>
 
+    <!-- Import the basic jquery lib. -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Import the associated firebase lib which the order is fixed. -->
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
+    ></script>
+    <!-- Set the firebsae config and initialize it. -->
+    <script defer src="init-firebase.js"></script>
+
     <script>
       // 获取日历头部元素和月份显示区域元素
       const header = document.getElementById("header");
