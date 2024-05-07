@@ -67,10 +67,10 @@
       };
 
       // initializeApp firebase
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
       auth.languageCode = "en";
-      const provider = new GoogleAuthProvider();
+      const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
       const googleLogin = document.getElementById("google-log-btn");
       googleLogin.addEventListener("click", function () {
