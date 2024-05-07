@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Page</title>
-    <script src="js/main.js" defer type="module"></script>
     <link rel="stylesheet" href="css/login.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
   </head>
@@ -49,5 +48,44 @@
         </div>
       </div>
     </section>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCkMa2jz6kDse8j3BSsXYKru8LYA_Sb2M0",
+        authDomain: "leisurepace-a3d51.firebaseapp.com",
+        projectId: "leisurepace-a3d51",
+        storageBucket: "leisurepace-a3d51.appspot.com",
+        messagingSenderId: "955257567601",
+        appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+      };
+
+      // initializeApp firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      auth.languageCode = "en";
+      const provider = new GoogleAuthProvider();
+
+      const googleLogin = document.getElementById("google-log-btn");
+      googleLogin.addEventListener("click", function () {
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const user = result.user;
+            console.log(user);
+            window, (location.href = "");
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+      });
+    </script>
   </body>
 </html>
