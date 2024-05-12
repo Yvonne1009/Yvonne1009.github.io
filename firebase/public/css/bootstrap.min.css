@@ -5315,7 +5315,6 @@ a.close.disabled {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
-  flex-direction: column;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;

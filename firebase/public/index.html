@@ -130,7 +130,23 @@
               />
             </div>
             <div class="grid-item vertical">
-              ios手機圖片，點擊可以看到apple商店的連結
+              <div class="slider">
+                <div class="slides">
+                  <div class="slide">
+                    <a href="link_to_your_apple_store"
+                      ><img
+                        src="image1.jpg"
+                        alt="ios apple商店的連結
+                      "
+                    /></a>
+                  </div>
+                  <div class="slide">
+                    <a href="link_to_your_apple_store"
+                      ><img src="image2.jpg" alt="line官方連結"
+                    /></a>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="grid-item horizontal">
@@ -152,9 +168,43 @@
             <div id="myModal" class="modal">
               <div class="modal-content">
                 <span class="close">&times;</span>
-                <!-- 在這裡放置彈出視窗內容，如功能介紹和購買按鈕 -->
-                <p>這裡是解鎖後的功能介紹。</p>
-                <button id="buyButton">購買</button>
+                <div class="columns">
+                  <ul class="price">
+                    <li class="header">月度會員</li>
+                    <li class="grey">$ 9.99 / year</li>
+                    <li>10GB Storage</li>
+                    <li>10 Emails</li>
+                    <li>10 Domains</li>
+                    <li>1GB Bandwidth</li>
+                    <li class="grey"><a href="#" class="button">購買</a></li>
+                  </ul>
+                </div>
+
+                <div class="columns">
+                  <ul class="price">
+                    <li class="header" style="background-color: #04aa6d">
+                      家庭會員
+                    </li>
+                    <li class="grey">$ 24.99 / year</li>
+                    <li>25GB Storage</li>
+                    <li>25 Emails</li>
+                    <li>25 Domains</li>
+                    <li>2GB Bandwidth</li>
+                    <li class="grey"><a href="#" class="button">購買</a></li>
+                  </ul>
+                </div>
+
+                <div class="columns">
+                  <ul class="price">
+                    <li class="header">終身會員</li>
+                    <li class="grey">$ 49.99 / year</li>
+                    <li>50GB Storage</li>
+                    <li>50 Emails</li>
+                    <li>50 Domains</li>
+                    <li>5GB Bandwidth</li>
+                    <li class="grey"><a href="#" class="button">購買</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -380,6 +430,23 @@
       buyButton.onclick = function () {
         window.location.href = "checkout.html"; // 假設結帳畫面的文件名是checkout.html
       };
+    </script>
+    <script>
+      let slider = document.querySelector(".slider");
+      let slides = document.querySelector(".slides");
+      let slideWidth = document.querySelector(".slide").offsetWidth;
+
+      function nextSlide() {
+        slides.style.transition = "transform 0.5s ease-in-out";
+        slides.style.transform = "translateX(-" + slideWidth + "px)";
+        setTimeout(() => {
+          slides.appendChild(slides.firstElementChild);
+          slides.style.transition = "none";
+          slides.style.transform = "translateX(0)";
+        }, 500);
+      }
+
+      setInterval(nextSlide, 5000); // 设置自动播放
     </script>
   </body>
 </html>
