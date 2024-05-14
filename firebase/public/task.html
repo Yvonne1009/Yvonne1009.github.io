@@ -418,6 +418,70 @@
         generateCalendar(currentYear, currentMonth);
         displayTasks(currentYear, currentMonth, currentDate.getDate());
       }
+
+      //資料庫
+      // 函数：添加任务到 Firebase 数据库
+      function addTaskToFirebase(task) {
+        // 在 Firebase 数据库中的 "tasks" 节点下添加一个新任务
+        database
+          .ref("tasks")
+          .push(task)
+          .then(() => {
+            console.log("Task added to Firebase database successfully!");
+          })
+          .catch((error) => {
+            console.error("Error adding task to Firebase database: ", error);
+          });
+      }
+
+      // 函数：从 Firebase 数据库获取任务列表
+      function getTasksFromFirebase() {
+        // 获取对 "tasks" 节点的引用
+        const tasksRef = database.ref("tasks");
+
+        // 监听 "value" 事件以获取所有任务数据
+        tasksRef.on(
+          "value",
+          (snapshot) => {
+            const tasks = snapshot.val();
+            if (tasks) {
+              // 如果有任务数据，则更新任务列表显示
+              const storedTasks = Object.values(tasks);
+              displayTasks(currentYear, currentMonth, currentDay, storedTasks);
+            }
+          },
+          (errorObject) => {
+            console.error("The read failed: " + errorObject.code);
+          }
+        );
+      }
+
+      // 在页面加载时从 Firebase 数据库获取任务列表
+      getTasksFromFirebase();
+
+      // 在添加任务时将任务添加到 Firebase 数据库
+      function addTask() {
+        const input = document.getElementById("taskInput");
+        const taskText = input.value.trim();
+
+        if (taskText !== "") {
+          // 创建一个任务对象
+          const task = {
+            id: Date.now(), // 使用当前时间戳作为任务的唯一标识符
+            text: taskText,
+            completed: false,
+            year: currentYear,
+            month: currentMonth,
+            day: currentDay, // 更新为当前选择的日期
+          };
+
+          // 将任务添加到 Firebase 数据库
+          addTaskToFirebase(task);
+
+          // 清空输入框
+          input.value = "";
+        }
+      }
     </script>
     <!-- footer 開始 -->
     <footer id="footer" class="footer-area">
