@@ -70,7 +70,6 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
 }
 [tabindex="-1"]:focus {
   outline: 0 !important;
@@ -10287,7 +10286,6 @@ body {
   font-size: 18px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
 }
 button,
 input,
