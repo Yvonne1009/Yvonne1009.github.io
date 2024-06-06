@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="css/task.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <script src="js/task.js"></script>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
@@ -114,6 +113,28 @@
           <!-- Tasks will be dynamically added here -->
         </div>
       </div>
+
+      <div class="container">
+        <h1>每日體重記錄</h1>
+        <form id="weightForm">
+          <label for="weightInput">輸入體重 (kg): </label>
+          <input type="number" id="weightInput" step="0.1" required />
+          <button type="submit">記錄體重</button>
+        </form>
+        <h2>體重記錄</h2>
+        <div id="weightRecords"></div>
+      </div>
+
+      <div class="container">
+        <h1>每日喝水记录</h1>
+        <form id="waterForm">
+          <label for="waterInput">输入喝水量 (ml): </label>
+          <input type="number" id="waterInput" step="1" required />
+          <button type="submit">记录喝水量</button>
+        </form>
+        <h2>喝水记录</h2>
+        <div id="waterRecords"></div>
+      </div>
     </div>
 
     <!-- Import the basic jquery lib. -->
@@ -148,17 +169,20 @@
       // 获取当前日期信息
       let currentDate = new Date();
       let currentYear = currentDate.getFullYear();
-      let currentMonth = currentDate.getMonth();
+      let currentMonth = currentDate.getMonth() + 1; // 将月份索引+1
       let currentDay = currentDate.getDate();
 
       // 初始化月份选择框
-      for (let i = 0; i < 12; i++) {
+      for (let i = 1; i <= 12; i++) {
+        // 将月份从1开始
         const option = document.createElement("option");
         option.value = i;
-        option.text = new Date(0, i).toLocaleString("en", { month: "long" });
+        option.text = new Date(0, i - 1).toLocaleString("en", {
+          month: "long",
+        }); // 将月份索引-1
         monthSelect.appendChild(option);
       }
-      monthSelect.selectedIndex = currentMonth;
+      monthSelect.selectedIndex = currentMonth - 1; // 将月份索引-1
 
       // 初始化年份选择框
       for (let i = currentYear - 10; i <= currentYear + 10; i++) {
@@ -171,13 +195,13 @@
 
       // 函数：生成月份选择器
       function generateMonthSelector() {
-        monthSelect.selectedIndex = currentMonth;
+        monthSelect.selectedIndex = currentMonth - 1; // 将月份索引-1
       }
 
       // 函数：生成日历
       function generateCalendar(year, month) {
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month, 0).getDate(); // 修改获取天数的方式
+        const firstDay = new Date(year, month - 1, 1).getDay(); // 将月份索引-1
         const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
         // 清空日历容器
@@ -211,8 +235,7 @@
             currentMonth = month;
             currentDay = i;
             updateHeader(currentYear, currentMonth, currentDay); // 更新标题
-            const storedTasks = JSON.parse(localStorage.getItem("tasks"));
-            displayTasks(currentYear, currentMonth, currentDay, storedTasks); // 重新显示任务列表
+            getTasksFromFirebase(); // 重新从 Firebase 获取任务列表并显示
           });
 
           // 如果是今天的日期，则添加红色背景
@@ -228,85 +251,41 @@
         }
       }
 
-      // 函数：生成年份选择框
-      function changeYear() {
-        currentYear = parseInt(yearSelect.value);
-        generateCalendar(currentYear, currentMonth);
-      }
-
-      // 函数：生成月份选择框
-      function changeMonth() {
-        currentMonth = parseInt(monthSelect.value);
-        generateCalendar(currentYear, currentMonth);
-      }
-
       // 函数：更新标题显示选定的年份、月份和日期
       function updateHeader(year, month, day) {
-        header.innerText = `${year}年${month + 1}月${day}日`;
+        header.innerText = `${year}年${month}月${day}日`; // 不再 +1
       }
 
-      // 初始化日历
-      generateCalendar(currentYear, currentMonth);
-
-      // 在生成日历的地方调用updateHeader函数
-      updateHeader(currentYear, currentMonth, currentDate.getDate());
-
-      // 在页面加载时初始化任务列表
-      initTaskList();
-
-      // 函数：初始化任务列表
-      function initTaskList() {
-        // 检查本地存储中是否有存储的任务列表
-        let storedTasks = localStorage.getItem("tasks");
-        if (!storedTasks) {
-          // 如果没有存储的任务列表，则初始化一个空数组并存储到本地存储中
-          storedTasks = "[]";
-          localStorage.setItem("tasks", storedTasks);
-        }
-
-        // 将本地存储中的任务列表解析为数组
-        storedTasks = JSON.parse(storedTasks);
-
-        // 更新任务列表显示
-        displayTasks(currentYear, currentMonth, currentDay, storedTasks);
+      // 函数：添加任务到 Firebase 数据库
+      function addTaskToFirebase(task) {
+        database
+          .ref("tasks")
+          .push(task)
+          .then(() => {
+            console.log("Task added to Firebase database successfully!");
+            getTasksFromFirebase();
+          })
+          .catch((error) => {
+            console.error("Error adding task to Firebase database: ", error);
+          });
       }
 
-      // 函数：添加任务
-      function addTask() {
-        const input = document.getElementById("taskInput");
-        const taskText = input.value.trim();
-
-        if (taskText !== "") {
-          // 创建一个任务对象
-          const task = {
-            id: Date.now(), // 使用当前时间戳作为任务的唯一标识符
-            text: taskText,
-            completed: false,
-            year: currentYear,
-            month: currentMonth,
-            day: currentDay, // 更新为当前选择的日期
-          };
-
-          // 从本地存储中获取任务列表
-          let storedTasks = JSON.parse(localStorage.getItem("tasks"));
-
-          // 如果没有存储的任务列表，则初始化一个空数组
-          if (!storedTasks) {
-            storedTasks = [];
+      // 函数：从 Firebase 数据库获取任务列表
+      function getTasksFromFirebase() {
+        const tasksRef = database.ref("tasks");
+        tasksRef.on(
+          "value",
+          (snapshot) => {
+            const tasks = snapshot.val();
+            if (tasks) {
+              const storedTasks = Object.values(tasks);
+              displayTasks(currentYear, currentMonth, currentDay, storedTasks);
+            }
+          },
+          (errorObject) => {
+            console.error("The read failed: " + errorObject.code);
           }
-
-          // 将新任务添加到任务列表中
-          storedTasks.push(task);
-
-          // 将更新后的任务列表重新存储到本地存储中
-          localStorage.setItem("tasks", JSON.stringify(storedTasks));
-
-          // 清空输入框
-          input.value = "";
-
-          // 更新任务列表显示
-          displayTasks(currentYear, currentMonth, currentDay, storedTasks);
-        }
+        );
       }
 
       // 函数：显示任务列表
@@ -314,17 +293,10 @@
         const taskList = document.getElementById("taskList");
         taskList.innerHTML = "";
 
-        // 根据日期筛选任务列表
         const selectedDateTasks = tasks.filter((task) => {
-          const taskDate = new Date(task.id);
-          return (
-            taskDate.getFullYear() === year &&
-            taskDate.getMonth() === month &&
-            taskDate.getDate() === day
-          );
+          return task.year === year && task.month === month && task.day === day;
         });
 
-        // 遍历筛选后的任务列表，并创建任务列表项
         selectedDateTasks.forEach((task) => {
           const taskElement = document.createElement("div");
           taskElement.classList.add("task");
@@ -358,7 +330,6 @@
 
       // 函数：标记任务完成或未完成
       function toggleTaskCompletion(taskId, tasks) {
-        // 在任务列表中查找对应的任务并更新完成状态
         const updatedTasks = tasks.map((task) => {
           if (task.id === taskId) {
             return { ...task, completed: !task.completed };
@@ -366,31 +337,45 @@
           return task;
         });
 
-        // 更新本地存储中的任务列表
         localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-
-        // 重新显示任务列表
         displayTasks(currentYear, currentMonth, currentDay, updatedTasks);
       }
 
       // 函数：删除任务
       function deleteTask(taskId, tasks) {
-        // 在任务列表中过滤掉要删除的任务
         const updatedTasks = tasks.filter((task) => task.id !== taskId);
-
-        // 更新本地存储中的任务列表
         localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-
-        // 重新显示任务列表
         displayTasks(currentYear, currentMonth, currentDay, updatedTasks);
       }
 
-      // 在点击日期时更新当前日期并重新显示任务列表
-      day.addEventListener("click", () => {
-        console.log(`Clicked on day ${i}`);
-        currentDay = i; // 更新当前日期
-        updateHeader(year, month, currentDay); // 更新标题
-        displayTasks(currentYear, currentMonth, currentDay); // 重新显示任务列表
+      // 初始化日历
+      generateCalendar(currentYear, currentMonth);
+      updateHeader(currentYear, currentMonth, currentDate.getDate());
+      getTasksFromFirebase();
+
+      // 函数：尝试加载之前存储的任务列表
+      function tryLoadPreviousTasks() {
+        const storedTasks = localStorage.getItem("tasks");
+        if (storedTasks) {
+          const parsedTasks = JSON.parse(storedTasks);
+          displayTasks(currentYear, currentMonth, currentDay, parsedTasks);
+        }
+      }
+
+      // 在页面加载时尝试加载之前存储的任务列表
+      tryLoadPreviousTasks();
+
+      // 绑定月份和年份选择器的事件
+      monthSelect.addEventListener("change", () => {
+        currentMonth = parseInt(monthSelect.value);
+        generateCalendar(currentYear, currentMonth);
+        getTasksFromFirebase();
+      });
+
+      yearSelect.addEventListener("change", () => {
+        currentYear = parseInt(yearSelect.value);
+        generateCalendar(currentYear, currentMonth);
+        getTasksFromFirebase();
       });
 
       // 函数：显示前一个月份
@@ -403,7 +388,7 @@
         }
         generateMonthSelector();
         generateCalendar(currentYear, currentMonth);
-        displayTasks(currentYear, currentMonth, currentDate.getDate());
+        getTasksFromFirebase();
       }
 
       // 函数：显示下一个月份
@@ -416,48 +401,8 @@
         }
         generateMonthSelector();
         generateCalendar(currentYear, currentMonth);
-        displayTasks(currentYear, currentMonth, currentDate.getDate());
+        getTasksFromFirebase();
       }
-
-      //資料庫
-      // 函数：添加任务到 Firebase 数据库
-      function addTaskToFirebase(task) {
-        // 在 Firebase 数据库中的 "tasks" 节点下添加一个新任务
-        database
-          .ref("tasks")
-          .push(task)
-          .then(() => {
-            console.log("Task added to Firebase database successfully!");
-          })
-          .catch((error) => {
-            console.error("Error adding task to Firebase database: ", error);
-          });
-      }
-
-      // 函数：从 Firebase 数据库获取任务列表
-      function getTasksFromFirebase() {
-        // 获取对 "tasks" 节点的引用
-        const tasksRef = database.ref("tasks");
-
-        // 监听 "value" 事件以获取所有任务数据
-        tasksRef.on(
-          "value",
-          (snapshot) => {
-            const tasks = snapshot.val();
-            if (tasks) {
-              // 如果有任务数据，则更新任务列表显示
-              const storedTasks = Object.values(tasks);
-              displayTasks(currentYear, currentMonth, currentDay, storedTasks);
-            }
-          },
-          (errorObject) => {
-            console.error("The read failed: " + errorObject.code);
-          }
-        );
-      }
-
-      // 在页面加载时从 Firebase 数据库获取任务列表
-      getTasksFromFirebase();
 
       // 在添加任务时将任务添加到 Firebase 数据库
       function addTask() {
@@ -465,23 +410,188 @@
         const taskText = input.value.trim();
 
         if (taskText !== "") {
-          // 创建一个任务对象
           const task = {
-            id: Date.now(), // 使用当前时间戳作为任务的唯一标识符
+            id: Date.now(),
             text: taskText,
             completed: false,
             year: currentYear,
             month: currentMonth,
-            day: currentDay, // 更新为当前选择的日期
+            day: currentDay,
           };
 
-          // 将任务添加到 Firebase 数据库
           addTaskToFirebase(task);
-
-          // 清空输入框
           input.value = "";
         }
       }
+    </script>
+    <script>
+      //每日體重紀錄
+      // 获取 DOM 元素
+      const weightForm = document.getElementById("weightForm");
+      const weightInput = document.getElementById("weightInput");
+      const weightRecords = document.getElementById("weightRecords");
+
+      // 记录体重
+      weightForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const weightAmount = parseFloat(weightInput.value);
+        if (isNaN(weightAmount)) return;
+
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1; // 月份从 0 开始，所以需要加 1
+        const day = date.getDate();
+
+        const weightEntry = {
+          amount: weightAmount,
+          year: year,
+          month: month,
+          day: day,
+        };
+
+        addWeightToFirebase(weightEntry);
+        weightInput.value = "";
+      });
+
+      // 将体重记录添加到 Firebase
+      function addWeightToFirebase(weightEntry) {
+        database
+          .ref("weight")
+          .push(weightEntry)
+          .then(() => {
+            console.log(
+              "Weight entry added to Firebase database successfully!"
+            );
+            getWeightFromFirebase();
+          })
+          .catch((error) => {
+            console.error(
+              "Error adding weight entry to Firebase database: ",
+              error
+            );
+          });
+      }
+
+      // 从 Firebase 获取体重记录
+      function getWeightFromFirebase() {
+        database
+          .ref("weight")
+          .once("value")
+          .then(function (snapshot) {
+            const weights = snapshot.val();
+            displayWeight(weights);
+          })
+          .catch(function (error) {
+            console.error("The read failed: " + error.code);
+          });
+      }
+
+      // 显示体重记录
+      function displayWeight(weights) {
+        weightRecords.innerHTML = "";
+
+        if (weights) {
+          const weightEntries = Object.values(weights);
+          weightEntries.forEach((entry) => {
+            const weightElement = document.createElement("div");
+            weightElement.classList.add("weight-entry");
+            weightElement.innerHTML = `
+        <span class="weight-date">${entry.year}-${entry.month}-${entry.day}:</span>
+        <span class="weight-value">${entry.amount} kg</span>
+      `;
+            weightRecords.appendChild(weightElement);
+          });
+        }
+      }
+
+      // 页面加载时获取体重记录
+      window.addEventListener("load", function () {
+        getWeightFromFirebase();
+      });
+
+      //喝水記錄
+      // 获取 DOM 元素
+      const waterForm = document.getElementById("waterForm");
+      const waterInput = document.getElementById("waterInput");
+      const waterRecords = document.getElementById("waterRecords");
+
+      // 记录喝水量
+      waterForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const waterAmount = parseFloat(waterInput.value);
+        if (isNaN(waterAmount)) return;
+
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1; // 月份从 0 开始，所以需要加 1
+        const day = date.getDate();
+
+        const waterEntry = {
+          amount: waterAmount,
+          year: year,
+          month: month,
+          day: day,
+        };
+
+        addWaterToFirebase(waterEntry);
+        waterInput.value = "";
+      });
+
+      // 将喝水记录添加到 Firebase
+      function addWaterToFirebase(waterEntry) {
+        database
+          .ref("water")
+          .push(waterEntry)
+          .then(() => {
+            console.log("Water entry added to Firebase database successfully!");
+            getWaterFromFirebase();
+          })
+          .catch((error) => {
+            console.error(
+              "Error adding water entry to Firebase database: ",
+              error
+            );
+          });
+      }
+
+      // 从 Firebase 获取喝水记录
+      function getWaterFromFirebase() {
+        database
+          .ref("water")
+          .once("value")
+          .then(function (snapshot) {
+            const waters = snapshot.val();
+            displayWater(waters);
+          })
+          .catch(function (error) {
+            console.error("The read failed: " + error.code);
+          });
+      }
+
+      // 显示喝水记录
+      function displayWater(waters) {
+        waterRecords.innerHTML = "";
+
+        if (waters) {
+          const waterEntries = Object.values(waters);
+          waterEntries.forEach((entry) => {
+            const waterElement = document.createElement("div");
+            waterElement.classList.add("water-entry");
+            waterElement.innerHTML = `
+        <span class="water-date">${entry.year}-${entry.month}-${entry.day}:</span>
+        <span class="water-value">${entry.amount} ml</span>
+      `;
+            waterRecords.appendChild(waterElement);
+          });
+        }
+      }
+
+      // 页面加载时获取喝水记录
+      window.addEventListener("load", function () {
+        getWaterFromFirebase();
+      });
     </script>
     <!-- footer 開始 -->
     <footer id="footer" class="footer-area">

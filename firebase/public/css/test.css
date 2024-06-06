@@ -248,24 +248,25 @@ section {
   padding: 20px;
 }
 
+/*分頁轉換*/
 .tab {
-  float: left;
+  display: flex;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
-  width: 40%;
-  height: 300px;
+  width: 100%;
+  height: auto;
+  justify-content: space-around;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
-  display: block;
   background-color: inherit;
   color: black;
-  padding: 22px 16px;
-  width: 100%;
+  padding: 14px 16px;
+  width: auto;
   border: none;
   outline: none;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
   transition: 0.3s;
   font-size: 17px;
@@ -283,10 +284,82 @@ section {
 
 /* Style the tab content */
 .tabcontent {
-  float: left;
+  display: none;
   padding: 0px 12px;
-  border: 1px solid #ccc;
-  width: 60%;
+  width: 100%;
   border-left: none;
   height: 300px;
+}
+
+.tabcontent.active {
+  display: block;
+}
+
+/*設定*/
+/* 主頁面區塊樣式 */
+.banner {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  grid-gap: 16px;
+}
+
+.grid-item {
+  background: #f0f0f0;
+  border-radius: 0px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-item.large {
+  grid-column: span 2;
+  grid-row: span 25;
+}
+
+.overlay-content {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #fff;
+}
+
+/*開關按鈕*/
+.btn-box {
+  display: inline-block;
+  vertical-align: middle;
+  width: 40px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: #ccc;
+  box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.13) inset;
+}
+.btn-box .btn {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-left: 0; /*動畫從ml為0開始*/
+  transition: 0.5s;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.checkbox {
+  position: absolute;
+  opacity: 0;
+}
+.checkbox:checked + .btn-box {
+  background-color: rgb(84, 241, 84);
+}
+.checkbox:checked + .btn-box .btn {
+  margin-left: 20px;
 }

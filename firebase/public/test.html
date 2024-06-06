@@ -35,7 +35,7 @@
           <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="index.html">首頁</a></li>
-              <li class="active" class="dropdown">
+              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                   >關於LeisurePace <i class="fa fa-angle-double-down"></i
                 ></a>
@@ -61,7 +61,7 @@
               <li class="dropdown">
                 <a href="task.html">任務 </a>
               </li>
-              <li class="dropdown">
+              <li class="active" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img
                     src="<?php echo $imagePath; ?>"
@@ -86,6 +86,7 @@
     </header>
     <!-- menu 結束 -->
 
+    <!-- 主頁面區塊 -->
     <div class="tab">
       <button
         class="tablinks"
@@ -104,26 +105,113 @@
       <button class="tablinks" onclick="openCity(event, 'friend')">
         添加好友
       </button>
-      <button class="tablinks" onclick="openCity(event, 'account')">
-        帳號設定
-      </button>
-      <button class="tablinks" onclick="openCity(event, 'privacy')">
-        隱私設定
-      </button>
-      <button class="tablinks" onclick="openCity(event, 'notify')">
-        通知設定
-      </button>
-      <button class="tablinks" onclick="openCity(event, 'area')">
-        地區設定
-      </button>
       <button class="tablinks" onclick="openCity(event, 'service')">
         客服
       </button>
     </div>
 
     <div id="settings" class="tabcontent">
-      <h3>設定</h3>
-      <p>London is the capital city of England.</p>
+      <section id="home">
+        <div class="hero-section">
+          <div class="banner">
+            <div class="grid-container">
+              <!-- 主橫幅 -->
+              <div class="grid-item large">
+                <h2>帳號設定</h2>
+                <ul>
+                  <li><a href="#">密碼與帳號設定</a></li>
+                  <li><a href="personal.html">個人資料</a></li>
+                  <li><a href="#">停用或刪除帳號</a></li>
+                </ul>
+              </div>
+
+              <div class="grid-item large">
+                <h2>隱私設定</h2>
+                <ul>
+                  <li>
+                    <label>
+                      <span class="text">允許被加好友</span>
+                      <input
+                        type="checkbox"
+                        name="allow-friend"
+                        class="checkbox"
+                      />
+                      <span class="btn-box">
+                        <span class="btn"></span>
+                      </span>
+                    </label>
+                  </li>
+                  <li><a href="#">封鎖帳號</a></li>
+                </ul>
+              </div>
+
+              <div class="grid-item large">
+                <section class="notify">
+                  <h2>通知設定</h2>
+                  <div>
+                    <label>
+                      <span class="text">運動提醒</span>
+                      <input
+                        type="checkbox"
+                        name="exercise-reminder"
+                        class="checkbox"
+                      />
+                      <span class="btn-box">
+                        <span class="btn"></span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label>
+                      <span class="text">喝水提醒</span>
+                      <input
+                        type="checkbox"
+                        name="water-reminder"
+                        class="checkbox"
+                      />
+                      <span class="btn-box">
+                        <span class="btn"></span>
+                      </span>
+                    </label>
+                  </div>
+                </section>
+              </div>
+
+              <div class="grid-item large">
+                <h2>地區設定</h2>
+                <select class="region">
+                  <option value="台灣">台灣</option>
+                  <option value="美國">美國</option>
+                  <option value="日本">日本</option>
+                </select>
+
+                <script>
+                  function redirectToSelectedRegion() {
+                    var selectedRegion =
+                      document.querySelector(".region").value;
+                    switch (selectedRegion) {
+                      case "台灣":
+                        window.location.href = "index.html";
+                        break;
+                      case "美國":
+                        window.location.href = "index_usa.html";
+                        break;
+                      case "日本":
+                        window.location.href = "index_japan.html";
+                        break;
+                    }
+                  }
+
+                  document
+                    .querySelector(".region")
+                    .addEventListener("change", redirectToSelectedRegion);
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
     <div id="daily" class="tabcontent">
@@ -143,26 +231,6 @@
 
     <div id="friend" class="tabcontent">
       <h3>添加好友</h3>
-      <p>Tokyo is the capital of Japan.</p>
-    </div>
-
-    <div id="account" class="tabcontent">
-      <h3>帳號設定</h3>
-      <p>Tokyo is the capital of Japan.</p>
-    </div>
-
-    <div id="privacy" class="tabcontent">
-      <h3>隱私設定</h3>
-      <p>Tokyo is the capital of Japan.</p>
-    </div>
-
-    <div id="notify" class="tabcontent">
-      <h3>通知設定</h3>
-      <p>Tokyo is the capital of Japan.</p>
-    </div>
-
-    <div id="area" class="tabcontent">
-      <h3>地區設定</h3>
       <p>Tokyo is the capital of Japan.</p>
     </div>
 
@@ -191,5 +259,26 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Import the basic jquery lib. -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Import the associated firebase lib which the order is fixed. -->
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
+    ></script>
+    <!-- Set the firebsae config and initialize it. -->
+    <script defer src="init-firebase.js"></script>
   </body>
 </html>
