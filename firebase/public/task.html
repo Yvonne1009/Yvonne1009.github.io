@@ -135,6 +135,17 @@
         <h2>喝水记录</h2>
         <div id="waterRecords"></div>
       </div>
+
+      <div class="container">
+        <h1>每日步数记录</h1>
+        <form id="stepForm">
+          <label for="stepInput">输入步数: </label>
+          <input type="number" id="stepInput" required />
+          <button type="submit">记录步数</button>
+        </form>
+        <h2>步数记录</h2>
+        <div id="stepRecords"></div>
+      </div>
     </div>
 
     <!-- Import the basic jquery lib. -->
@@ -509,7 +520,8 @@
       window.addEventListener("load", function () {
         getWeightFromFirebase();
       });
-
+    </script>
+    <script>
       //喝水記錄
       // 获取 DOM 元素
       const waterForm = document.getElementById("waterForm");
@@ -591,6 +603,90 @@
       // 页面加载时获取喝水记录
       window.addEventListener("load", function () {
         getWaterFromFirebase();
+      });
+    </script>
+    <script>
+      //步數記錄
+      // 获取 DOM 元素
+      const stepForm = document.getElementById("stepForm");
+      const stepInput = document.getElementById("stepInput");
+      const stepRecords = document.getElementById("stepRecords");
+
+      // 记录步数
+      stepForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const stepAmount = parseInt(stepInput.value);
+        if (isNaN(stepAmount)) return;
+
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1; // 月份从 0 开始，所以需要加 1
+        const day = date.getDate();
+
+        const stepEntry = {
+          amount: stepAmount,
+          year: year,
+          month: month,
+          day: day,
+        };
+
+        addStepToFirebase(stepEntry);
+        stepInput.value = "";
+      });
+
+      // 将步数记录添加到 Firebase
+      function addStepToFirebase(stepEntry) {
+        database
+          .ref("steps")
+          .push(stepEntry)
+          .then(() => {
+            console.log("Step entry added to Firebase database successfully!");
+            getStepsFromFirebase();
+          })
+          .catch((error) => {
+            console.error(
+              "Error adding step entry to Firebase database: ",
+              error
+            );
+          });
+      }
+
+      // 从 Firebase 获取步数记录
+      function getStepsFromFirebase() {
+        database
+          .ref("steps")
+          .once("value")
+          .then(function (snapshot) {
+            const steps = snapshot.val();
+            displaySteps(steps);
+          })
+          .catch(function (error) {
+            console.error("The read failed: " + error.code);
+          });
+      }
+
+      // 显示步数记录
+      function displaySteps(steps) {
+        stepRecords.innerHTML = "";
+
+        if (steps) {
+          const stepEntries = Object.values(steps);
+          stepEntries.forEach((entry) => {
+            const stepElement = document.createElement("div");
+            stepElement.classList.add("step-entry");
+            stepElement.innerHTML = `
+        <span class="step-date">${entry.year}-${entry.month}-${entry.day}:</span>
+        <span class="step-value">${entry.amount} steps</span>
+      `;
+            stepRecords.appendChild(stepElement);
+          });
+        }
+      }
+
+      // 页面加载时获取步数记录
+      window.addEventListener("load", function () {
+        getStepsFromFirebase();
       });
     </script>
     <!-- footer 開始 -->
