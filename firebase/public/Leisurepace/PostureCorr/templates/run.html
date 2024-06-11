@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/run.css'%}" />
+    <link rel="icon" href="image/logo.ico" type="image/x-icon" />
+    <script src="{%static 'js/run.js'%}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <title>視訊計算</title>
+    <!--註解文字-->
+</head>
+<body>
+
+<header>
+    <div id="navbar" class="navbar">
+        <div class="logo1">
+            <a href="index.html">LeisurePace</a>
+        </div>
+        <ul class="menu">
+            <li class="dropdown">
+                <a href="#about">關於LeisurePace<i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">LeisurePace</a>
+                    <a href="#">超慢跑</a>
+                    <a href="#">製作團隊</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#">超慢跑<i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">單人遊玩</a>
+                    <a href="#">好友連線</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="設定.html">設定<i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">介紹超慢跑</a>
+                    <a href="#">Option 2</a>
+                    <a href="#">Option 3</a>
+                </div>
+            </li>
+            <li><a href="#">每日簽到</a></li>
+        </ul>
+        <div class="login">
+            <a href="login.html">登入</a>
+        </div>
+    </div>
+</header>
+
+
+
+<div class="gray-container"><!-- 灰色區域 -->
+
+    <br><br>
+    <div class="switch-button">
+
+        <button class="item" id="start">開始</button>
+        <button class="item" id="voice_guide">語音導覽</button>
+
+
+        <!-- 計時器 -->
+        <button onclick="pauseResumeCountdown()"><i id="pauseIcon" class="fas fa-pause"></i></button>
+        <button onclick="previousItem()"><i class="fas fa-chevron-left"></i></button>
+        <button class="item" id="itemButton" onclick="startCountdown(currentItemIndex)">180BPM/10分鐘</button>
+        <button onclick="nextItem()"><i class="fas fa-chevron-right"></i></button>
+
+        <!-- 數據顯示 -->
+        <div class="additional-info">
+
+            <span>步數：</span>
+                <!--未來這裡放步數數據，以此類推-->
+            大卡：<div id="numberElement">0</div> <!-- 每分鐘+8 -->
+        </div>
+    </div>
+    <div id="countdownTimer"></div> <!-- Countdown timer display -->
+    <br>
+    
+    <div id="media" style="display: flex; justify-content: flex-end; align-items: center;">
+        <button class="item" id="pic"><i class="fas fa-image"></i>圖片</button>
+        <button class="item" id="music"><i class="fas fa-music"></i>音樂</button>
+    </div>
+    <hr>
+    <br><br>
+    <div id="videoContainer" style="display:none">
+        <img id = "videoStream" src="" alt="Video Stream">
+    </div>
+    <br><br>
+</div>
+<script>
+    ///開始按鈕打開姿勢偵測///
+    document.getElementById('start').addEventListener('click', function() {
+        var videoContainer = document.getElementById('videoContainer');
+        var videoStream = document.getElementById('videoStream');
+        
+        // Set the source of the video stream
+        videoStream.src = "{% url 'video_feed' %}";
+    
+        // Display the video container
+        videoContainer.style.display = 'block';
+    });
+    </script>
+</body>
+</html>
