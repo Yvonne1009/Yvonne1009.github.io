@@ -180,30 +180,30 @@ var modal133 = document.getElementById("myModal133");
 
 var img1 = document.getElementById("ImpressionSunrise");
 var img2 = document.getElementById("TheWaterLilyPond");
-var img3 = document.getElementById("SnowSceneatArgenteuil");
-var img4 = document.getElementById("WaterlooBridgeLondon");
+var img3 = document.getElementById("AFarmyardinNormandy");
+var img4 = document.getElementById("Angler");
 var img5 = document.getElementById("WaterLiliesEveningEffect");
-var img6 = document.getElementById("VetheuilinSummer");
-var img7 = document.getElementById(
-  "PoplarsontheBanksoftheRiverEpteSeenfromtheMarsh"
-);
-var img8 = document.getElementById("TheSeineatVetheuil");
+var img6 = document.getElementById("Chrysanthemums");
+var img7 = document.getElementById("FruitBasketwithApplesandGrapes");
+var img8 = document.getElementById("GardenatSainteAdresse");
 var img9 = document.getElementById("WaterlooBridgeGrayWeather");
 var img10 = document.getElementById("TheBridgeAmsterdam");
-var img11 = document.getElementById("101");
-var img12 = document.getElementById("101night");
-var img13 = document.getElementById("TaichungCafe");
-var img14 = document.getElementById("TaichungArtMuseum");
+var img11 = document.getElementById("IntheGarden");
+var img12 = document.getElementById("JeanneMargueriteLecadreintheGarden");
+var img13 = document.getElementById("TheBoatStudio");
+var img14 = document.getElementById("TheChapelNotreDamedeGraceatHonfleur");
 var img15 = document.getElementById("Juechen");
 var img16 = document.getElementById("Iceandsnow");
 var img17 = document.getElementById("Searching");
 var img18 = document.getElementById("Fieldfragrance");
 var img19 = document.getElementById("It’scoldathighplaces");
 var img20 = document.getElementById("dreamofmortalworld");
-var img21 = document.getElementById("TainanArtMuseum");
-var img22 = document.getElementById("Kenting1");
-var img23 = document.getElementById("Kenting2");
-var img24 = document.getElementById("Kenting3");
+var img21 = document.getElementById(
+  "TheChurchatVarengevilleandtheGorgeofLesMoutiers"
+);
+var img22 = document.getElementById("TheGarden");
+var img23 = document.getElementById("TheLuncheon");
+var img24 = document.getElementById("WindmillsnearZaandam");
 var img25 = document.getElementById("cyut");
 var img26 = document.getElementById("KaohsiungCityMartyrsShrine");
 var img27 = document.getElementById("LoversObservationDeck1");

@@ -5315,7 +5315,6 @@ a.close.disabled {
   display: flex;
   -ms-flex-direction: column;
   pointer-events: auto;
-  background-color: #fff;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
@@ -15433,7 +15432,6 @@ button.list-group-item-danger.active:hover {
   font-size: 50px;
   font-weight: 700;
   line-height: 1;
-  color: #fff;
   text-shadow: 0 1px 0 #fff;
   filter: alpha(opacity=20);
 }
@@ -15492,7 +15490,6 @@ button.close {
 }
 .modal-content {
   position: relative;
-  background-color: #fff;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   border: 1px solid #999;
