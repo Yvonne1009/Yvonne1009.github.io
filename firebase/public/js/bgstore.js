@@ -145,6 +145,38 @@ var modal98 = document.getElementById("myModal98");
 var modal99 = document.getElementById("myModal99");
 var modal100 = document.getElementById("myModal100");
 var modal101 = document.getElementById("myModal101");
+var modal102 = document.getElementById("myModal102");
+var modal103 = document.getElementById("myModal103");
+var modal104 = document.getElementById("myModal104");
+var modal105 = document.getElementById("myModal105");
+var modal106 = document.getElementById("myModal106");
+var modal107 = document.getElementById("myModal107");
+var modal108 = document.getElementById("myModal108");
+var modal109 = document.getElementById("myModal109");
+var modal110 = document.getElementById("myModal110");
+var modal111 = document.getElementById("myModal111");
+var modal112 = document.getElementById("myModal112");
+var modal113 = document.getElementById("myModal113");
+var modal114 = document.getElementById("myModal114");
+var modal115 = document.getElementById("myModal115");
+var modal116 = document.getElementById("myModal116");
+var modal117 = document.getElementById("myModal117");
+var modal118 = document.getElementById("myModal118");
+var modal119 = document.getElementById("myModal119");
+var modal120 = document.getElementById("myModal120");
+var modal121 = document.getElementById("myModal121");
+var modal122 = document.getElementById("myModal122");
+var modal123 = document.getElementById("myModal123");
+var modal124 = document.getElementById("myModal124");
+var modal125 = document.getElementById("myModal125");
+var modal126 = document.getElementById("myModal126");
+var modal127 = document.getElementById("myModal127");
+var modal128 = document.getElementById("myModal128");
+var modal129 = document.getElementById("myModal129");
+var modal130 = document.getElementById("myModal130");
+var modal131 = document.getElementById("myModal131");
+var modal132 = document.getElementById("myModal132");
+var modal133 = document.getElementById("myModal133");
 
 var img1 = document.getElementById("ImpressionSunrise");
 var img2 = document.getElementById("TheWaterLilyPond");
@@ -248,7 +280,39 @@ var img97 = document.getElementById("attackontitan");
 var img98 = document.getElementById("Gundam");
 var img99 = document.getElementById("spy");
 var img100 = document.getElementById("sharkcat");
-var img101 = document.getElementById("chinchilla");
+var img101 = document.getElementById("img101");
+var img102 = document.getElementById("img102");
+var img103 = document.getElementById("img103");
+var img104 = document.getElementById("img104");
+var img105 = document.getElementById("img105");
+var img106 = document.getElementById("img106");
+var img107 = document.getElementById("img107");
+var img108 = document.getElementById("img108");
+var img109 = document.getElementById("img109");
+var img110 = document.getElementById("img110");
+var img111 = document.getElementById("img111");
+var img112 = document.getElementById("img112");
+var img113 = document.getElementById("img113");
+var img114 = document.getElementById("img114");
+var img115 = document.getElementById("img115");
+var img116 = document.getElementById("img116");
+var img117 = document.getElementById("img117");
+var img118 = document.getElementById("img118");
+var img119 = document.getElementById("img119");
+var img120 = document.getElementById("img120");
+var img121 = document.getElementById("img121");
+var img122 = document.getElementById("img122");
+var img123 = document.getElementById("img123");
+var img124 = document.getElementById("img124");
+var img125 = document.getElementById("img125");
+var img126 = document.getElementById("img126");
+var img127 = document.getElementById("img127");
+var img128 = document.getElementById("img128");
+var img129 = document.getElementById("img129");
+var img130 = document.getElementById("img130");
+var img131 = document.getElementById("img131");
+var img132 = document.getElementById("img132");
+var img133 = document.getElementById("img133");
 
 var modalImg1 = document.getElementById("img01");
 var modalImg2 = document.getElementById("img02");
@@ -351,6 +415,38 @@ var modalImg98 = document.getElementById("img98");
 var modalImg99 = document.getElementById("img99");
 var modalImg100 = document.getElementById("img100");
 var modalImg101 = document.getElementById("img101");
+var modalImg102 = document.getElementById("img102");
+var modalImg103 = document.getElementById("img103");
+var modalImg104 = document.getElementById("img104");
+var modalImg105 = document.getElementById("img105");
+var modalImg106 = document.getElementById("img106");
+var modalImg107 = document.getElementById("img107");
+var modalImg108 = document.getElementById("img108");
+var modalImg109 = document.getElementById("img109");
+var modalImg110 = document.getElementById("img110");
+var modalImg111 = document.getElementById("img111");
+var modalImg112 = document.getElementById("img112");
+var modalImg113 = document.getElementById("img113");
+var modalImg114 = document.getElementById("img114");
+var modalImg115 = document.getElementById("img115");
+var modalImg116 = document.getElementById("img116");
+var modalImg117 = document.getElementById("img117");
+var modalImg118 = document.getElementById("img118");
+var modalImg119 = document.getElementById("img119");
+var modalImg120 = document.getElementById("img120");
+var modalImg121 = document.getElementById("img121");
+var modalImg122 = document.getElementById("img122");
+var modalImg123 = document.getElementById("img123");
+var modalImg124 = document.getElementById("img124");
+var modalImg125 = document.getElementById("img125");
+var modalImg126 = document.getElementById("img126");
+var modalImg127 = document.getElementById("img127");
+var modalImg128 = document.getElementById("img128");
+var modalImg129 = document.getElementById("img129");
+var modalImg130 = document.getElementById("img130");
+var modalImg131 = document.getElementById("img131");
+var modalImg132 = document.getElementById("img132");
+var modalImg133 = document.getElementById("img133");
 
 var captionText1 = document.getElementById("caption");
 var captionText2 = document.getElementById("caption2");
@@ -453,6 +549,38 @@ var captionText98 = document.getElementById("caption98");
 var captionText99 = document.getElementById("caption99");
 var captionText100 = document.getElementById("caption100");
 var captionText101 = document.getElementById("caption101");
+var captionText102 = document.getElementById("caption102");
+var captionText103 = document.getElementById("caption103");
+var captionText104 = document.getElementById("caption104");
+var captionText105 = document.getElementById("caption105");
+var captionText106 = document.getElementById("caption106");
+var captionText107 = document.getElementById("caption107");
+var captionText108 = document.getElementById("caption108");
+var captionText109 = document.getElementById("caption109");
+var captionText110 = document.getElementById("caption110");
+var captionText111 = document.getElementById("caption111");
+var captionText112 = document.getElementById("caption112");
+var captionText113 = document.getElementById("caption113");
+var captionText114 = document.getElementById("caption114");
+var captionText115 = document.getElementById("caption115");
+var captionText116 = document.getElementById("caption116");
+var captionText117 = document.getElementById("caption117");
+var captionText118 = document.getElementById("caption118");
+var captionText119 = document.getElementById("caption119");
+var captionText120 = document.getElementById("caption120");
+var captionText121 = document.getElementById("caption121");
+var captionText122 = document.getElementById("caption122");
+var captionText123 = document.getElementById("caption123");
+var captionText124 = document.getElementById("caption124");
+var captionText125 = document.getElementById("caption125");
+var captionText126 = document.getElementById("caption126");
+var captionText127 = document.getElementById("caption127");
+var captionText128 = document.getElementById("caption128");
+var captionText129 = document.getElementById("caption129");
+var captionText130 = document.getElementById("caption130");
+var captionText131 = document.getElementById("caption131");
+var captionText132 = document.getElementById("caption132");
+var captionText133 = document.getElementById("caption133");
 
 // Function to open modal for the first image
 img1.onclick = function () {
@@ -1221,7 +1349,7 @@ img61.onclick = function () {
 };
 
 // Function to close modal for the fifty-first image
-var span61 = document.getElementsByClassName("close")[60]; // Note: 50 is the index corresponding to the close button of the fifty-first modal
+var span61 = document.getElementsByClassName("close")[60]; // Note: 60 is the index corresponding to the close button of the fifty-first modal
 span61.onclick = function () {
   modal61.style.display = "none";
 };
@@ -1234,7 +1362,7 @@ img62.onclick = function () {
 };
 
 // Function to close modal for the fifty-second image
-var span62 = document.getElementsByClassName("close")[61]; // Note: 51 is the index corresponding to the close button of the fifty-second modal
+var span62 = document.getElementsByClassName("close")[61]; // Note: 61 is the index corresponding to the close button of the fifty-second modal
 span62.onclick = function () {
   modal62.style.display = "none";
 };
@@ -1247,7 +1375,7 @@ img63.onclick = function () {
 };
 
 // Function to close modal for the fifty-third image
-var span63 = document.getElementsByClassName("close")[62]; // Note: 52 is the index corresponding to the close button of the fifty-third modal
+var span63 = document.getElementsByClassName("close")[62]; // Note: 62 is the index corresponding to the close button of the fifty-third modal
 span63.onclick = function () {
   modal63.style.display = "none";
 };
@@ -1260,7 +1388,7 @@ img64.onclick = function () {
 };
 
 // Function to close modal for the fifty-fourth image
-var span64 = document.getElementsByClassName("close")[63]; // Note: 53 is the index corresponding to the close button of the fifty-fourth modal
+var span64 = document.getElementsByClassName("close")[63]; // Note: 63 is the index corresponding to the close button of the fifty-fourth modal
 span64.onclick = function () {
   modal64.style.display = "none";
 };
@@ -1273,7 +1401,7 @@ img65.onclick = function () {
 };
 
 // Function to close modal for the fifty-fifth image
-var span65 = document.getElementsByClassName("close")[64]; // Note: 54 is the index corresponding to the close button of the fifty-fifth modal
+var span65 = document.getElementsByClassName("close")[64]; // Note: 64 is the index corresponding to the close button of the fifty-fifth modal
 span65.onclick = function () {
   modal65.style.display = "none";
 };
@@ -1286,7 +1414,7 @@ img66.onclick = function () {
 };
 
 // Function to close modal for the fifty-sixth image
-var span66 = document.getElementsByClassName("close")[65]; // Note: 55 is the index corresponding to the close button of the fifty-sixth modal
+var span66 = document.getElementsByClassName("close")[65]; // Note: 65 is the index corresponding to the close button of the fifty-sixth modal
 span66.onclick = function () {
   modal66.style.display = "none";
 };
@@ -1299,7 +1427,7 @@ img67.onclick = function () {
 };
 
 // Function to close modal for the fifty-seventh image
-var span67 = document.getElementsByClassName("close")[66]; // Note: 56 is the index corresponding to the close button of the fifty-seventh modal
+var span67 = document.getElementsByClassName("close")[66]; // Note: 66 is the index corresponding to the close button of the fifty-seventh modal
 span67.onclick = function () {
   modal67.style.display = "none";
 };
@@ -1733,18 +1861,29 @@ span100.onclick = function () {
   modal100.style.display = "none";
 };
 
-// Function to open modal for the fifty-eighth image
-img101.onclick = function () {
-  modal101.style.display = "block";
-  modalImg101.src = this.src;
-  captionText101.innerHTML = this.alt;
-};
+document.addEventListener("DOMContentLoaded", function () {
+  for (let i = 101; i <= 133; i++) {
+    let img = document.getElementById(`img${i}`);
+    let modal = document.getElementById(`modal${i}`);
+    let modalImg = document.getElementById(`modalImg${i}`);
+    let captionText = document.getElementById(`captionText${i}`);
+    let span = document.getElementsByClassName("close")[i - 1];
 
-// Function to close modal for the fifty-eighth image
-var span101 = document.getElementsByClassName("close")[100];
-span101.onclick = function () {
-  modal101.style.display = "none";
-};
+    if (img && modal && modalImg && captionText && span) {
+      // Function to open modal for the ith image
+      img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+      };
+
+      // Function to close modal for the ith image
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+    }
+  }
+});
 
 // Close modals when clicked outside the images
 window.onclick = function (event) {
@@ -1951,5 +2090,191 @@ window.onclick = function (event) {
   }
   if (event.target == modal68) {
     modal68.style.display = "none";
+  }
+  if (event.target == modal69) {
+    modal69.style.display = "none";
+  }
+  if (event.target == modal70) {
+    modal70.style.display = "none";
+  }
+  if (event.target == modal71) {
+    modal71.style.display = "none";
+  }
+  if (event.target == modal72) {
+    modal72.style.display = "none";
+  }
+  if (event.target == modal73) {
+    modal73.style.display = "none";
+  }
+  if (event.target == modal74) {
+    modal74.style.display = "none";
+  }
+  if (event.target == modal75) {
+    modal75.style.display = "none";
+  }
+  if (event.target == modal76) {
+    modal76.style.display = "none";
+  }
+  if (event.target == modal77) {
+    modal77.style.display = "none";
+  }
+  if (event.target == modal78) {
+    modal78.style.display = "none";
+  }
+  if (event.target == modal79) {
+    modal79.style.display = "none";
+  }
+  if (event.target == modal80) {
+    modal80.style.display = "none";
+  }
+  if (event.target == modal81) {
+    modal81.style.display = "none";
+  }
+  if (event.target == modal82) {
+    modal82.style.display = "none";
+  }
+  if (event.target == modal83) {
+    modal83.style.display = "none";
+  }
+  if (event.target == modal84) {
+    modal84.style.display = "none";
+  }
+  if (event.target == modal85) {
+    modal85.style.display = "none";
+  }
+  if (event.target == modal86) {
+    modal86.style.display = "none";
+  }
+  if (event.target == modal87) {
+    modal87.style.display = "none";
+  }
+  if (event.target == modal88) {
+    modal88.style.display = "none";
+  }
+  if (event.target == modal89) {
+    modal89.style.display = "none";
+  }
+  if (event.target == modal90) {
+    modal90.style.display = "none";
+  }
+  if (event.target == modal91) {
+    modal91.style.display = "none";
+  }
+  if (event.target == modal92) {
+    modal92.style.display = "none";
+  }
+  if (event.target == modal93) {
+    modal93.style.display = "none";
+  }
+  if (event.target == modal94) {
+    modal94.style.display = "none";
+  }
+  if (event.target == modal95) {
+    modal95.style.display = "none";
+  }
+  if (event.target == modal96) {
+    modal96.style.display = "none";
+  }
+  if (event.target == modal97) {
+    modal97.style.display = "none";
+  }
+  if (event.target == modal98) {
+    modal98.style.display = "none";
+  }
+  if (event.target == modal99) {
+    modal99.style.display = "none";
+  }
+  if (event.target == modal100) {
+    modal100.style.display = "none";
+  }
+  if (event.target == modal101) {
+    modal101.style.display = "none";
+  }
+  if (event.target == modal102) {
+    modal102.style.display = "none";
+  }
+  if (event.target == modal103) {
+    modal103.style.display = "none";
+  }
+  if (event.target == modal104) {
+    modal104.style.display = "none";
+  }
+  if (event.target == modal105) {
+    modal105.style.display = "none";
+  }
+  if (event.target == modal106) {
+    modal106.style.display = "none";
+  }
+  if (event.target == modal107) {
+    modal107.style.display = "none";
+  }
+  if (event.target == modal108) {
+    modal108.style.display = "none";
+  }
+  if (event.target == modal109) {
+    modal109.style.display = "none";
+  }
+  if (event.target == modal110) {
+    modal110.style.display = "none";
+  }
+  if (event.target == modal111) {
+    modal111.style.display = "none";
+  }
+  if (event.target == modal112) {
+    modal112.style.display = "none";
+  }
+  if (event.target == modal113) {
+    modal113.style.display = "none";
+  }
+  if (event.target == modal114) {
+    modal114.style.display = "none";
+  }
+  if (event.target == modal115) {
+    modal115.style.display = "none";
+  }
+  if (event.target == modal116) {
+    modal116.style.display = "none";
+  }
+  if (event.target == modal117) {
+    modal117.style.display = "none";
+  }
+  if (event.target == modal118) {
+    modal118.style.display = "none";
+  }
+  if (event.target == modal119) {
+    modal119.style.display = "none";
+  }
+  if (event.target == modal120) {
+    modal120.style.display = "none";
+  }
+  if (event.target == modal121) {
+    modal121.style.display = "none";
+  }
+  if (event.target == modal122) {
+    modal122.style.display = "none";
+  }
+  if (event.target == modal123) {
+    modal123.style.display = "none";
+  }
+  if (event.target == modal124) {
+    modal124.style.display = "none";
+  }
+  if (event.target == modal125) {
+    modal125.style.display = "none";
+  }
+  if (event.target == modal126) {
+    modal126.style.display = "none";
+  }
+  if (event.target == modal127) {
+    modal127.style.display = "none";
+  }
+  if (event.target == modal128) {
+    modal128.style.display = "none";
+  }
+  if (event.target == modal129) {
+    modal129.style.display = "none";
+  }
+  if (event.target == modal130) {
+    modal130.style.display = "none";
   }
 };

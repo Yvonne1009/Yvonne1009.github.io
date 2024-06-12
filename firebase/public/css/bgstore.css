@@ -332,7 +332,7 @@ h1 {
   opacity: 0.7;
 }
 
-/* The Modal (background) */
+/* Modal */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -347,11 +347,44 @@ h1 {
   background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
 }
 
-/* Modal Content (image) */
+/* Modal Content */
 .modal-content {
   margin: auto;
-  display: block;
-  max-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+}
+
+/* Modal Image */
+.modal-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Modal Text */
+.modal-text {
+  max-width: 50%;
+  padding: 20px;
+  color: #000;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* Caption of Modal Image */
@@ -360,7 +393,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -371,7 +403,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -381,7 +412,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -391,7 +421,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -401,7 +430,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -411,7 +439,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -421,7 +448,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -431,7 +457,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -441,7 +466,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -451,7 +475,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -461,7 +484,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -471,7 +493,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -481,7 +502,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -491,7 +511,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -501,7 +520,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -511,7 +529,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -521,7 +538,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -531,7 +547,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -541,7 +556,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -551,7 +565,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -561,7 +574,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -572,7 +584,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -583,7 +594,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -594,7 +604,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -605,7 +614,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -616,7 +624,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -627,7 +634,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -638,7 +644,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -649,7 +654,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -660,7 +664,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -671,7 +674,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -682,7 +684,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -693,7 +694,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -704,7 +704,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -715,7 +714,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -726,7 +724,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -737,7 +734,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -748,7 +744,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -759,7 +754,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -770,7 +764,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -781,7 +774,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -792,7 +784,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -803,7 +794,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -814,7 +804,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -825,7 +814,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -836,7 +824,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -847,7 +834,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -858,7 +844,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -869,7 +854,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -880,7 +864,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -891,7 +874,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -902,7 +884,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -913,7 +894,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -924,7 +904,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -935,7 +914,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -946,7 +924,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -957,7 +934,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -968,7 +944,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -979,7 +954,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -990,7 +964,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -1000,7 +973,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -1011,7 +983,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -1022,7 +993,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -1033,7 +1003,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -1044,7 +1013,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -1055,7 +1023,6 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
@@ -1066,13 +1033,716 @@ h1 {
   display: block;
   width: 80%;
   max-width: 700px;
-  text-align: center;
   color: #ccc;
   padding: 10px 0;
   height: 150px;
 }
 
 #caption68 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption69 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption70 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption71 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption72 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption73 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption74 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption75 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption76 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption77 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption78 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption79 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption80 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+#caption81 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption82 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption83 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption84 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption85 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption86 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption87 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption88 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption89 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption90 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption91 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption92 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption93 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption94 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption95 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption96 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption97 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption98 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption99 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption100 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption101 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption102 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption103 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption104 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption105 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption106 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption107 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption108 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption109 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption110 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption111 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption112 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption113 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption114 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption115 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption116 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption117 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption118 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption119 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption120 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption121 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption122 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption123 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption124 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption125 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption126 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption127 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption128 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption129 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption130 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption131 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption132 {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+#caption133 {
   margin: auto;
   display: block;
   width: 80%;
