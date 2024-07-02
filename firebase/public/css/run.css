@@ -198,3 +198,7 @@ hr {
 .item i {
   margin-right: 5px; /* 图标与文字之间的间距 */
 }
+
+canvas {
+  position: absolute;
+}
