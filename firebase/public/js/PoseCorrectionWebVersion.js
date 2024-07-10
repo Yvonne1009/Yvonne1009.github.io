@@ -1,159 +1,167 @@
-const video = document.getElementById("video");
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const videoElement = document.createElement("video");
+const canvasElement = document.getElementById("output");
+const canvasCtx = canvasElement.getContext("2d");
+const messageElement = document.getElementById("message");
+const stepCounterElement = document.getElementById("stepCounter");
 
-const calculateAngle = (a, b, c) => {
+let stepCounter = 0;
+let l_stage = "DOWN";
+let r_stage = "DOWN";
+const STAGE_DOWN = "DOWN";
+const STAGE_UP = "UP";
+
+const numFramesToAnalyze = 30;
+const leftWristPositions = [];
+const rightWristPositions = [];
+
+async function setupCamera() {
+  const stream = await navigator.mediaDevices.getUserMedia({
+    video: true,
+  });
+  videoElement.srcObject = stream;
+
+  return new Promise((resolve) => {
+    videoElement.onloadedmetadata = () => {
+      resolve(videoElement);
+    };
+  });
+}
+
+function calculateAngle(a, b, c) {
   const radians =
-    Math.atan2(c.y - b.y, c.x - b.x) - Math.atan2(a.y - b.y, a.x - b.x);
+    Math.atan2(c[1] - b[1], c[0] - b[0]) - Math.atan2(a[1] - b[1], a[0] - b[0]);
   let angle = Math.abs((radians * 180.0) / Math.PI);
   if (angle > 180.0) {
     angle = 360 - angle;
   }
   return angle;
-};
+}
 
-const calculateDistance = (a, b) => {
-  return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
-};
+function calculateDistance(a, b) {
+  return Math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2);
+}
 
-let leftWristPositions = [];
-let rightWristPositions = [];
-const numFramesToAnalyze = 30;
-let counter = 0;
-let lStage = "DOWN";
-let rStage = "DOWN";
+async function main() {
+  await setupCamera();
+  videoElement.play();
 
-const setupCamera = async () => {
-  const stream = await navigator.mediaDevices.getUserMedia({
-    video: true,
-  });
-  video.srcObject = stream;
-
-  return new Promise((resolve) => {
-    video.onloadedmetadata = () => {
-      resolve(video);
-    };
-  });
-};
-
-const detectPose = async () => {
   const net = await posenet.load();
-  while (true) {
-    const pose = await net.estimateSinglePose(video, {
+
+  async function detect() {
+    const pose = await net.estimateSinglePose(videoElement, {
       flipHorizontal: false,
     });
-    drawPose(pose);
-    await tf.nextFrame();
-  }
-};
 
-const drawPose = (pose) => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const keypoints = pose.keypoints;
+    const landmarks = pose.keypoints.map((k) => [k.position.x, k.position.y]);
 
-  const leftWrist = keypoints.find(
-    (point) => point.part === "leftWrist"
-  ).position;
-  const rightWrist = keypoints.find(
-    (point) => point.part === "rightWrist"
-  ).position;
-  const shoulderLeft = keypoints.find(
-    (point) => point.part === "leftShoulder"
-  ).position;
-  const shoulderRight = keypoints.find(
-    (point) => point.part === "rightShoulder"
-  ).position;
-  const hipLeft = keypoints.find((point) => point.part === "leftHip").position;
-  const hipRight = keypoints.find(
-    (point) => point.part === "rightHip"
-  ).position;
-  const kneeLeft = keypoints.find(
-    (point) => point.part === "leftKnee"
-  ).position;
-  const kneeRight = keypoints.find(
-    (point) => point.part === "rightKnee"
-  ).position;
-  const ankleLeft = keypoints.find(
-    (point) => point.part === "leftAnkle"
-  ).position;
-  const ankleRight = keypoints.find(
-    (point) => point.part === "rightAnkle"
-  ).position;
-  const nose = keypoints.find((point) => point.part === "nose").position;
+    const leftWrist = landmarks[9];
+    const rightWrist = landmarks[10];
 
-  leftWristPositions.push(leftWrist);
-  rightWristPositions.push(rightWrist);
-  if (leftWristPositions.length > numFramesToAnalyze)
-    leftWristPositions.shift();
-  if (rightWristPositions.length > numFramesToAnalyze)
-    rightWristPositions.shift();
+    leftWristPositions.push(leftWrist);
+    rightWristPositions.push(rightWrist);
+    if (leftWristPositions.length > numFramesToAnalyze)
+      leftWristPositions.shift();
+    if (rightWristPositions.length > numFramesToAnalyze)
+      rightWristPositions.shift();
 
-  const lAngle = calculateAngle(hipLeft, kneeLeft, ankleLeft);
-  const rAngle = calculateAngle(hipRight, kneeRight, ankleRight);
-  const shoulderHipAngleLeft = calculateAngle(nose, shoulderLeft, hipLeft);
-  const shoulderHipAngleRight = calculateAngle(nose, shoulderRight, hipRight);
-  const hunchbackDetected =
-    (shoulderHipAngleLeft < 145 || shoulderHipAngleLeft > 170) &&
-    (shoulderHipAngleRight < 145 || shoulderHipAngleRight > 170);
+    const shoulderLeft = landmarks[5];
+    const shoulderRight = landmarks[6];
+    const hipLeft = landmarks[11];
+    const hipRight = landmarks[12];
+    const kneeLeft = landmarks[13];
+    const kneeRight = landmarks[14];
+    const ankleLeft = landmarks[15];
+    const ankleRight = landmarks[16];
+    const nose = landmarks[0];
 
-  if (hunchbackDetected) {
-    ctx.font = "30px Arial";
-    ctx.fillStyle = "red";
-    ctx.fillText("Straighten your back and keep your head up", 10, 100);
-  } else {
-    if (lAngle < 150 && lStage === "DOWN") lStage = "UP";
-    if (rAngle < 150 && rStage === "DOWN") rStage = "UP";
-    if (lAngle >= 160 && lStage === "UP") {
-      lStage = "DOWN";
-      counter++;
+    const l_angle = calculateAngle(hipLeft, kneeLeft, ankleLeft);
+    const r_angle = calculateAngle(hipRight, kneeRight, ankleRight);
+
+    const shoulder_hip_angle_left = calculateAngle(nose, shoulderLeft, hipLeft);
+    const shoulder_hip_angle_right = calculateAngle(
+      nose,
+      shoulderRight,
+      hipRight
+    );
+    const hunchback_detected =
+      (shoulder_hip_angle_left < 145 || shoulder_hip_angle_left > 170) &&
+      (shoulder_hip_angle_right < 145 || shoulder_hip_angle_right > 170);
+
+    if (hunchback_detected) {
+      messageElement.innerText = "Straighten your back and keep your head up";
+    } else {
+      messageElement.innerText = "";
+
+      if (l_angle < 150 && l_stage === STAGE_DOWN) {
+        l_stage = STAGE_UP;
+      }
+      if (r_angle < 150 && r_stage === STAGE_DOWN) {
+        r_stage = STAGE_UP;
+      }
+
+      if (l_angle >= 160 && l_stage === STAGE_UP) {
+        l_stage = STAGE_DOWN;
+        stepCounter++;
+      }
+      if (r_angle >= 160 && r_stage === STAGE_UP) {
+        r_stage = STAGE_DOWN;
+        stepCounter++;
+      }
     }
-    if (rAngle >= 160 && rStage === "UP") {
-      rStage = "DOWN";
-      counter++;
+
+    if (leftWristPositions.length === numFramesToAnalyze) {
+      const leftMovement = leftWristPositions
+        .slice(1)
+        .reduce(
+          (acc, curr, i) =>
+            acc + calculateDistance(curr, leftWristPositions[i]),
+          0
+        );
+      const rightMovement = rightWristPositions
+        .slice(1)
+        .reduce(
+          (acc, curr, i) =>
+            acc + calculateDistance(curr, rightWristPositions[i]),
+          0
+        );
+
+      const minMovementThreshold = 0.1;
+      const maxMovementThreshold = 0.5;
+
+      if (
+        leftMovement < minMovementThreshold ||
+        rightMovement < minMovementThreshold
+      ) {
+        messageElement.innerText = "Swing your arms more";
+      } else if (
+        leftMovement > maxMovementThreshold ||
+        rightMovement > maxMovementThreshold
+      ) {
+        messageElement.innerText = "Reduce arm swing";
+      }
     }
+
+    stepCounterElement.innerText = `Steps: ${stepCounter}`;
+
+    canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    canvasCtx.drawImage(
+      videoElement,
+      0,
+      0,
+      canvasElement.width,
+      canvasElement.height
+    );
+    pose.keypoints.forEach((point) => {
+      canvasCtx.beginPath();
+      canvasCtx.arc(point.position.x, point.position.y, 5, 0, 2 * Math.PI);
+      canvasCtx.fillStyle = "red";
+      canvasCtx.fill();
+    });
+
+    requestAnimationFrame(detect);
   }
 
-  if (leftWristPositions.length === numFramesToAnalyze) {
-    const leftMovement = leftWristPositions
-      .slice(1)
-      .reduce(
-        (acc, pos, i) => acc + calculateDistance(pos, leftWristPositions[i]),
-        0
-      );
-    const rightMovement = rightWristPositions
-      .slice(1)
-      .reduce(
-        (acc, pos, i) => acc + calculateDistance(pos, rightWristPositions[i]),
-        0
-      );
-    const minMovementThreshold = 10;
-    const maxMovementThreshold = 50;
-    if (
-      leftMovement < minMovementThreshold ||
-      rightMovement < minMovementThreshold
-    ) {
-      ctx.font = "30px Arial";
-      ctx.fillStyle = "red";
-      ctx.fillText("Swing your arms more", 10, 140);
-    } else if (
-      leftMovement > maxMovementThreshold ||
-      rightMovement > maxMovementThreshold
-    ) {
-      ctx.font = "30px Arial";
-      ctx.fillStyle = "red";
-      ctx.fillText("Reduce arm swing", 10, 180);
-    }
-  }
+  detect();
+}
 
-  ctx.font = "30px Arial";
-  ctx.fillStyle = "black";
-  ctx.fillText(`Steps: ${counter}`, 10, 40);
-
-  keypoints.forEach((point) => {
-    ctx.beginPath();
-    ctx.arc(point.position.x, point.position.y, 5, 0, 2 * Math.PI);
-    ctx.fill();
-  });
-};
-
-setupCamera().then(detectPose);
+main();
