@@ -376,6 +376,17 @@ ol {
   }
 }
 
+input,
+select,
+button {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/*footer 開始*/
 .footer-logo a img {
   width: 140px;
 }
