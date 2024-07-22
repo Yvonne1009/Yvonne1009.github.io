@@ -7,17 +7,127 @@ body {
 }
 
 h1 {
-  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 20px;
 }
 
-/*任務月曆*/
+h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 60%;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* 版面設置 */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  background-color: #fff;
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+}
+
+.left-section,
+.right-section {
+  flex: 1;
+}
+
+.left-section {
+  max-width: 45%;
+}
+
+.right-section {
+  max-width: 55%;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar,
+.todo-list,
+.record-section {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.calendar-nav,
+.form-group,
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.task-list,
+.record-list {
+  margin-top: 20px;
+}
+
+.task {
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.record-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border: 5px solid #007bff;
+  border-radius: 50%;
+  margin: 10px 0;
+  font-size: 1.5em;
+}
+
+/* 月曆 */
 .calendar {
   max-width: 500px;
-  margin: 0 auto;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-bottom: 20px;
 }
+
 .calendar-header {
   background-color: #80bef5;
   color: #fff;
@@ -26,57 +136,54 @@ h1 {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.calendar-body {
-  flex-wrap: wrap;
-}
-.month {
-  width: calc(100% / 3);
-  padding: 10px;
-}
-.month-header {
-  font-weight: bold;
+
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
-.days {
-  display: flex;
-  flex-wrap: wrap;
-}
-.day {
-  width: calc(100% / 7);
-  text-align: center;
-  padding: 10px 0;
+
+.calendar-nav button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
-.day:hover {
+
+.calendar-nav button:hover {
+  background-color: #0056b3;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.calendar-day {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.calendar-day:hover {
   background-color: #f0f0f0;
 }
-.record {
-  max-width: 500px;
-  margin-top: 20px;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: block; /* 固定显示记录区域 */
-}
-.record.show {
-  display: block;
-}
-.record-item {
-  margin-bottom: 10px;
+
+.today {
+  background-color: #ff0000;
+  color: #fff;
+  border-radius: 50%; /* 将日期框的边界半径设置为50%，使其呈现圆形 */
 }
 
-.add-task {
-  bottom: 5px;
-  right: 5px;
-  font-size: 12px;
-  cursor: pointer;
-  color: blue;
-}
-
-/*導覽列*/
+/* 導覽列 */
 #masthead .navbar {
   margin-bottom: 0;
   min-height: 70px;
@@ -278,9 +385,7 @@ h1 {
   border-color: #80bef5;
 }
 
-/* Buttons
- * -------------------------- */
-
+/* Buttons */
 .btn {
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
@@ -288,19 +393,16 @@ h1 {
   font-weight: 800;
   font-size: 12px;
   padding: 10px 15px;
-  font-size: 12px;
 }
 
 .btn-lg {
   padding: 18px 27px;
-  font-size: 14px;
   font-size: 14px;
 }
 
 .btn-sm,
 .btn-xs {
   padding: 6px 9px;
-  font-size: 10px;
   font-size: 10px;
 }
 
@@ -325,7 +427,7 @@ section {
   height: 20px; /* 高度會自動調整以保持原始比例 */
 }
 
-/*footer css*/
+/* footer css 開始 */
 .row {
   display: -ms-flexbox;
   display: flex;
@@ -489,58 +591,25 @@ ol {
   border-top: 1px solid #eceff8;
   padding: 13px 0;
 }
+/* footer css 結束 */
 
-/*任務*/
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-input[type="text"] {
-  width: 70%;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-button {
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #45a049;
-}
-.task {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
+/* 任務 */
 .task input[type="checkbox"] {
   margin-right: 10px;
 }
+
 .task.completed span {
   text-decoration: line-through;
   color: #888;
 }
-.calendar {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.calendar-header {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
+
+/* 調整月曆 */
 .calendar-body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
 }
+
 .calendar-day {
   display: inline-block;
   width: 40px;
@@ -553,27 +622,71 @@ button:hover {
   cursor: pointer;
 }
 
-/*多增加的*/
-.calendar-nav {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.calendar-nav button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.calendar-nav button:hover {
-  background-color: #0056b3;
+.calendar-day:hover {
+  background-color: #f0f0f0;
 }
 
 .today {
   background-color: #ff0000;
   color: #fff;
   border-radius: 50%; /* 将日期框的边界半径设置为50%，使其呈现圆形 */
+}
+
+/* 其他設置 */
+.record {
+  max-width: 500px;
+  margin-top: 20px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: block; /* 固定显示记录区域 */
+}
+
+.record.show {
+  display: block;
+}
+
+.record-item {
+  margin-bottom: 10px;
+}
+
+.add-task {
+  bottom: 5px;
+  right: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  color: blue;
+}
+
+.form-group,
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.task-list,
+.record-list {
+  margin-top: 20px;
+}
+
+#taskInput {
+  margin-right: 10px;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+form label {
+  margin-right: 10px;
+}
+
+form input {
+  margin-right: 10px;
 }

@@ -86,83 +86,112 @@
     </header>
     <!-- menu 結束 -->
 
-    <div class="container pt-80 pt-130">
-      <div class="calendar">
-        <div class="calendar-header" id="header"></div>
-        <div class="calendar-nav">
-          <button onclick="prevMonth()">Prev Month</button>
-          <select id="monthSelect" onchange="changeMonth()"></select>
-          <select id="yearSelect" onchange="changeYear()"></select>
-          <button onclick="nextMonth()">Next Month</button>
+    <!-- 左側：月曆和待辦事項清單  開始-->
+    <div class="container main-container">
+      <div class="left-section">
+        <!-- 月曆 開始 -->
+        <div class="calendar">
+          <div class="calendar-header" id="header"></div>
+          <div class="calendar-nav">
+            <button onclick="prevMonth()">Prev Month</button>
+            <select id="monthSelect" onchange="changeMonth()"></select>
+            <select id="yearSelect" onchange="changeYear()"></select>
+            <button onclick="nextMonth()">Next Month</button>
+          </div>
+          <div class="calendar-body" id="calendar"></div>
         </div>
-        <div class="calendar-body" id="calendar"></div>
-      </div>
+        <!-- 月曆 結束 -->
 
-      <div class="container">
-        <h2 id="todoTitle">To-Do List -</h2>
-        <input type="text" id="taskInput" placeholder="Add new task..." />
-        <button onclick="addTask()">Add</button>
-
-        <div id="taskList">
-          <!-- Tasks will be dynamically added here -->
+        <!--待辦事項清單  開始-->
+        <div class="todo-list">
+          <h2 id="todoTitle">待辦事項清單</h2>
+          <input type="text" id="taskInput" placeholder="新增待辦事項清單..." />
+          <button onclick="addTask()">新增</button>
+          <div id="taskList">
+            <!-- Tasks will be dynamically added here -->
+          </div>
         </div>
+        <!--待辦事項清單  結束-->
       </div>
+      <!-- 左側：月曆和待辦事項清單  結束-->
 
-      <div class="container">
-        <h1>每日體重記錄</h1>
-        <form id="weightForm">
-          <label for="weightInput">輸入體重 (kg): </label>
-          <input type="number" id="weightInput" step="0.1" required />
-          <button type="submit">記錄體重</button>
-        </form>
-        <h2>體重記錄</h2>
-        <div id="weightRecords"></div>
-      </div>
+      <!-- 右側：每日記錄 -->
+      <div class="right-section">
+        <div class="record-section">
+          <h1>體重</h1>
+          <div class="weight-record">
+            <form id="weightForm">
+              <label for="weightInput">輸入體重 (kg): </label>
+              <input
+                type="number"
+                id="weightInput"
+                placeholder="輸入體重 (kg)..."
+                step="0.1"
+                required
+              />
+              <button type="submit">新增</button>
+            </form>
+            <h2>體重記錄</h2>
+            <div id="weightRecords"></div>
+          </div>
+        </div>
 
-      <div class="container">
-        <h1>每日喝水記錄</h1>
-        <form id="waterForm">
-          <label for="waterInput">输入喝水量 (ml): </label>
-          <input type="number" id="waterInput" step="1" required />
-          <button type="submit">記錄喝水量</button>
-        </form>
-        <h2>喝水記錄</h2>
-        <div id="waterRecords"></div>
-      </div>
+        <div class="record-section">
+          <h1>喝水</h1>
+          <div class="water-record">
+            <form id="waterForm">
+              <label for="waterInput">输入喝水量(ml): </label>
+              <input
+                type="number"
+                id="waterInput"
+                placeholder="输入喝水量(ml)..."
+                step="1"
+                required
+              />
+              <button type="submit">新增</button>
+            </form>
+            <h2>喝水記錄</h2>
+            <div id="waterRecords"></div>
+          </div>
+        </div>
 
-      <div class="container">
-        <h1>每日步數記錄</h1>
-        <form id="stepForm">
-          <label for="stepInput">输入步數: </label>
-          <input type="number" id="stepInput" required />
-          <button type="submit">記錄步數</button>
-        </form>
-        <h2>步數記錄</h2>
-        <div id="stepRecords"></div>
+        <div class="record-section">
+          <h1>步數</h1>
+          <div class="step-record">
+            <form id="stepForm">
+              <label for="stepInput">输入步數(steps): </label>
+              <input
+                type="number"
+                id="stepInput"
+                placeholder="输入步數(steps)..."
+                required
+              />
+              <button type="submit">新增</button>
+            </form>
+            <h2>步數記錄</h2>
+            <div id="stepRecords"></div>
+          </div>
+        </div>
+
+        <div class="record-section">
+          <h1>超慢跑</h1>
+          <div class="run-record">
+            <form id="runForm">
+              <label for="runInput">新增目標(分鐘): </label>
+              <input
+                type="text"
+                id="runInput"
+                placeholder="新增目標(分鐘)..."
+                required
+              />
+              <button type="submit">新增</button>
+            </form>
+            <h2>超慢跑記錄</h2>
+            <div id="runRecords"></div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Import the basic jquery lib. -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- Import the associated firebase lib which the order is fixed. -->
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
-    ></script>
-    <!-- Set the firebsae config and initialize it. -->
-    <script defer src="init-firebase.js"></script>
 
     <script>
       // 獲取日曆頭部元素和月份顯示區域元素
@@ -497,25 +526,45 @@
         weightRecords.innerHTML = "";
 
         if (weights) {
-          const weightEntries = Object.values(weights);
-          weightEntries.forEach((entry) => {
+          const weightEntries = Object.entries(weights);
+          weightEntries.forEach(([id, entry]) => {
             const weightElement = document.createElement("div");
-            weightElement.classList.add("weight-entry");
+            weightElement.classList.add("record-entry");
             weightElement.innerHTML = `
-        <span class="weight-date">${entry.year}-${entry.month}-${entry.day}:</span>
-        <span class="weight-value">${entry.amount} kg</span>
-      `;
+                <span class="weight-date">${entry.year}-${entry.month}-${entry.day}:</span>
+                <span class="weight-value">${entry.amount} kg</span>
+                <button onclick="deleteWeight('${id}')">刪除</button>
+            `;
             weightRecords.appendChild(weightElement);
           });
         }
+      }
+
+      // 删除体重记录
+      function deleteWeight(id) {
+        database
+          .ref("weight")
+          .child(id)
+          .remove()
+          .then(() => {
+            console.log(
+              "Weight entry removed from Firebase database successfully!"
+            );
+            getWeightFromFirebase();
+          })
+          .catch((error) => {
+            console.error(
+              "Error removing weight entry from Firebase database: ",
+              error
+            );
+          });
       }
 
       // 页面加载时获取体重记录
       window.addEventListener("load", function () {
         getWeightFromFirebase();
       });
-    </script>
-    <script>
+
       //喝水記錄
       // 获取 DOM 元素
       const waterForm = document.getElementById("waterForm");
@@ -581,25 +630,45 @@
         waterRecords.innerHTML = "";
 
         if (waters) {
-          const waterEntries = Object.values(waters);
-          waterEntries.forEach((entry) => {
+          const waterEntries = Object.entries(waters);
+          waterEntries.forEach(([id, entry]) => {
             const waterElement = document.createElement("div");
-            waterElement.classList.add("water-entry");
+            waterElement.classList.add("record-entry");
             waterElement.innerHTML = `
-        <span class="water-date">${entry.year}-${entry.month}-${entry.day}:</span>
-        <span class="water-value">${entry.amount} ml</span>
-      `;
+                <span class="water-date">${entry.year}-${entry.month}-${entry.day}:</span>
+                <span class="water-value">${entry.amount} ml</span>
+                <button onclick="deleteWater('${id}')">刪除</button>
+            `;
             waterRecords.appendChild(waterElement);
           });
         }
+      }
+
+      // 删除喝水记录
+      function deleteWater(id) {
+        database
+          .ref("water")
+          .child(id)
+          .remove()
+          .then(() => {
+            console.log(
+              "Water entry removed from Firebase database successfully!"
+            );
+            getWaterFromFirebase();
+          })
+          .catch((error) => {
+            console.error(
+              "Error removing water entry from Firebase database: ",
+              error
+            );
+          });
       }
 
       // 页面加载时获取喝水记录
       window.addEventListener("load", function () {
         getWaterFromFirebase();
       });
-    </script>
-    <script>
+
       //步數記錄
       // 获取 DOM 元素
       const stepForm = document.getElementById("stepForm");
@@ -665,22 +734,138 @@
         stepRecords.innerHTML = "";
 
         if (steps) {
-          const stepEntries = Object.values(steps);
-          stepEntries.forEach((entry) => {
+          const stepEntries = Object.entries(steps);
+          stepEntries.forEach(([id, entry]) => {
             const stepElement = document.createElement("div");
-            stepElement.classList.add("step-entry");
+            stepElement.classList.add("record-entry");
             stepElement.innerHTML = `
-        <span class="step-date">${entry.year}-${entry.month}-${entry.day}:</span>
-        <span class="step-value">${entry.amount} steps</span>
-      `;
+                <span class="step-date">${entry.year}-${entry.month}-${entry.day}:</span>
+                <span class="step-value">${entry.amount} steps</span>
+                <button onclick="deleteStep('${id}')">刪除</button>
+            `;
             stepRecords.appendChild(stepElement);
           });
         }
       }
 
+      // 删除步数记录
+      function deleteStep(id) {
+        database
+          .ref("steps")
+          .child(id)
+          .remove()
+          .then(() => {
+            console.log(
+              "Step entry removed from Firebase database successfully!"
+            );
+            getStepsFromFirebase();
+          })
+          .catch((error) => {
+            console.error(
+              "Error removing step entry from Firebase database: ",
+              error
+            );
+          });
+      }
+
       // 页面加载时获取步数记录
       window.addEventListener("load", function () {
         getStepsFromFirebase();
+      });
+
+      //超慢跑記錄
+      // 获取 DOM 元素
+      const runForm = document.getElementById("runForm");
+      const runInput = document.getElementById("runInput");
+      const runRecords = document.getElementById("runRecords");
+
+      // 记录超慢跑目标
+      runForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const runGoal = runInput.value.trim();
+        if (!runGoal) return;
+
+        const runEntry = {
+          goal: runGoal,
+        };
+
+        addRunToFirebase(runEntry);
+        runInput.value = "";
+      });
+
+      // 将超慢跑记录添加到 Firebase
+      function addRunToFirebase(runEntry) {
+        database
+          .ref("run")
+          .push(runEntry)
+          .then(() => {
+            console.log("Run entry added to Firebase database successfully!");
+            getRunFromFirebase();
+          })
+          .catch((error) => {
+            console.error(
+              "Error adding run entry to Firebase database: ",
+              error
+            );
+          });
+      }
+
+      // 从 Firebase 获取超慢跑记录
+      function getRunFromFirebase() {
+        database
+          .ref("run")
+          .once("value")
+          .then(function (snapshot) {
+            const runs = snapshot.val();
+            displayRun(runs);
+          })
+          .catch(function (error) {
+            console.error("The read failed: " + error.code);
+          });
+      }
+
+      // 显示超慢跑记录
+      function displayRun(runs) {
+        runRecords.innerHTML = "";
+
+        if (runs) {
+          const runEntries = Object.entries(runs);
+          runEntries.forEach(([id, entry]) => {
+            const runElement = document.createElement("div");
+            runElement.classList.add("record-entry");
+            runElement.innerHTML = `
+                <span class="run-goal">${entry.goal}</span>
+                <button onclick="deleteRun('${id}')">刪除</button>
+            `;
+            runRecords.appendChild(runElement);
+          });
+        }
+      }
+
+      // 删除超慢跑记录
+      function deleteRun(id) {
+        database
+          .ref("run")
+          .child(id)
+          .remove()
+          .then(() => {
+            console.log(
+              "Run entry removed from Firebase database successfully!"
+            );
+            getRunFromFirebase();
+          })
+          .catch((error) => {
+            console.error(
+              "Error removing run entry from Firebase database: ",
+              error
+            );
+          });
+      }
+
+      // 页面加载时获取超慢跑记录
+      window.addEventListener("load", function () {
+        getRunFromFirebase();
       });
     </script>
     <!-- footer 開始 -->
