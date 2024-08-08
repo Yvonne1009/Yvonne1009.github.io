@@ -256,51 +256,60 @@ hr {
   width: 100%; /* 设置分界线的宽度 */
 }
 
-/* 灰色區域 */
+/*以下是是全網頁區域) */
 .gray-container {
-  background-color: #f2f2f2; /* 灰色背景颜色 */
   padding: 20px; /* 视频元素周围的内边距 */
   display: flex; /* 使用 flexbox 进行布局 */
   flex-direction: column; /* 列布局 */
   align-items: center; /* 水平居中对齐 */
   position: absolute; /* 绝对定位 */
-  left: 0; /* 左对齐 */
-  right: 0; /* 右对齐 */
-  font-size: 20pt;
-  border: 2px solid #f2f2f2;
+  /*top: 5px; /* 距离顶部的偏移量 */
+  left: 0px; /* 左对齐 */
+  right: 0px; /* 右对齐 */
+  font-size: 16pt;
+  margin-top: 0px;
 }
 
-/* Styling for the video element */
+/*以下是*/ /* 擷取攝影機 */
 #video {
   width: 640px; /* Set width of video element */
   height: 480px; /* Set height of video element */
 }
 
+/*以下是*/ /* 開始和語音導覽按鈕 */
 #start {
-  margin-left: -150pt;
+  margin-left: -200pt;
+  width: 90px; /* 设置按钮宽度 */
+  height: 40px; /* 设置按钮高度 */
+  font-size: 16px;
+  top: 50px;
 }
-
 #voice_guide {
-  margin-left: 30pt;
-  margin-right: 170pt;
+  margin-left: -120pt;
+  margin-right: 250pt;
+  width: 90px; /* 设置按钮宽度 */
+  height: 40px; /* 设置按钮高度 */
+  font-size: 16px;
 }
+/*以上是*/ /* 開始和語音導覽按鈕 */
 
-/* 計時器按钮样式 */
+/*以下是*/ /* 計時器按钮样式 */
+
 .switch-button {
   margin-right: 50%; /* 增加右侧间距 */
   display: flex; /* 使用 Flex 布局 */
   justify-content: space-between; /* 在容器内平均分布子元素 */
   align-items: center; /* 垂直居中对齐 */
-  width: 250px; /* 增加宽度以容纳暂停按钮 */
+  width: 190px; /* 增加宽度以容纳暂停按钮 */
+  height: 40px; /* 设置按钮高度 */
+  font-size: 12pt; /*中間按鈕文字大小*/
 }
-
 .switch-button button {
   padding: 10px 20px; /* 增大按钮的内边距 */
   background: none;
   border: none;
   cursor: pointer;
 }
-
 .switch-button .item {
   padding: 10px 20px; /* 增大按钮的内边距 */
   border: 1px solid #ccc;
@@ -309,27 +318,25 @@ hr {
   background-color: #f0f0f0;
   transition: background-color 0.3s ease;
   white-space: nowrap; /* 禁止文本换行 */
-  font-size: 18pt; /*中間按鈕文字大小*/
+  font-size: 14pt; /*中間按鈕文字大小*/
 }
 
-.switch-button .item:hover {
-  background-color: #e0e0e0;
-}
-
-/* Styles for pause button */
 .pause-button {
   margin: 0 20px; /* Add margin between pause button and switch buttons */
 }
+/*以上是*/ /* 計時器按钮样式 */
 
 /*心跳步數大卡*/
+/* 調整數據顯示區塊樣式 */
 .additional-info {
   display: flex; /* 使用 Flex 布局 */
   float: right; /* 将容器向右浮动 */
   margin-top: 0px; /* 增加顶部间距 */
-  margin-left: 130px; /* 增加左侧间距 */
+  margin-left: 90px; /* 增加左侧间距 */
   text-align: left; /* 将文本右对齐 */
   white-space: nowrap; /* 禁止文本换行 */
   align-items: center; /* 垂直居中对齐 */
+  font-size: 14pt;
   justify-content: flex-end; /* 水平靠右对齐 */
 }
 
@@ -337,7 +344,30 @@ hr {
   margin-right: 30px; /* 增加各个文字之间的间距 */
 }
 
-/* 媒體按鈕樣式 */
+/* 體重確認按鈕樣式 */
+.additional-info button {
+  border: 1px solid #e9e8e8; /* 灰色邊框 */
+  border-radius: 5px; /* 圓角 */
+  padding: 5px 10px; /* 设置内边距 */
+  cursor: pointer; /* 鼠标指针样式 */
+  margin-left: 5px; /* 增加左侧间距 */
+  margin-right: 30px; /* 增加左侧间距 */
+  background-color: #f6f6f6; /* 鼠标悬停时的背景色 */
+  text-align: center; /* 文字內容置中 */
+}
+
+/* 調整輸入框樣式 */
+input[type="number"] {
+  width: 70px;
+  border: 5px solid #1918188e; /* 灰色邊框 */
+  border-radius: 5px; /* 圓角 */
+  padding: 5px; /* 內邊距 */
+  box-sizing: border-box; /* 讓內邊距和邊框不會改變元素的寬度 */
+  margin: 0 auto; /* 水平居中 */
+  text-align: center; /* 文字內容置中 */
+}
+
+/* 以下是*/ /*媒體按鈕樣式 */
 #media {
   display: flex;
   justify-content: flex-end; /* 按钮右对齐 */
@@ -351,26 +381,226 @@ hr {
   padding: 5px 10px; /* 按钮内边距 */
   border: 1px solid #ccc; /* 边框 */
   border-radius: 5px; /* 圆角 */
-  background-color: #f0f0f0; /* 背景颜色 */
+
+  height: 40px; /* 设置按钮高度 */
 }
 
 .item i {
   margin-right: 5px; /* 图标与文字之间的间距 */
 }
 
-canvas {
-  position: absolute;
+/*圖片庫 img大小*/
+/* Style for the gallery button */
+#galleryButton {
+  width: 27px;
+  height: 27px;
+  margin-left: 50px; /* Left margin */
 }
 
-#videoContainer {
-  background-color: gray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
+/* Style for the images in the gallery */
+.gallery img {
+  width: 100px; /* Sets the width of the images */
+  height: auto; /* Maintains the aspect ratio */
+  margin: 5px; /* Adds margin around the images */
+  display: inline-block; /* Ensures images are displayed inline */
 }
 
-#output {
+/*彈跳視窗*/
+.gallery {
+  position: fixed;
+  left: 10;
+  margin-top: -50px;
+  background-color: white;
+  display: none;
+}
+
+/*彈跳視窗按鈕*/
+.gallery button {
   display: block;
+  margin-bottom: 10px;
+  width: auto;
+  padding: 5px 10px;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.gallery {
+  position: fixed;
+  right: 20px;
+  top: 180px;
+  background-color: white;
+  display: none;
+  max-width: 150px; /* Set maximum width to ensure it doesn't become too wide */
+  max-height: 80vh; /* Set maximum height to 80% of viewport height */
+  overflow: auto; /* Enable scrolling if needed */
+}
+
+/* 調整輸入框樣式 */
+input[type="number"] {
+  width: 70px;
+  border: 1px solid #e9e8e8; /* 灰色邊框 */
+  border-radius: 5px; /* 圓角 */
+  padding: 5px; /* 內邊距 */
+  box-sizing: border-box; /* 讓內邊距和邊框不會改變元素的寬度 */
+  outline: none; /* 移除默認的焦點邊框 */
+  margin: 0 auto; /* 水平居中 */
+  text-align: center; /* 文字內容置中 */
+}
+
+.countdown-container {
+  display: flex;
+  align-items: center;
+  margin-left: -680px;
+}
+
+/* 時間字體 */
+.countdown-container span {
+  margin-right: 10px;
+  margin-top: 25px;
+  margin-left: -370px; /* Align more to the left */
+  color: rgb(255, 255, 255); /* 设置白色文字颜色 */
+  font-size: 25px; /* Increase font size */
+}
+
+/* 倒數 */
+.countdown-timer {
+  margin-right: 30px;
+  margin-top: 15px;
+  margin-left: -10px; /* Align more to the left */
+  color: rgb(255, 255, 255); /* 设置白色文字颜色 */
+  padding: 10px 10px 0px 10px; /* 调整内边距，上内边距增大，底内边距减小 */
+  border-radius: 5px; /* 添加圆角 */
+  border: none; /* 移除边框 */
+  font-size: 25px; /* Increase font size */
+}
+
+/*//////////////////////////////////////////////////////////////////////////////////////*/
+/*以下語音導覽*/
+.gif-container {
+  position: absolute;
+  top: 80%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+}
+.gif-container .gif-image {
+  width: 150px; /* 设置 GIF 图像的宽度 */
+  height: auto; /* 根据宽度等比例调整高度 */
+  filter: brightness(0) invert(1);
+}
+
+.text-box {
+  position: absolute;
+  top: 80%; /* 根据需要调整位置 */
+  left: 25%; /* 根据需要调整位置 */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.7
+  ); /* 背景颜色，这里设置为半透明白色 */
+  padding: 10px; /* 文本框内边距 */
+  border-radius: 5px; /* 圆角 */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* 阴影效果 */
+}
+
+.text-box p {
+  margin: 0; /* 清除段落的默认边距 */
+  font-size: 14px; /* 文本字体大小 */
+  color: #333; /* 文本颜色 */
+  white-space: pre-line; /* 处理 \n 换行符 */
+}
+/*以上語音導覽*/
+
+/*gif圖*/
+.gif-container {
+  position: absolute;
+  top: 80%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+}
+.gif-container .gif-image {
+  width: 150px; /* 设置 GIF 图像的宽度 */
+  height: auto; /* 根据宽度等比例调整高度 */
+  filter: brightness(0) invert(1);
+}
+
+.gif-container {
+  position: absolute;
+  top: 80%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+}
+
+.gif-container img {
+  width: 150px; /* Set the width of the GIF image */
+  height: auto; /* Maintain aspect ratio based on width */
+  filter: brightness(0) invert(1); /* Apply filter */
+}
+
+/*以上語音導覽*/
+
+/*//////////////////////////////////////////////////////////////////////////////////////*/
+
+/* 定义下拉菜单的容器 */
+.dropdown.guidebpm {
+  position: relative; /* 相对定位，用于下拉菜单的定位 */
+  display: inline-block; /* 行內元素，使其可以在一行中顯示 */
+}
+
+.guidebpm-content {
+  display: none; /* 下拉菜單內容預設隱藏 */
+  position: absolute; /* 絕對定位，使下拉菜單能夠精確定位 */
+  background-color: #f9f9f9; /* 下拉菜單內容背景顏色 */
+  min-width: 100px; /* 下拉菜單最小寬度 */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* 下拉菜單陰影效果 */
+  z-index: 1; /* 控制下拉菜單的疊加順序，使其顯示在其他元素之上 */
+  margin-left: -120pt;
+}
+
+.guidebpm-content a {
+  color: black; /* 下拉菜單內連結文字顏色 */
+  padding: 12px 16px; /* 內容連結的內邊距 */
+  text-decoration: none; /* 去除連結下劃線 */
+  display: block; /* 使連結佔據整個區域 */
+}
+
+.guidebpm-content a:hover {
+  background-color: #f1f1f1; /* 連結懸停時的背景顏色變化 */
+}
+
+.show {
+  display: block; /* 用於顯示下拉菜單內容 */
+}
+
+/*語音導覽bpm選單*/
+.dropdown.bpm {
+  position: relative; /* 相对定位，用于下拉菜单的定位 */
+  display: inline-block; /* 行內元素，使其可以在一行中顯示 */
+}
+
+.bpm-content {
+  display: none; /* 下拉菜單內容預設隱藏 */
+  position: absolute; /* 絕對定位，使下拉菜單能夠精確定位 */
+  background-color: #f9f9f9; /* 下拉菜單內容背景顏色 */
+  min-width: 160px; /* 下拉菜單最小寬度 */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* 下拉菜單陰影效果 */
+  z-index: 1; /* 控制下拉菜單的疊加順序，使其顯示在其他元素之上 */
+  margin-left: -200pt;
+}
+
+.bpm-content a {
+  color: black; /* 下拉菜單內連結文字顏色 */
+  padding: 12px 16px; /* 內容連結的內邊距 */
+  text-decoration: none; /* 去除連結下劃線 */
+  display: block; /* 使連結佔據整個區域 */
+}
+
+.bpm-content a:hover {
+  background-color: #f1f1f1; /* 連結懸停時的背景顏色變化 */
+}
+
+.show {
+  display: block; /* 用於顯示下拉菜單內容 */
+  margin-top: 3px;
 }
