@@ -2,6 +2,10 @@ body {
   font-family: "Arial", sans-serif;
   padding: 0;
   box-sizing: border-box;
+  background-image: url("background.jpg");
+  background-position: center 160px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /*導覽列*/
