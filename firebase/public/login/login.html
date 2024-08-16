@@ -1,0 +1,56 @@
+<html>
+
+<head>
+  <title>Firebase Login</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css" />
+</head>
+
+<body>
+
+  <div id="login_div" class="main-div">
+    <h3>LeisurePace Web login</h3>
+    <input type="email" placeholder="Email..." id="email_field" />
+    <input type="password" placeholder="Password..." id="password_field" />
+    <a id="forget" href="./forget.html">忘記你的帳戶或密碼</a>
+    <button onclick="login()">登入帳戶</button>
+    <div class="division-line">
+      <hr id="left-line">
+      <span>OR</span>
+      <hr id="right-line">
+    </div>
+
+    <div class="other-login">
+      <div id="img">
+        <img src="圖片/fb.png"alt="other_login" onclick="fb_login()">
+      </div>
+      <div id="img"><img src="圖片/g.png"alt="other_login" onclick="google_login()">
+      </div>
+      <div id="img"><img src="圖片/phone.png"alt="other_login" onclick="phone_login()">
+      </div>
+    </div>
+    <a href="register.html" id="create-account">尚未註冊？立即建立您的帳戶</a>
+  </div>
+
+  <div id="recaptcha-container"></div>
+
+  <div id="user_div" class="loggedin-div">
+    <h3>Welcome User</h3>
+    <p id="user_para">Welcome to Firebase web login Example. You're currently logged in.</p>
+    <button onclick="logout()">Logout</button>
+    <a href="../index.html" id="Go to home page">前往首頁</a>
+
+
+  </div>
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase.js"></script>
+  <script src="./js/firebase.js"></script>
+  <script src="./js/index.js"></script>
+  
+
+  
+</body>
+
+</html>
