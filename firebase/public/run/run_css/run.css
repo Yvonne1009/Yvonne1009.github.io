@@ -410,36 +410,32 @@ input[type="number"] {
   display: inline-block; /* Ensures images are displayed inline */
 }
 
-/*彈跳視窗*/
-.gallery {
-  position: fixed;
-  left: 10;
-  margin-top: -50px;
-  background-color: white;
-  display: none;
-}
 
-/*彈跳視窗按鈕*/
+/* 弹跳窗口按钮的样式 */
 .gallery button {
   display: block;
   margin-bottom: 10px;
   width: auto;
   padding: 5px 10px;
   border: none;
-  background-color: #fff;
   cursor: pointer;
+  text-align: right; /* 确保按钮内的文本靠右对齐 */
 }
 
+/* 弹跳窗口的样式 */
 .gallery {
   position: fixed;
   right: 20px;
   top: 180px;
-  background-color: white;
-  display: none;
-  max-width: 150px; /* Set maximum width to ensure it doesn't become too wide */
-  max-height: 80vh; /* Set maximum height to 80% of viewport height */
-  overflow: auto; /* Enable scrolling if needed */
+  display: flex; /* 使用 flex 布局 */
+  flex-direction: row; /* 按钮横排 */
+  flex-wrap: wrap; /* 如果按钮超出容器宽度，换行显示 */
+  max-width: 200px; /* 最大宽度 */
+  max-height: 80vh; /* 最大高度 */
+  overflow: auto; /* 超出时滚动 */
+  text-align: right; /* 确保弹跳窗口内的内容靠右对齐 */
 }
+
 
 /* 調整輸入框樣式 */
 input[type="number"] {
@@ -588,7 +584,7 @@ input[type="number"] {
   display: none; /* 下拉菜單內容預設隱藏 */
   position: absolute; /* 絕對定位，使下拉菜單能夠精確定位 */
   background-color: #f9f9f9; /* 下拉菜單內容背景顏色 */
-  min-width: 160px; /* 下拉菜單最小寬度 */
+  min-width: 100px; /* 下拉菜單最小寬度 */
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* 下拉菜單陰影效果 */
   z-index: 1; /* 控制下拉菜單的疊加順序，使其顯示在其他元素之上 */
   margin-left: -200pt;
@@ -607,5 +603,5 @@ input[type="number"] {
 
 .show {
   display: block; /* 用於顯示下拉菜單內容 */
-  margin-top: 3px;
+  margin-top: 6px;
 }

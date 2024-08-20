@@ -410,37 +410,30 @@ input[type="number"] {
   display: inline-block; /* Ensures images are displayed inline */
 }
 
-/*彈跳視窗*/
-.gallery {
-  position: fixed;
-  left: 10;
-  margin-top: -50px;
-  background-color: white;
-  display: none;
-}
-
-/*彈跳視窗按鈕*/
+/* 弹跳窗口按钮的样式 */
 .gallery button {
   display: block;
   margin-bottom: 10px;
   width: auto;
   padding: 5px 10px;
   border: none;
-  background-color: #fff;
   cursor: pointer;
+  text-align: right; /* 确保按钮内的文本靠右对齐 */
 }
 
+/* 弹跳窗口的样式 */
 .gallery {
   position: fixed;
   right: 20px;
   top: 180px;
-  background-color: white;
-  display: none;
-  max-width: 150px; /* Set maximum width to ensure it doesn't become too wide */
-  max-height: 80vh; /* Set maximum height to 80% of viewport height */
-  overflow: auto; /* Enable scrolling if needed */
+  display: flex; /* 使用 flex 布局 */
+  flex-direction: row; /* 按钮横排 */
+  flex-wrap: wrap; /* 如果按钮超出容器宽度，换行显示 */
+  max-width: 200px; /* 最大宽度 */
+  max-height: vh; /* 最大高度 */
+  overflow: auto; /* 超出时滚动 */
+  text-align: right; /* 确保弹跳窗口内的内容靠右对齐 */
 }
-
 /* 調整輸入框樣式 */
 input[type="number"] {
   width: 70px;
@@ -498,6 +491,7 @@ input[type="number"] {
   position: absolute;
   bottom: 10%; /* 根据需要调整位置 */
   left: 25%;
+  height: auto; /* 根据宽度等比例调整高度 */
   background-color: rgba(
     255,
     255,
@@ -511,7 +505,7 @@ input[type="number"] {
 
 .text-box p {
   margin: 0; /* 清除段落的默认边距 */
-  font-size: 14px; /* 文本字体大小 */
+  font-size: 18px; /* 文本字体大小 */
   color: #333; /* 文本颜色 */
   white-space: pre-line; /* 处理 \n 换行符 */
 }
@@ -576,6 +570,8 @@ input[type="number"] {
 
 .show {
   display: block; /* 用於顯示下拉菜單內容 */
+    margin-top: 6px;
+
 }
 
 /*語音導覽bpm選單*/
@@ -607,5 +603,5 @@ input[type="number"] {
 
 .show {
   display: block; /* 用於顯示下拉菜單內容 */
-  margin-top: 3px;
+  margin-top: 6px;
 }
