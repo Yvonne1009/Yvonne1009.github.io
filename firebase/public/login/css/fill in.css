@@ -16,7 +16,7 @@ body {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-image: url("../image/bg2.png"); /* 設定背景圖片 */
+  background-image: url("../圖片/bg2.png"); /* 設定背景圖片 */
 }
 
 #healthForm {
