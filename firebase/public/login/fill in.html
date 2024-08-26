@@ -10,6 +10,7 @@
   <body class="page6">
     <form id="healthForm">
       <div class="column">
+        <!-- 表单字段 -->
         <label for="name">姓名:</label>
         <input type="text" id="name" name="name" required />
 
@@ -34,45 +35,34 @@
           <option value="occasionally">一週 2 - 3 次</option>
           <option value="occasionally">一週 4 - 6 次</option>
         </select>
-
-        <label>運動目的:</label>
-        <label
-          ><input type="checkbox" name="exercisePurpose" value="stayhealthy" />
-          保持健康</label
-        >
-        <label
-          ><input
-            type="checkbox"
-            name="exercisePurpose"
-            value="Relievestress"
-          />
-          舒壓</label
-        >
-        <label
-          ><input type="checkbox" name="exercisePurpose" value="Cellulite" />
-          消脂</label
-        >
-
-        <label
-          ><input type="checkbox" name="exercisePurpose" value="Buildmuscle" />
-          增肌</label
-        >
-
-        <label
-          ><input type="checkbox" name="exercisePurpose" value="other" />
-          其他</label
-        >
       </div>
       <button type="submit">提交</button>
     </form>
 
+    <!-- 引入 Firebase App SDK（必须） -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+
+    <!-- 引入 Firestore SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+
+    <!-- 初始化 Firebase -->
     <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCkMa2jz6kDse8j3BSsXYKru8LYA_Sb2M0",
+        authDomain: "leisurepace-a3d51.firebaseapp.com",
+        projectId: "leisurepace-a3d51",
+        storageBucket: "leisurepace-a3d51.appspot.com",
+        messagingSenderId: "955257567601",
+        appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+      };
+
       // 初始化 Firebase 应用
       const app = firebase.initializeApp(firebaseConfig);
-
       // 初始化 Firestore 实例
       const db = firebase.firestore(app);
+    </script>
 
+    <script>
       // 表单提交处理代码
       const healthForm = document.getElementById("healthForm");
 
@@ -88,8 +78,8 @@
 
         console.log("表单数据:", dataObject);
 
-        // 将表单数据保存到 Firestore 的 'users' 集合中
-        db.collection("users")
+        // 将表单数据保存到 Firestore 的 'users_id' 集合中
+        db.collection("users_id")
           .add(dataObject)
           .then((docRef) => {
             console.log("文档写入 ID: ", docRef.id);
@@ -101,28 +91,8 @@
           });
       });
     </script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+
     <!-- Import the basic jquery lib. -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- Import the associated firebase lib which the order is fixed. -->
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
-    ></script>
-    <!-- Set the firebsae config and initialize it. -->
-    <script defer src="../js/init-firebase.js"></script>
   </body>
 </html>
