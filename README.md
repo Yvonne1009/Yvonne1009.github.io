@@ -15,6 +15,7 @@ https://yvonne1009.github.io/firebase/public/logo.html
 4. 激活虚拟环境 : myenv\Scripts\activate
 5. 在虚拟环境中安装包 : pip install package_name
 6. 退出虚拟环境 : deactivate
+
 '''
 ##在虛擬環境裡安裝套件
 1.pip install numpy
