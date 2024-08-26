@@ -17,10 +17,10 @@ https://yvonne1009.github.io/firebase/public/logo.html
 6. 退出虚拟环境 : deactivate
 '''
 ##在虛擬環境裡安裝套件
-pip install numpy
-pip install scikit-learn
-pip install jupyter notebook
-pip install opencv-python
-pip install mediapipe
-pip install tensorflow
-pip install matplotlib
+1.pip install numpy
+2.pip install scikit-learn
+3.pip install jupyter notebook
+4.pip install opencv-python
+5.pip install mediapipe
+6.pip install tensorflow
+7.pip install matplotlib
