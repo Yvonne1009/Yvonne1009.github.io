@@ -1,4 +1,6 @@
 // del_acc.js
+//對帳號的引用
+const auth = firebase.auth();
 
 document.getElementById('confirm_delete_btn').addEventListener('click', function() {
     const user = auth.currentUser; // Get the current user
