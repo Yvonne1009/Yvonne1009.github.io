@@ -13,5 +13,3 @@ firebase.initializeApp(firebaseConfig);
 
 // 获取对数据库的引用
 const database = firebase.database();
-//對帳號的引用
-const auth = firebase.auth();
