@@ -519,3 +519,49 @@ button {
   border-top: 1px solid #eceff8;
   padding: 13px 0;
 }
+/*驗證按鈕*/
+.confirm_btn {
+  background-color: #ff5722;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/*刪除帳號按鈕和彈窗*/
+
+.btn-primary,
+.btn-default,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active{
+  background-color: #ff5722;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: none;
+    outline: none;
+}
+
+.modal-content {
+  background-color: white; 
+  height: 300px;
+}
+.modal-dialog {
+  width: 800px; /* 可以根据需要调整宽度 */
+  height: 500px;
+  max-width: none; /* 取消最大宽度限制 */
+  max-height: none;
+}
+.modal-footer {
+  margin-top: auto;
+}
+
+#password_field {
+  height: 40px;
+}
