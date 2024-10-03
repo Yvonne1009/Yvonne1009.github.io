@@ -19,6 +19,37 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
+    <!-- Firebase 初始化 -->
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
+        authDomain: "leisurepace-a3d51.firebaseapp.com",
+        databaseURL: "https://leisurepace-a3d51-default-rtdb.firebaseio.com",
+        projectId: "leisurepace-a3d51",
+        storageBucket: "leisurepace-a3d51.appspot.com",
+        messagingSenderId: "955257567601",
+        appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+        measurementId: "G-MHZ967Y676"
+      };
+      const app = firebase.initializeApp(firebaseConfig);
+    </script>
+    <!-- 引入你的 auth.js 文件 -->
+    <script type="module">
+        import { Auth } from './auth.js';  // 引入你的 Auth 類別
+        const auth = new Auth(app);  // 使用 Firebase app 初始化
+        // 監聽使用者登入狀態變化
+        auth.onChange(
+            (user) => {
+                console.log("User is logged in:", user.email);
+                // 執行登入後的操作
+            },
+            () => {
+                console.log("No user is logged in");
+                // 未登入，跳轉到登入頁面
+                window.location.href = "login.html";
+            }
+        );
+    </script>
   </head>
   <body>
     <!-- menu 開始 -->
@@ -96,6 +127,9 @@
       </button>
       <button class="tablinks" onclick="openCity(event, 'achievement')">
         成就
+      </button>
+      <button class="tablinks" onclick="openCity(event, 'rank')">
+        排行榜
       </button>
       <button class="tablinks" onclick="openCity(event, 'service')">
         客服
@@ -195,161 +229,64 @@
     </div>
 
     <div id="daily" class="tabcontent">
-      <h3>每日登入</h3>
-      <p>Paris is the capital of France.</p>
-       <!-- footer 開始 -->
-    <footer id="footer" class="footer-area">
-      <div class="footer-widget pt-80">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-8">
-              <div class="footer-logo mt-50">
-                <a href="#">
-                  <img src="image/logo.png" alt="Logo" />
-                </a>
-
-                <ul class="footer-social mt-20">
-                  <li>
-                    <a href="#"><i class="lni-facebook-filled"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="lni-twitter-original"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="lni-google"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="lni-instagram"></i></a>
-                  </li>
-                </ul>
-              </div>
-              <!-- footer logo -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="footer-link mt-45">
-                <div class="f-title">
-                  <h4 class="title">關於LeisurePace</h4>
-                </div>
-                <ul class="mt-15">
-                  <li><a href="about.html">LeisurePace</a></li>
-                  <li><a href="about.html">超慢跑介紹</a></li>
-                  <li><a href="about.html">製作團隊</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="footer-link mt-45">
-                <ul class="mt-15">
-                  <li><a href="./run/run180.html">超慢跑</a></li>
-                  <li><a href="analyze.html">分析</a></li>
-                  <li><a href="task.html">任務</a></li>
-                  <li><a href="bgstore.html">背景介紹</a></li>
-                  <li><a href="test.html">設定</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <!-- row -->
-        </div>
-        <!-- container -->
+      <div class="container1">
+      <h1>每日登入</h1>
+        <p id="loginStatus"></p>
+        <button id="loginBtn">每日登入</button>
       </div>
-      <!-- footer widget -->
-      <div class="copyright-area">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="copyright text-center">
-                <p>&copy; LeisurePace</p>
-              </div>
-              <!-- copyright -->
-            </div>
-          </div>
-          <!-- row -->
-        </div>
-        <!-- container -->
-      </div>
-      <!-- copyright-area -->
-    </footer>
-    <!-- footer 結束 -->
     </div>
 
     <div id="achievement" class="tabcontent">
-      <h3>成就</h3>
-      <p>Tokyo is the capital of Japan.</p>
-       <!-- footer 開始 -->
-    <footer id="footer" class="footer-area">
-      <div class="footer-widget pt-80">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-8">
-              <div class="footer-logo mt-50">
-                <a href="#">
-                  <img src="image/logo.png" alt="Logo" />
-                </a>
+      <div class="container1">
+      <h1>成就</h1>
+      <div class="achievement-grid">
+        <div class="achievement-box">
+          <h3>達成每日2000ml喝水量</h3>
+          <p>狀態：未達成</p>
+        </div>
+        <div class="achievement-box">
+          <h3>達成每日紀錄體重</h3>
+          <p>狀態：未達成</p>
+        </div>
+        <div class="achievement-box">
+          <h3>達成每日紀錄步數</h3>
+          <p>狀態：未達成</p>
+        </div>
+        <div class="achievement-box">
+          <h3>達成連續一週紀錄喝水量</h3>
+          <p>狀態：未達成</p>
+        </div>
+        <div class="achievement-box">
+          <h3>達成連續一週紀錄體重</h3>
+          <p>狀態：未達成</p>
+        </div>
+        <div class="achievement-box">
+          <h3>達成連續一週紀錄步數</h3>
+          <p>狀態：未達成</p>
+        </div>
+      </div>
+    </div>
+    </div>
 
-                <ul class="footer-social mt-20">
-                  <li>
-                    <a href="#"><i class="lni-facebook-filled"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="lni-twitter-original"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="lni-google"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="lni-instagram"></i></a>
-                  </li>
-                </ul>
-              </div>
-              <!-- footer logo -->
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="footer-link mt-45">
-                <div class="f-title">
-                  <h4 class="title">關於LeisurePace</h4>
-                </div>
-                <ul class="mt-15">
-                  <li><a href="about.html">LeisurePace</a></li>
-                  <li><a href="about.html">超慢跑介紹</a></li>
-                  <li><a href="about.html">製作團隊</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="footer-link mt-45">
-                <ul class="mt-15">
-                  <li><a href="./run/run180.html">超慢跑</a></li>
-                  <li><a href="analyze.html">分析</a></li>
-                  <li><a href="task.html">任務</a></li>
-                  <li><a href="bgstore.html">背景介紹</a></li>
-                  <li><a href="test.html">設定</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <!-- row -->
-        </div>
-        <!-- container -->
-      </div>
-      <!-- footer widget -->
-      <div class="copyright-area">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="copyright text-center">
-                <p>&copy; LeisurePace</p>
-              </div>
-              <!-- copyright -->
-            </div>
-          </div>
-          <!-- row -->
-        </div>
-        <!-- container -->
-      </div>
-      <!-- copyright-area -->
-    </footer>
-    <!-- footer 結束 -->
+    <div id="rank" class="tabcontent">
+      <div class="container1">
+      <h1>排行榜</h1>
+      
+      <table id="leaderboard">
+          <thead>
+              <tr>
+                  <th>排名</th>
+                  <th>使用者名稱</th>
+                  <th>步數</th>
+                  <th>簽到次數</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- 排行榜資料會動態插入 -->
+          </tbody>
+      </table>
+    </div>
+  </div>
     </div>
 
     <div id="service" class="tabcontent">
@@ -494,7 +431,7 @@
       src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
     ></script>
     <!-- Set the firebsae config and initialize it. -->
-    <script defer src="./js/init-firebase.js"></script>
+    <script defer src="init-firebase.js"></script>
     <script src="js/test.js"></script>
   </body>
 </html>
