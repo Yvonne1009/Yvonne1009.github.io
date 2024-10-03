@@ -22,7 +22,7 @@ auth.onAuthStateChanged(async (user) => {
       //}
     }
   } else {
-    window.location.href = "login.html";
+    window.location.href = "login/login.html";
   }
 });
 
