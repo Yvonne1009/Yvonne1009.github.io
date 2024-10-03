@@ -43,20 +43,20 @@
             const userData = doc.data();
             // 更新表單中的值
             document.getElementById('username').value = userData.username || user.email;
-            document.getElementById('name').value = userData.name || "";
+            //document.getElementById('name').value = userData.name || "";
             document.getElementById('email').value = user.email; // 使用者的 Email 來自 Firebase Auth
-            document.getElementById('phone').value = userData.phone || "";
-            document.getElementById('birthday').value = userData.birthday || "";
+            //document.getElementById('phone').value = userData.phone || "";
+            //document.getElementById('birthday').value = userData.birthday || "";
             // 更新性別
-            if (userData.gender === "male") {
-              document.getElementById('male').checked = true;
-            } else if (userData.gender === "female") {
-              document.getElementById('female').checked = true;
-            } else {
-              document.getElementById('other').checked = true;
-            }
-          } else {
-            console.log("No user data found");
+            //if (userData.gender === "male") {
+            //  document.getElementById('male').checked = true;
+            //} else if (userData.gender === "female") {
+            //  document.getElementById('female').checked = true;
+            //} else {
+            //  document.getElementById('other').checked = true;
+            //}
+          //} else {
+            //console.log("No user data found");
           }
         } else {
           // 沒有登入，跳轉到登入頁面
