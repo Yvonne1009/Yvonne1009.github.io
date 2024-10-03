@@ -17,39 +17,7 @@
     <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
-    <!-- Firebase 初始化 -->
-    <script type="module">
-      // 獲取使用者資料並顯示在表單中
-      auth.onAuthStateChanged(async (user) => {
-        if (user) {
-          const userRef = db.collection("users").doc(user.uid);
-          const doc = await userRef.get();
-          if (doc.exists) {
-            const userData = doc.data();
-            // 更新表單中的值
-            document.getElementById('username').value = userData.username || user.email;
-            //document.getElementById('name').value = userData.name || "";
-            document.getElementById('email').value = user.email; // 使用者的 Email 來自 Firebase Auth
-            //document.getElementById('phone').value = userData.phone || "";
-            //document.getElementById('birthday').value = userData.birthday || "";
-            // 更新性別
-            //if (userData.gender === "male") {
-            //  document.getElementById('male').checked = true;
-            //} else if (userData.gender === "female") {
-            //  document.getElementById('female').checked = true;
-            //} else {
-            //  document.getElementById('other').checked = true;
-            //}
-          //} else {
-            //console.log("No user data found");
-          }
-        } else {
-          // 沒有登入，跳轉到登入頁面
-          window.location.href = "login.html";
-        }
-      });
-    </script>
-    </script>  
+     
   </head>
 
   
@@ -250,7 +218,7 @@
     <!-- Import the associated firebase lib which the order is fixed. -->
    
     <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
-    <script defer src="./js/init-firebase.js"></script>
-    <script src="js/personal.js"></script>
+    <script type="module" src="init-firebase.js"></script>
+    <script type="module" src="js/personal.js"></script>
   </body>
 </html>
