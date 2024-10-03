@@ -58,3 +58,25 @@ auth
   .catch((error) => {
     console.error("登入失敗: ", error);
   });
+  
+  //提交表單和更新資料
+  document.getElementById('profileForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+  
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const birthday = document.getElementById('birthday').value;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+  
+    try {
+      await db.collection('users').doc(auth.currentUser.uid).set({
+        name,
+        phone,
+        birthday,
+        gender
+      }, { merge: true });
+      alert("個人資料已更新！");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  });
