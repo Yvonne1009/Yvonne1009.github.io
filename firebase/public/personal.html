@@ -18,21 +18,6 @@
     <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
     <!-- Firebase 初始化 -->
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
-        authDomain: "leisurepace-a3d51.firebaseapp.com",
-        databaseURL: "https://leisurepace-a3d51-default-rtdb.firebaseio.com",
-        projectId: "leisurepace-a3d51",
-        storageBucket: "leisurepace-a3d51.appspot.com",
-        messagingSenderId: "955257567601",
-        appId: "1:955257567601:web:2e06661d84707065fe9ed0",
-        measurementId: "G-MHZ967Y676"
-      };
-      const app = firebase.initializeApp(firebaseConfig);
-      const auth = firebase.auth();
-      const db = firebase.firestore();
-    </script>
     <script type="module">
       // 獲取使用者資料並顯示在表單中
       auth.onAuthStateChanged(async (user) => {
