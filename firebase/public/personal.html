@@ -9,13 +9,65 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+      rel="stylesheet"/>
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
     <title>LeisurePace_個人資料</title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/personal.css" />
+    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
+    <!-- Firebase 初始化 -->
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
+        authDomain: "leisurepace-a3d51.firebaseapp.com",
+        databaseURL: "https://leisurepace-a3d51-default-rtdb.firebaseio.com",
+        projectId: "leisurepace-a3d51",
+        storageBucket: "leisurepace-a3d51.appspot.com",
+        messagingSenderId: "955257567601",
+        appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+        measurementId: "G-MHZ967Y676"
+      };
+      const app = firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+    </script>
+    <script type="module">
+      // 獲取使用者資料並顯示在表單中
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          const userRef = db.collection("users").doc(user.uid);
+          const doc = await userRef.get();
+          if (doc.exists) {
+            const userData = doc.data();
+            // 更新表單中的值
+            document.getElementById('username').value = userData.username || user.email;
+            document.getElementById('name').value = userData.name || "";
+            document.getElementById('email').value = user.email; // 使用者的 Email 來自 Firebase Auth
+            document.getElementById('phone').value = userData.phone || "";
+            document.getElementById('birthday').value = userData.birthday || "";
+            // 更新性別
+            if (userData.gender === "male") {
+              document.getElementById('male').checked = true;
+            } else if (userData.gender === "female") {
+              document.getElementById('female').checked = true;
+            } else {
+              document.getElementById('other').checked = true;
+            }
+          } else {
+            console.log("No user data found");
+          }
+        } else {
+          // 沒有登入，跳轉到登入頁面
+          window.location.href = "login.html";
+        }
+      });
+    </script>
+    </script>  
   </head>
+
+  
   <body>
     <!-- menu 開始 -->
     <header id="masthead" class="site-header" role="banner">
@@ -64,7 +116,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="bgstore.html">背景介紹</a></li>
                   <li><a href="test.html">設定</a></li>
-                  <li><a href="./login/login.html">登出</a></li>
+                  <li><a href="login.html">登出</a></li>
                 </ul>
               </li>
             </ul>
@@ -85,25 +137,29 @@
       <form id="profileForm">
         <div class="form-group">
           <label for="username">使用者帳號</label>
-          <input type="text" id="username" value="yvonne803" disabled />
+          <input type="text" id="username" disabled />
         </div>
         <div class="form-group">
           <label for="name">姓名</label>
-          <input type="text" id="name" value="Yvonne" />
+          <input type="text" id="name" />
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" value="ch*******@gmail.com" />
-          <a href="#">變更</a>
+          <input type="email" id="email"/>
+          <a href="em_chag.html">變更</a>
+        </div>
+        <div class="form-group">
+          <label for="password">密碼</label>
+          <a href="pwd_chag.html">變更</a>
         </div>
         <div class="form-group">
           <label for="phone">手機號碼</label>
-          <input type="text" id="phone" value="*********80" />
-          <a href="#">變更</a>
+          <input type="text" id="phone"/>
+          <a href="ph_chag.html">變更</a>
         </div>
         <div class="form-group">
           <label>性別</label>
-          <input type="radio" id="male" name="gender" value="male" />
+          <input type="radio" id="male" name="gender"/>
           <label for="male">男性</label>
           <input
             type="radio"
@@ -207,23 +263,8 @@
     <!-- Import the basic jquery lib. -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Import the associated firebase lib which the order is fixed. -->
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
-    ></script>
-    <!-- Set the firebsae config and initialize it. -->
+   
+    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
     <script defer src="./js/init-firebase.js"></script>
     <script src="js/personal.js"></script>
   </body>
