@@ -3,27 +3,28 @@ import { auth, db } from './init-firebase.js';  // 從 init-firebase.js 中引�
 
 auth.onAuthStateChanged(async (user) => {
   if (user) {
-    // 從 Firebase Authentication 取得基本資料
     const userEmail = user.email;
 
-    // 從 Firestore 取得更多自定義的個人資料
     const userRef = db.collection("users").doc(user.uid);
     const doc = await userRef.get();
     if (doc.exists) {
       const userData = doc.data();
-      //document.getElementById('username').value = userData.username || user.email;
-      //document.getElementById('name').value = userData.name || "";
-      document.getElementById('email').value = user.email;
-      //document.getElementById('phone').value = userData.phone || "";
-      //document.getElementById('birthday').value = userData.birthday || "";
 
-      //if (userData.gender === "male") {
-      //  document.getElementById('male').checked = true;
-      //} else if (userData.gender === "female") {
-      //  document.getElementById('female').checked = true;
-      //} else {
-      //  document.getElementById('other').checked = true;
-      //}
+      // 檢查 username 是否存在，若不存在提示使用者
+      if (!userData.username) {
+        alert("請補充使用者名稱！");
+      }
+      document.getElementById('username').value = userData.username || userEmail;
+
+      // 檢查 name 是否存在，若不存在提示使用者
+      if (!userData.name) {
+        alert("請補充姓名！");
+      }
+      document.getElementById('name').value = userData.name || "";
+
+      document.getElementById('email').value = userEmail;
+    } else {
+      alert("無法找到使用者資料");
     }
   } else {
     window.location.href = "login.html";
