@@ -122,7 +122,8 @@ function logout() {
     .then(function () {
       // Sign-out successful.
       alert("You have successfully logged out.");
-      window.location.href = "../../index1.html"; // 導向到 index1.html
+      window.location.href =
+        "https://yvonne1009.github.io/firebase/public/index1.html"; // 導向到特定的網頁
     })
     .catch(function (error) {
       // An error happened.
