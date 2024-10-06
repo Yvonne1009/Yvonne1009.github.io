@@ -25,7 +25,7 @@ auth.onAuthStateChanged(async (user) => {
       window.location.href = "login.html";  // 按下「確定」後跳轉
     }
   } else {
-    window.location.href = "public/login/login.html";
+    window.location.href = "login/login.html";
   }
 });
 
