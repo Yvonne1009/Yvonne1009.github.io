@@ -3,6 +3,10 @@ import { auth, db } from './init-firebase.js';  // 從 init-firebase.js 中引�
 
 auth.onAuthStateChanged(async (user) => {
   if (user) {
+    // 從 Firebase Authentication 取得基本資料
+    const userEmail = user.email;
+
+    // 從 Firestore 取得更多自定義的個人資料
     const userRef = db.collection("users").doc(user.uid);
     const doc = await userRef.get();
     if (doc.exists) {
@@ -22,7 +26,7 @@ auth.onAuthStateChanged(async (user) => {
       //}
     }
   } else {
-    window.location.href = "login/login.html";
+    window.location.href = "login.html";
   }
 });
 
