@@ -122,7 +122,7 @@ function logout() {
     .then(function () {
       // Sign-out successful.
       alert("You have successfully logged out.");
-      window.location.href = "../index1.html"; // 導向到 index1.html
+      window.location.href = "../../index1.html"; // 導向到 index1.html
     })
     .catch(function (error) {
       // An error happened.
