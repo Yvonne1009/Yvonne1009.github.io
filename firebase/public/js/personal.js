@@ -10,24 +10,22 @@ auth.onAuthStateChanged(async (user) => {
     if (doc.exists) {
       const userData = doc.data();
 
-      // 檢查 username 是否存在，若不存在提示使用者
+      // 檢查 username 是否存在，若不存在則提示並跳轉
       if (!userData.username) {
         alert("請補充使用者名稱！");
+        window.location.href = "補充資料頁面.html";  // 按下「確定」後跳轉
       }
+
       document.getElementById('username').value = userData.username || userEmail;
-
-      // 檢查 name 是否存在，若不存在提示使用者
-      if (!userData.name) {
-        alert("請補充姓名！");
-      }
       document.getElementById('name').value = userData.name || "";
-
       document.getElementById('email').value = userEmail;
+      // 其他自定義資料處理邏輯
     } else {
       alert("無法找到使用者資料");
+      window.location.href = "login.html";  // 按下「確定」後跳轉
     }
   } else {
-    window.location.href = "login.html";
+    window.location.href = "public/login/login.html";
   }
 });
 
