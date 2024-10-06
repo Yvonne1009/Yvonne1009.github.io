@@ -123,7 +123,7 @@ function logout() {
       // Sign-out successful.
       alert("You have successfully logged out.");
       window.location.href =
-        "https://yvonne1009.github.io/firebase/public/index1.html"; // 導向到特定的網頁
+        "https://yvonne1009.github.io/firebase/public/index1.html";
     })
     .catch(function (error) {
       // An error happened.
