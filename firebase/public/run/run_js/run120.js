@@ -6,6 +6,20 @@ async function getVideoStream() {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     const videoElement = document.getElementById("video");
     videoElement.srcObject = stream;
+
+    // Process each frame and send to server
+    videoElement.addEventListener("play", () => {
+      const frameInterval = setInterval(() => {
+        sendFrameToServer(videoElement); // Send each frame to server
+      }, 1000 / 30); // Sending frames at 30 fps
+
+      videoElement.addEventListener("pause", () =>
+        clearInterval(frameInterval)
+      );
+      videoElement.addEventListener("ended", () =>
+        clearInterval(frameInterval)
+      );
+    });
   } catch (error) {
     console.error("取得視訊失敗:", error);
   }

@@ -161,6 +161,36 @@
 
       <!-- Video Display -->
       <video id="video" autoplay></video>
+      <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+      <script>
+        const socket = io.connect(
+          "https://yvonne1009.github.io/firebase/public/run/run120.html"
+        ); // Adjust port if necessary
+
+        // Send video frame to server using SocketIO
+        function sendFrameToServer(frame) {
+          // Convert the frame (canvas or video) to a base64-encoded image
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          canvas.width = frame.videoWidth;
+          canvas.height = frame.videoHeight;
+          context.drawImage(frame, 0, 0, canvas.width, canvas.height);
+          const dataURL = canvas.toDataURL("image/jpeg");
+
+          // Send the base64-encoded image to the server
+          socket.emit("video_frame", dataURL);
+        }
+      </script>
+      <script>
+        socket.on("prediction_result", (data) => {
+          const warning = data.warning || "No warning";
+          const steps = data.steps || 0;
+
+          // Update the UI with received data
+          document.getElementById("numberElement").textContent = steps;
+          alert(warning); // Display warning message
+        });
+      </script>
       <br /><br />
     </div>
 
@@ -182,7 +212,6 @@
       defer
       src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
     ></script>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.17.0/full/pyodide.js"></script>
     <script defer src="../js/init-firebase.js"></script>
     <script src="./run_js/SlowJogging_main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
