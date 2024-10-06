@@ -164,39 +164,6 @@
       <br /><br />
     </div>
 
-    <!-- SocketIO 客戶端腳本 -->
-    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
-    <script>
-      const socket = io.connect(
-        "https://yvonne1009.github.io/firebase/public/run/run120.html"
-      );
-
-      // 捕捉視頻流
-      const video = document.getElementById("videoElement");
-      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-        video.srcObject = stream;
-      });
-
-      // 定期發送視頻幀到後端
-      setInterval(() => {
-        const canvas = document.createElement("canvas");
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        // 將視頻幀轉換為 base64
-        const dataURL = canvas.toDataURL("image/jpeg");
-        socket.emit("video_frame", dataURL);
-      }, 1000); // 每秒發送一次視頻幀
-
-      // 接收來自後端的結果
-      socket.on("prediction_result", (data) => {
-        document.getElementById("steps").textContent = data.steps;
-        document.getElementById("warning").textContent = data.warning || "無";
-      });
-    </script>
-
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script
