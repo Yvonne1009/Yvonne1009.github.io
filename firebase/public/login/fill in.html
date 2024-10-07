@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/fill in.css" />
+    <link rel="stylesheet" href="../login/css/fill in.css" />
     <link rel="icon" href="../image/logo.ico" type="image/x-icon" />
     <title>LeisurePace_個人資料填寫</title>
   </head>
   <body class="page6">
     <form id="healthForm">
       <div class="column">
-        <!-- 表单字段 -->
+        <!-- 表單字段 -->
         <label for="name">姓名:</label>
         <input type="text" id="name" name="name" required />
 
         <label for="birthday">生日:</label>
         <input type="date" id="birthday" name="birthday" required />
 
-        <label>性别:</label>
+        <label>性別:</label>
         <label><input type="radio" name="gender" value="male" /> 男性</label>
         <label><input type="radio" name="gender" value="female" /> 女性</label>
         <label><input type="radio" name="gender" value="other" /> 其他</label>
@@ -28,8 +28,8 @@
         <label for="weight">體重 (kg):</label>
         <input type="number" id="weight" name="weight" required />
 
-        <label>運動频率:</label>
-        <select name="exerciseFrequency">
+        <label>運動頻率:</label>
+        <select id="exerciseFrequency" name="exerciseFrequency">
           <option value="daily">每天運動</option>
           <option value="weekly">一週 0 - 1 次</option>
           <option value="occasionally">一週 2 - 3 次</option>
@@ -39,16 +39,19 @@
       <button type="submit">提交</button>
     </form>
 
-    <!-- 引入 Firebase App SDK（必须） -->
+    <!-- 引入 Firebase App SDK（必須） -->
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
 
     <!-- 引入 Firestore SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
 
+    <!-- 引入 Firebase Auth SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+
     <!-- 初始化 Firebase -->
     <script>
       const firebaseConfig = {
-        apiKey: "AIzaSyCkMa2jz6kDse8j3BSsXYKru8LYA_Sb2M0",
+        apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
         authDomain: "leisurepace-a3d51.firebaseapp.com",
         projectId: "leisurepace-a3d51",
         storageBucket: "leisurepace-a3d51.appspot.com",
@@ -56,43 +59,52 @@
         appId: "1:955257567601:web:2e06661d84707065fe9ed0",
       };
 
-      // 初始化 Firebase 应用
-      const app = firebase.initializeApp(firebaseConfig);
-      // 初始化 Firestore 实例
-      const db = firebase.firestore(app);
-    </script>
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      const auth = firebase.auth();
 
-    <script>
-      // 表单提交处理代码
-      const healthForm = document.getElementById("healthForm");
+      // 提交表單
+      document.getElementById("healthForm").addEventListener("submit", (e) => {
+        e.preventDefault(); // 防止表單提交刷新頁面
 
-      healthForm.addEventListener("submit", function (event) {
-        event.preventDefault(); // 阻止表单提交的默认行为
+        // 收集表單資料
+        const name = document.getElementById("name").value;
+        const birthday = document.getElementById("birthday").value;
+        const gender = document.querySelector(
+          'input[name="gender"]:checked'
+        )?.value;
+        const height = document.getElementById("height").value;
+        const weight = document.getElementById("weight").value;
+        const exerciseFrequency =
+          document.getElementById("exerciseFrequency").value;
 
-        const formData = new FormData(healthForm);
-        const dataObject = {};
+        // 獲取當前登入使用者
+        const user = auth.currentUser;
 
-        formData.forEach(function (value, key) {
-          dataObject[key] = value;
-        });
-
-        console.log("表单数据:", dataObject);
-
-        // 将表单数据保存到 Firestore 的 'users_id' 集合中
-        db.collection("users_id")
-          .add(dataObject)
-          .then((docRef) => {
-            console.log("文档写入 ID: ", docRef.id);
-            alert("数据已成功保存！");
-          })
-          .catch((error) => {
-            console.error("添加文档时出错: ", error);
-            alert("保存数据时出错，请重试！");
-          });
+        if (user) {
+          // 將表單資料儲存到 Firestore
+          db.collection("users")
+            .doc(user.uid)
+            .set({
+              name: name,
+              birthday: birthday,
+              gender: gender,
+              height: height,
+              weight: weight,
+              exerciseFrequency: exerciseFrequency,
+            })
+            .then(() => {
+              alert("資料已成功儲存！");
+              window.location.href =
+                "https://yvonne1009.github.io/firebase/public/index.html"; // 可跳轉到成功頁面
+            })
+            .catch((error) => {
+              console.error("Error updating document: ", error);
+            });
+        } else {
+          alert("使用者未登入");
+        }
       });
     </script>
-
-    <!-- Import the basic jquery lib. -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   </body>
 </html>
