@@ -15,12 +15,12 @@
         <input type="text" id="name" name="name" required />
 
         <label for="birthday">生日:</label>
-        <input type="date" id="birthday" name="birthday" required />
+        <input type="date" id="birthDate" name="birthDate" required />
 
         <label>性別:</label>
-        <label><input type="radio" name="gender" value="male" /> 男性</label>
-        <label><input type="radio" name="gender" value="female" /> 女性</label>
-        <label><input type="radio" name="gender" value="other" /> 其他</label>
+        <label><input type="radio" name="gender" value="男" /> 男性</label>
+        <label><input type="radio" name="gender" value="女" /> 女性</label>
+        <label><input type="radio" name="gender" value="其他" /> 其他</label>
 
         <label for="height">身高 (cm):</label>
         <input type="number" id="height" name="height" required />
@@ -30,11 +30,13 @@
 
         <label>運動頻率:</label>
         <select id="exerciseFrequency" name="exerciseFrequency">
-          <option value="daily">每天運動</option>
-          <option value="weekly">一週 0 - 1 次</option>
-          <option value="occasionally">一週 2 - 3 次</option>
-          <option value="occasionally">一週 4 - 6 次</option>
+          <option value="每天運動">每天運動</option>
+          <option value="每周幾次">每周幾次</option>
+          <option value="每周0 - 1次">每周0 - 1次</option>
         </select>
+
+        <label for="phone">電話:</label>
+        <input type="text" id="phone" name="phone" required />
       </div>
       <button type="submit">提交</button>
     </form>
@@ -69,7 +71,7 @@
 
         // 收集表單資料
         const name = document.getElementById("name").value;
-        const birthday = document.getElementById("birthday").value;
+        const birthDate = document.getElementById("birthDate").value;
         const gender = document.querySelector(
           'input[name="gender"]:checked'
         )?.value;
@@ -77,6 +79,7 @@
         const weight = document.getElementById("weight").value;
         const exerciseFrequency =
           document.getElementById("exerciseFrequency").value;
+        const phone = document.getElementById("phone").value;
 
         // 獲取當前登入使用者
         const user = auth.currentUser;
@@ -87,11 +90,13 @@
             .doc(user.uid)
             .set({
               name: name,
-              birthday: birthday,
+              birthDate: birthDate,
               gender: gender,
-              height: height,
-              weight: weight,
+              height: parseFloat(height), // 確保身高和體重作為數字保存
+              weight: parseFloat(weight),
               exerciseFrequency: exerciseFrequency,
+              phone: phone,
+              email: user.email, // 保存使用者的電子郵件
             })
             .then(() => {
               alert("資料已成功儲存！");
