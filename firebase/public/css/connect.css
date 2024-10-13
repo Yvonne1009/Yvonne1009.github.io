@@ -1,0 +1,279 @@
+body {
+  font-family: "Arial", sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*導覽列*/
+#masthead .navbar {
+  margin-bottom: 0;
+  min-height: 70px;
+}
+
+#masthead .navbar-default {
+  background-color: #ffffff;
+  border-color: #ecf0f1;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+  border: 0;
+}
+
+#masthead .navbar-brand {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 30px;
+  padding: 20.5px 15px;
+  height: 70px;
+  color: #000;
+}
+
+#masthead .navbar-brand img {
+  width: 125px;
+}
+
+#masthead .navbar-default .navbar-brand {
+  color: #000;
+}
+
+#masthead .navbar-brand span {
+  color: #80bef5;
+}
+
+#masthead .navbar-nav > li > a {
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+#masthead .navbar-default .navbar-nav > li > a {
+  color: #2c3e50;
+}
+
+#masthead .navbar-default .navbar-nav > li > a:hover,
+#masthead .navbar-default .navbar-nav > li > a:focus {
+  color: #80bef5;
+}
+
+#masthead .dropdown-menu {
+  font-size: 11px;
+  min-width: 175px;
+}
+
+#masthead .dropdown-menu > li > a {
+  color: #2c3e50;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+#masthead .dropdown-menu > li > a:hover,
+#masthead .dropdown-menu > li > a:focus {
+  color: #80bef5;
+}
+
+@media (max-width: 767px) {
+  #masthead .navbar-default .navbar-nav > .active > a,
+  #masthead .navbar-default .navbar-nav > .active > a:hover,
+  #masthead .navbar-default .navbar-nav > .active > a:focus {
+    color: #fff !important;
+    background-color: #80bef5;
+    border-bottom: 0;
+  }
+
+  #masthead .navbar-default .navbar-nav > .open > a,
+  #masthead .navbar-default .navbar-nav > .open > a:hover,
+  #masthead .navbar-default .navbar-nav > .open > a:focus {
+    border-bottom: 0;
+  }
+
+  #masthead .navbar-default .navbar-nav > .open > a,
+  #masthead .navbar-default .navbar-nav > .open > a:hover,
+  #masthead .navbar-default .navbar-nav > .open > a:focus {
+    background-color: #000;
+    color: #fff !important;
+  }
+
+  #masthead .navbar-nav > li > a {
+    border-bottom: 1px solid #ecf0f1;
+  }
+
+  #masthead .navbar-nav > li:last-child > a {
+    border-bottom: 0;
+  }
+
+  #masthead .nav > li.dropdown:before {
+    content: "+";
+    position: absolute;
+    top: 0;
+    right: 15px;
+    color: #bdc3c7;
+    font-size: 30px;
+    z-index: 9999;
+    font-weight: 200;
+  }
+
+  #masthead .nav > li.dropdown.open:before {
+    content: "-";
+    right: 17px;
+  }
+
+  #masthead .dropdown-menu > li > a:before {
+    content: "-";
+    margin-right: 5px;
+    margin-left: -10px;
+  }
+}
+
+@media (min-width: 768px) {
+  #masthead .navbar-brand {
+    padding: 40px 0px;
+    height: 90px;
+  }
+
+  #masthead .navbar-brand img {
+    width: 145px;
+  }
+
+  #masthead .navbar-nav > li > a {
+    border-top: 4px solid transparent;
+    padding-top: 31px;
+    padding-bottom: 35px;
+  }
+
+  #masthead .navbar-default .navbar-nav > li > a:hover,
+  #masthead .navbar-default .navbar-nav > li > a:focus {
+    border-top-color: #80bef5;
+  }
+
+  #masthead .navbar-default .navbar-nav > .active > a,
+  #masthead .navbar-default .navbar-nav > .active > a:hover,
+  #masthead .navbar-default .navbar-nav > .active > a:focus {
+    color: #80bef5;
+    background-color: #e7e7e7;
+    border-top: 4px solid #80bef5;
+    padding-top: 31px;
+    background-color: transparent;
+  }
+
+  #masthead .navbar-default .navbar-nav > .open > a,
+  #masthead .navbar-default .navbar-nav > .open > a:hover,
+  #masthead .navbar-default .navbar-nav > .open > a:focus {
+    color: #80bef5;
+    background-color: #ffffff;
+    border-top: 4px solid #80bef5;
+    padding-top: 31px;
+  }
+
+  #masthead .dropdown-menu {
+    border-radius: 0;
+    border: 0;
+    background-color: #000;
+  }
+
+  #masthead .dropdown-menu > li > a {
+    padding: 15px 30px;
+    color: #fff;
+    font-weight: 800;
+  }
+
+  #masthead .dropdown-menu > li > a:hover,
+  #masthead .dropdown-menu > li > a:focus {
+    background-color: #80bef5;
+    color: #fff !important;
+  }
+
+  #masthead .dropdown-menu > .active > a,
+  #masthead .dropdown-menu > .active > a:hover,
+  #masthead .dropdown-menu > .active > a:focus {
+    background-color: #80bef5;
+  }
+}
+
+#masthead .navbar-default .navbar-toggle {
+  background-color: #80bef5;
+  background-image: none;
+  border: 1px solid #80bef5;
+  border-radius: 0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#masthead .navbar-default .navbar-toggle .icon-bar {
+  border-radius: 0;
+  background-color: #ffffff;
+  height: 4px;
+}
+
+#masthead .navbar-default .navbar-toggle:hover,
+#masthead .navbar-default .navbar-toggle:focus {
+  border-color: #80bef5;
+}
+
+/* Buttons
+ * -------------------------- */
+
+/* 整體背景設置為白色 */
+body {
+  background-color: #ffffff;
+  color: #333;
+}
+
+/* 客服區塊的樣式 */
+#service {
+  padding: 60px 0;
+}
+
+/* 區塊樣式：加上陰影和邊框 */
+.contact-info,
+.feedback {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+/* 區塊標題樣式 */
+.contact-info h2,
+.feedback h2 {
+  font-size: 24px;
+  color: #495057;
+  margin-bottom: 20px;
+}
+
+/* 按鈕設計 */
+.btn-primary {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0056b3, #004080);
+}
+
+/* 表單輸入框樣式 */
+.form-control,
+textarea {
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+}
+
+/* 文字區域樣式 */
+textarea {
+  resize: none;
+}
+
+/* 客服標題居中樣式 */
+h1 {
+  font-size: 36px;
+  color: #343a40;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.profile-picture {
+  width: 20px; /* 調整寬度 */
+  height: 20px; /* 高度會自動調整以保持原始比例 */
+}

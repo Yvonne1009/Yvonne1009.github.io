@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="image/logo.ico" type="image/x-icon" />
+    <title>LeisurePace_個人資料</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/personal.css" />
+  </head>
+  <body>
+    <!-- menu 開始 -->
+    <header id="masthead" class="site-header" role="banner">
+      <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target=".navbar-ex1-collapse"
+            ></button>
+            <a class="navbar-brand" href="index.html"> LeisurePace </a>
+          </div>
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="index.html">首頁</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">關於LeisurePace <i
+                    class="fa fa-angle-double-down"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="about.html">LeisurePace</a></li>
+                  <li><a href="about.html">超慢跑介紹</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="./run/run180.html">超慢跑 </a>
+              </li>
+              <li class="dropdown">
+                <a href="analyze.html">分析</a>
+              </li>
+              <li class="dropdown">
+                <a href="task.html">任務 </a>
+              </li>
+  
+              </li>
+              <li class="dropdown active">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img
+                      id="profileImage"
+                      src="./image/default-avatar.png"
+                      class="profile-picture"
+                      style="border-radius: 50%"
+                    />
+                </a>
+                <ul class="dropdown-menu ">
+                  <li><a href="bgstore.html">背景介紹</a></li>
+                  <li><a href="personal.html">個人資料</a></li>
+                  <li><a href="connect.html">聯絡我們</a></li>
+                  <li><a href="./login/login.html">登出</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- menu 結束 -->
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h2>修改Email</h2>
+      <p></p>
+      <form id="profileForm">
+        <div class="form-group">
+          <label for="email">舊Email</label>
+          <input type="text" id="pwd_bf" value="" />
+        </div>
+        <div class="form-group">
+          <label for="email">新Email</label>
+          <input type="text" id="pwd_af" value="" />
+        </div>
+        <div class="form-group">
+          <label for="email">再次確認新Email</label>
+          <input type="text" id="pwd_af" value="" />
+        </div>
+        <button type="submit">儲存</button>
+      </form>
+    </div>
+
+    <!-- footer 開始 -->
+    <footer id="footer" class="footer-area">
+      <div class="footer-widget pt-80">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-8">
+              <div class="footer-logo mt-50">
+                <a href="#">
+                  <img src="image/logo.png" alt="Logo" />
+                </a>
+
+                <ul class="footer-social mt-20">
+                  <li>
+                    <a href="#"><i class="lni-facebook-filled"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-twitter-original"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-google"></i></a>
+                  </li>
+                  <li>
+                    <a href="#"><i class="lni-instagram"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <!-- footer logo -->
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <div class="f-title">
+                  <h4 class="title">關於LeisurePace</h4>
+                </div>
+                <ul class="mt-15">
+                  <li><a href="about.html">LeisurePace</a></li>
+                  <li><a href="about.html">超慢跑介紹</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="footer-link mt-45">
+                <ul class="mt-15">
+                  <li><a href="./run/run180.html">超慢跑</a></li>
+                  <li><a href="analyze.html">分析</a></li>
+                  <li><a href="task.html">任務</a></li>
+                  <li><a href="bgstore.html">背景介紹</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- footer widget -->
+      <div class="copyright-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="copyright text-center">
+                <p>&copy; LeisurePace</p>
+              </div>
+              <!-- copyright -->
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- copyright-area -->
+    </footer>
+    <!-- footer 結束 -->
+    <!-- Import the basic jquery lib. -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Import the associated firebase lib which the order is fixed. -->
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"
+    ></script>
+    <script
+      defer
+      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
+    ></script>
+    <!-- Set the firebsae config and initialize it. -->
+    <script defer src="init-firebase.js"></script>
+    <script src="js/personal.js"></script>
+  </body>
+</html>

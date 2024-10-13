@@ -174,7 +174,10 @@ button:hover {
 }
 
 .calendar-day:hover {
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; /* 将滑鼠碰到日期 */
+}
+.selected {
+  color: rgb(244, 5, 5);
 }
 
 .today {
@@ -689,4 +692,9 @@ form label {
 
 form input {
   margin-right: 10px;
+}
+
+.today {
+  background-color: #fc0606; /* 可以更改成其他的今日日期的顏色 */
+  color: rgb(255, 255, 255);
 }

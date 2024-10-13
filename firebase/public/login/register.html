@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <!-- ------------------ 登入區塊 ------------------ -->
     <div id="login_div" class="main-div">
       <h3>LeisurePace Web 註冊</h3>
       <input type="email" placeholder="Email..." id="email_field" />
@@ -18,20 +19,23 @@
       <button onclick="login()">Create an Account</button>
       <a href="login.html" id="login-account">已有帳號？登入</a>
     </div>
+    <!-- ------------------ 登入區塊結束 ------------------ -->
 
+    <!-- ------------------ 使用者登入後顯示區塊 ------------------ -->
     <div id="user_div" class="loggedin-div">
       <h3>Welcome User</h3>
-      <p id="user_para">
-        Welcome to Firebase web login Example. You're currently logged in.
-      </p>
+      <p id="user_para">歡迎來到 LeisurePace Web 登入。您目前已登入。</p>
       <button onclick="logout()">Logout</button>
       <br />
       <button onclick="redirectToForm()">跳轉到填寫表單頁面</button>
       <a href="../index.html" id="Go to home page">前往首頁</a>
     </div>
+    <!-- ------------------ 使用者登入後顯示區塊結束 ------------------ -->
 
+    <!-- ------------------ Firebase JavaScript SDK ------------------ -->
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <script src="./js/firebase.js"></script>
     <script src="./js/register.js"></script>
+    <!-- ------------------ Firebase JavaScript SDK 結束 ------------------ -->
   </body>
 </html>
