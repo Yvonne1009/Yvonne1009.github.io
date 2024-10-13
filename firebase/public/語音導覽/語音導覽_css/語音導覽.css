@@ -570,8 +570,7 @@ input[type="number"] {
 
 .show {
   display: block; /* 用於顯示下拉菜單內容 */
-    margin-top: 6px;
-
+  margin-top: 6px;
 }
 
 /*語音導覽bpm選單*/
@@ -604,4 +603,10 @@ input[type="number"] {
 .show {
   display: block; /* 用於顯示下拉菜單內容 */
   margin-top: 6px;
+}
+
+/*導覽列的頭像*/
+.profile-picture {
+  width: 20px; /* 調整寬度 */
+  height: 20px; /* 高度會自動調整以保持原始比例 */
 }

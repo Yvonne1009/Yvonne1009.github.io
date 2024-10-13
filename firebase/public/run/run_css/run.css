@@ -410,7 +410,6 @@ input[type="number"] {
   display: inline-block; /* Ensures images are displayed inline */
 }
 
-
 /* 弹跳窗口按钮的样式 */
 .gallery button {
   display: block;
@@ -435,7 +434,6 @@ input[type="number"] {
   overflow: auto; /* 超出时滚动 */
   text-align: right; /* 确保弹跳窗口内的内容靠右对齐 */
 }
-
 
 /* 調整輸入框樣式 */
 input[type="number"] {
@@ -604,4 +602,10 @@ input[type="number"] {
 .show {
   display: block; /* 用於顯示下拉菜單內容 */
   margin-top: 6px;
+}
+
+/*導覽列的頭像*/
+.profile-picture {
+  width: 20px; /* 調整寬度 */
+  height: 20px; /* 高度會自動調整以保持原始比例 */
 }
