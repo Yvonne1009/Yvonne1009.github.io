@@ -15,9 +15,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <link rel="icon" href="image/logo.ico" type="image/x-icon" />
-
-
-
+</head>
 <body>
  <!-- menu 開始 -->
  <header id="masthead" class="site-header" role="banner">
@@ -178,7 +176,67 @@
       </div>
     </div>
   </footer>
+
+   <!-- 引入 Firebase App SDK（必須） -->
+   <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+
+   <!-- 引入 Firestore SDK -->
+   <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+
+   <!-- 引入 Firebase Auth SDK -->
+   <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+
+  <script>
+  // 初始化 Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
+    authDomain: "leisurepace-a3d51.firebaseapp.com",
+    projectId: "leisurepace-a3d51",
+    storageBucket: "leisurepace-a3d51.appspot.com",
+    messagingSenderId: "955257567601",
+    appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+
+  // 提交意見表單
+  document.getElementById("feedbackForm").addEventListener("submit", (e) => {
+    e.preventDefault(); // 防止表單提交刷新頁面
+
+    // 收集表單資料
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("feedbackInput").value;
+
+    // 獲取當前登入使用者
+    const user = auth.currentUser;
+
+    if (user) {
+      // 將表單資料儲存到 Firestore
+      db.collection("messages")
+        .add({
+          name: name,
+          email: email,
+          message: message,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          userId: user.uid, // 儲存使用者的 ID
+          userEmail: user.email, // 保存使用者的電子郵件
+        })
+        .then(() => {
+          alert("您的意見已成功提交！");
+          document.getElementById("feedbackForm").reset(); // 清空表單
+        })
+        .catch((error) => {
+          console.error("提交意見時發生錯誤：", error);
+        });
+    } else {
+      alert("使用者未登入");
+    }
+  });
+</script>
+
 </body>
-</head>
 
 </html>
