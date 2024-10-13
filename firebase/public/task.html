@@ -156,8 +156,20 @@
 
   <!--////////////////////////////////////////////以下JS///////////////////////////////////////////////////-->
 
+  <!-- ------------------------------------初始化 Firestore-------------------------------------------- -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
+      authDomain: "leisurepace-a3d51.firebaseapp.com",
+      projectId: "leisurepace-a3d51",
+      storageBucket: "leisurepace-a3d51.appspot.com",
+      messagingSenderId: "955257567601",
+      appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+    };
 
-
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    </script>
 
   <!-- ------------------------------------調整日歷JS-------------------------------------------- -->
   <script>
@@ -491,383 +503,341 @@
   <!-- ---------------------------以下體重、喝水、步數、超慢跑紀錄JS------------------------------------ -->
   <script>
     // 获取 DOM 元素
-    const weightForm = document.getElementById("weightForm");
-    const weightInput = document.getElementById("weightInput");
-    const weightRecords = document.getElementById("weightRecords");
+const weightForm = document.getElementById("weightForm");
+const weightInput = document.getElementById("weightInput");
+const weightRecords = document.getElementById("weightRecords");
 
-    const waterForm = document.getElementById("waterForm");
-    const waterInput = document.getElementById("waterInput");
-    const waterRecords = document.getElementById("waterRecords");
+const waterForm = document.getElementById("waterForm");
+const waterInput = document.getElementById("waterInput");
+const waterRecords = document.getElementById("waterRecords");
 
-    const stepForm = document.getElementById("stepForm");
-    const stepInput = document.getElementById("stepInput");
-    const stepRecords = document.getElementById("stepRecords");
+const stepForm = document.getElementById("stepForm");
+const stepInput = document.getElementById("stepInput");
+const stepRecords = document.getElementById("stepRecords");
 
-    const runForm = document.getElementById("runForm");
-    const runInput = document.getElementById("runInput");
-    const runRecords = document.getElementById("runRecords");
+const runForm = document.getElementById("runForm");
+const runInput = document.getElementById("runInput");
+const runRecords = document.getElementById("runRecords");
 
+// 更新当前选择的日期（可以根据您的日期选择器更新）
+function updateSelectedDate(year, month, day) {
+  currentYear = year;
+  currentMonth = month;
+  currentDay = day;
+}
 
-    // 更新当前选择的日期（可以根据您的日期选择器更新）
-    function updateSelectedDate(year, month, day) {
-      currentYear = year;
-      currentMonth = month;
-      currentDay = day;
-    }
+// 在输入体重时记录选定日期
+weightForm.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-    // 在输入体重时记录选定日期
-    weightForm.addEventListener("submit", function (event) {
-      event.preventDefault();
+  const weightAmount = parseFloat(weightInput.value);
+  if (isNaN(weightAmount)) return;
 
-      const weightAmount = parseFloat(weightInput.value);
-      if (isNaN(weightAmount)) return;
+  const weightEntry = {
+    amount: weightAmount,
+    year: currentYear,
+    month: currentMonth,
+    day: currentDay,
+  };
 
-      const weightEntry = {
-        amount: weightAmount,
-        year: currentYear,
-        month: currentMonth,
-        day: currentDay,
-      };
+  addWeightToFirestore(weightEntry);
+  weightInput.value = "";
+});
 
-      addWeightToFirebase(weightEntry);
-      weightInput.value = "";
+// 将体重记录添加到 Firestore
+function addWeightToFirestore(weightEntry) {
+  db.collection("weight").add(weightEntry)
+    .then(() => {
+      console.log("Weight entry added to Firestore successfully!");
+      getWeightFromFirestore();
+    })
+    .catch((error) => {
+      console.error("Error adding weight entry to Firestore: ", error);
     });
+}
 
-    // 将体重记录添加到 Firebase
-    function addWeightToFirebase(weightEntry) {
-      database
-        .ref("weight")
-        .push(weightEntry)
-        .then(() => {
-          console.log("Weight entry added to Firebase database successfully!");
-          getWeightFromFirebase();
-        })
-        .catch((error) => {
-          console.error("Error adding weight entry to Firebase database: ", error);
-        });
-    }
-
-    // 从 Firebase 获取体重记录
-    function getWeightFromFirebase() {
-      database
-        .ref("weight")
-        .once("value")
-        .then(function (snapshot) {
-          const weights = snapshot.val();
-          displayWeight(weights); // 直接显示当前日期的体重记录
-        })
-        .catch(function (error) {
-          console.error("The read failed: " + error.code);
-        });
-    }
-
-    // 显示体重记录
-    function displayWeight(weights) {
-      weightRecords.innerHTML = "";
-
-      if (weights) {
-        const weightEntries = Object.entries(weights).filter(([id, entry]) => {
-          return entry.year === currentYear && entry.month === currentMonth && entry.day === currentDay;
-        });
-
-        weightEntries.forEach(([id, entry]) => {
-          const weightElement = document.createElement("div");
-          weightElement.classList.add("record-entry");
-          weightElement.innerHTML = `
-                <span class="weight-date">${entry.year}-${entry.month}-${entry.day}:</span>
-                <span class="weight-value">${entry.amount} kg</span>
-                <button onclick="deleteWeight('${id}')">刪除</button>
-            `;
-          weightRecords.appendChild(weightElement);
-        });
-      }
-    }
-
-    // 删除体重记录
-    function deleteWeight(id) {
-      database
-        .ref("weight")
-        .child(id)
-        .remove()
-        .then(() => {
-          console.log("Weight entry removed from Firebase database successfully!");
-          getWeightFromFirebase();
-        })
-        .catch((error) => {
-          console.error("Error removing weight entry from Firebase database: ", error);
-        });
-    }
-
-    // 页面加载时获取体重记录
-    window.addEventListener("load", function () {
-      getWeightFromFirebase();
+// 从 Firestore 获取体重记录
+function getWeightFromFirestore() {
+  db.collection("weight").get()
+    .then((querySnapshot) => {
+      const weights = [];
+      querySnapshot.forEach((doc) => {
+        weights.push({ id: doc.id, ...doc.data() });
+      });
+      displayWeight(weights);
+    })
+    .catch((error) => {
+      console.error("Error fetching weight data from Firestore: ", error);
     });
+}
 
-    // 记录喝水量
-    waterForm.addEventListener("submit", function (event) {
-      event.preventDefault();
+// 显示体重记录
+function displayWeight(weights) {
+  weightRecords.innerHTML = "";
 
-      const waterAmount = parseFloat(waterInput.value);
-      if (isNaN(waterAmount)) return;
+  weights.forEach((entry) => {
+    const weightElement = document.createElement("div");
+    weightElement.classList.add("record-entry");
+    weightElement.innerHTML = `
+      <span class="weight-date">${entry.year}-${entry.month}-${entry.day}:</span>
+      <span class="weight-value">${entry.amount} kg</span>
+      <button onclick="deleteWeightFromFirestore('${entry.id}')">刪除</button>
+    `;
+    weightRecords.appendChild(weightElement);
+  });
+}
 
-      const waterEntry = {
-        amount: waterAmount,
-        year: currentYear,
-        month: currentMonth,
-        day: currentDay,
-      };
-
-      addWaterToFirebase(waterEntry);
-      waterInput.value = "";
+// 删除体重记录
+function deleteWeightFromFirestore(id) {
+  db.collection("weight").doc(id).delete()
+    .then(() => {
+      console.log("Weight entry removed from Firestore successfully!");
+      getWeightFromFirestore();
+    })
+    .catch((error) => {
+      console.error("Error removing weight entry from Firestore: ", error);
     });
+}
 
-    // 将喝水记录添加到 Firebase
-    function addWaterToFirebase(waterEntry) {
-      database
-        .ref("water")
-        .push(waterEntry)
-        .then(() => {
-          console.log("Water entry added to Firebase database successfully!");
-          getWaterFromFirebase();
-        })
-        .catch((error) => {
-          console.error("Error adding water entry to Firebase database: ", error);
-        });
-    }
+// 页面加载时获取体重记录
+window.addEventListener("load", function () {
+  getWeightFromFirestore();
+});
 
-    // 从 Firebase 获取喝水记录
-    function getWaterFromFirebase() {
-      database
-        .ref("water")
-        .once("value")
-        .then(function (snapshot) {
-          const waters = snapshot.val();
-          displayWater(waters); // 直接显示当前日期的喝水记录
-        })
-        .catch(function (error) {
-          console.error("The read failed: " + error.code);
-        });
-    }
+// 记录喝水量
+waterForm.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-    // 显示喝水记录
-    function displayWater(waters) {
-      waterRecords.innerHTML = "";
+  const waterAmount = parseFloat(waterInput.value);
+  if (isNaN(waterAmount)) return;
 
-      if (waters) {
-        const waterEntries = Object.entries(waters).filter(([id, entry]) => {
-          return entry.year === currentYear && entry.month === currentMonth && entry.day === currentDay;
-        });
+  const waterEntry = {
+    amount: waterAmount,
+    year: currentYear,
+    month: currentMonth,
+    day: currentDay,
+  };
 
-        waterEntries.forEach(([id, entry]) => {
-          const waterElement = document.createElement("div");
-          waterElement.classList.add("record-entry");
-          waterElement.innerHTML = `
-                <span class="water-date">${entry.year}-${entry.month}-${entry.day}:</span>
-                <span class="water-value">${entry.amount} ml</span>
-                <button onclick="deleteWater('${id}')">刪除</button>
-            `;
-          waterRecords.appendChild(waterElement);
-        });
-      }
-    }
+  addWaterToFirestore(waterEntry);
+  waterInput.value = "";
+});
 
-    // 删除喝水记录
-    function deleteWater(id) {
-      database
-        .ref("water")
-        .child(id)
-        .remove()
-        .then(() => {
-          console.log("Water entry removed from Firebase database successfully!");
-          getWaterFromFirebase();
-        })
-        .catch((error) => {
-          console.error("Error removing water entry from Firebase database: ", error);
-        });
-    }
-
-    // 页面加载时获取喝水记录
-    window.addEventListener("load", function () {
-      getWaterFromFirebase();
+// 将喝水记录添加到 Firestore
+function addWaterToFirestore(waterEntry) {
+  db.collection("water").add(waterEntry)
+    .then(() => {
+      console.log("Water entry added to Firestore successfully!");
+      getWaterFromFirestore();
+    })
+    .catch((error) => {
+      console.error("Error adding water entry to Firestore: ", error);
     });
+}
 
-    // 记录步数
-    stepForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const stepAmount = parseInt(stepInput.value);
-      if (isNaN(stepAmount)) return;
-
-      const stepEntry = {
-        amount: stepAmount,
-        year: currentYear,
-        month: currentMonth,
-        day: currentDay,
-      };
-
-      addStepToFirebase(stepEntry);
-      stepInput.value = "";
+// 从 Firestore 获取喝水记录
+function getWaterFromFirestore() {
+  db.collection("water").get()
+    .then((querySnapshot) => {
+      const waters = [];
+      querySnapshot.forEach((doc) => {
+        waters.push({ id: doc.id, ...doc.data() });
+      });
+      displayWater(waters);
+    })
+    .catch((error) => {
+      console.error("Error fetching water data from Firestore: ", error);
     });
+}
 
-    // 将步数记录添加到 Firebase
-    function addStepToFirebase(stepEntry) {
-      database
-        .ref("steps")
-        .push(stepEntry)
-        .then(() => {
-          console.log("Step entry added to Firebase database successfully!");
-          getStepsFromFirebase();
-        })
-        .catch((error) => {
-          console.error("Error adding step entry to Firebase database: ", error);
-        });
-    }
+// 显示喝水记录
+function displayWater(waters) {
+  waterRecords.innerHTML = "";
 
-    // 从 Firebase 获取步数记录
-    function getStepsFromFirebase() {
-      database
-        .ref("steps")
-        .once("value")
-        .then(function (snapshot) {
-          const steps = snapshot.val();
-          displaySteps(steps); // 直接显示当前日期的步数记录
-        })
-        .catch(function (error) {
-          console.error("The read failed: " + error.code);
-        });
-    }
+  waters.forEach((entry) => {
+    const waterElement = document.createElement("div");
+    waterElement.classList.add("record-entry");
+    waterElement.innerHTML = `
+      <span class="water-date">${entry.year}-${entry.month}-${entry.day}:</span>
+      <span class="water-value">${entry.amount} ml</span>
+      <button onclick="deleteWaterFromFirestore('${entry.id}')">刪除</button>
+    `;
+    waterRecords.appendChild(waterElement);
+  });
+}
 
-    // 显示步数记录
-    function displaySteps(steps) {
-      stepRecords.innerHTML = "";
-
-      if (steps) {
-        const stepEntries = Object.entries(steps).filter(([id, entry]) => {
-          return entry.year === currentYear && entry.month === currentMonth && entry.day === currentDay;
-        });
-
-        stepEntries.forEach(([id, entry]) => {
-          const stepElement = document.createElement("div");
-          stepElement.classList.add("record-entry");
-          stepElement.innerHTML = `
-                <span class="step-date">${entry.year}-${entry.month}-${entry.day}:</span>
-                <span class="step-value">${entry.amount} steps</span>
-                <button onclick="deleteStep('${id}')">刪除</button>
-            `;
-          stepRecords.appendChild(stepElement);
-        });
-      }
-    }
-
-
-    // 删除步数记录
-    function deleteStep(id) {
-      database
-        .ref("steps")
-        .child(id)
-        .remove()
-        .then(() => {
-          console.log("Step entry removed from Firebase database successfully!");
-          getStepsFromFirebase();
-        })
-        .catch((error) => {
-          console.error("Error removing step entry from Firebase database: ", error);
-        });
-    }
-
-    // 页面加载时获取步数记录
-    window.addEventListener("load", function () {
-      getStepsFromFirebase();
+// 删除喝水记录
+function deleteWaterFromFirestore(id) {
+  db.collection("water").doc(id).delete()
+    .then(() => {
+      console.log("Water entry removed from Firestore successfully!");
+      getWaterFromFirestore();
+    })
+    .catch((error) => {
+      console.error("Error removing water entry from Firestore: ", error);
     });
+}
 
-    // 记录超慢跑目标
-    runForm.addEventListener("submit", function (event) {
-      event.preventDefault();
+// 页面加载时获取喝水记录
+window.addEventListener("load", function () {
+  getWaterFromFirestore();
+});
 
-      const runGoal = runInput.value.trim();
-      if (!runGoal) return;
+// 记录步数
+stepForm.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-      const runEntry = {
-        goal: runGoal,
-        year: currentYear,
-        month: currentMonth,
-        day: currentDay,
-      };
+  const stepAmount = parseInt(stepInput.value);
+  if (isNaN(stepAmount)) return;
 
-      addRunToFirebase(runEntry);
-      runInput.value = "";
+  const stepEntry = {
+    amount: stepAmount,
+    year: currentYear,
+    month: currentMonth,
+    day: currentDay,
+  };
+
+  addStepToFirestore(stepEntry);
+  stepInput.value = "";
+});
+
+// 将步数记录添加到 Firestore
+function addStepToFirestore(stepEntry) {
+  db.collection("steps").add(stepEntry)
+    .then(() => {
+      console.log("Step entry added to Firestore successfully!");
+      getStepsFromFirestore();
+    })
+    .catch((error) => {
+      console.error("Error adding step entry to Firestore: ", error);
     });
+}
 
-    // 将超慢跑记录添加到 Firebase
-    function addRunToFirebase(runEntry) {
-      database
-        .ref("run")
-        .push(runEntry)
-        .then(() => {
-          console.log("Run entry added to Firebase database successfully!");
-          getRunFromFirebase();
-        })
-        .catch((error) => {
-          console.error("Error adding run entry to Firebase database: ", error);
-        });
-    }
-
-    // 从 Firebase 获取超慢跑记录
-    function getRunFromFirebase() {
-      database
-        .ref("run")
-        .once("value")
-        .then(function (snapshot) {
-          const runs = snapshot.val();
-          displayRun(runs); // 直接显示当前日期的跑步记录
-        })
-        .catch(function (error) {
-          console.error("The read failed: " + error.code);
-        });
-    }
-
-    // 显示超慢跑记录
-    function displayRun(runs) {
-      runRecords.innerHTML = "";
-
-      if (runs) {
-        const runEntries = Object.entries(runs).filter(([id, entry]) => {
-          return entry.year === currentYear && entry.month === currentMonth && entry.day === currentDay;
-        });
-
-        runEntries.forEach(([id, entry]) => {
-          const runElement = document.createElement("div");
-          runElement.classList.add("record-entry");
-          runElement.innerHTML = `
-                <span class="run-date">${entry.year}-${entry.month}-${entry.day}:</span>
-                <span class="run-goal">${entry.goal}</span>
-                <button onclick="deleteRun('${id}')">刪除</button>
-            `;
-          runRecords.appendChild(runElement);
-        });
-      }
-    }
-
-
-    // 删除超慢跑记录
-    function deleteRun(id) {
-      database
-        .ref("run")
-        .child(id)
-        .remove()
-        .then(() => {
-          console.log("Run entry removed from Firebase database successfully!");
-          getRunFromFirebase();
-        })
-        .catch((error) => {
-          console.error("Error removing run entry from Firebase database: ", error);
-        });
-    }
-
-    // 页面加载时获取超慢跑记录
-    window.addEventListener("load", function () {
-      getRunFromFirebase();
+// 从 Firestore 获取步数记录
+function getStepsFromFirestore() {
+  db.collection("steps").get()
+    .then((querySnapshot) => {
+      const steps = [];
+      querySnapshot.forEach((doc) => {
+        steps.push({ id: doc.id, ...doc.data() });
+      });
+      displaySteps(steps);
+    })
+    .catch((error) => {
+      console.error("Error fetching step data from Firestore: ", error);
     });
+}
+
+// 显示步数记录
+function displaySteps(steps) {
+  stepRecords.innerHTML = "";
+
+  steps.forEach((entry) => {
+    const stepElement = document.createElement("div");
+    stepElement.classList.add("record-entry");
+    stepElement.innerHTML = `
+      <span class="step-date">${entry.year}-${entry.month}-${entry.day}:</span>
+      <span class="step-value">${entry.amount} steps</span>
+      <button onclick="deleteStepFromFirestore('${entry.id}')">刪除</button>
+    `;
+    stepRecords.appendChild(stepElement);
+  });
+}
+
+// 删除步数记录
+function deleteStepFromFirestore(id) {
+  db.collection("steps").doc(id).delete()
+    .then(() => {
+      console.log("Step entry removed from Firestore successfully!");
+      getStepsFromFirestore();
+    })
+    .catch((error) => {
+      console.error("Error removing step entry from Firestore: ", error);
+    });
+}
+
+// 页面加载时获取步数记录
+window.addEventListener("load", function () {
+  getStepsFromFirestore();
+});
+
+// 记录超慢跑目标
+runForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const runGoal = runInput.value.trim();
+  if (!runGoal) return;
+
+  const runEntry = {
+    goal: runGoal,
+    year: currentYear,
+    month: currentMonth,
+    day: currentDay,
+  };
+
+  addRunToFirestore(runEntry);
+  runInput.value = "";
+});
+
+// 将超慢跑记录添加到 Firestore
+function addRunToFirestore(runEntry) {
+  db.collection("run").add(runEntry)
+    .then(() => {
+      console.log("Run entry added to Firestore successfully!");
+      getRunFromFirestore();
+    })
+    .catch((error) => {
+      console.error("Error adding run entry to Firestore: ", error);
+    });
+}
+
+// 从 Firestore 获取超慢跑记录
+function getRunFromFirestore() {
+  db.collection("run").get()
+    .then((querySnapshot) => {
+      const runs = [];
+      querySnapshot.forEach((doc) => {
+        runs.push({ id: doc.id, ...doc.data() });
+      });
+      displayRun(runs);
+    })
+    .catch((error) => {
+      console.error("Error fetching run data from Firestore: ", error);
+    });
+}
+
+// 显示超慢跑记录
+function displayRun(runs) {
+  runRecords.innerHTML = "";
+
+  runs.forEach((entry) => {
+    const runElement = document.createElement("div");
+    runElement.classList.add("record-entry");
+    runElement.innerHTML = `
+      <span class="run-date">${entry.year}-${entry.month}-${entry.day}:</span>
+      <span class="run-goal">${entry.goal}</span>
+      <button onclick="deleteRunFromFirestore('${entry.id}')">刪除</button>
+    `;
+    runRecords.appendChild(runElement);
+  });
+}
+
+// 删除超慢跑记录
+function deleteRunFromFirestore(id) {
+  db.collection("run").doc(id).delete()
+    .then(() => {
+      console.log("Run entry removed from Firestore successfully!");
+      getRunFromFirestore();
+    })
+    .catch((error) => {
+      console.error("Error removing run entry from Firestore: ", error);
+    });
+}
+
+// 页面加载时获取超慢跑记录
+window.addEventListener("load", function () {
+  getRunFromFirestore();
+});
+
 
   </script>
   <!------------------------------------下半部 footer 開始 --------------------------------------------------------->
@@ -948,6 +918,7 @@
   <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
   <script defer src="./js/init-firebase.js"></script>
 </body>
 
