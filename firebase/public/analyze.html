@@ -71,8 +71,10 @@
       </nav>
     </header>
 
+    <!-- 左側：月曆和待辦事項清單  開始-->
     <div class="container main-container">
       <div class="left-section">
+        <!-- 月曆 開始 -->
         <div class="calendar">
           <div class="calendar-header" id="header"></div>
           <div class="calendar-nav">
@@ -83,21 +85,21 @@
           </div>
           <div class="calendar-body" id="calendar"></div>
         </div>
-
+        <!-- 月曆 結束 -->
+        <!--紅色-->
         <div class="record" id="recordSection">
           <div class="record-item" id="calories">每日卡路里:</div>
           <div class="record-item" id="exercise">運動記錄:</div>
           <div class="record-item" id="steps">每日步數:</div>
         </div>
       </div>
-
       <div class="right-section">
         <div id="chart-container">
           <canvas id="myChart"></canvas>
         </div>
 
         <div id="activity-tracking">
-          <!-- Activity tracking data display here -->
+          <!-- 活动追踪数据显示于此 -->
         </div>
 
         <div id="fitness-plan">
@@ -129,18 +131,23 @@
         </div>
       </div>
     </div>
+    <!-- ----------------------------以下js------------------------------------ -->
 
     <script>
+      // 獲取日曆頭部元素和月份顯示區域元素
       const header = document.getElementById("header");
       const calendarContainer = document.getElementById("calendar");
       const monthSelect = document.getElementById("monthSelect");
       const yearSelect = document.getElementById("yearSelect");
 
+      // 獲取當前日期信息
       let currentDate = new Date();
       let currentYear = currentDate.getFullYear();
-      let currentMonth = currentDate.getMonth() + 1;
+      let currentMonth = currentDate.getMonth() + 1; // 將月份索引+1
       let currentDay = currentDate.getDate();
+      let selectedDayElement = null; // 用來存儲當前選中的日期元素
 
+      // 初始化月份選擇框
       for (let i = 1; i <= 12; i++) {
         const option = document.createElement("option");
         option.value = i;
@@ -151,6 +158,7 @@
       }
       monthSelect.selectedIndex = currentMonth - 1;
 
+      // 初始化年份選擇框
       for (let i = currentYear - 10; i <= currentYear + 10; i++) {
         const option = document.createElement("option");
         option.value = i;
@@ -159,24 +167,29 @@
       }
       yearSelect.selectedIndex = 10;
 
+      // 函數：生成月份選擇器
       function generateMonthSelector() {
         monthSelect.selectedIndex = currentMonth - 1;
       }
 
+      // 函數：生成日曆
       function generateCalendar(year, month) {
         const daysInMonth = new Date(year, month, 0).getDate();
         const firstDay = new Date(year, month - 1, 1).getDay();
         const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+        // 清空日曆容器
         calendarContainer.innerHTML = "";
 
-        weekdays.forEach((day) => {
+        // 添加星期標題
+        for (let i = 0; i < 7; i++) {
           const weekday = document.createElement("div");
           weekday.classList.add("calendar-day");
-          weekday.textContent = day;
+          weekday.textContent = weekdays[i];
           calendarContainer.appendChild(weekday);
-        });
+        }
 
+        // 添加空白日期
         for (let i = 0; i < firstDay; i++) {
           const emptyDay = document.createElement("div");
           emptyDay.classList.add("calendar-day");
@@ -184,19 +197,33 @@
           calendarContainer.appendChild(emptyDay);
         }
 
+        // 添加日期
         for (let i = 1; i <= daysInMonth; i++) {
           const day = document.createElement("div");
           day.classList.add("calendar-day");
           day.textContent = i;
           day.setAttribute("data-day", i);
+
+          // 設置點擊事件
           day.addEventListener("click", () => {
+            // 更新當前日期
             currentYear = year;
             currentMonth = month;
             currentDay = i;
-            updateHeader(currentYear, currentMonth, currentDay);
-            getTasksFromFirebase();
+
+            // 清除之前選中的日期顏色
+            if (selectedDayElement) {
+              selectedDayElement.classList.remove("selected");
+            }
+
+            // 將選中日期設置為紅色
+            day.classList.add("selected");
+            selectedDayElement = day;
+            updateHeader(currentYear, currentMonth, currentDay); // 更新標題
+            getTasksFromFirebase(); // 重新從 Firebase 獲取任務列表並顯示
           });
 
+          // 如果是今天的日期，则添加今日样式
           if (
             year === currentYear &&
             month === currentMonth &&
@@ -204,11 +231,29 @@
           ) {
             day.classList.add("today");
           }
-
           calendarContainer.appendChild(day);
         }
       }
 
+      // 當月份選擇變更時的處理函數
+      function changeMonth() {
+        currentMonth = parseInt(monthSelect.value); // 讀取新的月份
+        generateCalendar(currentYear, currentMonth); // 重新生成日曆
+        getTasksFromFirebase(); // 更新當前月份的任務列表
+      }
+
+      // 當年份選擇變更時的處理函數
+      function changeYear() {
+        currentYear = parseInt(yearSelect.value); // 讀取新的年份
+        generateCalendar(currentYear, currentMonth); // 重新生成日曆
+        getTasksFromFirebase(); // 更新當前年份的任務列表
+      }
+
+      // 當選擇月份或年份時，自動生成對應的日曆
+      monthSelect.addEventListener("change", changeMonth);
+      yearSelect.addEventListener("change", changeYear);
+
+      // 函数：更新标题显示选定的年份、月份和日期
       function updateHeader(year, month, day) {
         header.innerText = `${year}年${month}月${day}日`;
       }
@@ -239,32 +284,39 @@
         getTasksFromFirebase();
       });
 
+      // 函数：显示前一个月份
+      // 函数：显示前一个月份
       function prevMonth() {
-        if (currentMonth === 0) {
-          currentYear--;
-          currentMonth = 11;
+        if (currentMonth === 1) {
+          currentYear--; // 如果当前是1月，减1年
+          currentMonth = 12; // 月份设置为12月
         } else {
-          currentMonth--;
+          currentMonth--; // 否则减1月
         }
-        generateMonthSelector();
-        generateCalendar(currentYear, currentMonth);
-        getTasksFromFirebase();
+        generateMonthSelector(); // 更新月份选择器
+        yearSelect.value = currentYear; // 更新年份选择器
+        generateCalendar(currentYear, currentMonth); // 生成新的日历
+        getTasksFromFirebase(); // 获取任务列表
       }
 
+      // 函数：显示下一个月份
       function nextMonth() {
-        if (currentMonth === 11) {
-          currentYear++;
-          currentMonth = 0;
+        if (currentMonth === 12) {
+          currentYear++; // 如果当前是12月，加1年
+          currentMonth = 1; // 月份设置为1月
         } else {
-          currentMonth++;
+          currentMonth++; // 否则加1月
         }
-        generateMonthSelector();
-        generateCalendar(currentYear, currentMonth);
-        getTasksFromFirebase();
+        generateMonthSelector(); // 更新月份选择器
+        yearSelect.value = currentYear; // 更新年份选择器
+        generateCalendar(currentYear, currentMonth); // 生成新的日历
+        getTasksFromFirebase(); // 获取任务列表
       }
     </script>
 
     <script>
+      ////////////////////////////////// 紅色區域//////////////////////////////////
+
       document.addEventListener("DOMContentLoaded", function () {
         var ctx = document.getElementById("myChart").getContext("2d");
         var myChart = new Chart(ctx, {

@@ -163,13 +163,16 @@ h2 {
 }
 
 .calendar-day:hover {
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; /* 将滑鼠碰到日期 */
+}
+
+.selected {
+  color: rgb(255, 0, 0); /* 设置文字为白色，背景为红色 */
 }
 
 .today {
-  background-color: #ff0000;
-  color: #fff;
-  border-radius: 50%; /* 将日期框的边界半径设置为50%，使其呈现圆形 */
+  background-color: rgb(255, 0, 0); /* 今日日期设置为黄色 */
+  color: rgb(255, 255, 255); /* 设置今日日期的文字颜色 */
 }
 
 /* 調整月曆 */
@@ -613,4 +616,9 @@ ol {
 .copyright-area {
   border-top: 1px solid #eceff8;
   padding: 13px 0;
+}
+
+.today {
+  background-color: #fc0606; /* 可以更改成其他的今日日期的顏色 */
+  color: rgb(255, 255, 255);
 }
