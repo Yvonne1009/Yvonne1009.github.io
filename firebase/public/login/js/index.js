@@ -22,20 +22,23 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function login() {
-  var userEmail = document.getElementById("email_field").value;
-  var userPass = document.getElementById("password_field").value;
+  var userEmail = document.getElementById("email_field").value; // 獲取電子郵件輸入框的值
+  var userPass = document.getElementById("password_field").value; // 獲取密碼輸入框的值
 
+  // 嘗試使用電子郵件和密碼登入
   firebase
     .auth()
     .signInWithEmailAndPassword(userEmail, userPass)
+    .then(function () {
+      // 登入成功後的處理
+      window.location.href = "../index.html"; // 重新導向到首頁
+    })
     .catch(function (error) {
-      // 在這裡處理錯誤。
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      // 處理登入錯誤
+      var errorCode = error.code; // 獲取錯誤代碼
+      var errorMessage = error.message; // 獲取錯誤訊息
 
-      window.alert("Error : " + errorMessage);
-
-      // ...
+      window.alert("Error :登入錯誤 "); // 提示使用者錯誤訊息
     });
 }
 
@@ -92,26 +95,6 @@ function google_login() {
       var credential = error.credential;
       // ...
       console.log(errorMessage);
-    });
-}
-
-// 訪客登入
-function phone_login() {
-  window.location.href = "phone.html";
-}
-
-function changeEmail() {
-  // 自動偵測瀏覽器語言
-  firebase.auth().useDeviceLanguage();
-  // 修改 Email
-  var user = firebase.auth().currentUser;
-  user
-    .updateEmail("andy6804tw@gmail.com")
-    .then(function () {
-      // Update successful.
-    })
-    .catch(function (error) {
-      // An error happened.
     });
 }
 
