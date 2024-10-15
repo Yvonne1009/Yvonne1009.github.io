@@ -3,7 +3,7 @@ import mediapipe as mp
 import cv2
 import tensorflow as tf
 import os
-from tensorflow.keras.models import load_model
+from tensorflow.keras.models import load_model # type: ignore
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 import base64
