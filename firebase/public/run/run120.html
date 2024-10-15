@@ -163,6 +163,53 @@
       <!-- Video Display -->
       <video id="video" autoplay></video>
       <br /><br />
+
+      <!-- Socket.IO setup -->
+      <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+      <script>
+        const socket = io.connect("http://localhost:5000");
+
+        // 當連接成功時
+        socket.on("connect", () => {
+          console.log("Connected to the server");
+        });
+
+        // 發送數據到後端
+        function sendData(features) {
+          socket.emit("input_data", { features: features });
+        }
+
+        // 接收預測結果
+        socket.on("prediction_response", (data) => {
+          console.log("Prediction:", data.prediction);
+        });
+
+        // 捕捉視頻幀並發送到後端
+        const video = document.getElementById("video");
+        navigator.mediaDevices
+          .getUserMedia({ video: true })
+          .then((stream) => {
+            video.srcObject = stream;
+            video.play();
+          })
+          .catch((err) => {
+            console.error("Error accessing the camera", err);
+          });
+
+        function captureFrame() {
+          const canvas = document.createElement("canvas");
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          const context = canvas.getContext("2d");
+          context.drawImage(video, 0, 0, canvas.width, canvas.height);
+          return canvas.toDataURL("image/jpeg"); // 將視頻幀轉換成 Base64 字符串
+        }
+
+        setInterval(() => {
+          const frameData = captureFrame(); // 捕捉視頻幀
+          socket.emit("video_frame", frameData); // 發送視頻幀到後端
+        }, 2000); // 每 2 秒捕捉並發送一次視頻幀
+      </script>
     </div>
 
     <!-- Scripts -->
