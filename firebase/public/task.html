@@ -92,6 +92,7 @@
       <h2 id="todoTitle">待辦事項清單</h2>
       <input type="text" id="taskInput" placeholder="新增待辦事項清單..." />
       <button onclick="addTask()">新增</button>
+      <h2>待辦事項清單紀錄</h2>
       <div id="taskList">
       </div>
     </div>
@@ -335,45 +336,91 @@
 </script>
 
 
+ <!-- 初始化 Firebase -->
+ <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+<!-- -------------------------------------------Firebase 配置-------------------------------------------------- -->
+<script>
+  // 初始化 Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
+    authDomain: "leisurepace-a3d51.firebaseapp.com",
+    projectId: "leisurepace-a3d51",
+    storageBucket: "leisurepace-a3d51.appspot.com",
+    messagingSenderId: "955257567601",
+    appId: "1:955257567601:web:2e06661d84707065fe9ed0"
+  };
 
+  firebase.initializeApp(firebaseConfig);
+
+  // 初始化 Firebase Auth 和 Firestore
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  // 監聽使用者狀態變更
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      console.log("使用者已登入: ", user.email);
+      getTasks(); // 取得任務清單
+      // 你也可以在這裡加入其他資料獲取邏輯，如體重、喝水、步數等
+      getWeightRecords();
+      getWaterRecords();
+      getStepRecords();
+      getRunRecords();
+    } else {
+      console.log("使用者已登出或尚未登入");
+      window.location.href = './login/login.html'; // 導向登入頁面
+    }
+  });
+</script>
 
 
 
 <!-- -------------------------------------------待辦事項清單JS-------------------------------------------------- -->
 <script>
-  // 函数：添加任务到 Firebase 数据库
-  function addTaskToFirebase(task) {
-    database
-      .ref("tasks")
-      .push(task)
-      .then(() => {
-        console.log("Task added to Firebase database successfully!");
-        getTasksFromFirebase();
-      })
-      .catch((error) => {
-        console.error("Error adding task to Firebase database: ", error);
+  function addTask() {
+    const taskText = document.getElementById("taskInput").value.trim();
+    if (taskText === "") return;
+
+    const user = auth.currentUser;
+    if (user) {
+      const taskData = {
+        task: taskText,
+        completed: false,
+        date: new Date().toISOString(), // 儲存完整時間
+        year: currentYear,
+        month: currentMonth,
+        day: currentDay,
+      };
+
+      db.collection("users").doc(user.uid).collection("Records").add({
+        type: "task",
+        data: taskData
+      }).then(() => {
+        console.log("任務已新增");
+        document.getElementById("taskInput").value = "";
+        getTasks();
       });
+    } else {
+      console.error("未找到登入使用者");
+    }
   }
 
-  // 函数：从 Firebase 数据库获取任务列表
-  function getTasksFromFirebase() {
-    const tasksRef = database.ref("tasks");
-    tasksRef.on(
-      "value",
-      (snapshot) => {
-        const tasks = snapshot.val();
-        if (tasks) {
-          const storedTasks = Object.values(tasks);
-          displayTasks(currentYear, currentMonth, currentDay, storedTasks);
-        }
-      },
-      (errorObject) => {
-        console.error("The read failed: " + errorObject.code);
-      }
-    );
+  function getTasks() {
+    const user = auth.currentUser;
+    if (user) {
+      db.collection("users").doc(user.uid).collection("Records")
+        .where("type", "==", "task")
+        .get()
+        .then((querySnapshot) => {
+          const tasks = [];
+          querySnapshot.forEach((doc) => tasks.push(doc.data().data));
+          displayTasks(currentYear, currentMonth, currentDay, tasks);
+        });
+    }
   }
 
-  // 函数：显示任务列表
   function displayTasks(year, month, day, tasks) {
     const taskList = document.getElementById("taskList");
     taskList.innerHTML = "";
@@ -385,105 +432,51 @@
     selectedDateTasks.forEach((task) => {
       const taskElement = document.createElement("div");
       taskElement.classList.add("task");
-      if (task.completed) {
-        taskElement.classList.add("completed");
-      }
 
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = task.completed;
-      checkbox.addEventListener("change", () =>
-        toggleTaskCompletion(task.id, tasks)
-      );
+      // 顯示日期
+      const taskDate = document.createElement("span");
+      taskDate.textContent = `(${task.year}/${task.month}/${task.day}) `;
 
+      // 顯示輸入的任務內容
       const taskText = document.createElement("span");
-      taskText.textContent = task.text;
+      taskText.textContent = task.task;
 
       const deleteButton = document.createElement("button");
-      deleteButton.textContent = "Delete";
-      deleteButton.addEventListener("click", () =>
-        deleteTask(task.id, tasks)
-      );
+      deleteButton.textContent = "刪除";
+      deleteButton.addEventListener("click", () => deleteTask(task));
 
-      taskElement.appendChild(checkbox);
-      taskElement.appendChild(taskText);
-      taskElement.appendChild(deleteButton);
+      taskElement.appendChild(taskDate);  // 顯示日期
+      taskElement.appendChild(taskText);  // 顯示任務
+      taskElement.appendChild(deleteButton);  // 顯示刪除按鈕
 
       taskList.appendChild(taskElement);
     });
   }
 
-  // 函数：标记任务完成或未完成
-  function toggleTaskCompletion(taskId, tasks) {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === taskId) {
-        return { ...task, completed: !task.completed };
-      }
-      return task;
-    });
-
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-    displayTasks(currentYear, currentMonth, currentDay, updatedTasks);
-  }
-
-  // 函数：删除任务
-  function deleteTask(taskId, tasks) {
-    // 从 Firebase 中删除任务
-    const taskRef = database.ref("tasks").orderByChild("id").equalTo(taskId);
-    taskRef.once("value", (snapshot) => {
-      snapshot.forEach((childSnapshot) => {
-        childSnapshot.ref
-          .remove()
-          .then(() => {
-            console.log("Task deleted successfully from Firebase.");
-            // 重新获取任务列表以刷新显示
-            getTasksFromFirebase();
-          })
-          .catch((error) => {
-            console.error("Error deleting task from Firebase: ", error);
+  function deleteTask(task) {
+    const user = auth.currentUser;
+    if (user) {
+      db.collection("users").doc(user.uid).collection("Records")
+        .where("data.task", "==", task.task)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            db.collection("users").doc(user.uid).collection("Records").doc(doc.id).delete()
+              .then(() => {
+                console.log("任務已刪除");
+                getTasks();
+              });
           });
-      });
-    });
+        });
+    }
   }
 
-  // 初始化日历
+  // 初始化日曆
   generateCalendar(currentYear, currentMonth);
   updateHeader(currentYear, currentMonth, currentDate.getDate());
-  getTasksFromFirebase();
-
-  // 函数：尝试加载之前存储的任务列表
-  function tryLoadPreviousTasks() {
-    const storedTasks = localStorage.getItem("tasks");
-    if (storedTasks) {
-      const parsedTasks = JSON.parse(storedTasks);
-      displayTasks(currentYear, currentMonth, currentDay, parsedTasks);
-    }
-  }
-
-  // 在页面加载时尝试加载之前存储的任务列表
-  tryLoadPreviousTasks();
-
-  // 在添加任务时将任务添加到 Firebase 数据库
-  function addTask() {
-    const input = document.getElementById("taskInput");
-    const taskText = input.value.trim();
-
-    if (taskText !== "") {
-      const task = {
-        id: Date.now(),
-        text: taskText,
-        completed: false,
-        year: currentYear,
-        month: currentMonth,
-        day: currentDay,
-      };
-
-      addTaskToFirebase(task);
-      input.value = "";
-    }
-  }
-
+  getTasks();
 </script>
+
 
 
 
@@ -944,11 +937,7 @@
   </footer>
   <!-- footer 結束 -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
   <script defer src="./js/init-firebase.js"></script>
 </body>
 

@@ -1,265 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/personal.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
     <title>LeisurePace_個人資料</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- Header -->
     <header id="masthead" class="site-header" role="banner">
-      <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <button
-              type="button"
-              class="navbar-toggle"
-              data-toggle="collapse"
-              data-target=".navbar-ex1-collapse"
-            ></button>
-            <a class="navbar-brand" href="index.html">LeisurePace</a>
-          </div>
-          <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="index.html">首頁</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                  >關於LeisurePace <i class="fa fa-angle-double-down"></i
-                ></a>
-                <ul class="dropdown-menu">
-                  <li><a href="about.html">LeisurePace</a></li>
-                  <li><a href="about.html">超慢跑介紹</a></li>
-                </ul>
-              </li>
-              <li><a href="./run/run180.html">超慢跑</a></li>
-              <li><a href="analyze.html">分析</a></li>
-              <li><a href="task.html">任務</a></li>
-              <li class="dropdown active">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img
-                    id="profileImage"
-                    src="./image/default-avatar.png"
-                    class="profile-picture"
-                    style="border-radius: 50%"
-                    alt="Profile Image"
-                  />
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="bgstore.html">背景介紹</a></li>
-                  <li><a href="personal.html">個人資料</a></li>
-                  <li><a href="connect.html">聯絡我們</a></li>
-                  <li><a href="./login/login.html">登出</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target=".navbar-ex1-collapse"></button>
+                    <a class="navbar-brand" href="index.html">LeisurePace</a>
+                </div>
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.html">首頁</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">關於LeisurePace <i
+                                    class="fa fa-angle-double-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="about.html">LeisurePace</a></li>
+                                <li><a href="about.html">超慢跑介紹</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="./run/run180.html">超慢跑</a></li>
+                        <li><a href="analyze.html">分析</a></li>
+                        <li><a href="task.html">任務</a></li>
+                        <li class="dropdown active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img id="profileImage" src="./image/default-avatar.png" class="profile-picture"
+                                    style="border-radius: 50%" alt="Profile Image" />
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="bgstore.html">背景介紹</a></li>
+                                <li><a href="personal.html">個人資料</a></li>
+                                <li><a href="connect.html">聯絡我們</a></li>
+                                <li><a href="./login/login.html">登出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
-      <h2>我的檔案</h2>
-      <p>管理你的檔案以保護你的帳戶</p>
-      <form id="profileForm">
-        <div class="form-group">
-          <label for="username">使用者帳號</label>
-          <input type="text" id="username" value="yvonne803" readonly />
+        <h2>我的檔案</h2>
+        <p>管理你的檔案以保護你的帳戶</p>
+
+
+        <!-- 頭像選擇器 Modal -->
+        <div id="avatarModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="avatarModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title" id="avatarModalLabel">選擇頭像</h5>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="./image/頭像1.jpg" class="selectable-avatar" data-avatar="./image/頭像1.jpg" />
+                        <img src="./image/頭像2.jpg" class="selectable-avatar" data-avatar="./image/頭像2.jpg" />
+                        <img src="./image/頭像3.jpg" class="selectable-avatar" data-avatar="./image/頭像3.jpg" />
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="name">姓名</label>
-          <input type="text" id="name" value="" required />
+
+        <!-- 更換頭像的按鈕 -->
+        <div class="change-avatar-container">
+            <img id="avatarPreview" src="./image/default-avatar.png" alt="頭像預覽" class="profile-picture"
+                style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" />
+            <button id="changeAvatarBtn" class="btn btn-primary">更換頭像</button>
+            <input type="file" id="avatarFile" accept="image/*" style="display:none;" />
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" value="" required />
-          <a href="em_chag.html" aria-label="Change email">變更</a>
-        </div>
-        <div class="form-group">
-          <label for="phone">手機號碼</label>
-          <input type="text" id="phone" value="" required />
-          <a href="ph_chag.html" aria-label="Change phone number">變更</a>
-        </div>
-        <div class="form-group">
-          <label for="password">密碼</label>
-          <input type="password" id="password" value="*********80" readonly />
-          <a href="pwd_chag.html">變更</a>
-        </div>
-        <div class="form-group">
-          <label>性別</label>
-          <input type="radio" id="male" name="gender" value="男" />
-          <label for="male">男性</label>
-          <input type="radio" id="female" name="gender" value="女" />
-          <label for="female">女性</label>
-          <input type="radio" id="other" name="gender" value="其他" />
-          <label for="other">其他</label>
-        </div>
-        <div class="form-group">
-          <label for="birthDate">生日</label>
-          <input type="date" id="birthDate" name="birthDate" required />
-        </div>
-        <div>
-          <label>身高：</label>
-          <input type="number" id="height" name="height" required />
-        </div>
-        <div>
-          <label>體重：</label>
-          <input type="number" id="weight" name="weight" required />
-        </div>
-        <div>
-          <label>運動頻率：</label>
-          <select id="exerciseFrequency" name="exerciseFrequency">
-            <option value="每天運動">每天運動</option>
-            <option value="每周幾次">每周幾次</option>
-            <option value="每周0 - 1次">每周0 - 1次</option>
-          </select>
-        </div>
-        <button type="submit">儲存</button>
-      </form>
+
+
+        <p></p>
+
+        <!-- 表單開始 -->
+        <form id="profileForm">
+            <div class="form-group">
+                <label for="username">使用者帳號</label>
+                <input type="text" id="username" readonly />
+            </div>
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" id="name" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required />
+                <a href="em_chag.html" aria-label="Change email">變更</a>
+            </div>
+            <div class="form-group">
+                <label for="phone">手機號碼</label>
+                <input type="text" id="phone" required />
+                <a href="ph_chag.html" aria-label="Change phone number">變更</a>
+            </div>
+            <div class="form-group">
+                <label>性別</label>
+                <input type="radio" id="male" name="gender" value="男" />
+                <label for="male">男性</label>
+                <input type="radio" id="female" name="gender" value="女" checked />
+                <label for="female">女性</label>
+                <input type="radio" id="other" name="gender" value="其他" />
+                <label for="other">其他</label>
+            </div>
+            <div class="form-group">
+                <label for="birthDate">生日</label>
+                <input type="date" id="birthDate" name="birthDate" required />
+            </div>
+            
+            <!-- 體重欄位 -->
+            <div class="form-group">
+                <label for="weight">體重 (公斤)</label>
+                <input type="number" id="weight" name="weight" min="1" max="300" step="0.1" placeholder="請輸入體重" required />
+            </div>
+            
+            <!-- 身高欄位 -->
+            <div class="form-group">
+                <label for="height">身高 (公分)</label>
+                <input type="number" id="height" name="height" min="30" max="250" step="0.1" placeholder="請輸入身高" required />
+            </div>
+            
+            <button type="submit">儲存</button>
+        </form>
     </main>
 
-    <!-- -- -- -- -- -- JavaScript-- -- -- -- -- --  -->
+    <!-- Footer -->
+    <footer id="footer" class="footer-area">
+        <div class="footer-widget pt-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-8">
+                        <div class="footer-logo mt-50">
+                            <a href="#">
+                                <img src="image/logo.png" alt="LeisurePace Logo" />
+                            </a>
+                            <ul class="footer-social mt-20">
+                                <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
+                                <li><a href="#"><i class="lni-twitter-original"></i></a></li>
+                                <li><a href="#"><i class="lni-google"></i></a></li>
+                                <li><a href="#"><i class="lni-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="footer-link mt-45">
+                            <h4 class="title">關於LeisurePace</h4>
+                            <ul class="mt-15">
+                                <li><a href="about.html">LeisurePace</a></li>
+                                <li><a href="about.html">超慢跑介紹</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="footer-link mt-45">
+                            <ul class="mt-15">
+                                <li><a href="./run/run180.html">超慢跑</a></li>
+                                <li><a href="analyze.html">分析</a></li>
+                                <li><a href="task.html">任務</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="footer-link mt-45">
+                            <ul class="mt-15">
+                                <li><a href="bgstore.html">背景介紹</a></li>
+                                <li><a href="personal.html">個人資料</a></li>
+                                <li><a href="connect.html">聯絡我們</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="copyright text-center">
+                            <p>&copy; LeisurePace</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
     <script>
-      // Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
-        authDomain: "leisurepace-a3d51.firebaseapp.com",
-        projectId: "leisurepace-a3d51",
-        storageBucket: "leisurepace-a3d51.appspot.com",
-        messagingSenderId: "955257567601",
-        appId: "1:955257567601:web:2e06661d84707065fe9ed0",
-      };
+    // Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
+    authDomain: "leisurepace-a3d51.firebaseapp.com",
+    projectId: "leisurepace-a3d51",
+    storageBucket: "leisurepace-a3d51.appspot.com",
+    messagingSenderId: "955257567601",
+    appId: "1:955257567601:web:87073b209d8f2544d68d5b",
+    measurementId: "G-D8HL3GZ4L3"
+};
 
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
-      const auth = firebase.auth();
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
 
-      // 監聽使用者狀態變更
-      auth.onAuthStateChanged((user) => {
+// 当页面加载时检查用户登录状态
+window.onload = function () {
+    auth.onAuthStateChanged(function (user) {
         if (user) {
-          const userUID = user.uid;
+            const userUID = user.uid;
+            document.getElementById("username").value = user.displayName || user.email; // 可显示用户名或email
 
-          // 從 Firestore 獲取使用者的資料
-          const userRef = db.collection("users").doc(userUID);
-          userRef
-            .get()
-            .then((doc) => {
-              if (doc.exists) {
-                const userProfile = doc.data();
-                console.log(userProfile); // 確保這裡能看到正確的數據
+            // 从 Firestore 获取用户资料
+            const userRef = db.collection('users').doc(userUID);
+            userRef.get().then((doc) => {
+    if (doc.exists) {
+        const userProfile = doc.data();
+        document.getElementById("name").value = userProfile.name || "";
+        document.getElementById("email").value = userProfile.email || "";
+        document.getElementById("phone").value = userProfile.phone || "";
+        document.querySelector(`input[name="gender"][value="${userProfile.gender}"]`).checked = true;
+        document.getElementById("birthDate").value = userProfile.birthDate || "";
+        document.getElementById("weight").value = userProfile.weight || "";  // 體重
+        document.getElementById("height").value = userProfile.height || "";  // 身高
 
-                // 填寫表單資料
-                document.getElementById("name").value = userProfile.name || "";
-                document.getElementById("email").value =
-                  userProfile.email || "";
-                document.getElementById("phone").value =
-                  userProfile.phone || "";
-                document.querySelector(
-                  `input[name="gender"][value="${userProfile.gender}"]`
-                ).checked = true;
+        // 更新頭像
+        const avatar = userProfile.avatar || "./image/default-avatar.png";
+        document.getElementById("avatarPreview").src = avatar;
+        document.getElementById("profileImage").src = avatar;
+    } else {
+        console.log("No user profile found.");
+    }
+}).catch((error) => {
+    console.error("Error fetching user data:", error);
+    alert("There was an error fetching your profile. Please try again.");
+});
 
-                // 確保日期格式正確
-                if (userProfile.birthDate && userProfile.birthDate.toDate) {
-                  document.getElementById("birthDate").value =
-                    userProfile.birthDate
-                      .toDate()
-                      .toISOString()
-                      .substring(0, 10);
-                } else {
-                  document.getElementById("birthDate").value =
-                    userProfile.birthDate || "";
-                }
-
-                // 填寫身高、體重、運動頻率
-                document.getElementById("height").value =
-                  userProfile.height || "";
-                document.getElementById("weight").value =
-                  userProfile.weight || "";
-                document.getElementById("exerciseFrequency").value =
-                  userProfile.exerciseFrequency || "每周幾次";
-              } else {
-                console.log("No user profile found.");
-              }
-            })
-            .catch((error) => {
-              console.error("Error fetching user data:", error);
-              alert(
-                "There was an error fetching your profile. Please try again."
-              );
-            });
         } else {
-          // 如果未登入，導向至登入頁面
-          window.location.href = "./login/login.html";
+            // 如果未登录，导向至登录页面
+            window.location.href = './login/login.html';
         }
-      });
+    });
+};
 
-      // 提交表單並更新 Firestore 資料
-      document.getElementById("profileForm").addEventListener("submit", (e) => {
-        e.preventDefault();
+// 头像选择逻辑
+document.addEventListener("DOMContentLoaded", function () {
+    // 为更换头像按钮添加事件监听器
+    document.getElementById("changeAvatarBtn").addEventListener("click", function () {
+        $('#avatarModal').modal('show'); // 显示头像选择器 Modal
+    });
 
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const phone = document.getElementById("phone").value;
-        const gender = document.querySelector(
-          'input[name="gender"]:checked'
-        ).value;
-        const birthDate = document.getElementById("birthDate").value;
-        const height = document.getElementById("height").value;
-        const weight = document.getElementById("weight").value;
-        const exerciseFrequency =
-          document.getElementById("exerciseFrequency").value;
+    // 为每个头像图片添加事件监听器
+    const selectableAvatars = document.querySelectorAll('.selectable-avatar');
+    selectableAvatars.forEach(avatar => {
+        avatar.addEventListener('click', function () {
+            const selectedAvatar = this.dataset.avatar; // 获取选择的头像 URL
+            const avatarPreview = document.getElementById('avatarPreview');
+            const profileImage = document.getElementById('profileImage'); // 获取导航栏中的头像元素
 
-        if (
-          name &&
-          email &&
-          phone &&
-          birthDate &&
-          height &&
-          weight &&
-          exerciseFrequency
-        ) {
-          const userProfile = {
+            // 更新预览头像和导航栏头像
+            avatarPreview.src = selectedAvatar; 
+            profileImage.src = selectedAvatar; 
+            $('#avatarModal').modal('hide'); // 关闭 Modal
+
+            // 保存头像到 Firestore
+            const userUID = auth.currentUser.uid; // 获取当前用户的 UID
+            db.collection('users').doc(userUID).update({
+                avatar: selectedAvatar // 保存头像 URL
+            }).then(() => {
+                console.log("Avatar updated successfully!");
+            }).catch((error) => {
+                console.error("Error updating avatar:", error);
+            });
+        });
+    });
+});
+
+// 登出功能：登出并清空表单内容
+document.querySelector('.dropdown-menu a[href="./login/login.html"]').addEventListener('click', () => {
+    auth.signOut().then(() => {
+        document.getElementById("profileForm").reset(); // 清空表单资料
+        console.log("User signed out.");
+    }).catch((error) => {
+        console.error("Sign out error:", error);
+    });
+});
+
+// 设置档表单提交事件监听器
+document.getElementById("profileForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // 防止頁面重新載入
+
+    // 取得表單輸入值
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const birthDate = document.getElementById("birthDate").value;
+    const weight = document.getElementById("weight").value;
+    const height = document.getElementById("height").value;
+
+    // 確保所有必填欄位已填寫
+    if (name && email && phone && birthDate && weight && height) {
+        const userProfile = {
             name,
             email,
             phone,
             gender,
             birthDate,
-            height,
-            weight,
-            exerciseFrequency,
-          };
+            weight,  // 體重
+            height   // 身高
+        };
 
-          // 更新 Firestore 中的使用者資料
-          db.collection("users")
-            .doc(auth.currentUser.uid)
-            .update(userProfile)
+        // 使用 UID 將用戶資料儲存到 Firestore
+        db.collection('users').doc(auth.currentUser.uid).set(userProfile, { merge: true })
             .then(() => {
-              alert("Profile updated successfully!");
+                alert("Profile updated successfully!");
             })
             .catch((error) => {
-              console.error("Error updating profile:", error);
-              alert(
-                "There was an error updating your profile. Please try again."
-              );
+                console.error("Error updating profile:", error);
+                alert("There was an error updating your profile. Please try again.");
             });
-        } else {
-          alert("Please fill out all required fields.");
-        }
-      });
+    } else {
+        alert("Please fill out all required fields.");
+    }
+});
+
+
+
+
+
+
+
+
+        // JavaScript 代码
+        document.addEventListener("DOMContentLoaded", function () {
+            // 为更换头像按钮添加事件监听器
+            document.getElementById("changeAvatarBtn").addEventListener("click", function () {
+                $('#avatarModal').modal('show'); // 显示头像选择器 Modal
+            });
+
+            // 为每个头像图片添加事件监听器
+            const selectableAvatars = document.querySelectorAll('.selectable-avatar');
+            selectableAvatars.forEach(avatar => {
+                avatar.addEventListener('click', function () {
+                    const selectedAvatar = this.dataset.avatar; // 获取选择的头像 URL
+                    const avatarPreview = document.getElementById('avatarPreview');
+
+                    // 更新预览头像
+                    avatarPreview.src = selectedAvatar; // 仅更新图片源
+                    $('#avatarModal').modal('hide'); // 关闭 Modal
+                });
+            });
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+    // 为更换头像按钮添加事件监听器
+    document.getElementById("changeAvatarBtn").addEventListener("click", function () {
+        $('#avatarModal').modal('show'); // 显示头像选择器 Modal
+    });
+
+    // 为每个头像图片添加事件监听器
+    const selectableAvatars = document.querySelectorAll('.selectable-avatar');
+    selectableAvatars.forEach(avatar => {
+        avatar.addEventListener('click', function () {
+            const selectedAvatar = this.dataset.avatar; // 获取选择的头像 URL
+            const avatarPreview = document.getElementById('avatarPreview');
+            const profileImage = document.getElementById('profileImage'); // 获取导航栏中的头像元素
+
+            // 更新预览头像
+            avatarPreview.src = selectedAvatar; // 仅更新图片源
+            profileImage.src = selectedAvatar; // 更新导航栏头像
+            $('#avatarModal').modal('hide'); // 关闭 Modal
+        });
+    });
+});
+// 为每个头像图片添加事件监听器
+const selectableAvatars = document.querySelectorAll('.selectable-avatar');
+selectableAvatars.forEach(avatar => {
+    avatar.addEventListener('click', function () {
+        const selectedAvatar = this.dataset.avatar; // 获取选择的头像 URL
+        const avatarPreview = document.getElementById('avatarPreview');
+        const profileImage = document.getElementById('profileImage'); // 获取导航栏中的头像元素
+
+        // 更新预览头像
+        avatarPreview.src = selectedAvatar; // 仅更新图片源
+        profileImage.src = selectedAvatar; // 更新导航栏头像
+        $('#avatarModal').modal('hide'); // 关闭 Modal
+
+        // 保存头像到 Firestore
+        const userUID = auth.currentUser.uid; // 获取当前用户的 UID
+        db.collection('users').doc(userUID).update({
+            avatar: selectedAvatar // 保存头像 URL
+        }).then(() => {
+            console.log("Avatar updated successfully!");
+        }).catch((error) => {
+            console.error("Error updating avatar:", error);
+        });
+    });
+});
+
+
+
+
     </script>
-  </body>
+</body>
+
 </html>
