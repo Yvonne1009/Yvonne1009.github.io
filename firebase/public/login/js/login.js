@@ -1,3 +1,6 @@
+
+
+
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     // 使用者已登入。
