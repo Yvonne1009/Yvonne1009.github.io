@@ -263,7 +263,6 @@ async function getVideoStream() {
         "弗里德里希/Two Men Contemplating the Moon.jpg",
         "弗里德里希/Bohemian Landscape.jpg",
         "弗里德里希/Boats in the Harbour at Evening.jpg",
-        "弗里德里希/Evening.jpg",
         "弗里德里希/Day.jpg",
         "弗里德里希/Landscape with rainbow.jpg",
         "弗里德里希/Landscape with Mountain Lake Morning.jpg",
@@ -292,7 +291,6 @@ async function getVideoStream() {
         "雷諾瓦/Vase Basket of Flowers and Fruit.jpg",
       ];
     }
-  
     images.forEach((img) => {
       const button = document.createElement("button");
       const image = document.createElement("img");

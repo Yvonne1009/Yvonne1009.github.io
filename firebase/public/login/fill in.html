@@ -65,56 +65,49 @@
       const db = firebase.firestore();
       const auth = firebase.auth();
 
-      // 監聽使用者登入狀態
-      auth.onAuthStateChanged((user) => {
+      // 提交表單
+      document.getElementById("healthForm").addEventListener("submit", (e) => {
+        e.preventDefault(); // 防止表單提交刷新頁面
+
+        // 收集表單資料
+        const name = document.getElementById("name").value;
+        const birthDate = document.getElementById("birthDate").value;
+        const gender = document.querySelector(
+          'input[name="gender"]:checked'
+        )?.value;
+        const height = document.getElementById("height").value;
+        const weight = document.getElementById("weight").value;
+        const exerciseFrequency =
+          document.getElementById("exerciseFrequency").value;
+        const phone = document.getElementById("phone").value;
+
+        // 獲取當前登入使用者
+        const user = auth.currentUser;
+
         if (user) {
-          // 提交表單
-          document
-            .getElementById("healthForm")
-            .addEventListener("submit", (e) => {
-              e.preventDefault(); // 防止表單提交刷新頁面
-
-              // 收集表單資料
-              const name = document.getElementById("name").value;
-              const birthDate = document.getElementById("birthDate").value;
-              const gender = document.querySelector(
-                'input[name="gender"]:checked'
-              )?.value;
-              const height = document.getElementById("height").value;
-              const weight = document.getElementById("weight").value;
-              const exerciseFrequency =
-                document.getElementById("exerciseFrequency").value;
-              const phone = document.getElementById("phone").value;
-
-              if (!gender) {
-                alert("請選擇性別");
-                return;
-              }
-
-              // 將表單資料儲存到 Firestore
-              db.collection("users")
-                .doc(user.uid)
-                .set({
-                  name: name,
-                  birthDate: birthDate,
-                  gender: gender,
-                  height: parseFloat(height), // 確保身高和體重作為數字保存
-                  weight: parseFloat(weight),
-                  exerciseFrequency: exerciseFrequency,
-                  phone: phone,
-                  email: user.email, // 保存使用者的電子郵件
-                })
-                .then(() => {
-                  alert("資料已成功儲存！");
-                  window.location.href =
-                    "https://yvonne1009.github.io/firebase/public/index.html"; // 可跳轉到成功頁面
-                })
-                .catch((error) => {
-                  console.error("Error updating document: ", error);
-                });
+          // 將表單資料儲存到 Firestore
+          db.collection("users")
+            .doc(user.uid)
+            .set({
+              name: name,
+              birthDate: birthDate,
+              gender: gender,
+              height: parseFloat(height), // 確保身高和體重作為數字保存
+              weight: parseFloat(weight),
+              exerciseFrequency: exerciseFrequency,
+              phone: phone,
+              email: user.email, // 保存使用者的電子郵件
+            })
+            .then(() => {
+              alert("資料已成功儲存！");
+              window.location.href =
+                "https://yvonne1009.github.io/firebase/public/index.html"; // 可跳轉到成功頁面
+            })
+            .catch((error) => {
+              console.error("Error updating document: ", error);
             });
         } else {
-          alert("註冊失敗");
+          alert("使用者未登入");
         }
       });
     </script>

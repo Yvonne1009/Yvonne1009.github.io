@@ -379,97 +379,109 @@
 
 <!-- -------------------------------------------待辦事項清單JS-------------------------------------------------- -->
 <script>
-  function addTask() {
-    const taskText = document.getElementById("taskInput").value.trim();
-    if (taskText === "") return;
+ function addTask() {
+  const taskText = document.getElementById("taskInput").value.trim();
+  if (taskText === "") return;
 
-    const user = auth.currentUser;
-    if (user) {
-      const taskData = {
-        task: taskText,
-        completed: false,
-        date: new Date().toISOString(), // 儲存完整時間
-        year: currentYear,
-        month: currentMonth,
-        day: currentDay,
-      };
+  const user = auth.currentUser;
+  if (user) {
+    // 將日期格式化為子集合名稱，例如 "2024-10-15"
+    const taskDate = `${currentYear}-${currentMonth}-${currentDay}`;
+    
+    const taskData = {
+      task: taskText,
+      date: new Date().toISOString(),
+      year: currentYear,
+      month: currentMonth,
+      day: currentDay,
+    };
 
-      db.collection("users").doc(user.uid).collection("Records").add({
-        type: "task",
-        data: taskData
-      }).then(() => {
-        console.log("任務已新增");
-        document.getElementById("taskInput").value = "";
-        getTasks();
-      });
-    } else {
-      console.error("未找到登入使用者");
-    }
+    // 在特定日期的文檔中添加任務作為字段
+    db.collection("users").doc(user.uid).collection("Records").doc(taskDate).set({
+      task: taskText,
+    }, { merge: true })  // 使用 merge 避免覆蓋其他字段
+    .then(() => {
+      console.log("任務已新增");
+      document.getElementById("taskInput").value = "";
+      getTasks(); // 新增後重新獲取任務
+    });
+  } else {
+    console.error("未找到登入使用者");
   }
+}
 
-  function getTasks() {
-    const user = auth.currentUser;
-    if (user) {
-      db.collection("users").doc(user.uid).collection("Records")
-        .where("type", "==", "task")
-        .get()
-        .then((querySnapshot) => {
-          const tasks = [];
-          querySnapshot.forEach((doc) => tasks.push(doc.data().data));
+
+function getTasks() {
+  const user = auth.currentUser;
+  if (user) {
+    const taskDate = `${currentYear}-${currentMonth}-${currentDay}`;
+
+    // 獲取特定日期的任務（直接從日期文檔中獲取）
+    db.collection("users").doc(user.uid).collection("Records").doc(taskDate)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          const tasks = data.task ? [data.task] : []; // 任務以字段形式存儲
           displayTasks(currentYear, currentMonth, currentDay, tasks);
-        });
-    }
+        } else {
+          console.log("當天無任務");
+          displayTasks(currentYear, currentMonth, currentDay, []);
+        }
+      });
   }
+}
 
-  function displayTasks(year, month, day, tasks) {
-    const taskList = document.getElementById("taskList");
-    taskList.innerHTML = "";
 
-    const selectedDateTasks = tasks.filter((task) => {
-      return task.year === year && task.month === month && task.day === day;
-    });
 
-    selectedDateTasks.forEach((task) => {
-      const taskElement = document.createElement("div");
-      taskElement.classList.add("task");
+function displayTasks(year, month, day, tasks) {
+  const taskList = document.getElementById("taskList");
+  taskList.innerHTML = "";
 
-      // 顯示日期
-      const taskDate = document.createElement("span");
-      taskDate.textContent = `(${task.year}/${task.month}/${task.day}) `;
+  tasks.forEach((task) => {
+    const taskElement = document.createElement("div");
+    taskElement.classList.add("task");
 
-      // 顯示輸入的任務內容
-      const taskText = document.createElement("span");
-      taskText.textContent = task.task;
+    // 顯示日期
+    const taskDate = document.createElement("span");
+    taskDate.textContent = `(${year}/${month}/${day}) `;
 
-      const deleteButton = document.createElement("button");
-      deleteButton.textContent = "刪除";
-      deleteButton.addEventListener("click", () => deleteTask(task));
+    // 顯示輸入的任務內容
+    const taskText = document.createElement("span");
+    taskText.textContent = task;
 
-      taskElement.appendChild(taskDate);  // 顯示日期
-      taskElement.appendChild(taskText);  // 顯示任務
-      taskElement.appendChild(deleteButton);  // 顯示刪除按鈕
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "刪除";
+    deleteButton.addEventListener("click", () => deleteTask({ task, year, month, day }));
 
-      taskList.appendChild(taskElement);
-    });
+    taskElement.appendChild(taskDate);  // 顯示日期
+    taskElement.appendChild(taskText);  // 顯示任務
+    taskElement.appendChild(deleteButton);  // 顯示刪除按鈕
+
+    taskList.appendChild(taskElement);
+  });
+}
+
+
+function deleteTask(task) {
+  const user = auth.currentUser;
+  if (user) {
+    // 以日期作為文檔名稱
+    const taskDate = `${task.year}-${task.month}-${task.day}`;
+    
+    // 刪除該日期文檔中的 task 字段
+    db.collection("users").doc(user.uid).collection("Records").doc(taskDate)
+      .update({
+        task: firebase.firestore.FieldValue.delete()
+      })
+      .then(() => {
+        console.log("任務已刪除");
+        getTasks(); // 刪除後重新獲取任務
+      });
   }
+}
 
-  function deleteTask(task) {
-    const user = auth.currentUser;
-    if (user) {
-      db.collection("users").doc(user.uid).collection("Records")
-        .where("data.task", "==", task.task)
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.forEach((doc) => {
-            db.collection("users").doc(user.uid).collection("Records").doc(doc.id).delete()
-              .then(() => {
-                console.log("任務已刪除");
-                getTasks();
-              });
-          });
-        });
-    }
-  }
+
 
   // 初始化日曆
   generateCalendar(currentYear, currentMonth);

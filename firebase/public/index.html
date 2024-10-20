@@ -337,6 +337,33 @@
     <!-- ------------------ 頁尾區域結束 ------------------ -->
 
     <script>
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
+        authDomain: "leisurepace-a3d51.firebaseapp.com",
+        projectId: "leisurepace-a3d51",
+        storageBucket: "leisurepace-a3d51.appspot.com",
+        messagingSenderId: "955257567601",
+        appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // 驗證用戶登入狀態
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // 如果用戶已登入，顯示歡迎信息
+            document.getElementById("userGreeting").innerHTML = `歡迎回來, ${user.email}!`;
+        } else {
+            // 如果未登入，顯示相應提示
+            document.getElementById("userGreeting").innerHTML = "您尚未登入，請登入以訪問個人資料。";
+        }
+    });
+
+
+
+    
       /// 獲取彈出視窗
       var modal = document.getElementById("myModal");
 
@@ -413,3 +440,10 @@
     <script src="js/index.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+

@@ -260,22 +260,21 @@ async function getVideoStream() {
       ];
     } else if (category === "弗里德里希") {
       images = [
-        "弗里德里希/Two Men Contemplating the Moon.jpg",
-        "弗里德里希/Bohemian Landscape.jpg",
-        "弗里德里希/Boats in the Harbour at Evening.jpg",
-        "弗里德里希/Evening.jpg",
-        "弗里德里希/Day.jpg",
-        "弗里德里希/Landscape with rainbow.jpg",
-        "弗里德里希/Landscape with Mountain Lake Morning.jpg",
-        "弗里德里希/Morning.jpg",
-        "弗里德里希/Hills and Ploughed Fields near Dresden.jpg",
-        "弗里德里希/Landscape with Oak Trees and a Hunter.jpg",
-        "弗里德里希/Rocky Reef on the Seashore.jpg",
-        "弗里德里希/Solitary Tree.jpg",
-        "弗里德里希/Morning in the Mountains.jpg",
-        "弗里德里希/The Times Of Day：The Evening.jpg",
-        "弗里德里希/The Times of Day：The Morning.jpg",
-      ];
+          "弗里德里希/Two Men Contemplating the Moon.jpg",
+          "弗里德里希/Bohemian Landscape.jpg",
+          "弗里德里希/Boats in the Harbour at Evening.jpg",
+          "弗里德里希/Day.jpg",
+          "弗里德里希/Landscape with rainbow.jpg",
+          "弗里德里希/Landscape with Mountain Lake Morning.jpg",
+          "弗里德里希/Morning.jpg",
+          "弗里德里希/Hills and Ploughed Fields near Dresden.jpg",
+          "弗里德里希/Landscape with Oak Trees and a Hunter.jpg",
+          "弗里德里希/Rocky Reef on the Seashore.jpg",
+          "弗里德里希/Solitary Tree.jpg",
+          "弗里德里希/Morning in the Mountains.jpg",
+          "弗里德里希/The Times Of Day：The Evening.jpg",
+          "弗里德里希/The Times of Day：The Morning.jpg",
+        ];
     } else if (category === "雷諾瓦") {
       images = [
         "雷諾瓦/Barges on the Seine.jpg",

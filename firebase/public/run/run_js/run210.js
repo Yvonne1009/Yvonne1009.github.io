@@ -1,4 +1,4 @@
-// 取得視訊串流
+var images = [];// 取得視訊串流
 async function getVideoStream() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -263,7 +263,6 @@ async function getVideoStream() {
         "弗里德里希/Two Men Contemplating the Moon.jpg",
         "弗里德里希/Bohemian Landscape.jpg",
         "弗里德里希/Boats in the Harbour at Evening.jpg",
-        "弗里德里希/Evening.jpg",
         "弗里德里希/Day.jpg",
         "弗里德里希/Landscape with rainbow.jpg",
         "弗里德里希/Landscape with Mountain Lake Morning.jpg",
