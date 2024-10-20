@@ -15,6 +15,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
     <title>LeisurePace_個人資料</title>
   </head>
 
@@ -81,16 +82,16 @@
         </div>
         <div class="form-group">
           <label for="name">姓名</label>
-          <input type="text" id="name" value="Yvonne" required />
+          <input type="text" id="name" value="" required />
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" value="ch*******@gmail.com" required />
+          <input type="email" id="email" value="" required />
           <a href="em_chag.html" aria-label="Change email">變更</a>
         </div>
         <div class="form-group">
           <label for="phone">手機號碼</label>
-          <input type="text" id="phone" value="*********80" required />
+          <input type="text" id="phone" value="" required />
           <a href="ph_chag.html" aria-label="Change phone number">變更</a>
         </div>
         <div class="form-group">
@@ -102,7 +103,7 @@
           <label>性別</label>
           <input type="radio" id="male" name="gender" value="男" />
           <label for="male">男性</label>
-          <input type="radio" id="female" name="gender" value="女" checked />
+          <input type="radio" id="female" name="gender" value="女" />
           <label for="female">女性</label>
           <input type="radio" id="other" name="gender" value="其他" />
           <label for="other">其他</label>
@@ -137,80 +138,11 @@
         <div>
           <label for="avatar-upload">更換頭像：</label>
           <input type="file" id="avatar-upload" accept="image/*" />
-          <button onclick="uploadAvatar()">上傳</button>
+          <button type="button" onclick="uploadAvatar()">上傳</button>
         </div>
         <button type="submit">儲存</button>
       </form>
     </main>
-
-    <!-- Footer -->
-    <footer id="footer" class="footer-area">
-      <div class="footer-widget pt-80">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-8">
-              <div class="footer-logo mt-50">
-                <a href="#">
-                  <img src="image/logo.png" alt="LeisurePace Logo" />
-                </a>
-                <ul class="footer-social mt-20">
-                  <li>
-                    <a href="#"><i class="lni-facebook-filled"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="lni-twitter-original"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="lni-google"></i></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="lni-instagram"></i></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="footer-link mt-45">
-                <h4 class="title">關於LeisurePace</h4>
-                <ul class="mt-15">
-                  <li><a href="about.html">LeisurePace</a></li>
-                  <li><a href="about.html">超慢跑介紹</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="footer-link mt-45">
-                <ul class="mt-15">
-                  <li><a href="./run/run180.html">超慢跑</a></li>
-                  <li><a href="analyze.html">分析</a></li>
-                  <li><a href="task.html">任務</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="footer-link mt-45">
-                <ul class="mt-15">
-                  <li><a href="bgstore.html">背景介紹</a></li>
-                  <li><a href="personal.html">個人資料</a></li>
-                  <li><a href="connect.html">聯絡我們</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="copyright-area">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="copyright text-center">
-                <p>&copy; LeisurePace</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
 
     <!-- -- -- -- -- -- JavaScript-- -- -- -- -- --  -->
     <script>
@@ -224,23 +156,16 @@
         appId: "1:955257567601:web:2e06661d84707065fe9ed0",
       };
 
-      // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       const db = firebase.firestore();
       const auth = firebase.auth();
 
+      // 監聽使用者狀態變更
       auth.onAuthStateChanged((user) => {
         if (user) {
           const userUID = user.uid;
-          const username = user.email;
 
-          // 清空表單資料避免殘留舊資料
-          document.getElementById("profileForm").reset();
-
-          // 更新使用者名稱（登入使用者的 email）
-          document.getElementById("username").value = username;
-
-          // 從 Firestore 獲取新使用者的資料
+          // 從 Firestore 獲取使用者的資料
           const userRef = db.collection("users").doc(userUID);
           userRef
             .get()
@@ -249,6 +174,7 @@
                 const userProfile = doc.data();
                 console.log(userProfile); // 確保這裡能看到正確的數據
 
+                // 填寫表單資料
                 document.getElementById("name").value = userProfile.name || "";
                 document.getElementById("email").value =
                   userProfile.email || "";
@@ -257,8 +183,26 @@
                 document.querySelector(
                   `input[name="gender"][value="${userProfile.gender}"]`
                 ).checked = true;
-                document.getElementById("birthDate").value =
-                  userProfile.birthDate || "";
+
+                // 確保日期格式正確
+                if (userProfile.birthDate && userProfile.birthDate.toDate) {
+                  document.getElementById("birthDate").value =
+                    userProfile.birthDate
+                      .toDate()
+                      .toISOString()
+                      .substring(0, 10);
+                } else {
+                  document.getElementById("birthDate").value =
+                    userProfile.birthDate || "";
+                }
+
+                // 填寫身高、體重、運動頻率
+                document.getElementById("height").value =
+                  userProfile.height || "";
+                document.getElementById("weight").value =
+                  userProfile.weight || "";
+                document.getElementById("exerciseFrequency").value =
+                  userProfile.exerciseFrequency || "每周幾次";
               } else {
                 console.log("No user profile found.");
               }
@@ -275,63 +219,59 @@
         }
       });
 
-      // 登出功能：登出並清空表單內容
-      document
-        .querySelector('.dropdown-menu a[href="./login/login.html"]')
-        .addEventListener("click", () => {
-          auth
-            .signOut()
+      // 提交表單並更新 Firestore 資料
+      document.getElementById("profileForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const gender = document.querySelector(
+          'input[name="gender"]:checked'
+        ).value;
+        const birthDate = document.getElementById("birthDate").value;
+        const height = document.getElementById("height").value;
+        const weight = document.getElementById("weight").value;
+        const exerciseFrequency =
+          document.getElementById("exerciseFrequency").value;
+
+        if (
+          name &&
+          email &&
+          phone &&
+          birthDate &&
+          height &&
+          weight &&
+          exerciseFrequency
+        ) {
+          const userProfile = {
+            name,
+            email,
+            phone,
+            gender,
+            birthDate,
+            height,
+            weight,
+            exerciseFrequency,
+          };
+
+          // 更新 Firestore 中的使用者資料
+          db.collection("users")
+            .doc(auth.currentUser.uid)
+            .update(userProfile)
             .then(() => {
-              document.getElementById("profileForm").reset(); // 清空表單資料
-              console.log("User signed out.");
+              alert("Profile updated successfully!");
             })
             .catch((error) => {
-              console.error("Sign out error:", error);
+              console.error("Error updating profile:", error);
+              alert(
+                "There was an error updating your profile. Please try again."
+              );
             });
-        });
-
-      // 設定檔表單提交事件監聽器
-      document
-        .getElementById("profileForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault(); // Prevent page refresh
-
-          // 取得表單輸入值
-          const name = document.getElementById("name").value;
-          const email = document.getElementById("email").value;
-          const phone = document.getElementById("phone").value;
-          const gender = document.querySelector(
-            'input[name="gender"]:checked'
-          ).value;
-          const birthDate = document.getElementById("birthDate").value;
-
-          // 確保所有必填欄位已填寫
-          if (name && email && phone && birthDate) {
-            const userProfile = {
-              name,
-              email,
-              phone,
-              gender,
-              birthDate,
-            };
-
-            // 使用 UID 將使用者設定檔資料儲存到 Firestore
-            db.collection("users")
-              .doc(auth.currentUser.uid)
-              .set(userProfile)
-              .then(() => {
-                alert("Profile updated successfully!");
-              })
-              .catch((error) => {
-                console.error("Error updating profile:", error);
-                alert(
-                  "There was an error updating your profile. Please try again."
-                );
-              });
-          } else {
-            alert("Please fill out all required fields.");
-          }
-        });
+        } else {
+          alert("Please fill out all required fields.");
+        }
+      });
     </script>
   </body>
 </html>
