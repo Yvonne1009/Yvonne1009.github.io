@@ -119,8 +119,8 @@
         <div class="text-box">
           <p>這個頁面是語音導覽！選好BPM和時間之後按下開始會為你介紹藝術作品。</p>
         </div>
-        <button onclick="pauseResumeCountdown()">
-          <i id="pauseIcon" class="fas fa-pause"></i>
+        <button onclick="pauseResumeCountdown(); startCountdown(currentItemIndex)">
+          <i id="pauseIcon" class="fas fa-play"></i>
         </button>
         <button onclick="previousItem()">
           <i class="fas fa-chevron-left"></i>
