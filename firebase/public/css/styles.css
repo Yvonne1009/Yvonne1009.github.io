@@ -726,3 +726,22 @@ ol {
   width: 20px; /* 調整寬度 */
   height: 20px; /* 高度會自動調整以保持原始比例 */
 }
+
+.header__transparent {
+  margin: auto;
+  width: 100%;
+  z-index: 99;
+}
+
+.sticky {
+  position: fixed !important;
+  top: 0;
+  background: var(--clr-common-white);
+  z-index: 800;
+  right: 0;
+  left: 0;
+  width: 100%;
+  transition: all 0.5s ease-out 0s; /* 將0.3s改為0.5s */
+  box-shadow: 0 0 60px 0 rgba(53, 57, 69, 0.15);
+  animation: 500ms ease-in-out 0s normal none 1 running fadeInDown; /* 將300ms改為500ms */
+}

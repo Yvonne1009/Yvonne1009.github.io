@@ -19,7 +19,7 @@
   </head>
   <body>
     <!-- ------------------ 導覽列區域 ------------------ -->
-    <header id="masthead" class="site-header" role="banner">
+    <header id="masthead" class="site-header header__transparent" role="banner">
       <nav class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
@@ -197,7 +197,7 @@
     <section id="function" class="function-section">
       <div class="row">
         <div class="col-xs-12 col-sm-4">
-          <a href="" class="sbox">
+          <a href="javascript:void(0);" class="sbox ; scroll-to-top">
             <div class="sbox-inner">
               <h3 class="sbox-title">AI導覽</h3>
               <p>
@@ -207,7 +207,7 @@
           </a>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <a href="" class="sbox">
+          <a href="javascript:void(0);" class="sbox ; scroll-to-top">
             <div class="sbox-inner">
               <h3 class="sbox-title">腳步偵測功能</h3>
               <p>
@@ -217,7 +217,7 @@
           </a>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <a href="" class="sbox">
+          <a href="javascript:void(0);" class="sbox ; scroll-to-top">
             <div class="sbox-inner">
               <h3 class="sbox-title">姿勢糾正功能</h3>
               <p>
@@ -338,6 +338,29 @@
 
       setInterval(nextSlide, 5000); // 設置自動播放
     </script>
+
+    <script>
+      window.onscroll = function () {
+        const header = document.getElementById("masthead");
+        const sticky = header.offsetTop;
+      
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+        } else {
+          header.classList.remove("sticky");
+        }
+      };
+      </script>
+      <script>
+        // JavaScript 平滑滾動到最上面
+        document.querySelector('.scroll-to-top').onclick = function() {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // 使用平滑滾動效果
+          });
+        };
+      </script>
+
     <!-- Import the basic jquery lib. -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- Import the associated firebase lib which the order is fixed. -->
