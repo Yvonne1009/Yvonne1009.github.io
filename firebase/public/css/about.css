@@ -957,3 +957,75 @@ ol {
   width: 20px; /* 調整寬度 */
   height: 20px; /* 高度會自動調整以保持原始比例 */
 }
+
+/* Back to top */
+.progress-wrap {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  height: 46px;
+  width: 46px;
+  cursor: pointer;
+  display: block;
+  border-radius: 50px;
+  box-shadow: inset 0 0 0 2px rgba(95, 58, 252, 0.2);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 200ms linear;
+}
+
+.progress-wrap.active-progress {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.progress-wrap::after {
+  position: absolute;
+  font-family: "Font Awesome 5 Pro"; /* 確保正確的字型 */
+  text-align: center;
+  line-height: 46px;
+  font-size: 20px;
+  color: #3887fe;
+  left: 0;
+  top: 0;
+  height: 46px;
+  width: 46px;
+  cursor: pointer;
+  display: block;
+  z-index: 1;
+  transition: all 200ms linear;
+}
+
+.progress-wrap svg path {
+  fill: none;
+}
+
+.progress-wrap svg.progress-circle path {
+  stroke: #3887fe;
+  stroke-width: 4;
+  box-sizing: border-box;
+  transition: all 200ms linear;
+}
+
+/*導覽列特效*/
+.header__transparent {
+  margin: auto;
+  width: 100%;
+  z-index: 99;
+}
+
+.sticky {
+  position: fixed !important;
+  top: 0;
+  background: var(--clr-common-white);
+  z-index: 800;
+  right: 0;
+  left: 0;
+  width: 100%;
+  transition: all 0.5s ease-out 0s; /* 將0.3s改為0.5s */
+  box-shadow: 0 0 60px 0 rgba(53, 57, 69, 0.15);
+  animation: 500ms ease-in-out 0s normal none 1 running fadeInDown; /* 將300ms改為500ms */
+}

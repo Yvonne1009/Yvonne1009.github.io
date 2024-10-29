@@ -37,8 +37,7 @@
               <li class="active"><a href="index.html">首頁</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                  >關於LeisurePace <i class="fa fa-angle-double-down"></i
-                ></a>
+                  >關於LeisurePace </a>
                 <ul class="dropdown-menu">
                   <li><a href="about.html">LeisurePace</a></li>
                   <li><a href="about.html">超慢跑介紹</a></li>
@@ -327,6 +326,12 @@
     </footer>
     <!-- ------------------ 頁尾區域結束 ------------------ -->
 
+     <!-- Back to top start -->
+     <div class="progress-wrap">
+      <img src="../public/image/arrow_upward.svg" alt="Back to top" style="width: 100%; height: 100%;">
+    </div>
+    <!-- Back to top end -->
+
     <script>
     // Firebase configuration
     const firebaseConfig = {
@@ -409,25 +414,34 @@
     </script>
 
     <script>
-      window.onscroll = function () {
-        const header = document.getElementById("masthead");
-        const sticky = header.offsetTop;
-      
-        if (window.pageYOffset > sticky) {
-          header.classList.add("sticky");
-        } else {
-          header.classList.remove("sticky");
-        }
-      };
-      </script>
-      <script>
-        // JavaScript 平滑滾動到最上面
-        document.querySelector('.scroll-to-top').onclick = function() {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth' // 使用平滑滾動效果
-          });
-        };
+      window.onscroll = function() {
+    // 導覽列效果
+    const header = document.getElementById("masthead");
+    const sticky = header.offsetTop;
+
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+
+    // 返回按鈕顯示效果
+    const progressWrap = document.querySelector('.progress-wrap');
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        progressWrap.classList.add('active-progress');
+    } else {
+        progressWrap.classList.remove('active-progress');
+    }
+};
+
+// 點擊時平滑滾動到頁面頂部
+document.querySelector('.progress-wrap').onclick = function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+};
+
       </script>
 
     <!-- Import the basic jquery lib. -->
@@ -454,10 +468,3 @@
     <script src="js/index.js"></script>
   </body>
 </html>
-
-
-
-
-
-
-

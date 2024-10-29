@@ -15,6 +15,8 @@
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <title>LeisurePace</title>
   </head>
   <body>
@@ -36,8 +38,7 @@
               <li class="active"><a href="index1.html">首頁</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                  >關於LeisurePace <i class="fa fa-angle-double-down"></i
-                ></a>
+                  >關於LeisurePace </a>
                 <ul class="dropdown-menu">
                   <li><a href="about1.html">LeisurePace</a></li>
                   <li><a href="about1.html">超慢跑介紹</a></li>
@@ -197,7 +198,7 @@
     <section id="function" class="function-section">
       <div class="row">
         <div class="col-xs-12 col-sm-4">
-          <a href="javascript:void(0);" class="sbox ; scroll-to-top">
+          <a href="" class="sbox">
             <div class="sbox-inner">
               <h3 class="sbox-title">AI導覽</h3>
               <p>
@@ -207,7 +208,7 @@
           </a>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <a href="javascript:void(0);" class="sbox ; scroll-to-top">
+          <a href="" class="sbox">
             <div class="sbox-inner">
               <h3 class="sbox-title">腳步偵測功能</h3>
               <p>
@@ -217,7 +218,7 @@
           </a>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <a href="javascript:void(0);" class="sbox ; scroll-to-top">
+          <a href="" class="sbox">
             <div class="sbox-inner">
               <h3 class="sbox-title">姿勢糾正功能</h3>
               <p>
@@ -285,6 +286,12 @@
     </footer>
     <!-- ------------------ 頁尾區域結束 ------------------ -->
 
+    <!-- Back to top start -->
+    <div class="progress-wrap">
+      <img src="../public/image/arrow_upward.svg" alt="Back to top" style="width: 100%; height: 100%;">
+    </div>
+    <!-- Back to top end -->
+
     <script>
       /// 獲取彈出視窗
       var modal = document.getElementById("myModal");
@@ -339,27 +346,36 @@
       setInterval(nextSlide, 5000); // 設置自動播放
     </script>
 
-    <script>
-      window.onscroll = function () {
-        const header = document.getElementById("masthead");
-        const sticky = header.offsetTop;
-      
-        if (window.pageYOffset > sticky) {
-          header.classList.add("sticky");
-        } else {
-          header.classList.remove("sticky");
-        }
-      };
-      </script>
-      <script>
-        // JavaScript 平滑滾動到最上面
-        document.querySelector('.scroll-to-top').onclick = function() {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth' // 使用平滑滾動效果
-          });
-        };
-      </script>
+<script>
+  window.onscroll = function() {
+// 導覽列效果
+const header = document.getElementById("masthead");
+const sticky = header.offsetTop;
+
+if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+} else {
+    header.classList.remove("sticky");
+}
+
+// 返回按鈕顯示效果
+const progressWrap = document.querySelector('.progress-wrap');
+if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    progressWrap.classList.add('active-progress');
+} else {
+    progressWrap.classList.remove('active-progress');
+}
+};
+
+// 點擊時平滑滾動到頁面頂部
+document.querySelector('.progress-wrap').onclick = function() {
+window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+});
+};
+
+  </script>
 
     <!-- Import the basic jquery lib. -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
