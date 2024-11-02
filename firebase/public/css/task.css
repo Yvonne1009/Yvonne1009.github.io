@@ -31,6 +31,10 @@ button {
   background-color: #80bef5;
   color: #fff;
   cursor: pointer;
+}
+
+.btn-add,
+.btn-del {
   border-radius: 5px;
 }
 
@@ -97,8 +101,6 @@ button:hover {
   margin-bottom: 10px;
 }
 
-
-
 .weight,
 .water,
 .steps,
@@ -110,7 +112,6 @@ button:hover {
   border-radius: 10px;
   margin-bottom: 10px;
   width: 100%;
-
 }
 
 .record-entry {
@@ -191,13 +192,11 @@ button:hover {
 .calendar-day:hover {
   background-color: #f0f0f0;
   /* 将滑鼠碰到日期 */
-
 }
 
 .selected {
   color: rgb(244, 5, 5);
 }
-
 
 .today {
   background-color: #ff0000;
@@ -205,7 +204,6 @@ button:hover {
   border-radius: 50%;
   /* 将日期框的边界半径设置为50%，使其呈现圆形 */
 }
-
 
 /* 導覽列 */
 #masthead .navbar {
@@ -241,17 +239,17 @@ button:hover {
   color: #80bef5;
 }
 
-#masthead .navbar-nav>li>a {
+#masthead .navbar-nav > li > a {
   text-transform: uppercase;
   font-weight: 900;
 }
 
-#masthead .navbar-default .navbar-nav>li>a {
+#masthead .navbar-default .navbar-nav > li > a {
   color: #2c3e50;
 }
 
-#masthead .navbar-default .navbar-nav>li>a:hover,
-#masthead .navbar-default .navbar-nav>li>a:focus {
+#masthead .navbar-default .navbar-nav > li > a:hover,
+#masthead .navbar-default .navbar-nav > li > a:focus {
   color: #80bef5;
 }
 
@@ -260,49 +258,48 @@ button:hover {
   min-width: 175px;
 }
 
-#masthead .dropdown-menu>li>a {
+#masthead .dropdown-menu > li > a {
   color: #2c3e50;
   font-weight: 400;
   text-transform: uppercase;
 }
 
-#masthead .dropdown-menu>li>a:hover,
-#masthead .dropdown-menu>li>a:focus {
+#masthead .dropdown-menu > li > a:hover,
+#masthead .dropdown-menu > li > a:focus {
   color: #80bef5;
 }
 
 @media (max-width: 767px) {
-
-  #masthead .navbar-default .navbar-nav>.active>a,
-  #masthead .navbar-default .navbar-nav>.active>a:hover,
-  #masthead .navbar-default .navbar-nav>.active>a:focus {
+  #masthead .navbar-default .navbar-nav > .active > a,
+  #masthead .navbar-default .navbar-nav > .active > a:hover,
+  #masthead .navbar-default .navbar-nav > .active > a:focus {
     color: #fff !important;
     background-color: #80bef5;
     border-bottom: 0;
   }
 
-  #masthead .navbar-default .navbar-nav>.open>a,
-  #masthead .navbar-default .navbar-nav>.open>a:hover,
-  #masthead .navbar-default .navbar-nav>.open>a:focus {
+  #masthead .navbar-default .navbar-nav > .open > a,
+  #masthead .navbar-default .navbar-nav > .open > a:hover,
+  #masthead .navbar-default .navbar-nav > .open > a:focus {
     border-bottom: 0;
   }
 
-  #masthead .navbar-default .navbar-nav>.open>a,
-  #masthead .navbar-default .navbar-nav>.open>a:hover,
-  #masthead .navbar-default .navbar-nav>.open>a:focus {
+  #masthead .navbar-default .navbar-nav > .open > a,
+  #masthead .navbar-default .navbar-nav > .open > a:hover,
+  #masthead .navbar-default .navbar-nav > .open > a:focus {
     background-color: #000;
     color: #fff !important;
   }
 
-  #masthead .navbar-nav>li>a {
+  #masthead .navbar-nav > li > a {
     border-bottom: 1px solid #ecf0f1;
   }
 
-  #masthead .navbar-nav>li:last-child>a {
+  #masthead .navbar-nav > li:last-child > a {
     border-bottom: 0;
   }
 
-  #masthead .nav>li.dropdown:before {
+  #masthead .nav > li.dropdown:before {
     content: "+";
     position: absolute;
     top: 0;
@@ -313,12 +310,12 @@ button:hover {
     font-weight: 200;
   }
 
-  #masthead .nav>li.dropdown.open:before {
+  #masthead .nav > li.dropdown.open:before {
     content: "-";
     right: 17px;
   }
 
-  #masthead .dropdown-menu>li>a:before {
+  #masthead .dropdown-menu > li > a:before {
     content: "-";
     margin-right: 5px;
     margin-left: -10px;
@@ -335,20 +332,20 @@ button:hover {
     width: 145px;
   }
 
-  #masthead .navbar-nav>li>a {
+  #masthead .navbar-nav > li > a {
     border-top: 4px solid transparent;
     padding-top: 31px;
     padding-bottom: 35px;
   }
 
-  #masthead .navbar-default .navbar-nav>li>a:hover,
-  #masthead .navbar-default .navbar-nav>li>a:focus {
+  #masthead .navbar-default .navbar-nav > li > a:hover,
+  #masthead .navbar-default .navbar-nav > li > a:focus {
     border-top-color: #80bef5;
   }
 
-  #masthead .navbar-default .navbar-nav>.active>a,
-  #masthead .navbar-default .navbar-nav>.active>a:hover,
-  #masthead .navbar-default .navbar-nav>.active>a:focus {
+  #masthead .navbar-default .navbar-nav > .active > a,
+  #masthead .navbar-default .navbar-nav > .active > a:hover,
+  #masthead .navbar-default .navbar-nav > .active > a:focus {
     color: #80bef5;
     background-color: #e7e7e7;
     border-top: 4px solid #80bef5;
@@ -356,9 +353,9 @@ button:hover {
     background-color: transparent;
   }
 
-  #masthead .navbar-default .navbar-nav>.open>a,
-  #masthead .navbar-default .navbar-nav>.open>a:hover,
-  #masthead .navbar-default .navbar-nav>.open>a:focus {
+  #masthead .navbar-default .navbar-nav > .open > a,
+  #masthead .navbar-default .navbar-nav > .open > a:hover,
+  #masthead .navbar-default .navbar-nav > .open > a:focus {
     color: #80bef5;
     background-color: #ffffff;
     border-top: 4px solid #80bef5;
@@ -371,21 +368,21 @@ button:hover {
     background-color: #000;
   }
 
-  #masthead .dropdown-menu>li>a {
+  #masthead .dropdown-menu > li > a {
     padding: 15px 30px;
     color: #fff;
     font-weight: 800;
   }
 
-  #masthead .dropdown-menu>li>a:hover,
-  #masthead .dropdown-menu>li>a:focus {
+  #masthead .dropdown-menu > li > a:hover,
+  #masthead .dropdown-menu > li > a:focus {
     background-color: #80bef5;
     color: #fff !important;
   }
 
-  #masthead .dropdown-menu>.active>a,
-  #masthead .dropdown-menu>.active>a:hover,
-  #masthead .dropdown-menu>.active>a:focus {
+  #masthead .dropdown-menu > .active > a,
+  #masthead .dropdown-menu > .active > a:hover,
+  #masthead .dropdown-menu > .active > a:focus {
     background-color: #80bef5;
   }
 }
@@ -699,7 +696,6 @@ ol {
   font-size: 12px;
   cursor: pointer;
   color: blue;
-
 }
 
 .form-group,
@@ -717,24 +713,18 @@ ol {
 
 #taskInput {
   margin-right: 10px;
+  border-radius: 10px !important;
 }
 
 form {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-}
-
-form label {
-  margin-right: 10px;
+  margin-bottom: 30px;
 }
 
 form input {
-  margin-right: 10px;
+  border-radius: 10px !important;
 }
-
-
-
 
 .today {
   background-color: #fc0606;

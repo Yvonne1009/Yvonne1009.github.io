@@ -90,7 +90,7 @@
       <div class="todo-list">
         <h2 id="todoTitle">待辦事項清單</h2>
         <input type="text" id="taskInput" placeholder="新增待辦事項清單..." />
-        <button onclick="addTask()">新增</button>
+        <button class="btn-add" onclick="addTask()">新增</button>
         <h2>待辦項目</h2>
         <div id="taskList">
         </div>
@@ -106,7 +106,7 @@
 
             <label for="weightInput"></label>
             <input type="number" id="weightInput" placeholder="輸入體重(kg)..." step="0.1" required />
-            <button type="button" onclick="addWeight()">新增</button>
+            <button class="btn-add" type="button" onclick="addWeight()">新增</button>
 
           </form>
           <h2>體重記錄</h2>
@@ -119,8 +119,8 @@
         <div class="water-record">
           <form id="waterForm">
             <label for="waterInput"></label>
-            <input type="number" id="waterInput" placeholder="输入喝水量(ml)..." step="1" required />
-            <button type="button" onclick="addWater()">新增</button>
+            <input type="number" id="waterInput" placeholder="輸入喝水量(ml)..." step="1" required />
+            <button class="btn-add" type="button" onclick="addWater()">新增</button>
           </form>
           <h2>喝水記錄</h2>
           <div id="waterList"></div>
@@ -132,8 +132,8 @@
         <div class="step-record">
           <form id="stepForm">
             <label for="stepInput"></label>
-            <input type="number" id="stepsInput" placeholder="输入步數(steps)..." required />
-            <button type="button" onclick="addSteps()">新增</button>
+            <input type="number" id="stepsInput" placeholder="輸入步數(steps)..." required />
+            <button class="btn-add" type="button" onclick="addSteps()">新增</button>
           </form>
           <h2>步數記錄</h2>
           <div id="stepsList"></div>
@@ -146,7 +146,7 @@
           <form id="runForm">
             <label for="runInput"></label>
             <input type="text" id="runInput" placeholder="新增目標(分鐘)..." required />
-            <button type="button" onclick="addRun()">新增</button>
+            <button class="btn-add" type="button" onclick="addRun()">新增</button>
           </form>
           <h2>超慢跑記錄</h2>
           <div id="runList"></div>
@@ -447,13 +447,13 @@
   </script>
   <!--
 體體體體體體體體體體體體體體體體體體體體體體
-體體　　　　　　　　體體體　　　　　體體體體
-體體　　　體體　　　體體體　　　　　體體體體
-體體　　　體體　　　　　　　　　　　　　　體
-體體　　　　　　　　　　　　　　　　　　　體
-體體　　　　　　　　　　　　　　　　　　　體
-體體　　　　　　　　　　　　　　　　　　　體
-體　　　　　　　　　　　　　　　　　　　　體
+體體　　　　　　　　體體體　　體　　體體體體
+體體　　　體體　　　體體體　　體　　體體體體
+體體　　　體體　　　體　　　　　　　　　　體
+體體　　　　　　　　體　體　　體　　體　　體
+體體　　　　　　　　體　　　　　　　　　　體
+體體　　　　　　　　體　　　　　　　　　　體
+體　　　　　　　　　　　體　　體　　體　　體
 體　　　體體體體　　　　　　　　　　　　　體
 體體體體體體體體體體體體體體體體體體體體體體
 體體　　　　　　　　　　　　　　　　　　　體
@@ -567,6 +567,7 @@
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "刪除";
+        deleteButton.classList.add("btn-del"); 
         deleteButton.addEventListener("click", () => {
           deleteWeight({ time, year, month, day });
         });
@@ -740,6 +741,7 @@
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "刪除";
+        deleteButton.classList.add("btn-del"); 
         deleteButton.addEventListener("click", () => {
           deleteWater({ time, year, month, day });
         });
@@ -912,6 +914,7 @@
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "刪除";
+        deleteButton.classList.add("btn-del"); 
         deleteButton.addEventListener("click", () => {
           deleteSteps({ time, year, month, day });
         });
@@ -1084,6 +1087,7 @@
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "刪除";
+        deleteButton.classList.add("btn-del"); 
         deleteButton.addEventListener("click", () => {
           deleteRun({ time, year, month, day });
         });
@@ -1271,6 +1275,7 @@
         // 创建删除按钮
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "刪除";
+        deleteButton.classList.add("btn-del"); 
         deleteButton.addEventListener("click", () => {
           deleteTask({ time, year, month, day }); // 传递时间、年份、月份和日期
         });
