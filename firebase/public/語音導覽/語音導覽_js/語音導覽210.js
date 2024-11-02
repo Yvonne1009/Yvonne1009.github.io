@@ -148,7 +148,7 @@ function toggleGallery() {
     gallery.style.display = "block";
 
     // 建立類別按鈕
-    var categories = ["何木火", "莫內", "雷諾瓦", "畢卡索", "弗里德里希"];
+    var categories = ["雷諾瓦", "莫內",  "畢卡索", "弗里德里希","何木火"];
     categories.forEach((category) => {
       var button = document.createElement("button");
       button.textContent = category;

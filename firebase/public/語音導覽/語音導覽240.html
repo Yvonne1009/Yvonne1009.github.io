@@ -1,200 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="../image/logo.ico" type="image/x-icon" />
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
-    <title>LeisurePace_超慢跑</title>
-    <link rel="stylesheet" href="語音導覽_css/bootstrap.min.css" />
-    <link rel="stylesheet" href="語音導覽_css/語音導覽.css" />
-  </head>
-  <body>
-    <!-- menu 開始 -->
-    <header id="masthead" class="site-header" role="banner">
-      <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <button
-              type="button"
-              class="navbar-toggle"
-              data-toggle="collapse"
-              data-target=".navbar-ex1-collapse"
-            ></button>
-            <a class="navbar-brand" href="../index.html"> LeisurePace </a>
-          </div>
-          <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="../index.html">首頁</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                  >關於LeisurePace
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="../about.html">LeisurePace</a></li>
-                  <li><a href="../about.html">超慢跑介紹</a></li>
-                </ul>
-              </li>
-              <li class="active" class="dropdown">
-                <a href="../run/run240.html">超慢跑 </a>
-              </li>
-              <li class="dropdown">
-                <a href="../analyze.html">分析</a>
-              </li>
-              <li class="dropdown">
-                <a href="../task.html">任務 </a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img
-                    id="profileImage"
-                    src="../image/default-avatar.png"
-                    class="profile-picture"
-                    style="border-radius: 50%"
-                  />
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="../bgstore.html">背景介紹</a></li>
-                  <li><a href="../personal.html">個人資料</a></li>
-                  <li><a href="../connect.html">聯絡我們</a></li>
-                  <li><a href="../login/login.html">登出</a></li>
-                </ul>
-              </li>
-            </ul>
-            <!-- /.nav -->
-          </div>
-          <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-      </nav>
-      <!-- /.navbar -->
-    </header>
-    <!-- menu 結束 -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="語音導覽_css/語音導覽.css" />
+  <link rel="icon" href="../image/logo.ico" type="image/x-icon" />
+  <script src="語音導覽_js/語音導覽240.js"></script>
+  <link rel="stylesheet" href="語音導覽_css/bootstrap.min.css" />
 
-    <div class="gray-container">
-      <br /><br />
-      <div class="switch-button">
-        <div class="bpm">
-          <button
-            onclick="window.location.href='../run/run240.html';"
-            class="item"
-            id="start"
-          >
-            開始
-          </button>
-          <div id="myDropdown" class="bpm-content"></div>
-        </div>
-        <div class="guidebpm">
-          <button
-            onclick="guidetoggleDropdown();"
-            class="item"
-            id="voice_guide"
-          >
-            語音導覽
-          </button>
-          <div id="guideDropdown" class="guidebpm-content">
-            <a href="語音導覽120.html">120bpm</a>
-            <a href="語音導覽150.html">150bpm</a>
-            <a href="語音導覽180.html">180bpm</a>
-            <a href="語音導覽210.html">210bpm</a>
-            <a href="語音導覽240.html" style="background-color: #606060; color: white">240bpm</a>
-          </div>
-        </div>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
-        <div class="text-box">
-          <p>這個頁面是語音導覽！選好BPM和時間之後按下開始會為你介紹藝術作品。</p>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+
+
+  <title>LeisurePace_超慢跑</title>
+</head>
+
+<body>
+  <!-- menu 開始 -->
+  <header id="masthead" class="site-header" role="banner">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+            data-target=".navbar-ex1-collapse"></button>
+          <a class="navbar-brand" href="../index.html"> LeisurePace </a>
         </div>
-        <button onclick="pauseResumeCountdown(); startCountdown(currentItemIndex)">
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../index.html">首頁</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">關於LeisurePace
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="../about.html">LeisurePace</a></li>
+                <li><a href="../about.html">超慢跑介紹</a></li>
+              </ul>
+            </li>
+            <li class="active" class="dropdown">
+              <a href="../run/run240.html">超慢跑 </a>
+            </li>
+            <li class="dropdown">
+              <a href="../analyze.html">分析</a>
+            </li>
+            <li class="dropdown">
+              <a href="../task.html">任務 </a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img id="profileImage" src="../image/default-avatar.png" class="profile-picture"
+                  style="border-radius: 50%" />
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="../bgstore.html">背景介紹</a></li>
+                <li><a href="../personal.html">個人資料</a></li>
+                <li><a href="../connect.html">聯絡我們</a></li>
+                <li><a href="../login/login.html">登出</a></li>
+              </ul>
+            </li>
+          </ul>
+          <!-- /.nav -->
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+    <!-- /.navbar -->
+  </header>
+  <!-- menu 結束 -->
+
+  <div class="gray-container">
+    <br /><br />
+    <div class="switch-button">
+      <div class="bpm">
+        <button onclick="window.location.href='../run/run240.html';" class="item" id="start">
+          開始
+        </button>
+        <div id="myDropdown" class="bpm-content"></div>
+      </div>
+      <div class="guidebpm">
+        <button onclick="guidetoggleDropdown();" class="item" id="voice_guide">
+          語音導覽
+        </button>
+        <div id="guideDropdown" class="guidebpm-content">
+          <a href="語音導覽120.html">120bpm</a>
+          <a href="語音導覽150.html">150bpm</a>
+          <a href="語音導覽180.html">180bpm</a>
+          <a href="語音導覽210.html">210bpm</a>
+          <a href="語音導覽240.html" style="background-color: #606060; color: white">240bpm</a>
+        </div>
+      </div>
+
+      <div class="text-box">
+        <p>這個頁面是語音導覽！選好BPM和時間之後按下開始會為你介紹藝術作品。</p>
+      </div>
+       <button onclick="pauseResumeCountdown(); startCountdown(currentItemIndex)">
           <i id="pauseIcon" class="fas fa-play"></i>
         </button>
-        <button onclick="previousItem()">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button
-          class="item"
-          id="itemButton"
-          onclick="startCountdown(currentItemIndex)"
-        >
-          240BPM/10分鐘
-        </button>
-        <button onclick="nextItem()">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-        <div class="additional-info">
-          <label for="weight">體重：</label>
-          <input type="number" id="weight" placeholder="請輸入:" />
-          <button onclick="confirmWeight()">確認</button>
-          <span>步數：</span>
-          <span>距離：</span><span>m</span>
-          大卡：
-          <div id="numberElement">0</div>
-          <div
-            id="media"
-            style="
+      <button onclick="previousItem()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="item" id="itemButton" onclick="startCountdown(currentItemIndex)">
+        240BPM/10分鐘
+      </button>
+      <button onclick="nextItem()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <div class="additional-info">
+        <label for="weight">體重：</label>
+        <input type="number" id="weight" placeholder="請輸入:" />
+        <button onclick="confirmWeight()">確認</button>
+        <span>步數：</span>
+        <span>距離：</span><span>m</span>
+        大卡：
+        <div id="numberElement">0</div>
+        <div id="media" style="
               display: flex;
               justify-content: flex-end;
               align-items: center;
-            "
-          >
-            <img
-              id="galleryButton"
-              src="image.png"
-              onclick="toggleGallery()"
-            />
-            <div class="category-menu" id="categoryMenu"></div>
-            <div class="gallery" id="imageGallery"></div>
-          </div>
+            ">
+          <img id="galleryButton" src="image.png" onclick="toggleGallery()" />
+          <div class="category-menu" id="categoryMenu"></div>
+          <div class="gallery" id="imageGallery"></div>
         </div>
       </div>
-      <div class="countdown-container">
-        <span>時間:</span>
-        <div id="countdownTimer" class="countdown-timer"></div>
-      </div>
-
-      <video id="video" autoplay></video>
-
-      <div id="gifContainer" class="gif-container">
-        <img src="runingmen.gif" alt="Your GIF" />
-      </div>
-
-      <br /><br />
     </div>
+    <div class="countdown-container">
+      <span>時間:</span>
+      <div id="countdownTimer" class="countdown-timer"></div>
+    </div>
+
+    <video id="video" autoplay></video>
+
+    <div id="gifContainer" class="gif-container">
+      <img src="runingmen.gif" alt="Your GIF" />
+    </div>
+
+    <br /><br />
+  </div>
   </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"
-    ></script>
-    <script
-      defer
-      src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.17.0/full/pyodide.js"></script>
-    <script defer src="../js/init-firebase.js"></script>
-    <script src="語音導覽_js/SlowJogging_main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic"></script>
-    <script src="語音導覽_js/語音導覽240.js"></script>
-  </body>
+  <script>
+    // Firebase configuration
+    // 初始化 Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
+      authDomain: "leisurepace-a3d51.firebaseapp.com",
+      projectId: "leisurepace-a3d51",
+      storageBucket: "leisurepace-a3d51.appspot.com",
+      messagingSenderId: "955257567601",
+      appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+
+    // 頁面載入時檢查用戶登錄狀態
+    window.onload = function () {
+      auth.onAuthStateChanged(function (user) {
+        if (user) {
+          const userUID = user.uid;
+          const userRef = db.collection('users').doc(userUID);
+          userRef.get().then((doc) => {
+            if (doc.exists) {
+              const userProfile = doc.data();
+              const avatar = userProfile.avatar || "./image/default-avatar.png";
+              document.getElementById("profileImage").src = avatar;
+            } else {
+              console.error("無法找到使用者文件");
+            }
+          }).catch((error) => {
+            console.error("取得使用者資料時發生錯誤:", error);
+          });
+        } else {
+          window.location.href = '../login/login.html';
+        }
+      });
+    };
+
+
+
+  </script>
+
+  <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.17.0/full/pyodide.js"></script>
+  <script src="語音導覽_js/SlowJogging_main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic"></script>
+</body>
+
 </html>

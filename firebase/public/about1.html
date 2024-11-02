@@ -34,7 +34,7 @@
   </head>
   <body>
     <!-- menu 開始 -->
-    <header id="masthead" class="site-header" role="banner">
+    <header id="masthead" class="site-header header__transparent" role="banner">
       <nav class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
@@ -276,8 +276,8 @@
       </div>
     </footer>
     <!-- footer 結束 -->
-
-    <!-- Back to top start -->
+	
+	<!-- Back to top start -->
     <div class="progress-wrap">
       <img
         src="../public/image/arrow_upward.svg"
@@ -286,17 +286,8 @@
       />
     </div>
     <!-- Back to top end -->
-
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Include Slick JavaScript -->
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-    ></script>
-
-    <!-- Initialize Slick Carousel -->
+	
+	<!-- Initialize Slick Carousel -->
     <script>
       $(document).ready(function () {
         $(".single-item").slick({
@@ -339,6 +330,28 @@
           behavior: "smooth",
         });
       };
+    </script>
+	
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include Slick JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+
+    <!-- Initialize Slick Carousel -->
+    <script>
+      $(document).ready(function () {
+        $(".single-item").slick({
+          dots: true, // Show navigation dots
+          infinite: true, // Enable infinite loop
+          speed: 180, // Animation speed
+          slidesToShow: 1, // Number of slides to show at a time
+          adaptiveHeight: true, // Adjust slide height based on content
+        });
+      });
     </script>
     <!-- Import the basic jquery lib. -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

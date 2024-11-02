@@ -13,7 +13,6 @@
 
   <!-- Bootstrap JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
   <link rel="icon" href="image/logo.ico" type="image/x-icon" />
 </head>
 <body>
@@ -148,7 +147,7 @@
               <ul class="mt-15">
                 <li><a href="./run/run180.html">超慢跑</a></li>
                 <li><a href="analyze.html">分析</a></li>
-                <li><a href="task.html">任務</a></li>
+                <li><a href="task.html">紀錄</a></li>
               </ul>
             </div>
           </div>
@@ -186,7 +185,11 @@
    <!-- 引入 Firebase Auth SDK -->
    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
 
+
+
+   
   <script>
+// Firebase configuration
   // 初始化 Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
@@ -197,9 +200,39 @@
     appId: "1:955257567601:web:2e06661d84707065fe9ed0",
   };
 
-  firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
   const auth = firebase.auth();
+
+// 頁面載入時檢查用戶登錄狀態
+window.onload = function () {
+    auth.onAuthStateChanged(function (user) {
+        if (user) {
+            // 獲取用戶的 UID
+            const userUID = user.uid;
+
+            // 從 Firestore 獲取用戶資料
+            const userRef = db.collection('users').doc(userUID);
+            userRef.get().then((doc) => {
+                if (doc.exists) {
+                    const userProfile = doc.data();
+                    // 更新頭像
+                    const avatar = userProfile.avatar || "./image/default-avatar.png";
+                    document.getElementById("profileImage").src = avatar;
+                }
+            }).catch((error) => {
+                console.error("Error fetching user data:", error);
+            });
+        } else {
+            // 如果未登錄，導向至登錄頁面
+            window.location.href = './login/login.html';
+        }
+    });
+};
+
+
+
 
   // 提交意見表單
   document.getElementById("feedbackForm").addEventListener("submit", (e) => {

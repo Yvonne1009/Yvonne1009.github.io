@@ -158,8 +158,8 @@ async function getVideoStream() {
       // 顯示畫廊
       gallery.style.display = "block";
   
-      // 建立類別按鈕
-      var categories = ["何木火", "莫內", "雷諾瓦", "畢卡索", "弗里德里希"];
+       // 建立類別按鈕
+      var categories = [ "雷諾瓦","莫內", "畢卡索", "弗里德里希","何木火"];
       categories.forEach((category) => {
         var button = document.createElement("button");
         button.textContent = category;
@@ -201,30 +201,26 @@ async function getVideoStream() {
   function showCategory(category) {
     var gallery = document.getElementById("imageGallery");
     gallery.innerHTML = "";
-  
+
     var images = [];
-    if (category === "何木火") {
+    if (category === "雷諾瓦") {
       images = [
-        "何木火/一葉知秋.jpg",
-        "何木火/人止關寫生.jpg",
-        "何木火/月世界之歌.jpg",
-        "何木火/月冷光寒.jpg",
-        "何木火/冰天雪地.png",
-        "何木火/金碧山水.jpg",
-        "何木火/紅塵夢.png",
-        "何木火/飛向高峰.jpg",
-        "何木火/高處不勝寒.png",
-        "何木火/野地清香.png",
-        "何木火/尋.png",
-        "何木火/絕塵.png",
-        "何木火/橫越沙塵.jpg",
-      ];
+        "雷諾瓦/Landscape near Pont Aven.jpg",
+        "雷諾瓦/Barges on the Seine.jpg",
+        "雷諾瓦/Field of Banana Trees.jpg",
+        "雷諾瓦/Forest Path.jpg",
+        "雷諾瓦/The Laundress.jpg",
+        "雷諾瓦/The Rose Garden at Wargemont.jpg",
+        "雷諾瓦/青蛙塘.jpg",
+        "雷諾瓦/Bouquets of Flowers.jpg",
+        "雷諾瓦/The Seine at Asnieres (The Skiff).jpg",
+        "雷諾瓦/Roses.jpg",
+        "雷諾瓦/House and Figure among the Trees.jpg",
+        "雷諾瓦/Vase Basket of Flowers and Fruit.jpg",
+      ]
     } else if (category === "莫內") {
-      images = [
-        "莫內/Impression Sunrise.jpg",
+      images = [  
         "莫內/Jeanne-Marguerite Lecadre in the Garden.jpg",
-        "莫內/A Farmyard in Normandy.jpg",
-        "莫內/The Bridge, Amsterdam.jpg",
         "莫內/The Church at Varengeville and the Gorge of Les Moutiers.jpg",
         "莫內/The Water-Lily Pond.jpg",
         "莫內/Garden at Sainte-Adresse.jpg",
@@ -235,18 +231,20 @@ async function getVideoStream() {
         "莫內/The Garden.jpg",
         "莫內/The Boat Studio.jpg",
         "莫內/Fruit Basket with Apples and Grapes.jpg",
-        "莫內/Fruit Basket with Apples and Grapes.jpg",
         "莫內/Anglers.jpg",
         "莫內/In the Garden.jpg",
         "莫內/The Luncheon.jpg",
         "莫內/Chrysanthemums.jpg",
+        "莫內/A Farmyard in Normandy.jpg",
+        "莫內/The Bridge, Amsterdam.jpg",
+        "莫內/Impression Sunrise.jpg",
       ];
     } else if (category === "畢卡索") {
       images = [
+        "畢卡索/Square du Vert-Galant.jpg",
         "畢卡索/Houses on the hill.jpg",
         "畢卡索/Cafe Royan.jpg",
         "畢卡索/格爾尼卡.jpg",
-        "畢卡索/Square du Vert-Galant.jpg",
         "畢卡索/Studio.jpg",
         "畢卡索/Plaster head and arm.jpg",
         "畢卡索/The sculptor.jpg",
@@ -266,7 +264,6 @@ async function getVideoStream() {
         "弗里德里希/Day.jpg",
         "弗里德里希/Landscape with rainbow.jpg",
         "弗里德里希/Landscape with Mountain Lake Morning.jpg",
-        "弗里德里希/Morning.jpg",
         "弗里德里希/Hills and Ploughed Fields near Dresden.jpg",
         "弗里德里希/Landscape with Oak Trees and a Hunter.jpg",
         "弗里德里希/Rocky Reef on the Seashore.jpg",
@@ -275,22 +272,24 @@ async function getVideoStream() {
         "弗里德里希/The Times Of Day：The Evening.jpg",
         "弗里德里希/The Times of Day：The Morning.jpg",
       ];
-    } else if (category === "雷諾瓦") {
+    } else if (category === "何木火") {
       images = [
-        "雷諾瓦/Barges on the Seine.jpg",
-        "雷諾瓦/Field of Banana Trees.jpg",
-        "雷諾瓦/Forest Path.jpg",
-        "雷諾瓦/Landscape near Pont Aven.jpg",
-        "雷諾瓦/The Laundress.jpg",
-        "雷諾瓦/The Rose Garden at Wargemont.jpg",
-        "雷諾瓦/青蛙塘.jpg",
-        "雷諾瓦/Bouquets of Flowers.jpg",
-        "雷諾瓦/The Seine at Asnieres (The Skiff).jpg",
-        "雷諾瓦/Roses.jpg",
-        "雷諾瓦/House and Figure among the Trees.jpg",
-        "雷諾瓦/Vase Basket of Flowers and Fruit.jpg",
+        "何木火/月世界之歌.jpg",
+        "何木火/月冷光寒.jpg",
+        "何木火/冰天雪地.png",
+        "何木火/金碧山水.jpg",
+        "何木火/紅塵夢.png",
+        "何木火/飛向高峰.jpg",
+        "何木火/高處不勝寒.png",
+        "何木火/野地清香.png",
+        "何木火/尋.png",
+        "何木火/絕塵.png",
+        "何木火/橫越沙塵.jpg",
+        "何木火/一葉知秋.jpg",
+        "何木火/人止關寫生.jpg",
       ];
     }
+
     images.forEach((img) => {
       const button = document.createElement("button");
       const image = document.createElement("img");

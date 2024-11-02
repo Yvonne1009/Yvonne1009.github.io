@@ -1,126 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/bgstore.css" />
-    <link rel="icon" href="image/logo.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <title>LeisurePace_背景介紹</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  </head>
-  <body>
-    <!-- menu 開始 -->
-    <header id="masthead" class="site-header" role="banner">
-      <nav class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <button
-              type="button"
-              class="navbar-toggle"
-              data-toggle="collapse"
-              data-target=".navbar-ex1-collapse"
-            ></button>
-            <a class="navbar-brand" href="index.html"> LeisurePace </a>
-          </div>
-          <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="index.html">首頁</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                  >關於LeisurePace <i class="fa fa-angle-double-down"></i
-                ></a>
-                <ul class="dropdown-menu">
-                  <li><a href="about.html">LeisurePace</a></li>
-                  <li><a href="about.html">超慢跑介紹</a></li>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/bgstore.css" />
+  <link rel="icon" href="image/logo.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-                  <li><a href="about.html">製作團隊</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="./run/run180.html">超慢跑 </a>
-              </li>
-              <li class="dropdown">
-                <a href="analyze.html">分析</a>
-              </li>
-              <li class="dropdown">
-                <a href="task.html">任務 </a>
-              </li>
-              <li class="active" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img
-                  id="profileImage"
-                  src="./image/default-avatar.png"
-                  class="profile-picture"
-                  style="border-radius: 50%"
-                />
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="bgstore.html">背景介紹</a></li>
-                  <li><a href="personal.html">個人資料</a></li>
-                  <li><a href="connect.html">聯絡我們</a></li>
-                  <li><a href="./login/login.html">登出</a></li>
-              </ul>              
-              </li>
-            </ul>
-            <!-- /.nav -->
-          </div>
-          <!-- /.navbar-collapse -->
+  <title>LeisurePace_背景介紹</title>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Bootstrap JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+
+
+
+</head>
+
+<body>
+  <!-- menu 開始 -->
+  <header id="masthead" class="site-header" role="banner">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+            data-target=".navbar-ex1-collapse"></button>
+          <a class="navbar-brand" href="index.html">LeisurePace</a>
         </div>
-        <!-- /.container -->
-      </nav>
-      <!-- /.navbar -->
-    </header>
-    <!-- menu 結束 -->
-
-    <div class="main">
-      <h1>LeisurePace_背景介紹</h1>
-      <hr />
-      <div id="myBtnContainer">
-        <button class="btn active" onclick="filterSelection('all')">
-          全部
-        </button>
-        <button class="btn" onclick="filterSelection('people')">何木火</button>
-        <button class="btn" onclick="filterSelection('Renoir')">
-          雷諾瓦
-        </button>
-        <button class="btn" onclick="filterSelection('monet')">莫內</button>
-        <button class="btn" onclick="filterSelection('Picasso')">畢卡索</button>
-        <button class="btn" onclick="filterSelection('Friedrich')">弗里德里希</button>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="index.html">首頁</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">關於LeisurePace <i
+                  class="fa fa-angle-double-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="about.html">LeisurePace</a></li>
+                <li><a href="about.html">超慢跑介紹</a></li>
+              </ul>
+            </li>
+            <li><a href="./run/run180.html">超慢跑</a></li>
+            <li><a href="analyze.html">分析</a></li>
+            <li><a href="task.html">紀錄</a></li>
+            <li class="dropdown active">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img id="profileImage" src="./image/default-avatar.png" class="profile-picture"
+                  style="border-radius: 50%" alt="Profile Image" />
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="bgstore.html">背景介紹</a></li>
+                <li><a href="personal.html">個人資料</a></li>
+                <li><a href="connect.html">聯絡我們</a></li>
+                <li><a href="./login/login.html">登出</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
+    </nav>
+  </header>
 
-      <!-- Portfolio Gallery Grid -->
-      <div class="row">
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="ImpressionSunrise"
-              src="image/莫內/Impression Sunrise.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>印象．日出</h4>
-            <p>Impression, Sunrise</p>
+  <div class="main">
+    <h1>LeisurePace_背景介紹</h1>
+    <hr />
+    <div id="myBtnContainer">
+      <button class="btn active" onclick="filterSelection('all')">
+        全部
+      </button>
+      <button class="btn" onclick="filterSelection('people')">何木火</button>
+      <button class="btn" onclick="filterSelection('Renoir')">
+        雷諾瓦
+      </button>
+      <button class="btn" onclick="filterSelection('monet')">莫內</button>
+      <button class="btn" onclick="filterSelection('Picasso')">畢卡索</button>
+      <button class="btn" onclick="filterSelection('Friedrich')">弗里德里希</button>
+    </div>
+
+    <!-- Portfolio Gallery Grid -->
+    <div class="row">
+      <div class="column monet">
+        <div class="content">
+          <img id="ImpressionSunrise" src="image/莫內/Impression Sunrise.jpg" alt="" style="width: 100%" />
+          <h4>印象．日出</h4>
+          <p>Impression, Sunrise</p>
+        </div>
+      </div>
+      <!-- The Modal 彈跳視窗 -->
+      <div id="myModal" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img01" />
           </div>
-        </div>
-        <!-- The Modal 彈跳視窗 -->
-        <div id="myModal" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img01" />
-        </div>
-        <div class="columns">
-          <p>《印象·日出》（Impression, Sunrise）是法國畫家克勞德·莫奈（Claude Monet）於1872年創作的一幅著名畫作，這幅作品是印象派運動的命名之作。
-            <br>
+          <div class="columns">
+            <p>《印象·日出》（Impression, Sunrise）是法國畫家克勞德·莫奈（Claude Monet）於1872年創作的一幅著名畫作，這幅作品是印象派運動的命名之作。
+              <br>
             <h4>創作背景</h4>
             《印象·日出》描繪了法國勒阿弗爾港口的晨曦景象。勒阿弗爾是莫奈的家鄉，這幅畫反映了他對這個港口城市的深厚情感。畫作於1872年完成，並於1874年首次在巴黎的印象派畫展上展出。這次展覽由一群包括莫奈在內的前衛藝術家組織，被稱為“無名畫家、雕塑家、版畫家協會的首次展覽”。
             <br>
@@ -134,85 +114,77 @@
             畫面描繪了勒阿弗爾港口的日出景象。畫面的中心是一輪橙色的太陽，周圍的天空和水面被染成藍灰色。前景中的船隻和港口設施以簡單的輪廓呈現，背景中還能隱約看到煙囪和桅杆，展示了港口城市的繁忙景象。
             <br>
             <h4>藝術價值</h4>
-            《印象·日出》是印象派運動的代表作品，也是其名稱的由來。畫作在當時引起了極大的爭議，因為它與傳統的藝術風格大相徑庭。批評家路易·勒羅伊（Louis Leroy）在評論中諷刺性地使用了“印象派”一詞，最終這個名稱被印象派藝術家們接受並廣泛使用。
+            《印象·日出》是印象派運動的代表作品，也是其名稱的由來。畫作在當時引起了極大的爭議，因為它與傳統的藝術風格大相徑庭。批評家路易·勒羅伊（Louis
+            Leroy）在評論中諷刺性地使用了“印象派”一詞，最終這個名稱被印象派藝術家們接受並廣泛使用。
             <br>
             <h4>收藏</h4>
             這幅畫現收藏於巴黎的瑪摩丹莫奈美術館（Musée Marmottan Monet）。這座美術館擁有大量莫奈的作品，是研究和欣賞莫奈藝術的重要場所。
             <br>
             總之，《印象·日出》不僅是莫奈的代表作之一，也是印象派運動的重要里程碑。它以其獨特的光影處理和色彩運用，展現了莫奈卓越的藝術才華和對自然的深刻理解，對後世的現代藝術產生了深遠的影響。</p>
+          </div>
+        </div>
+        <div id="caption"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="TheWaterLilyPond" src="image/莫內/The Water-Lily Pond.jpg" alt="" style="width: 100%" />
+          <h4>睡蓮池</h4>
+          <p></p>
         </div>
       </div>
-          <div id="caption"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="TheWaterLilyPond"
-              src="image/莫內/The Water-Lily Pond.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>睡蓮池</h4>
-            <p></p>
+      <!-- The Modal -->
+      <div id="myModal2" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img02" />
           </div>
-        </div>
-        <!-- The Modal -->
-        <div id="myModal2" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-              <img class="modal-content" id="img02" />
-            </div>
-            <div class="columns">
-              <p>《睡蓮池》（The Water-Lily Pond）是克勞德·莫奈（Claude Monet）於1899年創作的一幅作品，屬於他著名的《睡蓮》系列中的一部分。這幅畫作反映了莫奈對光線、顏色和自然景觀的深入探索。
-                <br>
-                <h4>創作背景</h4>
-                在1890年代末，莫奈將其創作重心轉向了位於吉維尼（Giverny）的花園中的睡蓮池。他在這裡建立了一個巨大的睡蓮池，並開始創作大量的畫作，這些畫作集中展示了他對自然景觀的感知和表達。莫奈的這一系列作品，特別是睡蓮池，展現了他在藝術技術上的成熟與創新。
-                <br>
-                <h4>畫作風格</h4>
-                《睡蓮池》展示了莫奈的印象派風格的成熟特徵：
-                <br>
-                光影效果：畫作強調了水面上的光影變化，莫奈通過色彩的微妙變化來捕捉不同時間和天氣條件下的光線效果。
-                抽象與具象的結合：畫面中既有具體的物體，如睡蓮、樹木和水面，也有大量的抽象元素，如色彩的流動和形狀的變化，這種結合使得畫作在視覺上具有極大的張力和深度。
-                筆觸與色彩：莫奈使用了快速且自由的筆觸，通過對色彩的重疊和混合，表現出水面的動態和寧靜的美感。
-                <h4>畫作內容</h4>
-                畫作描繪了一片寧靜的水面，水面上漂浮著各式各樣的睡蓮。遠處的樹木和天空的反射也映入水中，營造出一種夢幻般的景象。整個畫面充滿了和諧與平靜，展示了莫奈對自然界光線和色彩變化的敏感捕捉。
-                <br>
-                <h4>藝術價值</h4>
-                《睡蓮池》是莫奈《睡蓮》系列中最具代表性的作品之一，這些作品在藝術史上具有重要地位。莫奈通過這些作品，開創了現代藝術中對光影和色彩表現的新視角，對後來的藝術家產生了深遠的影響。
-                <br>
-                <h4>收藏</h4>
-                《睡蓮池》中的多幅作品被收藏在世界各地的主要博物館和美術館中，包括巴黎奧賽博物館（Musée d'Orsay）和美國的華盛頓國家美術館（National Gallery of Art）等。
-                <br>
-                總之，《睡蓮池》通過其獨特的視覺效果和深邃的色彩表現，展示了莫奈對自然景觀的熱愛和對藝術創新的不斷追求，是印象派藝術的重要代表之一。</p>
-            </div>
-          </div>
-          <div id="caption2"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="AFarmyardinNormandy"
-              src="image/莫內/A Farmyard in Normandy.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>諾曼第的農場院</h4>
-            <p>A Farmyard in Normandy</p>
-          </div>
-        </div>
-        <!-- The Modal -->
-        <div id="myModal3" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img03" />
-        </div>
-        <div class="columns">
-          <p>《諾曼第的農場院》（A Farmyard in Normandy）是克勞德·莫奈（Claude Monet）於1865年左右創作的一幅畫作，描繪了法國諾曼第地區一個典型的農場景象。這幅畫反映了莫奈早期的藝術風格，與他後來的印象派作品有所不同，更加注重細節和現實主義的表現。
+          <div class="columns">
+            <p>《睡蓮池》（The Water-Lily Pond）是克勞德·莫奈（Claude Monet）於1899年創作的一幅作品，屬於他著名的《睡蓮》系列中的一部分。這幅畫作反映了莫奈對光線、顏色和自然景觀的深入探索。
+              <br>
+            <h4>創作背景</h4>
+            在1890年代末，莫奈將其創作重心轉向了位於吉維尼（Giverny）的花園中的睡蓮池。他在這裡建立了一個巨大的睡蓮池，並開始創作大量的畫作，這些畫作集中展示了他對自然景觀的感知和表達。莫奈的這一系列作品，特別是睡蓮池，展現了他在藝術技術上的成熟與創新。
             <br>
+            <h4>畫作風格</h4>
+            《睡蓮池》展示了莫奈的印象派風格的成熟特徵：
+            <br>
+            光影效果：畫作強調了水面上的光影變化，莫奈通過色彩的微妙變化來捕捉不同時間和天氣條件下的光線效果。
+            抽象與具象的結合：畫面中既有具體的物體，如睡蓮、樹木和水面，也有大量的抽象元素，如色彩的流動和形狀的變化，這種結合使得畫作在視覺上具有極大的張力和深度。
+            筆觸與色彩：莫奈使用了快速且自由的筆觸，通過對色彩的重疊和混合，表現出水面的動態和寧靜的美感。
+            <h4>畫作內容</h4>
+            畫作描繪了一片寧靜的水面，水面上漂浮著各式各樣的睡蓮。遠處的樹木和天空的反射也映入水中，營造出一種夢幻般的景象。整個畫面充滿了和諧與平靜，展示了莫奈對自然界光線和色彩變化的敏感捕捉。
+            <br>
+            <h4>藝術價值</h4>
+            《睡蓮池》是莫奈《睡蓮》系列中最具代表性的作品之一，這些作品在藝術史上具有重要地位。莫奈通過這些作品，開創了現代藝術中對光影和色彩表現的新視角，對後來的藝術家產生了深遠的影響。
+            <br>
+            <h4>收藏</h4>
+            《睡蓮池》中的多幅作品被收藏在世界各地的主要博物館和美術館中，包括巴黎奧賽博物館（Musée d'Orsay）和美國的華盛頓國家美術館（National Gallery of Art）等。
+            <br>
+            總之，《睡蓮池》通過其獨特的視覺效果和深邃的色彩表現，展示了莫奈對自然景觀的熱愛和對藝術創新的不斷追求，是印象派藝術的重要代表之一。</p>
+          </div>
+        </div>
+        <div id="caption2"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="AFarmyardinNormandy" src="image/莫內/A Farmyard in Normandy.jpg" alt="" style="width: 100%" />
+          <h4>諾曼第的農場院</h4>
+          <p>A Farmyard in Normandy</p>
+        </div>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal3" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img03" />
+          </div>
+          <div class="columns">
+            <p>《諾曼第的農場院》（A Farmyard in Normandy）是克勞德·莫奈（Claude
+              Monet）於1865年左右創作的一幅畫作，描繪了法國諾曼第地區一個典型的農場景象。這幅畫反映了莫奈早期的藝術風格，與他後來的印象派作品有所不同，更加注重細節和現實主義的表現。
+              <br>
             <h4>創作背景</h4>
             在19世紀60年代，莫奈經常在諾曼第地區旅行和創作，這一地區的田園風光和農村生活對他有著重要的吸引力。這幅畫作正是反映了莫奈對鄉村生活的關注和對自然景觀的真實描繪。
             <br>
@@ -232,33 +204,28 @@
             目前，這幅畫作可能被收藏在一些知名的美術館或私人收藏中，但具體的收藏地點可能會有所變動。
             <br>
             總之，《諾曼第的農場院》是莫奈早期創作中的一幅重要作品，通過細緻的描繪和真實的色彩表現，展示了他對鄉村生活的熱愛和藝術探索的起步，對他後期印象派風格的發展具有重要的歷史意義。</p>
-        </div>
-      </div>
-          <div id="caption3"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="Angler"
-              src="image/莫內/Anglers.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>釣魚者</h4>
-            <p>Anglers</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal4" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img04" />
+        <div id="caption3"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="Angler" src="image/莫內/Anglers.jpg" alt="" style="width: 100%" />
+          <h4>釣魚者</h4>
+          <p>Anglers</p>
         </div>
-        <div class="columns">
-          <p>《釣魚者》（Anglers）是克勞德·莫奈（Claude Monet）於1868年至1869年間創作的一幅畫作，屬於他早期作品中的一部分，展示了他對自然景觀的熱愛及對光影變化的探索。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal4" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img04" />
+          </div>
+          <div class="columns">
+            <p>《釣魚者》（Anglers）是克勞德·莫奈（Claude Monet）於1868年至1869年間創作的一幅畫作，屬於他早期作品中的一部分，展示了他對自然景觀的熱愛及對光影變化的探索。
+              <br>
             <h4>創作背景</h4>
             在1860年代末期，莫奈正處於探索和確立自己藝術風格的階段。他的創作風格逐漸轉向捕捉自然景象中的光與影，並且對戶外寫生和現場觀察越來越感興趣。這幅《釣魚者》展示了他對光影變化和色彩表現的初步嘗試。
             <br>
@@ -278,33 +245,30 @@
             目前，這幅畫可能收藏於一些知名的美術館或私人收藏中，具體的收藏地點可能會有所變動。重要的博物館和畫廊經常展示莫奈的作品，使得觀眾能夠更好地了解他的藝術演變。
             <br>
             總之，《釣魚者》通過對自然景觀的真實描繪和對光影變化的精確捕捉，展示了莫奈早期對藝術創作的探索和對光影效果的敏銳觀察，是他藝術道路上的一個重要里程碑。</p>
-        </div>
-      </div>
-          <div id="caption4"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="WaterLiliesEveningEffect"
-              src="image/莫內/Water Lilies, Evening Effect.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>睡蓮，黃昏效果</h4>
-            <p>Water Lilies, Evening Effect</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal5" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img05" />
+        <div id="caption4"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="WaterLiliesEveningEffect" src="image/莫內/Water Lilies, Evening Effect.jpg" alt=""
+            style="width: 100%" />
+          <h4>睡蓮，黃昏效果</h4>
+          <p>Water Lilies, Evening Effect</p>
         </div>
-        <div class="columns">
-          <p>《睡蓮·黃昏效果》（Water Lilies, Evening Effect）是克勞德·莫奈（Claude Monet）於1897年至1899年間創作的一幅重要作品，屬於他廣為人知的《睡蓮》系列。這一系列的作品主要描繪了他在吉維尼花園的睡蓮池，展示了他對光影變化和自然景觀的深刻理解。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal5" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img05" />
+          </div>
+          <div class="columns">
+            <p>《睡蓮·黃昏效果》（Water Lilies, Evening Effect）是克勞德·莫奈（Claude
+              Monet）於1897年至1899年間創作的一幅重要作品，屬於他廣為人知的《睡蓮》系列。這一系列的作品主要描繪了他在吉維尼花園的睡蓮池，展示了他對光影變化和自然景觀的深刻理解。
+              <br>
             <h4>創作背景</h4>
             莫奈的睡蓮系列是他晚期的代表作之一，這些作品反映了他對光線、色彩和水面反射的探索。莫奈在1890年代末至1900年代初，將大量時間投入到他位於吉維尼的花園中，專注於創作這些描繪睡蓮池的畫作。這些畫作不僅是自然景觀的再現，也是他對光和色彩表現的極致探索。
             <br>
@@ -324,33 +288,29 @@
             《睡蓮·黃昏效果》目前可能收藏於一些著名的博物館或美術館中，如巴黎的橘園美術館（Musée de l'Orangerie）和其他國際知名的藝術館。
             <br>
             總之，《睡蓮·黃昏效果》通過其獨特的光影處理和色彩運用，展示了莫奈對自然景觀的深刻理解和對藝術創新的追求，是印象派藝術中的重要作品之一。</p>
-        </div>
-      </div>
-          <div id="caption5"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="Chrysanthemums"
-              src="image/莫內/Chrysanthemums.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>菊花</h4>
-            <p>Chrysanthemums</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal6" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img06" />
+        <div id="caption5"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="Chrysanthemums" src="image/莫內/Chrysanthemums.jpg" alt="" style="width: 100%" />
+          <h4>菊花</h4>
+          <p>Chrysanthemums</p>
         </div>
-        <div class="columns">
-          <p>《菊花》（Chrysanthemums）是克勞德·莫奈（Claude Monet）於1880年代創作的一系列畫作，這些畫作展示了他對花卉主題的興趣和他對自然細節的深入描繪。菊花是當時非常流行的園藝植物，莫奈通過這些作品表達了他對色彩和光影的敏感性。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal6" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img06" />
+          </div>
+          <div class="columns">
+            <p>《菊花》（Chrysanthemums）是克勞德·莫奈（Claude
+              Monet）於1880年代創作的一系列畫作，這些畫作展示了他對花卉主題的興趣和他對自然細節的深入描繪。菊花是當時非常流行的園藝植物，莫奈通過這些作品表達了他對色彩和光影的敏感性。
+              <br>
             <h4>創作背景</h4>
             在19世紀末期，莫奈除了進行風景畫創作外，也對花卉畫有著濃厚的興趣。特別是在他位於吉維尼的花園中，菊花作為一種重要的花卉，他常常用來探索不同的色彩效果和光影變化。這些畫作展示了他對花卉自然美的深刻感受和技術上的成熟。
             <br>
@@ -370,33 +330,30 @@
             莫奈的《菊花》系列作品被收藏於多個國際知名的博物館和私人收藏中，如巴黎的奧賽博物館（Musée d'Orsay）和美國的國家美術館（National Gallery of Art）等。
             <br>
             總之，《菊花》系列通過對花卉主題的細緻描繪和對色彩光影的探索，展示了莫奈卓越的藝術才華和對自然之美的深刻理解，這些作品是他藝術創作中的重要里程碑。</p>
-        </div>
-      </div>
-          <div id="caption6"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="FruitBasketwithApplesandGrapes"
-              src="image/莫內/Fruit Basket with Apples and Grapes.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>果籃中的蘋果與葡萄</h4>
-            <p>Fruit Basket with Apples and Grapes</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal7" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img07" />
+        <div id="caption6"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="FruitBasketwithApplesandGrapes" src="image/莫內/Fruit Basket with Apples and Grapes.jpg" alt=""
+            style="width: 100%" />
+          <h4>果籃中的蘋果與葡萄</h4>
+          <p>Fruit Basket with Apples and Grapes</p>
         </div>
-        <div class="columns">
-          <p>《果籃中的蘋果與葡萄》（Fruit Basket with Apples and Grapes）是克勞德·莫奈（Claude Monet）於1860年代創作的一幅畫作，屬於他早期的靜物畫作品。這幅畫展示了莫奈在藝術技術上的初步探索，特別是在對光影和顏色的處理上。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal7" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img07" />
+          </div>
+          <div class="columns">
+            <p>《果籃中的蘋果與葡萄》（Fruit Basket with Apples and Grapes）是克勞德·莫奈（Claude
+              Monet）於1860年代創作的一幅畫作，屬於他早期的靜物畫作品。這幅畫展示了莫奈在藝術技術上的初步探索，特別是在對光影和顏色的處理上。
+              <br>
             <h4>創作背景</h4>
             在1860年代，莫奈正處於其藝術創作的早期階段，這一時期的他還在努力探索和確立自己的藝術風格。這幅《果籃中的蘋果與葡萄》反映了他對靜物畫的興趣，並展示了他對細節的關注和對自然光影效果的探索。
             <br>
@@ -416,33 +373,29 @@
             這幅畫作可能被收藏於一些著名的美術館或私人收藏中。具體的收藏地點可能會有所變動，但它們通常會在重要的展覽和畫展中展示，供公眾欣賞。
             <br>
             總之，《果籃中的蘋果與葡萄》通過對水果的細緻描繪和光影效果的探索，展示了莫奈在藝術創作初期的技術和對自然美的敏感感知，這些特徵對他後來的印象派風格和藝術創新具有重要的影響。</p>
-        </div>
-      </div>
-          <div id="caption7"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="GardenatSainteAdresse"
-              src="image/莫內/Garden at Sainte-Adresse.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>聖阿德列斯的花園</h4>
-            <p>Garden at Sainte-Adresse</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal8" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img08" />
+        <div id="caption7"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="GardenatSainteAdresse" src="image/莫內/Garden at Sainte-Adresse.jpg" alt="" style="width: 100%" />
+          <h4>聖阿德列斯的花園</h4>
+          <p>Garden at Sainte-Adresse</p>
         </div>
-        <div class="columns">
-          <p>《聖阿德列斯的花園》（Garden at Sainte-Adresse）是克勞德·莫奈（Claude Monet）於1867年創作的一幅畫作，這幅作品展示了莫奈早期對色彩和光線的探索，是他印象派風格形成過程中的重要一環。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal8" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img08" />
+          </div>
+          <div class="columns">
+            <p>《聖阿德列斯的花園》（Garden at Sainte-Adresse）是克勞德·莫奈（Claude
+              Monet）於1867年創作的一幅畫作，這幅作品展示了莫奈早期對色彩和光線的探索，是他印象派風格形成過程中的重要一環。
+              <br>
             <h4>創作背景</h4>
             聖阿德列斯（Sainte-Adresse）是法國諾曼第地區的一個沿海小鎮，莫奈的父母在那裡擁有一座別墅。1867年，莫奈在那裡度過了一段時間，並創作了這幅畫。畫作展示了別墅花園中的一角，背景是遼闊的海景，捕捉了夏日午後的光線和色彩。
             <br>
@@ -462,33 +415,30 @@
             這幅畫作目前收藏於美國紐約大都會藝術博物館（Metropolitan Museum of Art）。該館收藏了許多莫奈的作品，這些作品展示了他不同時期的藝術風格和技術。
             <br>
             總之，《聖阿德列斯的花園》通過其鮮明的色彩和精細的光影處理，展示了莫奈對自然景觀的敏銳觀察和藝術表現，這幅作品不僅是他早期風格的代表，也是他後來印象派創作的重要先聲。</p>
-        </div>
-      </div>
-          <div id="caption8"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="WaterlooBridgeGrayWeather"
-              src="image/莫內/Waterloo Bridge, Gray Weather.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>滑鐵盧橋，灰色天氣</h4>
-            <p>Waterloo Bridge, Gray Weather</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal9" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img09" />
+        <div id="caption8"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="WaterlooBridgeGrayWeather" src="image/莫內/Waterloo Bridge, Gray Weather.jpg" alt=""
+            style="width: 100%" />
+          <h4>滑鐵盧橋，灰色天氣</h4>
+          <p>Waterloo Bridge, Gray Weather</p>
         </div>
-        <div class="columns">
-          <p>《滑鐵盧橋，灰色天氣》（Waterloo Bridge, Gray Weather）是克勞德·莫奈（Claude Monet）於1900年至1904年間創作的一系列畫作之一。這些畫作描繪了倫敦滑鐵盧橋在不同天氣和光線條件下的景象，展示了莫奈對光影和色彩的深入探索。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal9" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img09" />
+          </div>
+          <div class="columns">
+            <p>《滑鐵盧橋，灰色天氣》（Waterloo Bridge, Gray Weather）是克勞德·莫奈（Claude
+              Monet）於1900年至1904年間創作的一系列畫作之一。這些畫作描繪了倫敦滑鐵盧橋在不同天氣和光線條件下的景象，展示了莫奈對光影和色彩的深入探索。
+              <br>
             <h4>創作背景</h4>
             莫奈在1899年首次訪問倫敦後，對這座城市的霧和光線效果產生了濃厚的興趣。他在1900年至1904年間多次訪問倫敦，專注於繪製泰晤士河沿岸的景色，包括滑鐵盧橋、查令十字橋和國會大廈等題材。這些畫作反映了莫奈對光線和天氣變化的關注，以及他對印象派技法的進一步探索。
             <br>
@@ -505,36 +455,33 @@
             《滑鐵盧橋，灰色天氣》是莫奈倫敦系列畫作中的一個重要組成部分，這些作品展示了他對光影和色彩的極致探索。莫奈通過這些畫作，表現了大都市在不同天氣條件下的多變景象，這些作品對後來的印象派和現代藝術產生了深遠的影響。
             <br>
             <h4>收藏</h4>
-            莫奈的《滑鐵盧橋》系列畫作目前收藏於世界各地的著名博物館和美術館中，包括巴黎的奧賽博物館（Musée d'Orsay）、美國的大都會藝術博物館（Metropolitan Museum of Art）和英國的泰特不列顛美術館（Tate Britain）等。
+            莫奈的《滑鐵盧橋》系列畫作目前收藏於世界各地的著名博物館和美術館中，包括巴黎的奧賽博物館（Musée d'Orsay）、美國的大都會藝術博物館（Metropolitan Museum of
+            Art）和英國的泰特不列顛美術館（Tate Britain）等。
             <br>
             總之，《滑鐵盧橋，灰色天氣》通過其獨特的光影處理和色彩運用，展示了莫奈對自然景觀的敏銳觀察和對藝術表現的創新，是他倫敦系列作品中的重要代表之一。</p>
-        </div>
-      </div>
-          <div id="caption9"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="TheBridgeAmsterdam"
-              src="image/莫內/The Bridge, Amsterdam.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>阿姆斯特丹的橋</h4>
-            <p>The Bridge, Amsterdam</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal10" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img10" />
+        <div id="caption9"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="TheBridgeAmsterdam" src="image/莫內/The Bridge, Amsterdam.jpg" alt="" style="width: 100%" />
+          <h4>阿姆斯特丹的橋</h4>
+          <p>The Bridge, Amsterdam</p>
         </div>
-        <div class="columns">
-          <p>《阿姆斯特丹的橋》（The Bridge, Amsterdam）是克勞德·莫奈（Claude Monet）於1874年創作的一幅畫作。這幅畫作捕捉了阿姆斯特丹的都市景觀，是莫奈在他印象派風格發展過程中的重要作品之一。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal10" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img10" />
+          </div>
+          <div class="columns">
+            <p>《阿姆斯特丹的橋》（The Bridge, Amsterdam）是克勞德·莫奈（Claude
+              Monet）於1874年創作的一幅畫作。這幅畫作捕捉了阿姆斯特丹的都市景觀，是莫奈在他印象派風格發展過程中的重要作品之一。
+              <br>
             <h4>創作背景</h4>
             莫奈在1870年代中期旅行至阿姆斯特丹，對這座城市的獨特景觀產生了興趣。阿姆斯特丹以其運河和橋樑聞名，這些景觀成為莫奈靈感的來源。在這一時期，莫奈致力於捕捉城市景觀中的光影變化和色彩效果，這幅《阿姆斯特丹的橋》正是這一探索的體現。
             <br>
@@ -554,35 +501,32 @@
             這幅畫作目前可能被收藏在世界各地的博物館或私人收藏中。具體的收藏地點可能會有所變動，但它通常會在重要的藝術展覽中展出，供公眾欣賞。
             <br>
             總之，《阿姆斯特丹的橋》通過其獨特的光影處理和色彩運用，展示了莫奈對都市景觀的敏銳觀察和對藝術表現的創新，是他印象派作品中的重要代表之一。</p>
-        </div>
-      </div>
-          <div id="caption10"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="IntheGarden"
-              src="image/莫內/In the Garden.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>在花園裡</h4>
-            <p>In the Garden</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal11" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img11" />
+        <div id="caption10"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="IntheGarden" src="image/莫內/In the Garden.jpg" alt="" style="width: 100%" />
+          <h4>在花園裡</h4>
+          <p>In the Garden</p>
         </div>
-        <div class="columns">
-          <p>《在花園裡》（In the Garden）是克勞德·莫奈（Claude Monet）於1866年創作的一幅畫作，也被稱為《婦女在花園裡》（Women in the Garden）。這幅畫展示了莫奈對光影效果的探索以及他對日常生活場景的捕捉，是印象派風格的早期表現。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal11" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img11" />
+          </div>
+          <div class="columns">
+            <p>《在花園裡》（In the Garden）是克勞德·莫奈（Claude Monet）於1866年創作的一幅畫作，也被稱為《婦女在花園裡》（Women in the
+              Garden）。這幅畫展示了莫奈對光影效果的探索以及他對日常生活場景的捕捉，是印象派風格的早期表現。
+              <br>
             <h4>創作背景</h4>
-            這幅畫作於1866年創作，當時莫奈居住在巴黎附近的小鎮聖阿德雷斯（Sainte-Adresse）。在這一時期，他對戶外光線和自然景觀的表現產生了濃厚的興趣，並開始實驗如何在畫布上捕捉光影變化。畫作中的模特包括莫奈的未婚妻卡米耶·多內（Camille Doncieux）和其他幾位朋友。
+            這幅畫作於1866年創作，當時莫奈居住在巴黎附近的小鎮聖阿德雷斯（Sainte-Adresse）。在這一時期，他對戶外光線和自然景觀的表現產生了濃厚的興趣，並開始實驗如何在畫布上捕捉光影變化。畫作中的模特包括莫奈的未婚妻卡米耶·多內（Camille
+            Doncieux）和其他幾位朋友。
             <br>
             <h4>畫作風格</h4>
             《在花園裡》展示了莫奈早期印象派風格的一些特徵：
@@ -600,35 +544,33 @@
             這幅畫目前收藏於巴黎的奧賽博物館（Musée d'Orsay），該博物館收藏了大量印象派和後印象派的經典作品，為研究和欣賞莫奈的藝術創作提供了豐富的資源。
             <br>
             總之，《在花園裡》通過其精細的光影處理和色彩運用，展示了莫奈對自然景觀的深刻理解和對日常生活的細膩觀察，是他早期印象派風格的重要代表作之一。</p>
-        </div>
-      </div>
-          <div id="caption11"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="JeanneMargueriteLecadreintheGarden"
-              src="image/莫內/Jeanne-Marguerite Lecadre in the Garden.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>在花園裡的珍妮-瑪格麗特·勒卡德爾</h4>
-            <p>Jeanne-Marguerite Lecadre in the Garden</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal12" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img12" />
+        <div id="caption11"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="JeanneMargueriteLecadreintheGarden" src="image/莫內/Jeanne-Marguerite Lecadre in the Garden.jpg" alt=""
+            style="width: 100%" />
+          <h4>在花園裡的珍妮-瑪格麗特·勒卡德爾</h4>
+          <p>Jeanne-Marguerite Lecadre in the Garden</p>
         </div>
-        <div class="columns">
-          <p>《在花園裡的珍妮-瑪格麗特·勒卡德爾》（Jeanne-Marguerite Lecadre in the Garden）是克勞德·莫奈（Claude Monet）於1866年創作的一幅油畫。這幅作品展示了莫奈早期的風格特徵，以及他對家庭和自然場景的關注。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal12" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img12" />
+          </div>
+          <div class="columns">
+            <p>《在花園裡的珍妮-瑪格麗特·勒卡德爾》（Jeanne-Marguerite Lecadre in the Garden）是克勞德·莫奈（Claude
+              Monet）於1866年創作的一幅油畫。這幅作品展示了莫奈早期的風格特徵，以及他對家庭和自然場景的關注。
+              <br>
             <h4>創作背景</h4>
-            珍妮-瑪格麗特·勒卡德爾是莫奈的堂妹，畫作創作於莫奈居住在法國諾曼第地區的勒阿弗爾（Le Havre）期間。這段時間，莫奈經常在戶外作畫，探索光影效果和自然景觀的變化。《在花園裡的珍妮-瑪格麗特·勒卡德爾》正是在這樣的背景下創作的。
+            珍妮-瑪格麗特·勒卡德爾是莫奈的堂妹，畫作創作於莫奈居住在法國諾曼第地區的勒阿弗爾（Le
+            Havre）期間。這段時間，莫奈經常在戶外作畫，探索光影效果和自然景觀的變化。《在花園裡的珍妮-瑪格麗特·勒卡德爾》正是在這樣的背景下創作的。
             <br>
             <h4>畫作風格</h4>
             這幅畫展示了莫奈早期印象派風格的一些特徵：
@@ -646,33 +588,29 @@
             這幅畫作目前收藏於美國華盛頓特區的國家藝廊（National Gallery of Art）。該館收藏了大量印象派和現代藝術的經典作品，為研究和欣賞莫奈的藝術創作提供了豐富的資源。
             <br>
             總之，《在花園裡的珍妮-瑪格麗特·勒卡德爾》通過其獨特的光影處理和色彩運用，展示了莫奈對自然景觀的深刻理解和對家庭成員的細膩描繪，是他早期印象派風格的重要代表作之一。</p>
-        </div>
-      </div>
-          <div id="caption12"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="TheBoatStudio"
-              src="image/莫內/The Boat Studio.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>畫舫</h4>
-            <p>The Boat Studio</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal13" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img13" />
+        <div id="caption12"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="TheBoatStudio" src="image/莫內/The Boat Studio.jpg" alt="" style="width: 100%" />
+          <h4>畫舫</h4>
+          <p>The Boat Studio</p>
         </div>
-        <div class="columns">
-          <p>《畫舫》（The Boat Studio）是克勞德·莫奈（Claude Monet）於1876年創作的一幅畫作，這幅作品描繪了他在塞納河上使用的畫舫，這是一艘專門用來作畫的小船。這幅畫展示了莫奈對光影和水面反射的探索，並且是他印象派技法的重要範例。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal13" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img13" />
+          </div>
+          <div class="columns">
+            <p>《畫舫》（The Boat Studio）是克勞德·莫奈（Claude
+              Monet）於1876年創作的一幅畫作，這幅作品描繪了他在塞納河上使用的畫舫，這是一艘專門用來作畫的小船。這幅畫展示了莫奈對光影和水面反射的探索，並且是他印象派技法的重要範例。
+              <br>
             <h4>創作背景</h4>
             1870年代，莫奈搬到了阿讓特伊（Argenteuil），一個位於巴黎西北郊的城鎮，這裡靠近塞納河，風景如畫。莫奈為了更方便地捕捉河上的景色，特意建造了一艘畫舫，這艘小船讓他能夠在河上自由地觀察和創作。這幅《畫舫》便是他在這段時期的創作之一。
             <br>
@@ -692,35 +630,33 @@
             這幅畫作目前收藏於巴黎的奧賽博物館（Musée d'Orsay）。該館收藏了大量印象派和後印象派的經典作品，為研究和欣賞莫奈的藝術創作提供了豐富的資源。
             <br>
             總之，《畫舫》通過其獨特的光影處理和色彩運用，展示了莫奈對自然景觀的敏銳觀察和對藝術表現的創新，是他印象派作品中的重要代表之一。</p>
-        </div>
-      </div>
-          <div id="caption13"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="TheChapelNotreDamedeGraceatHonfleur"
-              src="image/莫內/The Chapel Notre-Dame de Grace at Honfleur.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>翁弗勒爾的聖母恩賜小教堂</h4>
-            <p>The Chapel Notre-Dame de Grace at Honfleur</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal14" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img14" />
+        <div id="caption13"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="TheChapelNotreDamedeGraceatHonfleur" src="image/莫內/The Chapel Notre-Dame de Grace at Honfleur.jpg"
+            alt="" style="width: 100%" />
+          <h4>翁弗勒爾的聖母恩賜小教堂</h4>
+          <p>The Chapel Notre-Dame de Grace at Honfleur</p>
         </div>
-        <div class="columns">
-          <p>《翁弗勒爾的聖母恩賜小教堂》（The Chapel Notre-Dame de Grâce at Honfleur）是克勞德·莫奈（Claude Monet）於1864年創作的一幅畫作。這幅作品展示了莫奈早期的風景畫風格，以及他對自然景觀的熱愛和細膩描繪。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal14" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img14" />
+          </div>
+          <div class="columns">
+            <p>《翁弗勒爾的聖母恩賜小教堂》（The Chapel Notre-Dame de Grâce at Honfleur）是克勞德·莫奈（Claude
+              Monet）於1864年創作的一幅畫作。這幅作品展示了莫奈早期的風景畫風格，以及他對自然景觀的熱愛和細膩描繪。
+              <br>
             <h4>創作背景</h4>
-            1860年代，莫奈經常前往法國諾曼第地區的海岸小鎮翁弗勒爾（Honfleur）進行創作。翁弗勒爾以其美麗的港口和獨特的光線吸引了眾多藝術家。聖母恩賜小教堂（Chapelle Notre-Dame de Grâce）位於翁弗勒爾附近的山丘上，這是一座歷史悠久的小教堂，以其壯觀的海景和寧靜的氛圍著稱。
+            1860年代，莫奈經常前往法國諾曼第地區的海岸小鎮翁弗勒爾（Honfleur）進行創作。翁弗勒爾以其美麗的港口和獨特的光線吸引了眾多藝術家。聖母恩賜小教堂（Chapelle Notre-Dame de
+            Grâce）位於翁弗勒爾附近的山丘上，這是一座歷史悠久的小教堂，以其壯觀的海景和寧靜的氛圍著稱。
             <br>
             <h4>畫作風格</h4>
             《翁弗勒爾的聖母恩賜小教堂》展示了莫奈早期風格的一些特徵：
@@ -738,32 +674,27 @@
             這幅畫作目前收藏於美國華盛頓特區的國家藝廊（National Gallery of Art）。該館收藏了大量印象派和現代藝術的經典作品，為研究和欣賞莫奈的藝術創作提供了豐富的資源。
             <br>
             總之，《翁弗勒爾的聖母恩賜小教堂》通過其細緻的描繪和自然光線的運用，展示了莫奈對自然景觀的深刻理解和對藝術表現的初步探索，是他早期風景畫風格的重要代表作之一。</p>
-        </div>
-      </div>
-          <div id="caption14"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="Juechen"
-              src="image/何木火/絕塵.png"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>絕塵</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal15" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img15" />
+        <div id="caption14"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="Juechen" src="image/何木火/絕塵.png" alt="" style="width: 100%" />
+          <h4>絕塵</h4>
         </div>
-        <div class="columns">
-          <p>《絕塵》是台灣藝術家何木火的一件知名作品。何木火以其對自然、環境和人類內心世界的深刻觀察和獨特表達而聞名，他的作品往往充滿了詩意和哲理，並透過細膩的技法和豐富的素材來表達深層的情感和思想。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal15" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img15" />
+          </div>
+          <div class="columns">
+            <p>《絕塵》是台灣藝術家何木火的一件知名作品。何木火以其對自然、環境和人類內心世界的深刻觀察和獨特表達而聞名，他的作品往往充滿了詩意和哲理，並透過細膩的技法和豐富的素材來表達深層的情感和思想。
+              <br>
             <h4>創作背景</h4>
             何木火的作品通常受到東方哲學、禪宗思想以及台灣本土文化的影響。他對自然的熱愛和對生命意義的探尋在《絕塵》中得到了充分的體現。這件作品的名稱《絕塵》意指脫離世俗塵囂，追求一種純淨、超脫的精神境界，這與何木火個人對生活的態度和哲學思考密切相關。
             <br>
@@ -782,32 +713,27 @@
             《絕塵》這件作品可能在台灣和國際上的多個藝術展覽中展出，並受到廣泛關注和好評。具體的收藏信息可能因時間和展覽情況而有所變動，但其藝術價值和影響力毋庸置疑。
             <br>
             總之，何木火的《絕塵》通過其獨特的藝術表現和深刻的哲學意涵，展示了藝術家對自然、生活和人類內心世界的深刻理解和獨特表達，是他眾多作品中的一個重要代表。</p>
-        </div>
-      </div>
-          <div id="caption15"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="Iceandsnow"
-              src="image/何木火/冰天雪地.png"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>冰天雪地</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal16" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img16" />
+        <div id="caption15"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="Iceandsnow" src="image/何木火/冰天雪地.png" alt="" style="width: 100%" />
+          <h4>冰天雪地</h4>
         </div>
-        <div class="columns">
-          <p>《冰天雪地》是台灣當代藝術家何木火的代表作品之一。何木火以其獨特的視覺語言和深刻的自然觀察能力聞名，他的作品常常探討人與自然的關係，以及自然景觀中的哲理和美學。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal16" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img16" />
+          </div>
+          <div class="columns">
+            <p>《冰天雪地》是台灣當代藝術家何木火的代表作品之一。何木火以其獨特的視覺語言和深刻的自然觀察能力聞名，他的作品常常探討人與自然的關係，以及自然景觀中的哲理和美學。
+              <br>
             <h4>創作背景</h4>
             何木火的作品深受東方哲學影響，尤其是禪宗思想和對自然的崇敬。他的創作靈感經常來自於對自然景觀的觀察和體驗。《冰天雪地》反映了他對寒冷季節的景象及其內在精神的獨特理解。這幅作品可能創作於他在台灣或其他有寒冷氣候的地方旅行時，受到冰雪景象的啟發。
             <br>
@@ -827,32 +753,27 @@
             《冰天雪地》可能曾在台灣及國際上的多個藝術展覽中展出，並受到廣泛關注和好評。具體的收藏情況可能因時間和展覽情況而有所變動，但這幅作品無疑是何木火藝術創作中的重要代表之一。
             <br>
             總之，何木火的《冰天雪地》通過其獨特的藝術表現和深刻的自然觀察，展示了藝術家對冰雪景象的深刻理解和獨特詮釋，是他眾多作品中的一個重要代表。</p>
-        </div>
-      </div>
-          <div id="caption16"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="Searching"
-              src="image/何木火/尋.png"
-              alt="尋<br>35×75cm<br>紙本水墨 2015"
-              style="width: 100%"
-            />
-            <h4>尋</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal17" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img17" />
+        <div id="caption16"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="Searching" src="image/何木火/尋.png" alt="尋<br>35×75cm<br>紙本水墨 2015" style="width: 100%" />
+          <h4>尋</h4>
         </div>
-        <div class="columns">
-          <p>何木火的《尋》是一件具有深刻意涵和獨特視覺表現的藝術作品。何木火是一位台灣當代藝術家，他的創作常常融合東方哲學、自然元素和現代藝術手法，探索人與自然、內心世界與外部世界之間的關係。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal17" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img17" />
+          </div>
+          <div class="columns">
+            <p>何木火的《尋》是一件具有深刻意涵和獨特視覺表現的藝術作品。何木火是一位台灣當代藝術家，他的創作常常融合東方哲學、自然元素和現代藝術手法，探索人與自然、內心世界與外部世界之間的關係。
+              <br>
             <h4>創作背景</h4>
             《尋》這幅作品的創作背景可能與何木火個人對人生和自然的深刻思考有關。作品名稱“尋”表達了一種探索和追尋的過程，這既可以是對外部世界的探索，也可以是對內心世界的追尋。何木火的作品經常反映他對生命意義的思考和對精神世界的探索。
             <br>
@@ -872,32 +793,27 @@
             《尋》可能曾在台灣及國際上的多個藝術展覽中展出，並受到廣泛關注和好評。這件作品可能被美術館、畫廊或私人收藏家收藏，具體的收藏情況可能隨時間和展覽情況而變動。
             <br>
             總之，何木火的《尋》通過其深刻的哲學意涵和獨特的藝術表現，展示了藝術家對生命意義的探索和對自然世界的深刻理解，是他藝術創作中的一個重要代表。</p>
-        </div>
-      </div>
-          <div id="caption17"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="Fieldfragrance"
-              src="image/何木火/野地清香.png"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>野地清香</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal18" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img18" />
+        <div id="caption17"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="Fieldfragrance" src="image/何木火/野地清香.png" alt="" style="width: 100%" />
+          <h4>野地清香</h4>
         </div>
-        <div class="columns">
-          <p>《野地清香》是台灣當代藝術家何木火的一件著名作品。何木火以其獨特的視覺語言和深刻的自然觀察能力而聞名，他的作品經常融合自然元素和東方哲學，展現出對人與自然和諧共處的思考。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal18" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img18" />
+          </div>
+          <div class="columns">
+            <p>《野地清香》是台灣當代藝術家何木火的一件著名作品。何木火以其獨特的視覺語言和深刻的自然觀察能力而聞名，他的作品經常融合自然元素和東方哲學，展現出對人與自然和諧共處的思考。
+              <br>
             <h4>創作背景</h4>
             何木火的創作背景常常與他對自然的深刻觀察和體驗相關。《野地清香》可能靈感來自於他在自然環境中的經歷和感受，作品標題“野地清香”表達了一種自然界的純淨和美好，反映了他對自然的熱愛和敬仰。
             <br>
@@ -917,32 +833,27 @@
             《野地清香》可能在台灣及國際上的多個藝術展覽中展出，並受到廣泛關注和好評。這件作品可能被美術館、畫廊或私人收藏家收藏，具體的收藏情況可能隨時間和展覽情況而變動。
             <br>
             總之，何木火的《野地清香》通過其自然美學和哲學意涵，展示了藝術家對自然世界的深刻理解和對藝術表現的創新探索，是他藝術創作中的一個重要代表。</p>
-        </div>
-      </div>
-          <div id="caption18"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="It’scoldathighplaces"
-              src="image/何木火/高處不勝寒.png"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>高處不勝寒</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal19" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img19" />
+        <div id="caption18"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="It’scoldathighplaces" src="image/何木火/高處不勝寒.png" alt="" style="width: 100%" />
+          <h4>高處不勝寒</h4>
         </div>
-        <div class="columns">
-          <p>《高處不勝寒》是台灣當代藝術家何木火的一件重要作品。何木火的創作往往融合自然元素和深厚的哲學思考，這幅作品也不例外，展現了他對自然和人生的獨特見解。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal19" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img19" />
+          </div>
+          <div class="columns">
+            <p>《高處不勝寒》是台灣當代藝術家何木火的一件重要作品。何木火的創作往往融合自然元素和深厚的哲學思考，這幅作品也不例外，展現了他對自然和人生的獨特見解。
+              <br>
             <h4>創作背景</h4>
             何木火的《高處不勝寒》可能靈感來自於山岳景觀以及高海拔地區的自然環境。作品標題引用了中國古詩詞中的意象，表達了一種高處孤高、清冷的情感。這一主題可能反映了藝術家對於生命中孤獨和艱難時刻的深刻思考。
             <br>
@@ -962,32 +873,27 @@
             《高處不勝寒》可能曾在台灣及國際上的多個藝術展覽中展出，並受到廣泛關注和好評。這件作品可能被美術館、畫廊或私人收藏家收藏，具體的收藏情況可能隨時間和展覽情況而變動。
             <br>
             總之，何木火的《高處不勝寒》通過其獨特的自然景觀描繪和深刻的哲學意涵，展示了藝術家對自然世界的深刻理解和對生命意義的探索，是他藝術創作中的一個重要代表。</p>
-        </div>
-      </div>
-          <div id="caption19"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="dreamofmortalworld"
-              src="image/何木火/紅塵夢.png"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>紅塵夢</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal20" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img20" />
+        <div id="caption19"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="dreamofmortalworld" src="image/何木火/紅塵夢.png" alt="" style="width: 100%" />
+          <h4>紅塵夢</h4>
         </div>
-        <div class="columns">
-          <p>《紅塵夢》是台灣當代藝術家何木火的一件重要作品。何木火以其對自然、哲學和人類情感的深刻洞察而著稱，他的作品經常融合東方哲學和現代藝術手法，探索人類存在的深層意義。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal20" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img20" />
+          </div>
+          <div class="columns">
+            <p>《紅塵夢》是台灣當代藝術家何木火的一件重要作品。何木火以其對自然、哲學和人類情感的深刻洞察而著稱，他的作品經常融合東方哲學和現代藝術手法，探索人類存在的深層意義。
+              <br>
             <h4>創作背景</h4>
             《紅塵夢》這一作品的創作背景可能與何木火對人生和社會的深刻思考有關。作品標題“紅塵夢”來自於中文成語，意指塵世的繁華和夢幻，反映了人類在現實生活中的追求和幻滅。這一主題可能代表了藝術家對世俗生活的觀察和對精神世界的探索。
             <br>
@@ -1007,35 +913,33 @@
             《紅塵夢》可能曾在台灣及國際上的多個藝術展覽中展出，並受到廣泛關注和好評。這件作品可能被美術館、畫廊或私人收藏家收藏，具體的收藏情況可能隨時間和展覽情況而變動。
             <br>
             總之，何木火的《紅塵夢》通過其獨特的自然與人文景觀描繪和深刻的哲學意涵，展示了藝術家對現實生活和精神世界的深刻理解和探索，是他藝術創作中的一個重要代表。</p>
-        </div>
-      </div>
-          <div id="caption20"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="TheChurchatVarengevilleandtheGorgeofLesMoutiers"
-              src="image/莫內/The Church at Varengeville and the Gorge of Les Moutiers.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>瓦朗熱維爾的教堂和勒穆蒂埃峽谷</h4>
-            <p>The Church at Varengeville and the Gorge of Les Moutiers</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal21" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img21" />
+        <div id="caption20"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="TheChurchatVarengevilleandtheGorgeofLesMoutiers"
+            src="image/莫內/The Church at Varengeville and the Gorge of Les Moutiers.jpg" alt="" style="width: 100%" />
+          <h4>瓦朗熱維爾的教堂和勒穆蒂埃峽谷</h4>
+          <p>The Church at Varengeville and the Gorge of Les Moutiers</p>
         </div>
-        <div class="columns">
-          <p>《瓦朗熱維爾的教堂和勒穆蒂埃峽谷》（The Church at Varengeville and the Gorge of Les Moutiers）是克勞德·莫奈（Claude Monet）於1882年創作的作品之一。這幅作品展示了莫奈對自然景觀的深刻理解和對光影效果的敏銳把握，體現了他成熟的印象派風格。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal21" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img21" />
+          </div>
+          <div class="columns">
+            <p>《瓦朗熱維爾的教堂和勒穆蒂埃峽谷》（The Church at Varengeville and the Gorge of Les Moutiers）是克勞德·莫奈（Claude
+              Monet）於1882年創作的作品之一。這幅作品展示了莫奈對自然景觀的深刻理解和對光影效果的敏銳把握，體現了他成熟的印象派風格。
+              <br>
             <h4>創作背景</h4>
-            1882年，莫奈在法國諾曼第地區的瓦朗熱維爾（Varengeville-sur-Mer）度過了一段時間，這個位於海邊的小鎮以其壯麗的自然風光和歷史悠久的教堂著稱。瓦朗熱維爾的聖瓦斯特教堂（Église Saint-Valery）位於懸崖邊，俯瞰著壯麗的海景。莫奈被這一景象深深吸引，創作了一系列以這裡的景觀為題材的作品。
+            1882年，莫奈在法國諾曼第地區的瓦朗熱維爾（Varengeville-sur-Mer）度過了一段時間，這個位於海邊的小鎮以其壯麗的自然風光和歷史悠久的教堂著稱。瓦朗熱維爾的聖瓦斯特教堂（Église
+            Saint-Valery）位於懸崖邊，俯瞰著壯麗的海景。莫奈被這一景象深深吸引，創作了一系列以這裡的景觀為題材的作品。
             <br>
             <h4>畫作風格</h4>
             光影效果：莫奈在這幅畫中運用了精湛的光影效果，特別是光線在建築和自然景觀中的變化。陽光照射在教堂和峽谷的不同部位，創造出豐富的光影對比。
@@ -1053,33 +957,29 @@
             這幅作品目前收藏於巴黎的奧賽博物館（Musée d'Orsay），該博物館收藏了大量印象派和後印象派的經典作品，為研究和欣賞莫奈的藝術創作提供了豐富的資源。
             <br>
             總之，《瓦朗熱維爾的教堂和勒穆蒂埃峽谷》通過其獨特的光影處理和色彩運用，展示了莫奈對自然景觀的深刻理解和對藝術表現的創新，是他印象派作品中的重要代表之一。</p>
-        </div>
-      </div>
-          <div id="caption21"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="TheGarden"
-              src="image/莫內/The Garden.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>花園</h4>
-            <p>The Garden</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal22" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img22" />
+        <div id="caption21"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="TheGarden" src="image/莫內/The Garden.jpg" alt="" style="width: 100%" />
+          <h4>花園</h4>
+          <p>The Garden</p>
         </div>
-        <div class="columns">
-          <p>《花園》（The Garden）是克勞德·莫奈（Claude Monet）於1866年創作的一幅畫作，該作展示了他對自然景觀的熱愛和對印象派風格的探索。這幅畫是莫奈早期作品中的重要之一，體現了他對光影和色彩表現的深刻理解。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal22" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img22" />
+          </div>
+          <div class="columns">
+            <p>《花園》（The Garden）是克勞德·莫奈（Claude
+              Monet）於1866年創作的一幅畫作，該作展示了他對自然景觀的熱愛和對印象派風格的探索。這幅畫是莫奈早期作品中的重要之一，體現了他對光影和色彩表現的深刻理解。
+              <br>
             <h4>創作背景</h4>
             在1860年代，莫奈與其他印象派藝術家在法國的聖阿德雷斯（Sainte-Adresse）附近創作，這個地區擁有豐富的自然景觀和宜人的氣候，為他提供了豐富的創作素材。莫奈特別喜愛描繪花園和戶外場景，他的畫作中常常可以看到自然景觀和日常生活的細節。
             <br>
@@ -1099,33 +999,29 @@
             《花園》目前可能收藏於世界各大美術館或私人收藏中，但具體的收藏情況和位置可能隨時間變動。莫奈的許多早期作品對於理解印象派運動的發展和演變具有重要意義。
             <br>
             總之，《花園》通過其獨特的光影處理和色彩運用，展示了莫奈對自然景觀的深刻理解和對印象派藝術的創新探索，是他藝術生涯中具有代表性的一幅作品。</p>
-        </div>
-      </div>
-          <div id="caption22"></div>
-        </div>
-
-        <div class="column monet">
-          <div class="content">
-            <img
-              id="TheLuncheon"
-              src="image/莫內/The Luncheon.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>午餐</h4>
-            <p>The Luncheon</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal23" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img23" />
+        <div id="caption22"></div>
+      </div>
+
+      <div class="column monet">
+        <div class="content">
+          <img id="TheLuncheon" src="image/莫內/The Luncheon.jpg" alt="" style="width: 100%" />
+          <h4>午餐</h4>
+          <p>The Luncheon</p>
         </div>
-        <div class="columns">
-          <p>《午餐》（The Luncheon）是克勞德·莫奈（Claude Monet）於1868年創作的一幅畫作，這幅作品是莫奈早期印象派風格的代表之一。這幅畫通常被認為展示了他在風景畫和人物畫之間的探索，體現了他對光影效果和色彩表現的獨特理解。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal23" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img23" />
+          </div>
+          <div class="columns">
+            <p>《午餐》（The Luncheon）是克勞德·莫奈（Claude
+              Monet）於1868年創作的一幅畫作，這幅作品是莫奈早期印象派風格的代表之一。這幅畫通常被認為展示了他在風景畫和人物畫之間的探索，體現了他對光影效果和色彩表現的獨特理解。
+              <br>
             <h4>創作背景</h4>
             在1860年代末期，莫奈與其他印象派藝術家一起在巴黎活躍，他們對光線和色彩的研究使得他們的作品逐漸走向了一種全新的表現方式。《午餐》是莫奈在這一時期創作的，作品中融入了豐富的自然景觀元素，並且展示了他對日常生活場景的細膩描繪。
             <br>
@@ -1145,35 +1041,32 @@
             《午餐》目前可能收藏於某個美術館或私人收藏中，具體的收藏情況和位置可能隨時間變動。莫奈的許多早期作品對於理解印象派運動的發展和演變具有重要意義。
             <br>
             總之，《午餐》通過其獨特的光影處理和色彩運用，展示了莫奈對日常生活場景的深刻理解和對印象派藝術的創新探索，是他藝術生涯中具有代表性的一幅作品。</p>
-        </div>
-      </div>
-          <div id="caption23"></div>
-        </div>
-
-        <div class="column landscape">
-          <div class="content">
-            <img
-              id="WindmillsnearZaandam"
-              src="image/莫內/Windmills near Zaandam.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>在札安丹附近的風車</h4>
-            <p>Windmills near Zaandam</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal24" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img24" />
+        <div id="caption23"></div>
+      </div>
+
+      <div class="column landscape">
+        <div class="content">
+          <img id="WindmillsnearZaandam" src="image/莫內/Windmills near Zaandam.jpg" alt="" style="width: 100%" />
+          <h4>在札安丹附近的風車</h4>
+          <p>Windmills near Zaandam</p>
         </div>
-        <div class="columns">
-          <p>《在札安丹附近的風車》（Windmills near Zaandam）是克勞德·莫奈（Claude Monet）於1871年創作的一幅畫作。這幅畫顯示了莫奈在荷蘭札安丹（Zaandam）地區的風車景象，這是他在荷蘭旅遊期間創作的作品之一。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal24" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img24" />
+          </div>
+          <div class="columns">
+            <p>《在札安丹附近的風車》（Windmills near Zaandam）是克勞德·莫奈（Claude
+              Monet）於1871年創作的一幅畫作。這幅畫顯示了莫奈在荷蘭札安丹（Zaandam）地區的風車景象，這是他在荷蘭旅遊期間創作的作品之一。
+              <br>
             <h4>創作背景</h4>
-            1871年，莫奈和其他印象派藝術家如皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste Renoir）一同前往荷蘭，探索並創作了許多風景畫。札安丹地區以其眾多風車而聞名，這些風車是當地特有的景觀元素，對於當時的藝術家具有很大的吸引力。莫奈在這裡創作了一系列以風車為主題的畫作，這些作品展示了他對光影和色彩的敏銳感知。
+            1871年，莫奈和其他印象派藝術家如皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste
+            Renoir）一同前往荷蘭，探索並創作了許多風景畫。札安丹地區以其眾多風車而聞名，這些風車是當地特有的景觀元素，對於當時的藝術家具有很大的吸引力。莫奈在這裡創作了一系列以風車為主題的畫作，這些作品展示了他對光影和色彩的敏銳感知。
             <br>
             <h4>畫作風格</h4>
             光影效果：在《在札安丹附近的風車》中，莫奈專注於捕捉光線在風車和周圍景觀中的變化，畫面中的光影對比增強了畫面的層次感和動感。
@@ -1191,33 +1084,29 @@
             《在札安丹附近的風車》目前可能收藏於某個美術館或私人收藏中，具體的收藏情況和位置可能隨時間變動。莫奈的這些作品對於理解印象派運動的發展和演變具有重要意義。
             <br>
             總之，《在札安丹附近的風車》通過其獨特的光影處理和色彩運用，展示了莫奈對風車景象的深刻理解和對印象派藝術的創新探索，是他藝術生涯中具有代表性的一幅作品。</p>
-        </div>
-      </div>
-          <div id="caption24"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="BargesontheSeine"
-              src="image/雷諾瓦/Barges on the Seine.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>塞納河上的駁船</h4>
-            <p>Barges on the Seine</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal25" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img25" />
+        <div id="caption24"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="BargesontheSeine" src="image/雷諾瓦/Barges on the Seine.jpg" alt="" style="width: 100%" />
+          <h4>塞納河上的駁船</h4>
+          <p>Barges on the Seine</p>
         </div>
-        <div class="columns">
-          <p>《塞納河上的駁船》（Barges on the Seine）是法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste Renoir）創作的一幅著名畫作。雷諾阿是印象派運動的重要代表，他的作品以其充滿生氣的色彩和光影效果而著稱。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal25" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img25" />
+          </div>
+          <div class="columns">
+            <p>《塞納河上的駁船》（Barges on the Seine）是法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste
+              Renoir）創作的一幅著名畫作。雷諾阿是印象派運動的重要代表，他的作品以其充滿生氣的色彩和光影效果而著稱。
+              <br>
             <h4>創作背景</h4>
             這幅畫作創作於1870年代，是雷諾阿印象派時期的作品。當時的雷諾阿和其他印象派畫家一樣，致力於捕捉日常生活的瞬間和自然光線的變化。塞納河是巴黎及其周邊地區的重要風景，常常成為印象派畫家們的靈感來源。
             <br>
@@ -1237,33 +1126,29 @@
             《塞納河上的駁船》可能收藏於某個美術館或私人收藏中，具體的收藏情況和位置可能隨時間變動。雷諾阿的這些作品對於理解印象派運動的發展和演變具有重要意義，經常在世界各地的藝術展覽中展出，吸引了無數觀者和藝術愛好者的關注。
             <br>
             總之，皮埃爾-奧古斯特·雷諾阿的《塞納河上的駁船》通過其對光影和色彩的細膩處理，展示了他對自然景觀和日常生活的深刻理解和詮釋，是印象派藝術中的一個重要代表作品。</p>
-        </div>
-      </div>
-          <div id="caption25"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="BouquetsofFlowers"
-              src="image/雷諾瓦/Bouquets of Flowers.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>花束</h4>
-            <p>Bouquets of Flowers</p>
           </div>
         </div>
-         <!-- The Modal -->
-         <div id="myModal26" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img26" />
+        <div id="caption25"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="BouquetsofFlowers" src="image/雷諾瓦/Bouquets of Flowers.jpg" alt="" style="width: 100%" />
+          <h4>花束</h4>
+          <p>Bouquets of Flowers</p>
         </div>
-        <div class="columns">
-          <p>《花束》（Bouquets of Flowers）是法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste Renoir）的一幅著名作品。雷諾阿以其鮮豔的色彩和對光影的敏銳捕捉而著稱，《花束》展示了他對自然和美的熱愛。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal26" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img26" />
+          </div>
+          <div class="columns">
+            <p>《花束》（Bouquets of Flowers）是法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste
+              Renoir）的一幅著名作品。雷諾阿以其鮮豔的色彩和對光影的敏銳捕捉而著稱，《花束》展示了他對自然和美的熱愛。
+              <br>
             <h4>創作背景</h4>
             雷諾阿在他的藝術生涯中創作了許多靜物畫，特別是花卉題材的作品。《花束》創作於19世紀末期，是他在印象派運動成熟階段的代表作之一。當時的雷諾阿正專注於捕捉自然光線下的色彩和質感變化，這幅作品反映了他對靜物畫的探索和創新。
             <br>
@@ -1283,33 +1168,29 @@
             《花束》可能被收藏於世界各地的美術館或私人收藏中。雷諾阿的這些靜物畫對於理解印象派運動的發展和演變具有重要意義，經常在世界各地的藝術展覽中展出，吸引了無數觀者和藝術愛好者的關注。
             <br>
             總之，皮埃爾-奧古斯特·雷諾阿的《花束》通過其對花卉的細膩描繪和對光影色彩的精妙運用，展示了他對自然和美的深刻理解和詮釋，是印象派藝術中的一個重要代表作品。</p>
-        </div>
-      </div>
-          <div id="caption26"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="FieldofBananaTrees"
-              src="image/雷諾瓦/Field of Banana Trees.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4></h4>
-            <p>Field of Banana Trees</p>
           </div>
         </div>
-         <!-- The Modal -->
-         <div id="myModal27" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img27" />
+        <div id="caption26"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="FieldofBananaTrees" src="image/雷諾瓦/Field of Banana Trees.jpg" alt="" style="width: 100%" />
+          <h4></h4>
+          <p>Field of Banana Trees</p>
         </div>
-        <div class="columns">
-          <p>《香蕉樹田》（Field of Banana Trees）是法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste Renoir）的一幅作品。雷諾阿是印象派運動的重要代表，他的作品以其明亮的色彩和輕快的筆觸而著稱，常常捕捉日常生活中的愉快時刻和自然景觀。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal27" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img27" />
+          </div>
+          <div class="columns">
+            <p>《香蕉樹田》（Field of Banana Trees）是法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste
+              Renoir）的一幅作品。雷諾阿是印象派運動的重要代表，他的作品以其明亮的色彩和輕快的筆觸而著稱，常常捕捉日常生活中的愉快時刻和自然景觀。
+              <br>
             <h4>創作背景</h4>
             雖然雷諾阿的大多數作品集中在法國的風景和人物上，但他也曾前往其他地區旅行，尋找靈感並探索不同的自然景觀。這幅《香蕉樹田》創作於他的一次旅行期間，當時他對異國風情和熱帶景觀產生了濃厚的興趣。這幅作品展示了他對熱帶植物和景觀的觀察和表現。
             <br>
@@ -1329,33 +1210,29 @@
             《香蕉樹田》可能被收藏於某個美術館或私人收藏中。雷諾阿的這些作品對於理解印象派運動的發展和演變具有重要意義，經常在世界各地的藝術展覽中展出，吸引了無數觀者和藝術愛好者的關注。
             <br>
             總之，皮埃爾-奧古斯特·雷諾阿的《香蕉樹田》通過其對熱帶景觀的鮮豔描繪和對自然之美的深刻理解，展示了他對異國風情的探索和讚美，是印象派藝術中的一個重要代表作品。</p>
-        </div>
-      </div>
-          <div id="caption27"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="ForestPath"
-              src="image/雷諾瓦/Forest Path.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>林間小徑</h4>
-            <p>Forest Path</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal28" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img28" />
+        <div id="caption27"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="ForestPath" src="image/雷諾瓦/Forest Path.jpg" alt="" style="width: 100%" />
+          <h4>林間小徑</h4>
+          <p>Forest Path</p>
         </div>
-        <div class="columns">
-          <p>《林間小徑》（Forest Path）是法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste Renoir）創作的一幅作品。雷諾阿以其對自然光線的敏銳觀察和色彩的豐富運用而著稱，《林間小徑》展示了他對自然景觀的喜愛和詮釋。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal28" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img28" />
+          </div>
+          <div class="columns">
+            <p>《林間小徑》（Forest Path）是法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste
+              Renoir）創作的一幅作品。雷諾阿以其對自然光線的敏銳觀察和色彩的豐富運用而著稱，《林間小徑》展示了他對自然景觀的喜愛和詮釋。
+              <br>
             <h4>創作背景</h4>
             雷諾阿的藝術生涯中，經常描繪自然風景和戶外場景，特別是那些陽光充足的戶外景色。他熱愛在戶外繪畫，捕捉瞬間的光影變化和自然的和諧之美。《林間小徑》創作於19世紀晚期，這段時期的雷諾阿正專注於表現光影效果和色彩的微妙變化。
             <br>
@@ -1375,33 +1252,30 @@
             《林間小徑》可能被收藏於某個美術館或私人收藏中。雷諾阿的這些作品對於理解印象派運動的發展和演變具有重要意義，經常在世界各地的藝術展覽中展出，吸引了無數觀者和藝術愛好者的關注。
             <br>
             總之，皮埃爾-奧古斯特·雷諾阿的《林間小徑》通過其對自然景觀的細膩描繪和對光影色彩的精妙運用，展示了他對自然之美的深刻理解和詮釋，是印象派藝術中的一個重要代表作品。</p>
-        </div>
-      </div>
-          <div id="caption28"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="HouseandFigureamongtheTrees"
-              src="image/雷諾瓦/House and Figure among the Trees.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>樹林中的房屋與人物</h4>
-            <p>House and Figure among the Trees</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal29" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img29" />
+        <div id="caption28"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="HouseandFigureamongtheTrees" src="image/雷諾瓦/House and Figure among the Trees.jpg" alt=""
+            style="width: 100%" />
+          <h4>樹林中的房屋與人物</h4>
+          <p>House and Figure among the Trees</p>
         </div>
-        <div class="columns">
-          <p>《樹林中的房屋與人物》（House and Figure among the Trees）是法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste Renoir）創作的一幅作品。雷諾阿以其鮮明的色彩、輕快的筆觸以及對光影的精湛掌握而聞名，這幅畫作展示了他對自然風景的喜愛和描繪。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal29" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img29" />
+          </div>
+          <div class="columns">
+            <p>《樹林中的房屋與人物》（House and Figure among the Trees）是法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste
+              Renoir）創作的一幅作品。雷諾阿以其鮮明的色彩、輕快的筆觸以及對光影的精湛掌握而聞名，這幅畫作展示了他對自然風景的喜愛和描繪。
+              <br>
             <h4>創作背景</h4>
             雷諾阿的藝術生涯中，他經常描繪自然景觀和日常生活場景。《樹林中的房屋與人物》創作於19世紀末期，這段時期的雷諾阿正積極探索印象派的技法，特別是光影效果和色彩運用。這幅畫作可能描繪的是法國鄉村的一個安靜角落，展示了自然與人類活動的和諧融合。
             <br>
@@ -1421,42 +1295,39 @@
             《樹林中的房屋與人物》可能被收藏於某個美術館或私人收藏中。雷諾阿的這些作品對於理解印象派運動的發展和演變具有重要意義，經常在世界各地的藝術展覽中展出，吸引了無數觀者和藝術愛好者的關注。
             <br>
             總之，皮埃爾-奧古斯特·雷諾阿的《樹林中的房屋與人物》通過其對自然景觀的細膩描繪和對光影色彩的精妙運用，展示了他對自然之美的深刻理解和詮釋，是印象派藝術中的一個重要代表作品。</p>
-        </div>
-      </div>
-          <div id="caption29"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="LandscapenearPontAven"
-              src="image/雷諾瓦/Landscape near Pont Aven.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>Pont Aven 附近的風景</h4>
-            <p>Landscape near Pont Aven</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal30" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img30" />
+        <div id="caption29"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="LandscapenearPontAven" src="image/雷諾瓦/Landscape near Pont Aven.jpg" alt="" style="width: 100%" />
+          <h4>Pont Aven 附近的風景</h4>
+          <p>Landscape near Pont Aven</p>
         </div>
-        <div class="columns">
-          <p>《Pont Aven 附近的風景》（Landscape near Pont Aven）是由法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste Renoir）創作的一幅畫作，這幅作品展現了他在布列塔尼地區的鄉村風光。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal30" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img30" />
+          </div>
+          <div class="columns">
+            <p>《Pont Aven 附近的風景》（Landscape near Pont Aven）是由法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste
+              Renoir）創作的一幅畫作，這幅作品展現了他在布列塔尼地區的鄉村風光。
+              <br>
             <h4>創作背景</h4>
             雷諾阿在印象派時期的創作中，經常探索自然景觀和戶外場景，尤其是在其多次前往布列塔尼地區旅行期間，這片地區的風景和人文風貌對他產生了深刻的影響。雷諾阿對光影的捕捉和色彩的運用，使得他的風景畫具有很高的藝術價值和視覺吸引力。
             <br>
             <h4>畫作風格</h4>
             光影效果：雷諾阿在這幅畫中注重光影的變化，透過明暗對比和光線的折射，表現出自然光在不同時間和天氣條件下的效果。他的畫作通常能夠捕捉到光線在樹葉和地面上的斑駁效果，增強了畫面的立體感。
             色彩運用：雷諾阿的色彩使用非常豐富，這幅畫中，他使用了大量的綠色和藍色來描繪樹木和天空，並通過細膩的色彩層次，展示了自然景觀的生動和和諧。
-            筆觸風格：雷諾阿的筆觸輕快且富有動感，他經常使用短小而迅速的筆觸來捕捉景物的質感和動態，使得畫面充滿了生氣和活力。            
+            筆觸風格：雷諾阿的筆觸輕快且富有動感，他經常使用短小而迅速的筆觸來捕捉景物的質感和動態，使得畫面充滿了生氣和活力。
             <h4>畫作內容</h4>
-            《Pont Aven 附近的風景》描繪了一片布列塔尼地區的鄉村景象。畫面中可能包含起伏的山丘、綠意盎然的樹林以及遠處的房屋或小路。雷諾阿的筆觸和色彩運用使得這幅畫呈現出一種寧靜而生動的氛圍，讓人能夠感受到布列塔尼鄉村的自然美和悠閒氣息。
+            《Pont Aven
+            附近的風景》描繪了一片布列塔尼地區的鄉村景象。畫面中可能包含起伏的山丘、綠意盎然的樹林以及遠處的房屋或小路。雷諾阿的筆觸和色彩運用使得這幅畫呈現出一種寧靜而生動的氛圍，讓人能夠感受到布列塔尼鄉村的自然美和悠閒氣息。
             <br>
             <h4>藝術價值</h4>
             印象派特徵：這幅作品體現了印象派的核心特徵，如對光影變化的關注、色彩的和諧運用以及筆觸的自由表現。這些特徵使得雷諾阿的風景畫具有鮮明的印象派風格，對後來的藝術家產生了深遠的影響。
@@ -1467,33 +1338,29 @@
             《Pont Aven 附近的風景》目前可能被收藏於某個美術館或私人收藏中。雷諾阿的風景畫對於理解印象派運動的發展和演變具有重要意義，這幅畫作也常在各大藝術展覽中展出，受到藝術愛好者和學者的高度評價。
             <br>
             總之，皮埃爾-奧古斯特·雷諾阿的《Pont Aven 附近的風景》通過其對光影和色彩的精湛運用，展示了他對自然之美的深刻理解和獨特詮釋，是印象派藝術中的一個重要代表作品。</p>
-        </div>
-      </div>
-          <div id="caption30"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="Roses"
-              src="image/雷諾瓦/Roses.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>玫瑰</h4>
-            <p>Roses</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal31" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img31" />
+        <div id="caption30"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="Roses" src="image/雷諾瓦/Roses.jpg" alt="" style="width: 100%" />
+          <h4>玫瑰</h4>
+          <p>Roses</p>
         </div>
-        <div class="columns">
-          <p>《玫瑰》（Roses）是皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste Renoir）創作的一幅著名畫作。雷諾阿是印象派的代表畫家之一，以其對色彩和光線的卓越掌握而聞名。這幅作品展示了他對花卉的細膩描繪和對自然之美的熱愛。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal31" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img31" />
+          </div>
+          <div class="columns">
+            <p>《玫瑰》（Roses）是皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste
+              Renoir）創作的一幅著名畫作。雷諾阿是印象派的代表畫家之一，以其對色彩和光線的卓越掌握而聞名。這幅作品展示了他對花卉的細膩描繪和對自然之美的熱愛。
+              <br>
             <h4>創作背景</h4>
             雷諾阿對於花卉的描繪是他藝術生涯中的一個重要部分，他特別喜愛畫出花瓶中的花卉，包括玫瑰。這幅《玫瑰》可能創作於他在巴黎和周邊地區的生活期間，雷諾阿經常在家中或花園中畫畫，捕捉自然光線和花卉的細節。
             <br>
@@ -1513,33 +1380,29 @@
             《玫瑰》目前可能被收藏於某個美術館或私人收藏中。雷諾阿的這些作品對於理解印象派運動的發展和演變具有重要意義，經常在世界各地的藝術展覽中展出，受到藝術愛好者和學者的高度評價。
             <br>
             總之，皮埃爾-奧古斯特·雷諾阿的《玫瑰》通過其對色彩和光影的精湛運用，展示了他對自然之美的深刻理解和獨特詮釋，是印象派藝術中的一個重要代表作品。</p>
-        </div>
-      </div>
-          <div id="caption31"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="TheLaundress"
-              src="image/雷諾瓦/The Laundress.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>洗衣女工</h4>
-            <p>The Laundress</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal32" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img32" />
+        <div id="caption31"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="TheLaundress" src="image/雷諾瓦/The Laundress.jpg" alt="" style="width: 100%" />
+          <h4>洗衣女工</h4>
+          <p>The Laundress</p>
         </div>
-        <div class="columns">
-          <p>《洗衣女工》（The Laundress）是由法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste Renoir）創作的一幅作品。這幅畫作展示了雷諾阿對日常生活場景的描繪，特別是對人物表現的關注。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal32" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img32" />
+          </div>
+          <div class="columns">
+            <p>《洗衣女工》（The Laundress）是由法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste
+              Renoir）創作的一幅作品。這幅畫作展示了雷諾阿對日常生活場景的描繪，特別是對人物表現的關注。
+              <br>
             <h4>創作背景</h4>
             雷諾阿在其藝術生涯中，經常畫出當時社會中普通人物的日常生活，特別是勞動階層的人物。他對這些人物的描繪充滿了同情與關懷，試圖捕捉他們的真實情感和生活狀態。《洗衣女工》這幅畫作可能創作於19世紀末至20世紀初，當時雷諾阿的風格逐漸成熟，他的畫風開始更加注重色彩和光影的表現。
             <br>
@@ -1559,42 +1422,41 @@
             《洗衣女工》目前可能被收藏於某個美術館或私人收藏中。雷諾阿的這些作品對於理解印象派運動的發展和演變具有重要意義，經常在世界各地的藝術展覽中展出，受到藝術愛好者和學者的高度評價。
             <br>
             總之，皮埃爾-奧古斯特·雷諾阿的《洗衣女工》通過其對人物的細緻描繪和對光影色彩的精湛運用，展示了他對日常生活和普通人物的深刻理解和獨特詮釋，是印象派藝術中的一個重要代表作品。</p>
-        </div>
-      </div>
-          <div id="caption32"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="TheRoseGardenatWargemont"
-              src="image/雷諾瓦/The Rose Garden at Wargemont.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>Wargemont 的玫瑰花園</h4>
-            <p>The Rose Garden at Wargemont</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal33" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img33" />
+        <div id="caption32"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="TheRoseGardenatWargemont" src="image/雷諾瓦/The Rose Garden at Wargemont.jpg" alt=""
+            style="width: 100%" />
+          <h4>Wargemont 的玫瑰花園</h4>
+          <p>The Rose Garden at Wargemont</p>
         </div>
-        <div class="columns">
-          <p>《Wargemont 的玫瑰花園》（The Rose Garden at Wargemont）是由法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste Renoir）創作的一幅作品。這幅畫展示了雷諾阿對自然景觀和花卉的熱愛，特別是他對光影和色彩的獨特處理。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal33" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img33" />
+          </div>
+          <div class="columns">
+            <p>《Wargemont 的玫瑰花園》（The Rose Garden at Wargemont）是由法國印象派畫家皮埃爾-奧古斯特·雷諾阿（Pierre-Auguste
+              Renoir）創作的一幅作品。這幅畫展示了雷諾阿對自然景觀和花卉的熱愛，特別是他對光影和色彩的獨特處理。
+              <br>
             <h4>創作背景</h4>
-            雷諾阿在他的藝術生涯中，特別喜愛描繪花園和自然景觀。Wargemont 是他的一個靈感來源地，這裡的花園和周邊環境為他的創作提供了豐富的題材。這幅畫作可能創作於他在Wargemont生活和工作期間，當時雷諾阿正致力於探索印象派的光影效果和色彩表現。
+            雷諾阿在他的藝術生涯中，特別喜愛描繪花園和自然景觀。Wargemont
+            是他的一個靈感來源地，這裡的花園和周邊環境為他的創作提供了豐富的題材。這幅畫作可能創作於他在Wargemont生活和工作期間，當時雷諾阿正致力於探索印象派的光影效果和色彩表現。
             <br>
             <h4>畫作風格</h4>
             色彩運用：雷諾阿在這幅畫中運用了鮮豔且和諧的色彩。玫瑰花的各種色彩豐富而自然，從粉紅到紅色，再到白色和黃色，這些色彩的搭配使得整個畫面充滿了生命力和美感。
             光影效果：雷諾阿在畫中精細地捕捉了自然光的變化，特別是光線如何透過樹葉和花朵投射在地面和花園中的不同區域。他的筆觸和光影處理使得花園中的每一朵玫瑰都顯得生動而有立體感。
             筆觸技巧：雷諾阿的筆觸輕快且富有節奏感，他用細緻而迅速的筆觸來描繪花朵的質感和光澤，使得整幅畫作充滿了動感和層次感。
             <h4>畫作內容</h4>
-            《Wargemont 的玫瑰花園》描繪了一個充滿各種玫瑰的花園，花園中的花朵盛開，色彩斑斕。畫面中的光線透過樹葉，照在花朵上，形成美麗的光影效果。雷諾阿精細地描繪了每一朵玫瑰的細節，從花瓣的質地到花蕊的光澤，都顯得非常生動和真實。
+            《Wargemont
+            的玫瑰花園》描繪了一個充滿各種玫瑰的花園，花園中的花朵盛開，色彩斑斕。畫面中的光線透過樹葉，照在花朵上，形成美麗的光影效果。雷諾阿精細地描繪了每一朵玫瑰的細節，從花瓣的質地到花蕊的光澤，都顯得非常生動和真實。
             <br>
             <h4>藝術價值</h4>
             印象派特徵：這幅畫體現了印象派的核心特徵，包括對光影變化的關注、色彩的和諧運用和筆觸的自由表現。雷諾阿通過這幅畫展示了他對自然美的深刻理解和精湛技藝。
@@ -1605,33 +1467,30 @@
             《Wargemont 的玫瑰花園》可能被收藏於某個美術館或私人收藏中。雷諾阿的這些作品對於理解印象派運動的發展和演變具有重要意義，經常在世界各地的藝術展覽中展出，受到藝術愛好者和學者的高度評價。
             <br>
             總之，皮埃爾-奧古斯特·雷諾阿的《Wargemont 的玫瑰花園》通過其對色彩和光影的精湛運用，展示了他對自然之美的深刻理解和獨特詮釋，是印象派藝術中的一個重要代表作品。</p>
-        </div>
-      </div>
-          <div id="caption33"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="TheSeineatAsnieres"
-              src="image/雷諾瓦/The Seine at Asnieres (The Skiff).jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>The Seine at Asnieres (The Skiff)</h4>
-            <p>The Seine at Asnieres (The Skiff)</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal34" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img34" />
+        <div id="caption33"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="TheSeineatAsnieres" src="image/雷諾瓦/The Seine at Asnieres (The Skiff).jpg" alt=""
+            style="width: 100%" />
+          <h4>The Seine at Asnieres (The Skiff)</h4>
+          <p>The Seine at Asnieres (The Skiff)</p>
         </div>
-        <div class="columns">
-          <p>《The Seine at Asnières (The Skiff)》是由法國印象派畫家皮埃爾-奧古斯特·雷諾瓦（Pierre-Auguste Renoir）創作的一幅作品，完成於1879年。這幅畫是雷諾瓦早期印象主義風格的代表作之一，展現了他對光影和色彩的敏銳感知。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal34" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img34" />
+          </div>
+          <div class="columns">
+            <p>《The Seine at Asnières (The Skiff)》是由法國印象派畫家皮埃爾-奧古斯特·雷諾瓦（Pierre-Auguste
+              Renoir）創作的一幅作品，完成於1879年。這幅畫是雷諾瓦早期印象主義風格的代表作之一，展現了他對光影和色彩的敏銳感知。
+              <br>
             <h4>創作背景</h4>
             創作背景：這幅畫的主題來自雷諾瓦對自然風光的熱愛，特別是對河流和戶外風景的描繪。Asnières 是巴黎郊區的一個小鎮，擁有美麗的塞納河風景，雷諾瓦在此地進行了多次創作。
             畫作題材：畫中的主題是一艘小船，載著一位坐在船上的男子。畫作捕捉了日常生活中的一個瞬間，展示了雷諾瓦對日常景象的興趣。
@@ -1651,34 +1510,32 @@
             <h4>收藏</h4>
             這幅畫作在雷諾瓦的作品中占有重要地位，經常在各大博物館和藝術展覽中展示，並受到收藏家的青睞。雷諾瓦的作品因其獨特的風格和對自然美的深刻描繪而廣受讚譽。
             <br>
-            總結來說，《The Seine at Asnières (The Skiff)》通過其生動的光影表現和豐富的色彩運用，展現了雷諾瓦對自然景觀的深刻感悟和印象主義畫派的創新特點，是一幅具有高度藝術價值的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption34"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="VaseBasketofFlowersandFruit"
-              src="image/雷諾瓦/Vase Basket of Flowers and Fruit.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>Vase Basket of Flowers and Fruit</h4>
-            <p>Vase Basket of Flowers and Fruit</p>
+            總結來說，《The Seine at Asnières (The Skiff)》通過其生動的光影表現和豐富的色彩運用，展現了雷諾瓦對自然景觀的深刻感悟和印象主義畫派的創新特點，是一幅具有高度藝術價值的經典作品。
+            </p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal35" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img35" />
+        <div id="caption34"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="VaseBasketofFlowersandFruit" src="image/雷諾瓦/Vase Basket of Flowers and Fruit.jpg" alt=""
+            style="width: 100%" />
+          <h4>Vase Basket of Flowers and Fruit</h4>
+          <p>Vase Basket of Flowers and Fruit</p>
         </div>
-        <div class="columns">
-          <p>《Vase Basket of Flowers and Fruit》是由法國印象派畫家皮埃爾-奧古斯特·雷諾瓦（Pierre-Auguste Renoir）創作的一幅靜物畫，展示了他在繪畫技法上的精湛技巧和對自然美的敏銳捕捉。這幅作品通常被認為是雷諾瓦在靜物畫領域中的代表作之一。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal35" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img35" />
+          </div>
+          <div class="columns">
+            <p>《Vase Basket of Flowers and Fruit》是由法國印象派畫家皮埃爾-奧古斯特·雷諾瓦（Pierre-Auguste
+              Renoir）創作的一幅靜物畫，展示了他在繪畫技法上的精湛技巧和對自然美的敏銳捕捉。這幅作品通常被認為是雷諾瓦在靜物畫領域中的代表作之一。
+              <br>
             <h4>創作背景</h4>
             創作背景：這幅畫可能是在雷諾瓦早期的藝術生涯中創作的，當時他對自然光和色彩的處理已經顯示出獨特的風格。雷諾瓦在靜物畫中往往關注於花卉和水果的鮮豔色彩及其與光線的互動。
             題材選擇：這幅畫的題材是一個花瓶和一籃水果，展示了雷諾瓦對自然界日常美的欣賞和描繪。花卉和水果的組合是靜物畫中常見的主題，雷諾瓦在這幅作品中透過豐富的色彩和精細的筆觸來展現其自然美。
@@ -1697,33 +1554,29 @@
             文化意義：這幅作品展示了印象派畫派對日常生活和自然景物的關注，雷諾瓦在這幅畫中的表現增強了靜物畫的藝術價值，使其不僅僅是對物品的描繪，而是對自然美的深入探索。
             <br>
             總之，《Vase Basket of Flowers and Fruit》通過其鮮豔的色彩、細膩的筆觸和巧妙的光影效果，展現了雷諾瓦對自然美的深刻理解和精湛的畫技，是一幅值得細細品味和欣賞的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption35"></div>
-        </div>
-
-        <div class="column Renoir">
-          <div class="content">
-            <img
-              id="LaGrenouillere"
-              src="image/雷諾瓦/青蛙塘.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>青蛙塘</h4>
-            <p>La Grenouillere</p>
           </div>
         </div>
-         <!-- The Modal -->
-         <div id="myModal36" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img36" />
+        <div id="caption35"></div>
+      </div>
+
+      <div class="column Renoir">
+        <div class="content">
+          <img id="LaGrenouillere" src="image/雷諾瓦/青蛙塘.jpg" alt="" style="width: 100%" />
+          <h4>青蛙塘</h4>
+          <p>La Grenouillere</p>
         </div>
-        <div class="columns">
-          <p>《青蛙塘》（La Grenouillère）是由法國印象派畫家皮埃爾-奧古斯特·雷諾瓦（Pierre-Auguste Renoir）和克洛德·莫奈（Claude Monet）共同創作的一幅作品，完成於1869年。這幅畫描繪了巴黎近郊的塞納河上的一個熱門休閒地點——青蛙塘，這是一個人們夏季休閒、游泳和野餐的場所。這幅畫作展示了印象派畫家對自然光和現實生活場景的關注。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal36" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img36" />
+          </div>
+          <div class="columns">
+            <p>《青蛙塘》（La Grenouillère）是由法國印象派畫家皮埃爾-奧古斯特·雷諾瓦（Pierre-Auguste Renoir）和克洛德·莫奈（Claude
+              Monet）共同創作的一幅作品，完成於1869年。這幅畫描繪了巴黎近郊的塞納河上的一個熱門休閒地點——青蛙塘，這是一個人們夏季休閒、游泳和野餐的場所。這幅畫作展示了印象派畫家對自然光和現實生活場景的關注。
+              <br>
             <h4>創作背景</h4>
             創作背景：青蛙塘是塞納河上的一個受歡迎的休閒場所，尤其在19世紀末期，這裡是巴黎居民夏季消暑的熱點。雷諾瓦和莫奈在這個地方進行了多次創作，捕捉了這個場所的日常生活和自然景觀。
             畫作題材：畫作展示了許多人在青蛙塘上悠閒的生活場景，有的在水中游泳，有的在船上遊玩，整個場景充滿了生動的活動和輕鬆的氛圍。
@@ -1741,33 +1594,29 @@
             文化意義：這幅畫作反映了19世紀末期巴黎人們的休閒生活和自然景觀的美麗，具有很高的文化價值和歷史意義。它展示了印象派畫家對自然和生活的熱愛，以及他們對藝術創新的追求。
             <br>
             總之，《青蛙塘》（La Grenouillère）通過其生動的光影效果和豐富的色彩運用，展示了雷諾瓦和莫奈在印象主義畫派中的重要地位，是一幅值得細細品味和欣賞的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption36"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="Bathing"
-              src="image/畢卡索/Bathing.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>沐浴</h4>
-            <p>Bathing</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal37" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img37" />
+        <div id="caption36"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="Bathing" src="image/畢卡索/Bathing.jpg" alt="" style="width: 100%" />
+          <h4>沐浴</h4>
+          <p>Bathing</p>
         </div>
-        <div class="columns">
-          <p>巴勃羅·畢卡索（Pablo Picasso）的《Bathing》（沐浴）是一幅展示其成熟立體主義風格的作品，通常指的是他在20世紀早期創作的一些作品，特別是1918年至1920年間的作品。這些畫作通過幾何形狀和多視角的手法，將沐浴的場景重新詮釋為抽象且多層次的視覺語言。以下是對這些畫作的詳細介紹：
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal37" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img37" />
+          </div>
+          <div class="columns">
+            <p>巴勃羅·畢卡索（Pablo
+              Picasso）的《Bathing》（沐浴）是一幅展示其成熟立體主義風格的作品，通常指的是他在20世紀早期創作的一些作品，特別是1918年至1920年間的作品。這些畫作通過幾何形狀和多視角的手法，將沐浴的場景重新詮釋為抽象且多層次的視覺語言。以下是對這些畫作的詳細介紹：
+              <br>
             <h4>創作背景</h4>
             創作時期：畢卡索在1910年代到1920年代，尤其是第一次世界大戰後的期間，進一步發展了立體主義。他在這個時期的作品中，將更多的形式和空間探索融入到畫作中，特別是在描繪日常生活場景如沐浴時，將傳統的視覺表現方式進行了大膽的創新。
             題材選擇：沐浴作為一個平凡且充滿私密性的日常場景，成為畢卡索探索形態和空間變化的理想題材。他通過將人體和環境的各個角度組合在一起，展現了他對立體主義的理解和應用。
@@ -1786,33 +1635,29 @@
             文化意義：這些畫作反映了20世紀初期藝術的創新和變革，具有重要的文化價值和歷史意義。它們展示了畢卡索在立體主義畫派中的創新地位，以及他對現代藝術發展的貢獻。
             <br>
             總之，畢卡索的《Bathing》通過其立體主義的形式和技法，展示了他對人體美和空間結構的深刻理解，是一幅具有高度藝術價值和創新意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption37"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="Beachgameandrescue"
-              src="image/畢卡索/Beach game and rescue.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>沙灘遊戲與救援</h4>
-            <p>Beach game and rescue</p>
           </div>
         </div>
-         <!-- The Modal -->
-         <div id="myModal38" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img38" />
+        <div id="caption37"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="Beachgameandrescue" src="image/畢卡索/Beach game and rescue.jpg" alt="" style="width: 100%" />
+          <h4>沙灘遊戲與救援</h4>
+          <p>Beach game and rescue</p>
         </div>
-        <div class="columns">
-          <p>《Beach Game and Rescue》（沙灘遊戲與救援）是一幅由畢卡索（Pablo Picasso）創作的作品。這幅畫作展示了畢卡索在立體主義風格中對日常生活場景的描繪，特別是他對動態場景和情感表達的關注。以下是對這幅作品的詳細介紹：
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal38" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img38" />
+          </div>
+          <div class="columns">
+            <p>《Beach Game and Rescue》（沙灘遊戲與救援）是一幅由畢卡索（Pablo
+              Picasso）創作的作品。這幅畫作展示了畢卡索在立體主義風格中對日常生活場景的描繪，特別是他對動態場景和情感表達的關注。以下是對這幅作品的詳細介紹：
+              <br>
             <h4>創作背景</h4>
             創作時期：這幅畫作創作於20世紀早期，這是一個畢卡索風格逐漸成熟和轉變的重要時期。在這段時間內，他進一步發展了立體主義風格，並將其應用到更多元的主題和場景中。
             題材選擇：畢卡索選擇了沙灘遊戲和救援的場景，這是一個充滿活力和動感的題材。這樣的選擇展示了他對日常生活場景的關注，並且通過這些場景來探索光影和形態的變化。
@@ -1831,33 +1676,28 @@
             文化意義：這幅作品反映了20世紀初期藝術的創新和變革，具有重要的文化價值和歷史意義。它展示了畢卡索在立體主義畫派中的創新地位，以及他對現代藝術發展的貢獻。
             <br>
             總之，畢卡索的《Beach Game and Rescue》通過其立體主義的形式和技法，展示了他對動態場景和情感表達的深刻理解，是一幅具有高度藝術價值和創新意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption38"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="CafeRoyan"
-              src="image/畢卡索/Cafe Royan.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>羅揚咖啡館</h4>
-            <p>Cafe Royan</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal39" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img39" />
+        <div id="caption38"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="CafeRoyan" src="image/畢卡索/Cafe Royan.jpg" alt="" style="width: 100%" />
+          <h4>羅揚咖啡館</h4>
+          <p>Cafe Royan</p>
         </div>
-        <div class="columns">
-          <p>《Cafe Royan》是由巴勃羅·畢卡索（Pablo Picasso）創作的一幅作品。這幅畫作展示了畢卡索在其藝術生涯中對日常生活場景的描繪，特別是在他探索立體主義風格時期的表現。以下是對這幅作品的詳細介紹：
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal39" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img39" />
+          </div>
+          <div class="columns">
+            <p>《Cafe Royan》是由巴勃羅·畢卡索（Pablo Picasso）創作的一幅作品。這幅畫作展示了畢卡索在其藝術生涯中對日常生活場景的描繪，特別是在他探索立體主義風格時期的表現。以下是對這幅作品的詳細介紹：
+              <br>
             <h4>創作背景</h4>
             創作時期：這幅畫作創作於1914年，這是一個畢卡索從分析立體主義向綜合立體主義過渡的重要時期。在這段時間內，畢卡索的作品逐漸融合了更多元素，包括色彩、質地和具體形象。
             地點背景：Royan是法國西南部的一個海濱小鎮，畢卡索在1914年曾在那裡度過一段時間。《Cafe Royan》描繪的就是當地一間咖啡館的場景。
@@ -1876,33 +1716,28 @@
             文化意義：這幅作品反映了20世紀初期法國社會的生活風貌和文化特徵，具有重要的文化價值和歷史意義。它展示了畢卡索在立體主義畫派中的創新地位，以及他對現代藝術發展的貢獻。
             <br>
             總之，畢卡索的《Cafe Royan》通過其立體主義的形式和技法，展示了他對日常生活場景的深刻理解，是一幅具有高度藝術價值和創新意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption39"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="Fairground"
-              src="image/畢卡索/Fairground.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>遊樂場</h4>
-            <p>Fairground</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal40" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img40" />
+        <div id="caption39"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="Fairground" src="image/畢卡索/Fairground.jpg" alt="" style="width: 100%" />
+          <h4>遊樂場</h4>
+          <p>Fairground</p>
         </div>
-        <div class="columns">
-          <p>《Fairground》（遊樂場）是畢卡索（Pablo Picasso）在其藝術生涯中的一幅重要作品。這幅畫作展示了他對充滿活力和動感的場景的描繪，以及他對立體主義風格的運用。以下是對這幅作品的詳細介紹：
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal40" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img40" />
+          </div>
+          <div class="columns">
+            <p>《Fairground》（遊樂場）是畢卡索（Pablo Picasso）在其藝術生涯中的一幅重要作品。這幅畫作展示了他對充滿活力和動感的場景的描繪，以及他對立體主義風格的運用。以下是對這幅作品的詳細介紹：
+              <br>
             <h4>創作背景</h4>
             創作時期：畢卡索創作《Fairground》的具體年份並不詳知，但這幅畫通常被認為是在他立體主義時期創作的。這段時間，他對形狀和空間進行了深入探索和創新。
             地點背景：遊樂場是現實生活中的常見場景，充滿了各種各樣的活動和人群。這樣的背景為畢卡索提供了一個豐富的題材，讓他能夠表現出立體主義的特徵。
@@ -1921,33 +1756,29 @@
             文化意義：這幅作品反映了20世紀初期社會的生活風貌和文化特徵，具有重要的文化價值和歷史意義。它展示了畢卡索在立體主義畫派中的創新地位，以及他對現代藝術發展的貢獻。
             <br>
             總之，畢卡索的《Fairground》通過其立體主義的形式和技法，展示了他對動態場景和人類娛樂活動的深刻理解，是一幅具有高度藝術價值和創新意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption40"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="Harlequinfamily"
-              src="image/畢卡索/Harlequin family.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>哈里奎恩一家</h4>
-            <p>Harlequin family</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal41" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img41" />
+        <div id="caption40"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="Harlequinfamily" src="image/畢卡索/Harlequin family.jpg" alt="" style="width: 100%" />
+          <h4>哈里奎恩一家</h4>
+          <p>Harlequin family</p>
         </div>
-        <div class="columns">
-          <p>《Harlequin Family》（哈里奎恩一家）是畢卡索（Pablo Picasso）創作的一幅重要作品，展示了他對馬戲團生活和人物的深刻理解和表達。這幅畫作融合了畢卡索早期藍色時期和玫瑰時期的風格元素，體現了他對社會邊緣人物的關注和同情。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal41" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img41" />
+          </div>
+          <div class="columns">
+            <p>《Harlequin Family》（哈里奎恩一家）是畢卡索（Pablo
+              Picasso）創作的一幅重要作品，展示了他對馬戲團生活和人物的深刻理解和表達。這幅畫作融合了畢卡索早期藍色時期和玫瑰時期的風格元素，體現了他對社會邊緣人物的關注和同情。
+              <br>
             <h4>創作背景</h4>
             創作時期：這幅畫作創作於1905年，這是一個畢卡索從藍色時期向玫瑰時期過渡的時期。在這段時間內，畢卡索的作品逐漸從沉重的憂鬱情感轉向更溫暖和柔和的色調。
             題材選擇：哈里奎恩（Harlequin）是馬戲團中的一個傳統角色，通常以其多彩的服裝和幽默的表演著稱。畢卡索對馬戲團和其表演者有著濃厚的興趣，這在他的多幅作品中有所體現。
@@ -1966,33 +1797,28 @@
             文化意義：這幅作品反映了20世紀初期馬戲團生活的真實面貌，具有重要的文化價值和歷史意義。它展示了畢卡索在藝術表現上的創新和對社會生活的深刻洞察。
             <br>
             總之，畢卡索的《Harlequin Family》通過其柔和的色彩和細膩的筆觸，展示了他對馬戲團人物和家庭關係的深刻理解，是一幅具有高度藝術價值和情感深度的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption41"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="Housesonthehill"
-              src="image/畢卡索/Houses on the hill.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>山坡上的房子</h4>
-            <p>Houses on the hill</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal42" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img42" />
+        <div id="caption41"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="Housesonthehill" src="image/畢卡索/Houses on the hill.jpg" alt="" style="width: 100%" />
+          <h4>山坡上的房子</h4>
+          <p>Houses on the hill</p>
         </div>
-        <div class="columns">
-          <p>《Houses on the Hill》（山坡上的房子）是一幅由巴勃羅·畢卡索（Pablo Picasso）創作的畫作。這幅作品展示了畢卡索在立體主義風格中的探索，特別是在空間和形狀的分解與重組方面的創新。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal42" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img42" />
+          </div>
+          <div class="columns">
+            <p>《Houses on the Hill》（山坡上的房子）是一幅由巴勃羅·畢卡索（Pablo Picasso）創作的畫作。這幅作品展示了畢卡索在立體主義風格中的探索，特別是在空間和形狀的分解與重組方面的創新。
+              <br>
             <h4>創作背景</h4>
             創作時期：這幅畫作創作於1909年，處於畢卡索的立體主義時期。在這段時間，畢卡索和喬治·布拉克（Georges Braque）一起發展了立體主義，這是一種通過分解和重組形狀來描繪物體的藝術風格。
             地點背景：畫作中描繪的是山坡上的房子，這樣的場景為畢卡索提供了豐富的結構和形式，可以通過立體主義的技法進行重構。
@@ -2011,33 +1837,29 @@
             文化意義：這幅作品反映了20世紀初期現代主義藝術的探索和創新，具有重要的文化價值和歷史意義。它展示了畢卡索在立體主義畫派中的創新地位，以及他對現代藝術發展的貢獻。
             <br>
             總之，畢卡索的《Houses on the Hill》通過其立體主義的形式和技法，展示了他對結構和空間的深刻理解，是一幅具有高度藝術價值和創新意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption42"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="Plasterheadandarm"
-              src="image/畢卡索/Plaster head and arm.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>Plaster head and arm</h4>
-            <p>Plaster head and arm</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal43" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img43" />
+        <div id="caption42"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="Plasterheadandarm" src="image/畢卡索/Plaster head and arm.jpg" alt="" style="width: 100%" />
+          <h4>Plaster head and arm</h4>
+          <p>Plaster head and arm</p>
         </div>
-        <div class="columns">
-          <p>《Plaster Head and Arm》是一幅由巴勃羅·畢卡索（Pablo Picasso）創作的作品，展示了他對人體和雕塑形式的深刻理解和創新表現。這幅作品體現了畢卡索在不同藝術風格中的探索，尤其是他對形狀和形式的解構與重構。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal43" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img43" />
+          </div>
+          <div class="columns">
+            <p>《Plaster Head and Arm》是一幅由巴勃羅·畢卡索（Pablo
+              Picasso）創作的作品，展示了他對人體和雕塑形式的深刻理解和創新表現。這幅作品體現了畢卡索在不同藝術風格中的探索，尤其是他對形狀和形式的解構與重構。
+              <br>
             <h4>創作背景</h4>
             創作時期：具體創作年份不詳，但這幅作品與畢卡索的其他立體主義作品風格相近，可能創作於20世紀初期，當時畢卡索正處於立體主義的高峰期。
             題材選擇：這幅作品描繪了一個石膏頭部和手臂，這種題材反映了畢卡索對人體解剖和雕塑的深入研究和探索。
@@ -2056,35 +1878,32 @@
             文化意義：這幅作品反映了20世紀初期現代主義藝術的探索和創新，具有重要的文化價值和歷史意義。它展示了畢卡索在立體主義畫派中的創新地位，以及他對現代藝術發展的貢獻。
             <br>
             總之，畢卡索的《Plaster Head and Arm》通過其立體主義的形式和技法，展示了他對形狀和形式的深刻理解，是一幅具有高度藝術價值和創新意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption43"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="RecliningWoman"
-              src="image/畢卡索/Reclining Woman.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>躺著的女人</h4>
-            <p>Reclining Woman</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal44" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img44" />
+        <div id="caption43"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="RecliningWoman" src="image/畢卡索/Reclining Woman.jpg" alt="" style="width: 100%" />
+          <h4>躺著的女人</h4>
+          <p>Reclining Woman</p>
         </div>
-        <div class="columns">
-          <p>《Reclining Woman》（《躺著的女人》）是巴勃羅·畢卡索（Pablo Picasso）的一幅重要作品，展示了他對女性形體的描繪和他在藝術風格上的多樣性。這幅畫作反映了畢卡索對人類形體的探索和他對立體主義以及其他藝術風格的深刻理解。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal44" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img44" />
+          </div>
+          <div class="columns">
+            <p>《Reclining Woman》（《躺著的女人》）是巴勃羅·畢卡索（Pablo
+              Picasso）的一幅重要作品，展示了他對女性形體的描繪和他在藝術風格上的多樣性。這幅畫作反映了畢卡索對人類形體的探索和他對立體主義以及其他藝術風格的深刻理解。
+              <br>
             <h4>創作背景</h4>
-            創作時期：畢卡索創作過多幅以《Reclining Woman》為題的作品，涵蓋了他不同時期的風格，包括藍色時期、玫瑰時期、立體主義時期以及後期的超現實主義和表現主義作品。具體的《Reclining Woman》可以依據不同時期的特徵來進行具體分析。
+            創作時期：畢卡索創作過多幅以《Reclining Woman》為題的作品，涵蓋了他不同時期的風格，包括藍色時期、玫瑰時期、立體主義時期以及後期的超現實主義和表現主義作品。具體的《Reclining
+            Woman》可以依據不同時期的特徵來進行具體分析。
             題材選擇：躺著的女性是畢卡索經常描繪的題材，這種姿態的女性體現了柔美與放鬆，能夠表達出多種情感和主題。
             <br>
             <h4>畫作風格</h4>
@@ -2102,33 +1921,29 @@
             文化意義：這幅作品反映了20世紀現代主義藝術的探索和創新，具有重要的文化價值和歷史意義。它展示了畢卡索在現代藝術中的地位和影響力。
             <br>
             總之，畢卡索的《Reclining Woman》通過其多樣的藝術風格和深刻的情感表達，展示了他對女性形體和人類情感的深刻理解，是一幅具有高度藝術價值和文化意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption44"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="SquareduVertGalant"
-              src="image/畢卡索/Square du Vert-Galant.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>維爾-加朗廣場</h4>
-            <p>Square du Vert-Galant</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal45" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img45" />
+        <div id="caption44"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="SquareduVertGalant" src="image/畢卡索/Square du Vert-Galant.jpg" alt="" style="width: 100%" />
+          <h4>維爾-加朗廣場</h4>
+          <p>Square du Vert-Galant</p>
         </div>
-        <div class="columns">
-          <p>《Square du Vert-Galant》（維爾-加朗廣場）是由巴勃羅·畢卡索（Pablo Picasso）創作的一幅作品，展現了他在立體主義風格中的探索。這幅畫作反映了畢卡索對巴黎著名景點的詮釋，並展示了他如何運用立體主義技法來分解和重構視覺元素。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal45" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img45" />
+          </div>
+          <div class="columns">
+            <p>《Square du Vert-Galant》（維爾-加朗廣場）是由巴勃羅·畢卡索（Pablo
+              Picasso）創作的一幅作品，展現了他在立體主義風格中的探索。這幅畫作反映了畢卡索對巴黎著名景點的詮釋，並展示了他如何運用立體主義技法來分解和重構視覺元素。
+              <br>
             <h4>創作背景</h4>
             創作時期：這幅畫作創作於1900年代初期，處於畢卡索的立體主義時期。這段時間，畢卡索和喬治·布拉克共同探索立體主義，發展了一種全新的藝術表現形式。
             地點背景：維爾-加朗廣場位於巴黎塞納河畔，是一個著名的公共場所，以其美麗的景觀和悠閒的氛圍而聞名。畢卡索選擇這個地方作為題材，可能是因為其結構和形狀對立體主義技法的適用性。
@@ -2147,33 +1962,28 @@
             文化意義：這幅作品反映了20世紀初期現代主義藝術的探索和創新，具有重要的文化價值和歷史意義。它展示了畢卡索在立體主義畫派中的創新地位，以及他對現代藝術發展的貢獻。
             <br>
             總之，巴勃羅·畢卡索的《Square du Vert-Galant》通過其立體主義的形式和技法，展示了他對結構和空間的深刻理解，是一幅具有高度藝術價值和創新意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption45"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="Stilllife"
-              src="image/畢卡索/Still life.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>靜物</h4>
-            <p>Still life</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal46" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img46" />
+        <div id="caption45"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="Stilllife" src="image/畢卡索/Still life.jpg" alt="" style="width: 100%" />
+          <h4>靜物</h4>
+          <p>Still life</p>
         </div>
-        <div class="columns">
-          <p>巴勃羅·畢卡索（Pablo Picasso）是20世紀最具影響力的藝術家之一，他在靜物畫領域的創作尤為重要。畢卡索的靜物畫作品展示了他在風格和技法上的多樣性，以及他對立體主義的深刻探索。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal46" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img46" />
+          </div>
+          <div class="columns">
+            <p>巴勃羅·畢卡索（Pablo Picasso）是20世紀最具影響力的藝術家之一，他在靜物畫領域的創作尤為重要。畢卡索的靜物畫作品展示了他在風格和技法上的多樣性，以及他對立體主義的深刻探索。
+              <br>
             <h4>創作背景</h4>
             創作時期：畢卡索的靜物畫涵蓋了他不同的創作時期，包括藍色時期、玫瑰時期、立體主義時期，以及他後期的超現實主義和表現主義作品。在立體主義時期，他的靜物畫特別具有代表性。
             題材範疇：他的靜物畫常常包括日常物品，如水果、酒瓶、餐具、樂器等，這些物品在他的畫作中經常被重新組合和分解。
@@ -2184,33 +1994,29 @@
             文化與歷史：畢卡索的靜物畫反映了他對藝術形式的探索和對現實世界的再創造，具有重要的文化和歷史價值。這些作品展示了他在現代藝術發展中的重要地位。
             <br>
             總之，畢卡索的靜物畫通過其立體主義的形式和技法，展示了他對形狀、空間和色彩的深刻理解，是一系列具有高度藝術價值和創新意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption46"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="Studio"
-              src="image/畢卡索/Studio.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>工作室</h4>
-            <p>Studio</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal47" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img47" />
+        <div id="caption46"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="Studio" src="image/畢卡索/Studio.jpg" alt="" style="width: 100%" />
+          <h4>工作室</h4>
+          <p>Studio</p>
         </div>
-        <div class="columns">
-          <p>"Studio"（工作室）是巴勃羅·畢卡索（Pablo Picasso）的一幅重要作品，通常指的是畢卡索在他藝術創作中所使用的空間，這些作品常常描繪他的工作室內景，包含了他各種創作工具和物品。這類畫作反映了畢卡索對空間布局、形狀和光影效果的探索，並且展示了他對藝術創作過程的深刻洞察。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal47" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img47" />
+          </div>
+          <div class="columns">
+            <p>"Studio"（工作室）是巴勃羅·畢卡索（Pablo
+              Picasso）的一幅重要作品，通常指的是畢卡索在他藝術創作中所使用的空間，這些作品常常描繪他的工作室內景，包含了他各種創作工具和物品。這類畫作反映了畢卡索對空間布局、形狀和光影效果的探索，並且展示了他對藝術創作過程的深刻洞察。
+              <br>
             <h4>創作背景</h4>
             創作時期：畢卡索的工作室畫作涵蓋了他多個創作時期，從早期的藍色時期和玫瑰時期，到立體主義時期，甚至是他後期的超現實主義和表現主義時期。
             題材範疇：這些畫作通常描繪的是畢卡索的創作空間，包括他的畫布、顏料、畫架、藝術品和其他藝術家工具，這些元素的安排往往富有象徵意義。
@@ -2229,33 +2035,28 @@
             文化與歷史：畢卡索的工作室畫作反映了20世紀現代藝術的發展，具有重要的文化和歷史價值。這些作品展示了畢卡索在現代藝術中的創新地位和他對藝術形式的影響。
             <br>
             總之，畢卡索的《Studio》作品通過其對空間和物品的創新表現，展示了他對藝術創作的深刻理解和獨特風格，是一系列具有高度藝術價值和創新意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption47"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="TheKiss"
-              src="image/畢卡索/The Kiss.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>擁抱</h4>
-            <p>The Kiss</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal48" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img48" />
+        <div id="caption47"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="TheKiss" src="image/畢卡索/The Kiss.jpg" alt="" style="width: 100%" />
+          <h4>擁抱</h4>
+          <p>The Kiss</p>
         </div>
-        <div class="columns">
-          <p>《The Kiss》（擁抱）是巴勃羅·畢卡索（Pablo Picasso）創作的著名畫作之一，這幅畫在他的藝術生涯中具有重要地位，並且在現代藝術中也占據了舉足輕重的地位。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal48" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img48" />
+          </div>
+          <div class="columns">
+            <p>《The Kiss》（擁抱）是巴勃羅·畢卡索（Pablo Picasso）創作的著名畫作之一，這幅畫在他的藝術生涯中具有重要地位，並且在現代藝術中也占據了舉足輕重的地位。
+              <br>
             <h4>創作背景</h4>
             創作時期：這幅畫作創作於1900年代初期，屬於畢卡索的藍色時期。這一時期的作品以冷色調為主，表現了畢卡索對孤獨、悲傷和貧困的感受。
             題材背景：在藍色時期，畢卡索的作品常常以悲傷的主題為主，畫中人物通常表現出深沉的情感和孤獨的氛圍。這幅《The Kiss》也不例外，畫中人物的表情和姿態充滿了情感的張力。
@@ -2274,33 +2075,30 @@
             文化與歷史：《The Kiss》反映了20世紀初期現代藝術的發展，具有重要的文化和歷史價值。這幅作品展示了畢卡索在藍色時期的創新和對現代藝術的貢獻。
             <br>
             總之，巴勃羅·畢卡索的《The Kiss》通過其獨特的形式和深刻的情感表達，展示了他在藍色時期的藝術風格和對愛情主題的深刻探索，是一幅具有高度藝術價值和文化意義的經典作品。</p>
-        </div>
-      </div>
-          <div id="caption48"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="Thesculptor"
-              src="image/畢卡索/The sculptor.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>雕塑家</h4>
-            <p>The sculptor</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal49" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img49" />
+        <div id="caption48"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="Thesculptor" src="image/畢卡索/The sculptor.jpg" alt="" style="width: 100%" />
+          <h4>雕塑家</h4>
+          <p>The sculptor</p>
         </div>
-        <div class="columns">
-          <p>《The Sculptor》（雕塑家）是巴勃羅·畢卡索（Pablo Picasso）的一幅著名畫作，通常被認為是他在多個藝術領域中展現創意和技術的代表之一。畢卡索的作品涵蓋了繪畫、雕塑、版畫等多個領域，他在《The Sculptor》中融合了這些藝術形式的元素，表現了他對形狀、空間和情感的深刻探索。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal49" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img49" />
+          </div>
+          <div class="columns">
+            <p>《The Sculptor》（雕塑家）是巴勃羅·畢卡索（Pablo
+              Picasso）的一幅著名畫作，通常被認為是他在多個藝術領域中展現創意和技術的代表之一。畢卡索的作品涵蓋了繪畫、雕塑、版畫等多個領域，他在《The
+              Sculptor》中融合了這些藝術形式的元素，表現了他對形狀、空間和情感的深刻探索。
+              <br>
             <h4>創作背景</h4>
             創作時期：這幅畫作創作於20世紀初期，屬於畢卡索的立體主義時期。這個時期，畢卡索與喬治·布拉克共同開創了立體主義，並對傳統藝術形式進行了徹底的改革。
             題材背景：畫作主題集中在一位雕塑家身上，描繪了他在創作過程中的情景。這幅作品展示了畢卡索對藝術家創作過程的深刻理解和表現。
@@ -2319,33 +2117,28 @@
             文化與歷史：畢卡索的《The Sculptor》反映了20世紀初期現代藝術的發展，具有重要的文化和歷史價值。這幅作品展示了畢卡索在立體主義中的創新地位，以及他對現代藝術的貢獻。
             <br>
             總之，巴勃羅·畢卡索的《The Sculptor》通過其獨特的立體主義風格和深刻的情感表達，展示了他在藝術創作中的創新和探索，這幅作品是現代藝術史上具有重要價值和影響力的經典之作。</p>
-        </div>
-      </div>
-          <div id="caption49"></div>
-        </div>
-
-        <div class="column Picasso">
-          <div class="content">
-            <img
-              id="Guernica"
-              src="image/畢卡索/格爾尼卡.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>格爾尼卡</h4>
-            <p>Guernica</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal50" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img50" />
+        <div id="caption49"></div>
+      </div>
+
+      <div class="column Picasso">
+        <div class="content">
+          <img id="Guernica" src="image/畢卡索/格爾尼卡.jpg" alt="" style="width: 100%" />
+          <h4>格爾尼卡</h4>
+          <p>Guernica</p>
         </div>
-        <div class="columns">
-          <p>《格爾尼卡》（Guernica）是巴勃羅·畢卡索（Pablo Picasso）最著名的作品之一，也是20世紀藝術史上的經典之作。這幅畫作以其強烈的情感表達和對戰爭殘酷性的揭示，成為反戰藝術的象徵。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal50" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img50" />
+          </div>
+          <div class="columns">
+            <p>《格爾尼卡》（Guernica）是巴勃羅·畢卡索（Pablo Picasso）最著名的作品之一，也是20世紀藝術史上的經典之作。這幅畫作以其強烈的情感表達和對戰爭殘酷性的揭示，成為反戰藝術的象徵。
+              <br>
             <h4>創作背景</h4>
             創作背景：《格爾尼卡》創作於1937年，當時西班牙內戰正進行中。1937年4月26日，納粹德國空軍在西班牙小鎮格爾尼卡實施了空襲，造成了大量平民死亡和城鎮毀壞。畢卡索受到這一事件的震撼，決定創作這幅畫作來表達對戰爭的強烈反對。
             展示歷史：這幅畫在1937年巴黎國際博覽會上首次公開展出，後來被送往西班牙國家博物館保存，並成為西班牙文化和反戰象徵。
@@ -2363,34 +2156,32 @@
             情感與表達：這幅畫作不僅僅是一幅視覺藝術作品，更是一種強烈的情感表達，通過對戰爭和暴力的深刻描繪，呼籲和平與人道主義。
             文化與歷史：《格爾尼卡》不僅在藝術史上具有重要地位，也在文化和歷史上具有深遠的影響。它成為了全球反戰運動的象徵，激勵了無數人對和平的追求和對戰爭的譴責。
             <br>
-            總之，《格爾尼卡》是巴勃羅·畢卡索在藝術創作中最具代表性和深刻意義的作品之一，通過其獨特的風格和強烈的情感表達，成為了20世紀反戰藝術的重要標誌。這幅畫作以其震撼人心的力量，讓人們對戰爭的殘酷有了更深刻的認識和反思。</p>
-        </div>
-      </div>
-          <div id="caption50"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="BoatsintheHarbouratEvening"
-              src="image/弗里德里希/Boats in the Harbour at Evening.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>傍晚港口的船隻</h4>
-            <p>Boats in the Harbour at Evening</p>
+            總之，《格爾尼卡》是巴勃羅·畢卡索在藝術創作中最具代表性和深刻意義的作品之一，通過其獨特的風格和強烈的情感表達，成為了20世紀反戰藝術的重要標誌。這幅畫作以其震撼人心的力量，讓人們對戰爭的殘酷有了更深刻的認識和反思。
+            </p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal51" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img51" />
+        <div id="caption50"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="BoatsintheHarbouratEvening" src="image/弗里德里希/Boats in the Harbour at Evening.jpg" alt=""
+            style="width: 100%" />
+          <h4>傍晚港口的船隻</h4>
+          <p>Boats in the Harbour at Evening</p>
         </div>
-        <div class="columns">
-          <p>《Boats in the Harbour at Evening》（傍晚港口的船隻）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David Friedrich）的一幅著名作品。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品往往蘊含著濃厚的情感和哲學意義。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal51" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img51" />
+          </div>
+          <div class="columns">
+            <p>《Boats in the Harbour at Evening》（傍晚港口的船隻）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David
+              Friedrich）的一幅著名作品。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品往往蘊含著濃厚的情感和哲學意義。
+              <br>
             <h4>創作背景</h4>
             這幅作品描繪了一個寧靜的港口，傍晚的光線柔和地灑在水面和船隻上。弗里德里希以其獨特的視角和對自然的敏銳觀察，將這一場景呈現在觀眾面前。
             <br>
@@ -2400,38 +2191,36 @@
             **自然景觀：弗里德里希對自然景觀的描繪細緻入微，畫面中的每一個細節都展現了他對自然的熱愛和尊敬。港口、船隻和遠處的山脈共同構成了一幅和諧而壯麗的自然畫卷。
             <br>
             <h4>藝術價值</h4>
-            **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《Boats in the Harbour at Evening》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
+            **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《Boats in the Harbour at
+            Evening》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
             **哲學意義**：弗里德里希的畫作常常蘊含著哲學意義，他通過對自然的描繪，探索人與自然、個體與宇宙的關係。在這幅作品中，傍晚的光線和寧靜的港口象徵著人類對和平與安寧的追求。
-            **藝術創新**：弗里德里希以其獨特的視角和對光影的精妙運用，為浪漫主義繪畫帶來了新的表現手法。他的作品對後世的風景畫和浪漫主義藝術產生了深遠的影響。            
+            **藝術創新**：弗里德里希以其獨特的視角和對光影的精妙運用，為浪漫主義繪畫帶來了新的表現手法。他的作品對後世的風景畫和浪漫主義藝術產生了深遠的影響。
             <br>
-            總之，卡斯帕·大衛·弗里德里希的《Boats in the Harbour at Evening》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
-        </div>
-      </div>
-          <div id="caption51"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="BohemianLandscape"
-              src="image/弗里德里希/Bohemian Landscape.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>波希米亞景觀</h4>
-            <p>Bohemian Landscape</p>
+            總之，卡斯帕·大衛·弗里德里希的《Boats in the Harbour at
+            Evening》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal52" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img52" />
+        <div id="caption51"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="BohemianLandscape" src="image/弗里德里希/Bohemian Landscape.jpg" alt="" style="width: 100%" />
+          <h4>波希米亞景觀</h4>
+          <p>Bohemian Landscape</p>
         </div>
-        <div class="columns">
-          <p>《Bohemian Landscape》（波希米亞景觀）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David Friedrich）的作品之一。這幅畫作展現了弗里德里希對自然的熱愛和他獨特的藝術風格，以其深刻的情感表達和細膩的景觀描繪著稱。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal52" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img52" />
+          </div>
+          <div class="columns">
+            <p>《Bohemian Landscape》（波希米亞景觀）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David
+              Friedrich）的作品之一。這幅畫作展現了弗里德里希對自然的熱愛和他獨特的藝術風格，以其深刻的情感表達和細膩的景觀描繪著稱。
+              <br>
             <h4>創作背景</h4>
             波希米亞位於今天的捷克共和國西部，擁有壯麗的自然景觀和豐富的歷史文化。弗里德里希受到這些景觀的啟發，創作了這幅畫作，捕捉了波希米亞自然景觀的美麗和神秘。
             <br>
@@ -2441,33 +2230,29 @@
             **細膩描繪**：弗里德里希對自然景觀的描繪細緻入微，畫中的每一個細節都充滿了生命力和真實感。這種細膩的描繪使得畫作更加生動，讓觀眾仿佛置身於波希米亞的壯麗景色中。
             <br>
             總之，卡斯帕·大衛·弗里德里希的《Bohemian Landscape》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
-        </div>
-      </div>
-          <div id="caption52"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="Day"
-              src="image/弗里德里希/Day.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>白晝</h4>
-            <p>Day</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal53" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img53" />
+        <div id="caption52"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="Day" src="image/弗里德里希/Day.jpg" alt="" style="width: 100%" />
+          <h4>白晝</h4>
+          <p>Day</p>
         </div>
-        <div class="columns">
-          <p>《Day》（白晝）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David Friedrich）的一幅著名畫作。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品往往蘊含著濃厚的情感和哲學意義。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal53" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img53" />
+          </div>
+          <div class="columns">
+            <p>《Day》（白晝）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David
+              Friedrich）的一幅著名畫作。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品往往蘊含著濃厚的情感和哲學意義。
+              <br>
             <h4>創作背景</h4>
             這幅作品描繪了一個寧靜的白晝場景，陽光普照，景色宜人。弗里德里希以其獨特的視角和對自然的敏銳觀察，將這一場景呈現在觀眾面前。
             <br>
@@ -2480,336 +2265,313 @@
             - **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《Day》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
             <br>
             總之，卡斯帕·大衛·弗里德里希的《Day》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
-        </div>
-      </div>
-          <div id="caption53"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="HillsandPloughedFieldsnearDresden"
-              src="image/弗里德里希/Hills and Ploughed Fields near Dresden.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>德累斯頓附近的丘陵與犁地</h4>
-            <p>Hills and Ploughed Fields near Dresden</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal54" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img54" />
+        <div id="caption53"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="HillsandPloughedFieldsnearDresden" src="image/弗里德里希/Hills and Ploughed Fields near Dresden.jpg"
+            alt="" style="width: 100%" />
+          <h4>德累斯頓附近的丘陵與犁地</h4>
+          <p>Hills and Ploughed Fields near Dresden</p>
         </div>
-        <div class="columns">
-          <p>《Hills and Ploughed Fields near Dresden》（德累斯頓附近的丘陵與犁地）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David Friedrich）創作的一幅著名風景畫。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品往往蘊含著濃厚的情感和哲學意義。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal54" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img54" />
+          </div>
+          <div class="columns">
+            <p>《Hills and Ploughed Fields near Dresden》（德累斯頓附近的丘陵與犁地）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David
+              Friedrich）創作的一幅著名風景畫。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品往往蘊含著濃厚的情感和哲學意義。
+              <br>
             <h4>創作背景</h4>
             這幅作品描繪了德累斯頓附近的農田和丘陵景觀，展現了大自然的寧靜與和諧。德累斯頓是弗里德里希生活和創作的重要地點之一，他經常從周邊的自然景觀中汲取靈感。
             <br>
             <h4>畫作風格</h4>
-            **浪漫主義風格**：弗里德里希的作品帶有強烈的浪漫主義特徵，強調情感的表達和對自然的崇敬。在《Hills and Ploughed Fields near Dresden》中，他運用了浪漫主義的元素，通過自然景觀的描繪表達了對土地和自然的熱愛。
+            **浪漫主義風格**：弗里德里希的作品帶有強烈的浪漫主義特徵，強調情感的表達和對自然的崇敬。在《Hills and Ploughed Fields near
+            Dresden》中，他運用了浪漫主義的元素，通過自然景觀的描繪表達了對土地和自然的熱愛。
             **光影效果**：弗里德里希巧妙地運用了光影效果來增強畫面的氛圍。柔和的光線照耀在農田和丘陵上，增強了畫面的深度和層次感，使得整個畫面顯得格外生動。
             **自然景觀**：弗里德里希對自然景觀的描繪細膩入微，畫面中的每一個細節都展現了他對自然的敏銳觀察和深厚感情。犁過的田地、綿延的丘陵和廣闊的天空共同構成了一幅和諧而壯麗的田園畫卷。
             <br>
             <h4>藝術價值</h4>
-            - **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《Hills and Ploughed Fields near Dresden》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
+            - **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《Hills and Ploughed Fields near
+            Dresden》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
             <br>
-            總之，卡斯帕·大衛·弗里德里希的《Hills and Ploughed Fields near Dresden》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
-        </div>
-      </div>
-          <div id="caption54"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="LandscapewithMountainLakeMorning"
-              src="image/弗里德里希/Landscape with Mountain Lake Morning.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>山湖風景：早晨</h4>
-            <p>Landscape with Mountain Lake Morning</p>
+            總之，卡斯帕·大衛·弗里德里希的《Hills and Ploughed Fields near
+            Dresden》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal55" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img55" />
+        <div id="caption54"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="LandscapewithMountainLakeMorning" src="image/弗里德里希/Landscape with Mountain Lake Morning.jpg" alt=""
+            style="width: 100%" />
+          <h4>山湖風景：早晨</h4>
+          <p>Landscape with Mountain Lake Morning</p>
         </div>
-        <div class="columns">
-          <p>《Landscape with Mountain Lake: Morning》（山湖風景：早晨）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David Friedrich）創作的一幅優美而富有詩意的風景畫。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品充滿了情感和哲學意義。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal55" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img55" />
+          </div>
+          <div class="columns">
+            <p>《Landscape with Mountain Lake: Morning》（山湖風景：早晨）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David
+              Friedrich）創作的一幅優美而富有詩意的風景畫。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品充滿了情感和哲學意義。
+              <br>
             <h4>創作背景</h4>
             這幅作品描繪了一個寧靜的山湖場景，早晨的陽光剛剛升起，照耀在湖面和周圍的山脈上，營造出一種寧靜而神秘的氛圍。
             <br>
             <h4>畫作風格</h4>
-            - **浪漫主義風格**：弗里德里希的作品帶有強烈的浪漫主義特徵，注重情感的表達和對自然的崇敬。在《Landscape with Mountain Lake: Morning》中，他運用了浪漫主義的元素，通過自然景觀的描繪表達了對大自然的敬畏和熱愛。
-- **光影效果**：弗里德里希巧妙地運用了光影效果來增強畫面的氛圍。早晨的光線柔和而溫暖，照耀在湖面和山脈上，增強了畫面的深度和層次感，使得整個畫面顯得格外迷人。
-- **自然景觀**：弗里德里希對自然景觀的描繪細膩入微，畫面中的每一個細節都展現了他對自然的敏銳觀察和深厚感情。平靜的湖面、巍峨的山脈和廣闊的天空共同構成了一幅和諧而壯麗的自然畫卷。
+            - **浪漫主義風格**：弗里德里希的作品帶有強烈的浪漫主義特徵，注重情感的表達和對自然的崇敬。在《Landscape with Mountain Lake:
+            Morning》中，他運用了浪漫主義的元素，通過自然景觀的描繪表達了對大自然的敬畏和熱愛。
+            - **光影效果**：弗里德里希巧妙地運用了光影效果來增強畫面的氛圍。早晨的光線柔和而溫暖，照耀在湖面和山脈上，增強了畫面的深度和層次感，使得整個畫面顯得格外迷人。
+            - **自然景觀**：弗里德里希對自然景觀的描繪細膩入微，畫面中的每一個細節都展現了他對自然的敏銳觀察和深厚感情。平靜的湖面、巍峨的山脈和廣闊的天空共同構成了一幅和諧而壯麗的自然畫卷。
             <br>
             <h4>藝術價值</h4>
-            - **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《Landscape with Mountain Lake: Morning》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
-- **哲學意義**：弗里德里希的畫作常常蘊含著深刻的哲學意義，他通過對自然的描繪，探索人與自然、個體與宇宙的關係。在這幅作品中，早晨的光線和寧靜的湖面象徵著人類對和平與安寧的追求。
-- **藝術創新**：弗里德里希以其獨特的視角和對光影的精妙運用，為浪漫主義風景畫帶來了新的表現手法。他的作品對後世的風景畫和浪漫主義藝術產生了深遠的影響。
+            - **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《Landscape with Mountain Lake:
+            Morning》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
+            - **哲學意義**：弗里德里希的畫作常常蘊含著深刻的哲學意義，他通過對自然的描繪，探索人與自然、個體與宇宙的關係。在這幅作品中，早晨的光線和寧靜的湖面象徵著人類對和平與安寧的追求。
+            - **藝術創新**：弗里德里希以其獨特的視角和對光影的精妙運用，為浪漫主義風景畫帶來了新的表現手法。他的作品對後世的風景畫和浪漫主義藝術產生了深遠的影響。
             <br>
-            總之，卡斯帕·大衛·弗里德里希的《Landscape with Mountain Lake: Morning》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
-        </div>
-      </div>
-          <div id="caption55"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="Kentingseaview"
-              src="image/何木火/墾丁觀海.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>墾丁觀海</h4>
+            總之，卡斯帕·大衛·弗里德里希的《Landscape with Mountain Lake:
+            Morning》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
           </div>
         </div>
-         <!-- The Modal -->
-         <div id="myModal56" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img56" />
+        <div id="caption55"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="Kentingseaview" src="image/何木火/墾丁觀海.jpg" alt="" style="width: 100%" />
+          <h4>墾丁觀海</h4>
         </div>
-        <div class="columns">
-          <p>《墾丁觀海》是中國當代藝術家何木火的一幅作品。何木火以其細膩的筆觸和對自然景觀的深刻理解而聞名，他的作品往往能夠捕捉到自然的美麗和靜謐。《墾丁觀海》這幅作品描繪了台灣墾丁地區的海景，展現了自然的壯麗和人與自然的和諧。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal56" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img56" />
+          </div>
+          <div class="columns">
+            <p>
+              《墾丁觀海》是中國當代藝術家何木火的一幅作品。何木火以其細膩的筆觸和對自然景觀的深刻理解而聞名，他的作品往往能夠捕捉到自然的美麗和靜謐。《墾丁觀海》這幅作品描繪了台灣墾丁地區的海景，展現了自然的壯麗和人與自然的和諧。
+              <br>
             <h4>創作背景</h4>
             墾丁位於台灣的南端，以其壯麗的海岸線和豐富的自然景觀而著稱。這個地區是許多藝術家和遊客喜愛的靈感來源。何木火在《墾丁觀海》中捕捉了墾丁的自然美景，通過他的畫筆，展現了海洋和天空的無限魅力。
             <br>
             <h4>作品風格</h4>
             細膩的筆觸：何木火在這幅作品中使用了細膩的筆觸來描繪海洋和天空的細節。波浪的起伏、雲朵的變幻、光影的交錯，都被他巧妙地呈現出來。
-明亮的色彩：這幅作品可能使用了明亮而清新的色彩，如藍色、綠色和白色，這些顏色強調了海洋的清澈和天空的廣闊，營造出一種明亮而愉悅的氛圍。
-光影效果：何木火巧妙地運用了光影效果來增加畫面的深度和立體感。陽光灑在海面上，波光粼粼，讓整個畫面充滿了生機和動感。
+            明亮的色彩：這幅作品可能使用了明亮而清新的色彩，如藍色、綠色和白色，這些顏色強調了海洋的清澈和天空的廣闊，營造出一種明亮而愉悅的氛圍。
+            光影效果：何木火巧妙地運用了光影效果來增加畫面的深度和立體感。陽光灑在海面上，波光粼粼，讓整個畫面充滿了生機和動感。
             <h4>作品內容</h4>
             《墾丁觀海》描繪了一個壯麗的海景，可能包括廣闊的海洋、藍天白雲、以及遠處的山脈或海岸線。畫面中的每一個元素都被精心刻畫，展示了何木火對自然景觀的細緻觀察和熱愛。
             <br>
             <h4>藝術價值</h4>
             自然美的讚頌：這幅作品通過對海洋和天空的描繪，表達了對自然美的讚頌。觀者可以通過作品感受到大自然的壯麗和寧靜，體驗到一種心靈的平靜。
-技術高超：何木火在這幅作品中展示了他在繪畫技法上的高超水平。細膩的筆觸、明亮的色彩運用和精妙的光影處理，使得整個畫面充滿了藝術感染力。
-情感表達：作品中流露出一種對自然的敬畏和熱愛，讓觀者能夠感受到創作者的情感共鳴。
+            技術高超：何木火在這幅作品中展示了他在繪畫技法上的高超水平。細膩的筆觸、明亮的色彩運用和精妙的光影處理，使得整個畫面充滿了藝術感染力。
+            情感表達：作品中流露出一種對自然的敬畏和熱愛，讓觀者能夠感受到創作者的情感共鳴。
             <br>
             <h4>展覽與收藏</h4>
             《墾丁觀海》可能在各大藝術展覽中展出，並可能被私人收藏家或美術館收藏。何木火的作品因其獨特的風格和深刻的意境，受到了廣泛的關注和讚譽。
             <br>
             總之，何木火的《墾丁觀海》通過其細膩的筆觸、明亮的色彩和深刻的光影效果，展示了墾丁地區的壯麗海景和自然之美，是一幅值得細細品味和欣賞的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption56"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="DragonGateSecretRealm"
-              src="image/何木火/龍門秘境.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>龍門秘境</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal57" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img57" />
+        <div id="caption56"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="DragonGateSecretRealm" src="image/何木火/龍門秘境.jpg" alt="" style="width: 100%" />
+          <h4>龍門秘境</h4>
         </div>
-        <div class="columns">
-          <p>《龍門秘境》是中國當代藝術家何木火的一幅作品。何木火以其細膩的筆觸和對自然景觀及傳統文化的深刻理解而聞名，《龍門秘境》可能是他對中國傳統文化中神秘景觀的描繪，展現了壯麗的自然景觀和深厚的文化內涵。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal57" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img57" />
+          </div>
+          <div class="columns">
+            <p>《龍門秘境》是中國當代藝術家何木火的一幅作品。何木火以其細膩的筆觸和對自然景觀及傳統文化的深刻理解而聞名，《龍門秘境》可能是他對中國傳統文化中神秘景觀的描繪，展現了壯麗的自然景觀和深厚的文化內涵。
+              <br>
             <h4>創作背景</h4>
             龍門這個地名在中國文化中有著豐富的象徵意義，特別是與神話傳說中的龍門有關。在這些傳說中，魚躍龍門是一個象徵成功和飛黃騰達的故事。《龍門秘境》這幅作品可能受到了這些傳說的啟發，描繪了一個充滿神秘和壯麗景觀的地方。
             <br>
             <h4>作品風格</h4>
             細膩的筆觸：何木火在這幅作品中使用了細膩的筆觸，來刻畫龍門的壯麗景觀。山川河流、植物樹木以及可能出現的神話生物都被精細地描繪出來。
-豐富的色彩：作品可能使用了豐富的色彩，如深綠色、藍色、金色等，這些色彩的運用增強了畫面的視覺效果，並營造出一種神秘和壯觀的氛圍。
-光影效果：何木火巧妙地利用光影變化來增強畫面的深度和立體感。光影的交錯讓整個畫面充滿了動感和生機。
+            豐富的色彩：作品可能使用了豐富的色彩，如深綠色、藍色、金色等，這些色彩的運用增強了畫面的視覺效果，並營造出一種神秘和壯觀的氛圍。
+            光影效果：何木火巧妙地利用光影變化來增強畫面的深度和立體感。光影的交錯讓整個畫面充滿了動感和生機。
             <h4>作品內容</h4>
             《龍門秘境》描繪了一個充滿神秘色彩的自然景觀，可能包括壯麗的山川、蜿蜒的河流、茂密的森林以及一些象徵性的建築或生物。畫面中的每一個元素都被精心刻畫，展示了何木火對自然景觀和傳統文化的深刻理解和熱愛。
             <br>
             <h4>藝術價值</h4>
             文化象徵：這幅作品通過對龍門的描繪，象徵著中國傳統文化中的成功和飛黃騰達的理念。它不僅是一幅美麗的自然景觀畫，更是對文化傳統的致敬。
-技術高超：何木火在這幅作品中展示了他在繪畫技法上的高超水平。細膩的筆觸、豐富的色彩運用和精妙的光影處理，使得整個畫面充滿了藝術感染力。
-情感表達：作品中流露出一種對自然和文化的敬畏和熱愛，讓觀者能夠感受到創作者的情感共鳴。
+            技術高超：何木火在這幅作品中展示了他在繪畫技法上的高超水平。細膩的筆觸、豐富的色彩運用和精妙的光影處理，使得整個畫面充滿了藝術感染力。
+            情感表達：作品中流露出一種對自然和文化的敬畏和熱愛，讓觀者能夠感受到創作者的情感共鳴。
             <br>
             <h4>展覽與收藏</h4>
             《龍門秘境》可能在各大藝術展覽中展出，並可能被私人收藏家或美術館收藏。何木火的作品因其獨特的風格和深厚的文化內涵，受到了廣泛的關注和讚譽。
             <br>
             總之，何木火的《龍門秘境》通過其細膩的筆觸、豐富的色彩和深刻的文化象徵，展示了壯麗的自然景觀和深厚的文化內涵，是一幅值得細細品味和欣賞的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption57"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="Woodfireseries"
-              src="image/何木火/木火系列.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>木火系列</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal58" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img58" />
+        <div id="caption57"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="Woodfireseries" src="image/何木火/木火系列.jpg" alt="" style="width: 100%" />
+          <h4>木火系列</h4>
         </div>
-        <div class="columns">
-          <p>《木火系列》是中國當代藝術家何木火的一個代表性作品集，這個系列展現了他對自然景觀和人文主題的獨特詮釋。何木火的作品以其細膩的筆觸和深刻的意境而聞名，他在這個系列中通過不同的畫作探索了木與火的元素，表達了對自然力量和人文情感的深刻思考。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal58" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img58" />
+          </div>
+          <div class="columns">
+            <p>
+              《木火系列》是中國當代藝術家何木火的一個代表性作品集，這個系列展現了他對自然景觀和人文主題的獨特詮釋。何木火的作品以其細膩的筆觸和深刻的意境而聞名，他在這個系列中通過不同的畫作探索了木與火的元素，表達了對自然力量和人文情感的深刻思考。
+              <br>
             <h4>創作背景</h4>
             木與火的象徵意義：在中國文化中，木與火常常具有深刻的象徵意義。木代表生命和生長，而火則象徵著激情和變革。《木火系列》可能是何木火對這些元素的詮釋，通過畫作表達生命的力量和自然的變化。
             <br>
             <h4>作品風格</h4>
             元素融合：在這個系列中，何木火可能將木與火這兩個元素巧妙地融合在一起，創造出既具象徵意義又富有視覺衝擊力的作品。他的畫作中可能融合了自然景觀與抽象元素，展現了木與火的交互作用。
-細膩的筆觸：何木火在這個系列中的筆觸依然細膩，無論是描繪木的質樸還是火的激情，他都能夠精準地捕捉和表現。每一筆都充滿了力量和情感，使得整個畫面充滿生命力。
-色彩運用：色彩是《木火系列》中的一個重要元素。何木火可能使用了豐富的色彩來表現木與火的特質，如溫暖的紅色、橙色與冷靜的綠色和棕色，這些色彩的對比增強了作品的視覺效果和情感深度。
+            細膩的筆觸：何木火在這個系列中的筆觸依然細膩，無論是描繪木的質樸還是火的激情，他都能夠精準地捕捉和表現。每一筆都充滿了力量和情感，使得整個畫面充滿生命力。
+            色彩運用：色彩是《木火系列》中的一個重要元素。何木火可能使用了豐富的色彩來表現木與火的特質，如溫暖的紅色、橙色與冷靜的綠色和棕色，這些色彩的對比增強了作品的視覺效果和情感深度。
             <h4>作品內容</h4>
             《木火系列》中的每一幅作品都可能呈現出不同的主題和意境：
 
-木的生命力：某些畫作可能專注於木的生長和生命力，描繪樹木、森林等景象，強調生命的繁榮和自然的和諧。
-火的激情與變化：其他畫作則可能集中在火的力量和變化上，展現火焰的動態和燦爛，表達變革和激情的主題。
+            木的生命力：某些畫作可能專注於木的生長和生命力，描繪樹木、森林等景象，強調生命的繁榮和自然的和諧。
+            火的激情與變化：其他畫作則可能集中在火的力量和變化上，展現火焰的動態和燦爛，表達變革和激情的主題。
             <br>
             <h4>藝術價值</h4>
             象徵意義：這個系列通過木與火的結合，探索了自然和人文的多重層面。木與火的象徵意義豐富，讓作品具有深刻的哲理和文化內涵。
-情感表達：何木火在這個系列中通過對木與火的細膩描繪，表達了對生命的熱愛和對自然力量的敬畏。作品中流露出的情感使得觀者能夠與畫作產生深刻的情感共鳴。
-技術高超：何木火在色彩運用、筆觸表現和構圖上的高超技藝，使得《木火系列》在視覺和情感上都具有很高的藝術價值。
+            情感表達：何木火在這個系列中通過對木與火的細膩描繪，表達了對生命的熱愛和對自然力量的敬畏。作品中流露出的情感使得觀者能夠與畫作產生深刻的情感共鳴。
+            技術高超：何木火在色彩運用、筆觸表現和構圖上的高超技藝，使得《木火系列》在視覺和情感上都具有很高的藝術價值。
             <br>
             <h4>展覽與收藏</h4>
             《木火系列》可能在各大藝術展覽中展出，並且受到私人收藏家和美術館的青睞。何木火的作品因其獨特的風格和深刻的意境，受到了廣泛的關注和讚譽。
             <br>
             總之，何木火的《木火系列》通過其細膩的筆觸、豐富的色彩和深刻的象徵意義，展示了木與火的美學和哲理，是一個值得細細品味和欣賞的藝術系列。</p>
-        </div>
-      </div>
-          <div id="caption58"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="GroundGoldenLotus"
-              src="image/何木火/地湧金蓮.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>地湧金蓮 </h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal59" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img59" />
+        <div id="caption58"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="GroundGoldenLotus" src="image/何木火/地湧金蓮.jpg" alt="" style="width: 100%" />
+          <h4>地湧金蓮 </h4>
         </div>
-        <div class="columns">
-          <p>《地湧金蓮》是中國當代藝術家何木火的一幅作品，這幅畫作以其獨特的題材和深刻的象徵意義而受到關注。何木火在這幅作品中融合了豐富的文化象徵和自然元素，表達了對生命力、精神力量和自然美的深刻探索。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal59" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img59" />
+          </div>
+          <div class="columns">
+            <p>《地湧金蓮》是中國當代藝術家何木火的一幅作品，這幅畫作以其獨特的題材和深刻的象徵意義而受到關注。何木火在這幅作品中融合了豐富的文化象徵和自然元素，表達了對生命力、精神力量和自然美的深刻探索。
+              <br>
             <h4>創作背景</h4>
             “地湧金蓮”這一名稱來源於佛教文化中的一個概念，意指地面突然湧現出金色蓮花，象徵著無量的光明和神聖的力量。在中國藝術中，蓮花常常象徵著純潔、美麗和精神上的升華。何木火可能通過這個題材，探討了自然與精神之間的聯繫，以及生命力的展現。
             <br>
             <h4>作品風格</h4>
             細膩的筆觸：何木火在這幅作品中使用了細膩且富有表現力的筆觸，精確地描繪了蓮花的每一個細節，包括花瓣的紋理、葉片的質感等，展現了他對自然景物的精湛技藝。
-豐富的色彩：這幅畫作中的色彩運用豐富且層次分明。金色的蓮花在畫面中十分耀眼，周圍可能搭配有清新的綠色和柔和的背景色，營造出一種神秘而壯麗的氛圍。
-光影效果：何木火可能巧妙地利用光影效果，讓蓮花在畫面中顯得更加立體和生動。光線的運用強調了蓮花的神聖感和高貴氣質，使得整個畫面充滿了靈性和力量。
+            豐富的色彩：這幅畫作中的色彩運用豐富且層次分明。金色的蓮花在畫面中十分耀眼，周圍可能搭配有清新的綠色和柔和的背景色，營造出一種神秘而壯麗的氛圍。
+            光影效果：何木火可能巧妙地利用光影效果，讓蓮花在畫面中顯得更加立體和生動。光線的運用強調了蓮花的神聖感和高貴氣質，使得整個畫面充滿了靈性和力量。
             <h4>作品內容</h4>
             《地湧金蓮》可能描繪了一個金色蓮花在地面上湧現的景象，這個場景可能充滿了神秘和超凡的氣息。蓮花的盛開象徵著純潔、美麗和精神的升華，而背景中的自然元素則可能增強了畫面的深度和層次感。
             <br>
             <h4>藝術價值</h4>
             象徵意義：這幅作品通過蓮花的描繪，探索了生命力、精神力量和自然美的主題。蓮花的金色象徵著光明和神聖，使得整個畫面充滿了深刻的象徵意義。
-情感表達：何木火在這幅作品中流露出對自然之美和精神升華的敬畏和讚美。作品中的情感表達讓觀者能夠感受到藝術家對生命力和精神力量的深刻理解和尊重。
-技術高超：何木火在畫面的色彩運用、光影效果和細節描繪上的高超技藝，使得這幅作品在視覺和情感上都具有很高的藝術價值。
+            情感表達：何木火在這幅作品中流露出對自然之美和精神升華的敬畏和讚美。作品中的情感表達讓觀者能夠感受到藝術家對生命力和精神力量的深刻理解和尊重。
+            技術高超：何木火在畫面的色彩運用、光影效果和細節描繪上的高超技藝，使得這幅作品在視覺和情感上都具有很高的藝術價值。
             <br>
             <h4>展覽與收藏</h4>
             《地湧金蓮》可能在各大藝術展覽中展出，並受到私人收藏家和美術館的青睐。何木火的作品因其獨特的風格和深刻的象徵意義，受到廣泛的關注和讚譽。
             <br>
             總之，何木火的《地湧金蓮》通過其細膩的筆觸、豐富的色彩和深刻的象徵意義，展示了自然美和精神力量的結合，是一幅值得細細品味和欣賞的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption59"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="LandscapewithOakTreesandaHunter"
-              src="image/弗里德里希/Landscape with Oak Trees and a Hunter.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>橡樹與獵人風景</h4>
-            <p>Landscape with Oak Trees and a Hunter</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal60" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img60" />
+        <div id="caption59"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="LandscapewithOakTreesandaHunter" src="image/弗里德里希/Landscape with Oak Trees and a Hunter.jpg" alt=""
+            style="width: 100%" />
+          <h4>橡樹與獵人風景</h4>
+          <p>Landscape with Oak Trees and a Hunter</p>
         </div>
-        <div class="columns">
-          <p>《Landscape with Oak Trees and a Hunter》（橡樹與獵人風景）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David Friedrich）創作的一幅優美且富有深意的風景畫。弗里德里希的作品以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的畫作常常蘊含著濃厚的情感和哲學意義。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal60" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img60" />
+          </div>
+          <div class="columns">
+            <p>《Landscape with Oak Trees and a Hunter》（橡樹與獵人風景）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David
+              Friedrich）創作的一幅優美且富有深意的風景畫。弗里德里希的作品以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的畫作常常蘊含著濃厚的情感和哲學意義。
+              <br>
             <h4>創作背景</h4>
             這幅畫作描繪了一個寧靜的鄉村場景，畫面中的橡樹雄偉壯麗，一名獵人穿行於其間，這種場景體現了自然的偉大和人類的渺小。
             <br>
             <h4>畫作風格</h4>
-            - **浪漫主義風格**：弗里德里希的作品帶有強烈的浪漫主義特徵，強調情感的表達和對自然的崇敬。在《Landscape with Oak Trees and a Hunter》中，他通過細膩的光影效果和自然景觀的描繪，表達了對自然的敬畏和對人類生存狀態的思考。
-- **光影效果**：弗里德里希善於運用光影效果來增強畫面的氛圍。畫中的光線穿過樹林，照耀在橡樹和獵人身上，增強了畫面的深度和層次感，使得整個畫面顯得格外生動。
-- **自然景觀**：弗里德里希對自然景觀的描繪細膩入微，畫面中的橡樹、灌木和獵人共同構成了一幅和諧而壯麗的田園畫卷。每一個細節都展示了他對自然的敏銳觀察和深厚感情。
+            - **浪漫主義風格**：弗里德里希的作品帶有強烈的浪漫主義特徵，強調情感的表達和對自然的崇敬。在《Landscape with Oak Trees and a
+            Hunter》中，他通過細膩的光影效果和自然景觀的描繪，表達了對自然的敬畏和對人類生存狀態的思考。
+            - **光影效果**：弗里德里希善於運用光影效果來增強畫面的氛圍。畫中的光線穿過樹林，照耀在橡樹和獵人身上，增強了畫面的深度和層次感，使得整個畫面顯得格外生動。
+            - **自然景觀**：弗里德里希對自然景觀的描繪細膩入微，畫面中的橡樹、灌木和獵人共同構成了一幅和諧而壯麗的田園畫卷。每一個細節都展示了他對自然的敏銳觀察和深厚感情。
             <br>
             <h4>藝術價值</h4>
-            - **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《Landscape with Oak Trees and a Hunter》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
-- **哲學意義**：弗里德里希的畫作常常蘊含著深刻的哲學意義，他通過對自然的描繪，探索人與自然、個體與宇宙的關係。在這幅作品中，偉大的橡樹和渺小的獵人形成鮮明對比，象徵著自然的偉大和人類的渺小。
-- **藝術創新**：弗里德里希以其獨特的視角和對光影的精妙運用，為浪漫主義風景畫帶來了新的表現手法。他的作品對後世的風景畫和浪漫主義藝術產生了深遠的影響。
+            - **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《Landscape with Oak Trees and a
+            Hunter》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
+            - **哲學意義**：弗里德里希的畫作常常蘊含著深刻的哲學意義，他通過對自然的描繪，探索人與自然、個體與宇宙的關係。在這幅作品中，偉大的橡樹和渺小的獵人形成鮮明對比，象徵著自然的偉大和人類的渺小。
+            - **藝術創新**：弗里德里希以其獨特的視角和對光影的精妙運用，為浪漫主義風景畫帶來了新的表現手法。他的作品對後世的風景畫和浪漫主義藝術產生了深遠的影響。
             <br>
-            總之，卡斯帕·大衛·弗里德里希的《Landscape with Oak Trees and a Hunter》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
-        </div>
-      </div>
-          <div id="caption60"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="Oneleafknowsautumn"
-              src="image/何木火/一葉知秋.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>一葉知秋</h4>
+            總之，卡斯帕·大衛·弗里德里希的《Landscape with Oak Trees and a
+            Hunter》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal61" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img61" />
+        <div id="caption60"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="Oneleafknowsautumn" src="image/何木火/一葉知秋.jpg" alt="" style="width: 100%" />
+          <h4>一葉知秋</h4>
         </div>
-        <div class="columns">
-          <p>《一葉知秋》是中國當代藝術家何木火的著名作品之一。何木火以其獨特的畫風和對自然景觀的細膩描繪而聞名，他的作品經常以細膩的筆觸和深刻的意境展現自然的美。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal61" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img61" />
+          </div>
+          <div class="columns">
+            <p>《一葉知秋》是中國當代藝術家何木火的著名作品之一。何木火以其獨特的畫風和對自然景觀的細膩描繪而聞名，他的作品經常以細膩的筆觸和深刻的意境展現自然的美。
+              <br>
             <h4>創作背景</h4>
             《一葉知秋》這幅作品的創作靈感來自於中國古老的諺語“一葉知秋”，這句話意指從一片葉子的變化可以預見整個秋季的到來，表達了微小事物中蘊含著更大的變化和預兆。何木火通過這幅畫，試圖表達自然界的微妙變化和人生的哲理。
             <br>
@@ -2829,39 +2591,35 @@
             《一葉知秋》這幅作品可能在各大藝術展覽中展出，並可能被私人收藏家或美術館收藏。何木火的作品以其獨特的風格和深刻的意境，受到廣泛的關注和讚譽。
             <br>
             總之，何木火的《一葉知秋》通過其細膩的筆觸和深刻的意境，展現了自然的美和季節的變遷，是一幅值得細細品味和深思的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption61"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="Renzhiguansketching"
-              src="image/何木火/人止關寫生.jpg"
-              alt="人止關寫生<br>70×135cm<br>紙本水墨 2014"
-              style="width: 100%"
-            />
-            <h4>人止關寫生</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal62" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img62" />
+        <div id="caption61"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="Renzhiguansketching" src="image/何木火/人止關寫生.jpg" alt="人止關寫生<br>70×135cm<br>紙本水墨 2014"
+            style="width: 100%" />
+          <h4>人止關寫生</h4>
         </div>
-        <div class="columns">
-          <p>何木火的《人止關寫生》是一幅充滿自然美感和哲理意境的作品。何木火，作為中國當代藝術家，以其對自然景觀的細膩描繪和對生命哲理的深刻理解而著稱。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal62" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img62" />
+          </div>
+          <div class="columns">
+            <p>何木火的《人止關寫生》是一幅充滿自然美感和哲理意境的作品。何木火，作為中國當代藝術家，以其對自然景觀的細膩描繪和對生命哲理的深刻理解而著稱。
+              <br>
             <h4>創作背景</h4>
             《人止關寫生》中的“人止關”是指一個具有自然和歷史意義的地點，這裡或許有著特殊的自然景觀或者歷史背景，使其成為何木火創作靈感的源泉。這幅作品可能描繪了何木火在這個地點的觀察和體驗，通過寫生的方式，表達了他對自然和人文的深刻理解。
             <br>
             <h4>作品風格</h4>
             細膩的筆觸：何木火在《人止關寫生》中使用了細膩的筆觸，精確地描繪了自然景觀的每一個細節，包括山川、樹木、流水等元素。他的筆法細膩而靈動，使得畫面充滿了生機。
-自然的色彩：作品中使用了豐富而和諧的自然色彩，這些色彩的運用讓畫面充滿了真實感和親和力，觀者可以感受到大自然的美麗和寧靜。
-哲理意境：何木火善於在自然景觀中融入哲理意境，這幅作品通過對自然的描繪，表達了他對人生和自然的思考，畫面中透露出一種寧靜和深邃的氛圍。
+            自然的色彩：作品中使用了豐富而和諧的自然色彩，這些色彩的運用讓畫面充滿了真實感和親和力，觀者可以感受到大自然的美麗和寧靜。
+            哲理意境：何木火善於在自然景觀中融入哲理意境，這幅作品通過對自然的描繪，表達了他對人生和自然的思考，畫面中透露出一種寧靜和深邃的氛圍。
             <h4>作品內容</h4>
             《人止關寫生》可能描繪了一個具有代表性和特殊意義的自然景觀。畫面中或許包含山川河流、樹林草地等自然元素，這些元素被細膩地描繪出來，展示了自然的美麗和多樣性。作品中可能還包含一些人文元素，如古老的建築或歷史遺跡，這些元素增添了畫面的深度和意義。
             <br>
@@ -2874,219 +2632,196 @@
             《人止關寫生》這幅作品可能在各大藝術展覽中展出，並可能被私人收藏家或美術館收藏。何木火的作品以其獨特的風格和深刻的意境，受到廣泛的關注和讚譽。
             <br>
             總之，何木火的《人止關寫生》通過其細膩的筆觸和深刻的意境，展現了自然的美和人生的哲理，是一幅值得細細品味和深思的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption62"></div>
-        </div>
-        
-        <div class="column people">
-          <div class="content">
-            <img
-              id="Fieldfragrance(blackandwhite)"
-              src="image/何木火/野地清香(黑白).jpg"
-              alt="野地清香(黑白)<br>35×75cm<br>紙本水墨 2015"
-              style="width: 100%"
-            />
-            <h4>野地清香(黑白)</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal63" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img63" />
+        <div id="caption62"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="Fieldfragrance(blackandwhite)" src="image/何木火/野地清香(黑白).jpg" alt="野地清香(黑白)<br>35×75cm<br>紙本水墨 2015"
+            style="width: 100%" />
+          <h4>野地清香(黑白)</h4>
         </div>
-        <div class="columns">
-          <p>何木火的《野地清香（黑白）》是一幅獨特的作品，以其細膩的筆觸和黑白色調展示了自然的美與和諧。這幅作品展現了何木火對自然景觀的深刻理解和藝術表達。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal63" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img63" />
+          </div>
+          <div class="columns">
+            <p>何木火的《野地清香（黑白）》是一幅獨特的作品，以其細膩的筆觸和黑白色調展示了自然的美與和諧。這幅作品展現了何木火對自然景觀的深刻理解和藝術表達。
+              <br>
             <h4>創作背景</h4>
             《野地清香》是何木火的一系列自然題材作品中的一幅。這一系列作品旨在捕捉自然界中最純粹、最本質的美，表達出一種樸素而深遠的自然之美。黑白版本的《野地清香》更是強調了自然景觀中的光影變化和細節，使觀者能夠專注於形狀和構圖本身。
             <br>
             <h4>作品風格</h4>
             黑白色調：與彩色作品不同，這幅黑白作品通過濃淡不同的灰色調來展現自然景觀的層次感。黑白色調使得畫面顯得更加純粹和樸素，強調了自然形態和結構的美。
-細膩的筆觸：何木火以其細膩的筆觸聞名，他在這幅作品中運用了細緻入微的描繪技巧，讓每一個自然元素都顯得栩栩如生。葉片的紋理、花草的形態以及光影的變化都被精確地刻畫出來。
-光影效果：儘管是黑白作品，何木火依然通過光影的對比來強調景物的立體感和空間感。光與影的交錯使得畫面充滿了動感和層次感。
+            細膩的筆觸：何木火以其細膩的筆觸聞名，他在這幅作品中運用了細緻入微的描繪技巧，讓每一個自然元素都顯得栩栩如生。葉片的紋理、花草的形態以及光影的變化都被精確地刻畫出來。
+            光影效果：儘管是黑白作品，何木火依然通過光影的對比來強調景物的立體感和空間感。光與影的交錯使得畫面充滿了動感和層次感。
             <h4>作品內容</h4>
             《野地清香（黑白）》描繪了一片野地中的自然景象，可能包括各種野花、草地、樹木等自然元素。這些元素被細緻地描繪出來，展示了自然界的簡約之美和生命力。畫面中每一片葉子、每一朵花都透出一種自然的清香和純粹的美感。
             <br>
             <h4>藝術價值</h4>
             純粹之美：黑白色調使得這幅作品顯得更加純粹，強調了自然形態和結構的美。沒有色彩的干擾，觀者能夠更專注於自然的形狀和光影變化。
-細節刻畫：何木火對自然細節的精細描繪，展示了他高超的繪畫技巧和對自然的深刻觀察力。這種細膩的描繪讓畫面充滿了真實感和美感。
-光影表現：通過對光影的巧妙處理，何木火在黑白畫面中依然能夠展現出豐富的層次感和空間感，使得整幅作品充滿動感和立體感。
+            細節刻畫：何木火對自然細節的精細描繪，展示了他高超的繪畫技巧和對自然的深刻觀察力。這種細膩的描繪讓畫面充滿了真實感和美感。
+            光影表現：通過對光影的巧妙處理，何木火在黑白畫面中依然能夠展現出豐富的層次感和空間感，使得整幅作品充滿動感和立體感。
             <br>
             <h4>展覽與收藏</h4>
             《野地清香（黑白）》可能在各大藝術展覽中展出，並可能被私人收藏家或美術館收藏。何木火的作品因其獨特的風格和深刻的意境，受到廣泛的關注和讚譽。
             <br>
             總之，何木火的《野地清香（黑白）》通過其細膩的筆觸和深刻的光影效果，展示了自然的純粹之美和生命的和諧，是一幅值得細細品味和欣賞的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption63"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="coldmoonlight"
-              src="image/何木火/月冷光寒.jpg"
-              alt="月冷光寒<br>35×75cm<br>紙本水墨 2015"
-              style="width: 100%"
-            />
-            <h4>月冷光寒</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal64" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img64" />
+        <div id="caption63"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="coldmoonlight" src="image/何木火/月冷光寒.jpg" alt="月冷光寒<br>35×75cm<br>紙本水墨 2015" style="width: 100%" />
+          <h4>月冷光寒</h4>
         </div>
-        <div class="columns">
-          <p>《月冷光寒》是中國當代藝術家何木火創作的一幅作品。何木火以其對自然景觀的細膩描繪和深刻意境的表達而著稱，這幅畫作同樣展現了他獨特的藝術風格和對自然美的深刻理解。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal64" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img64" />
+          </div>
+          <div class="columns">
+            <p>《月冷光寒》是中國當代藝術家何木火創作的一幅作品。何木火以其對自然景觀的細膩描繪和深刻意境的表達而著稱，這幅畫作同樣展現了他獨特的藝術風格和對自然美的深刻理解。
+              <br>
             <h4>創作背景</h4>
             《月冷光寒》這幅作品的創作靈感可能來自於中國傳統文化中的月夜意象。月亮在中國文學和藝術中常常被用來表達寂靜、冷清和深遠的意境。何木火通過這幅作品，試圖捕捉月夜的冷清美感以及其中蘊含的哲理意味。
             <br>
             <h4>作品風格</h4>
             冷色調：作品中運用了大量的冷色調，如深藍、淺灰和銀白，這些顏色的運用強調了月夜的冷冽和寂靜。冷色調的選擇使得整個畫面看起來既清冷又富有詩意。
-細膩的筆觸：何木火以細膩的筆觸描繪了夜晚的景象，包括月光下的樹木、湖泊和天空。他的筆觸輕盈而精確，讓畫面中的每一個細節都顯得生動而真實。
-光影效果：月光是畫面的主要光源，何木火通過對光影的巧妙處理，強調了月光下景物的立體感和空間感。光影的對比使得整個畫面充滿了神秘和靜謐的氛圍。
+            細膩的筆觸：何木火以細膩的筆觸描繪了夜晚的景象，包括月光下的樹木、湖泊和天空。他的筆觸輕盈而精確，讓畫面中的每一個細節都顯得生動而真實。
+            光影效果：月光是畫面的主要光源，何木火通過對光影的巧妙處理，強調了月光下景物的立體感和空間感。光影的對比使得整個畫面充滿了神秘和靜謐的氛圍。
             <h4>作品內容</h4>
             《月冷光寒》描繪了一個靜謐的月夜景象。畫面中，月光灑在湖面上，樹影婆娑，整個景象籠罩在一片冷冷的月光中。畫面中的每一個元素都被精心刻畫，展現了何木火對自然景觀的深刻觀察和理解。
             <br>
             <h4>藝術價值</h4>
             自然美學：這幅作品展現了何木火對自然之美的深刻理解，通過冷色調和細膩的筆觸，捕捉到了月夜的獨特美感和詩意。
-情感表達：作品中流露出一種冷清和寂靜的情感，讓觀者能夠感受到夜晚的寂寥和深遠。這種情感的表達使得作品具有更深的藝術價值和情感共鳴。
-技術高超：何木火在光影效果和細節刻畫上的高超技藝，使得這幅作品在視覺上具有極高的真實感和美感，提升了整體的藝術價值。
+            情感表達：作品中流露出一種冷清和寂靜的情感，讓觀者能夠感受到夜晚的寂寥和深遠。這種情感的表達使得作品具有更深的藝術價值和情感共鳴。
+            技術高超：何木火在光影效果和細節刻畫上的高超技藝，使得這幅作品在視覺上具有極高的真實感和美感，提升了整體的藝術價值。
             <br>
             <h4>展覽與收藏</h4>
             《月冷光寒》可能在各大藝術展覽中展出，並可能被私人收藏家或美術館收藏。何木火的作品以其獨特的風格和深刻的意境，受到廣泛的關注和讚譽。
             <br>
             總之，何木火的《月冷光寒》通過其冷色調、細膩的筆觸和深刻的光影效果，展示了月夜的冷清美感和自然的靜謐之美，是一幅值得細細品味和欣賞的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption64"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="acrossthedust"
-              src="image/何木火/橫越沙塵.jpg"
-              alt="橫越沙塵<br>35×75cm<br>紙本水墨 2015"
-              style="width: 100%"
-            />
-            <h4>橫越沙塵</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal65" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img65" />
+        <div id="caption64"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="acrossthedust" src="image/何木火/橫越沙塵.jpg" alt="橫越沙塵<br>35×75cm<br>紙本水墨 2015" style="width: 100%" />
+          <h4>橫越沙塵</h4>
         </div>
-        <div class="columns">
-          <p>《橫越沙塵》是中國當代藝術家何木火創作的一幅作品。何木火以其對自然景觀和人文景觀的細膩描繪而著稱，他的作品往往充滿了哲理意境和深刻的情感表達。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal65" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img65" />
+          </div>
+          <div class="columns">
+            <p>《橫越沙塵》是中國當代藝術家何木火創作的一幅作品。何木火以其對自然景觀和人文景觀的細膩描繪而著稱，他的作品往往充滿了哲理意境和深刻的情感表達。
+              <br>
             <h4>創作背景</h4>
             《橫越沙塵》可能描繪了沙漠中的景象，表現了人類在大自然中的掙扎和堅韌。沙塵作為主題，象徵了自然環境的嚴酷以及人類對抗自然的毅力和勇氣。這幅畫作反映了何木火對自然力量的敬畏以及對人類精神的禮讚。
             <br>
             <h4>作品風格</h4>
             粗獷的筆觸：與何木火其他細膩的作品不同，《橫越沙塵》可能採用了更為粗獷和強烈的筆觸，以表現沙塵暴的狂野和動感。筆觸的變化強調了畫面中的動勢和力量。
-暗色調：畫作可能使用了大量的暗色調，如深褐色、沙黃色和灰色，這些顏色強調了沙漠環境的荒涼和嚴酷。暗色調的運用使得畫面更具沉重感和震撼力。
-對比強烈：何木火可能通過強烈的光影對比來強調沙塵暴的動感和畫面的深度。光影的變化讓整個畫面充滿了緊張和戲劇性。
+            暗色調：畫作可能使用了大量的暗色調，如深褐色、沙黃色和灰色，這些顏色強調了沙漠環境的荒涼和嚴酷。暗色調的運用使得畫面更具沉重感和震撼力。
+            對比強烈：何木火可能通過強烈的光影對比來強調沙塵暴的動感和畫面的深度。光影的變化讓整個畫面充滿了緊張和戲劇性。
             <h4>作品內容</h4>
             《橫越沙塵》描繪了一個沙塵暴中的場景，可能包括一群人在沙漠中行走或一個人在面對狂風沙塵的掙扎。畫面中的人物和景物被細緻地描繪出來，展示了他們在惡劣自然環境中的堅韌和勇氣。
             <br>
             <h4>藝術價值</h4>
             自然力量的表現：這幅作品展示了自然力量的偉大和人類面對自然挑戰的勇氣。沙塵暴的狂野和無情通過何木火的筆觸得到了生動的表現。
-人類精神的禮讚：通過描繪人類在沙塵暴中的掙扎，何木火表達了對人類精神的讚美。畫面中的人物象徵著不屈不撓的毅力和堅韌，讓觀者感受到強烈的情感共鳴。
-技術高超：何木火在光影效果和筆觸運用上的高超技藝，使得這幅作品在視覺上具有極高的真實感和震撼力，提升了整體的藝術價值。
+            人類精神的禮讚：通過描繪人類在沙塵暴中的掙扎，何木火表達了對人類精神的讚美。畫面中的人物象徵著不屈不撓的毅力和堅韌，讓觀者感受到強烈的情感共鳴。
+            技術高超：何木火在光影效果和筆觸運用上的高超技藝，使得這幅作品在視覺上具有極高的真實感和震撼力，提升了整體的藝術價值。
             <br>
             <h4>展覽與收藏</h4>
             《橫越沙塵》可能在各大藝術展覽中展出，並可能被私人收藏家或美術館收藏。何木火的作品因其獨特的風格和深刻的意境，受到廣泛的關注和讚譽。
             <br>
             總之，何木火的《橫越沙塵》通過其粗獷的筆觸、強烈的光影對比和深刻的情感表達，展示了自然的偉大力量和人類的堅韌精神，是一幅值得細細品味和欣賞的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption65"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="flytothepeak"
-              src="image/何木火/飛向高峰.jpg"
-              alt="飛向高峰<br>35×75cm<br>紙本水墨 2015"
-              style="width: 100%"
-            />
-            <h4>飛向高峰</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal66" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img66" />
+        <div id="caption65"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="flytothepeak" src="image/何木火/飛向高峰.jpg" alt="飛向高峰<br>35×75cm<br>紙本水墨 2015" style="width: 100%" />
+          <h4>飛向高峰</h4>
         </div>
-        <div class="columns">
-          <p>《飛向高峰》是中國當代藝術家何木火的一幅具有象徵意義的作品。何木火以其對自然和人文景觀的細膩描繪以及深刻意境的表達而著稱，這幅畫作通過飛翔的意象，展示了追求卓越和超越自我的主題。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal66" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img66" />
+          </div>
+          <div class="columns">
+            <p>《飛向高峰》是中國當代藝術家何木火的一幅具有象徵意義的作品。何木火以其對自然和人文景觀的細膩描繪以及深刻意境的表達而著稱，這幅畫作通過飛翔的意象，展示了追求卓越和超越自我的主題。
+              <br>
             <h4>創作背景</h4>
             《飛向高峰》這幅作品可能是何木火在觀察自然界中的飛鳥和高山時獲得的靈感。飛翔和高峰這兩個元素在藝術和文學中經常被用來象徵追求、自由和成就。這幅畫通過自然景觀中的飛翔意象，表達了對夢想和目標的不懈追求。
             <br>
             <h4>作品風格</h4>
             動態的構圖：畫面可能通過動態的構圖來強調飛翔的感覺。飛鳥在高空中翱翔，山峰在背景中巍峨聳立，這種動態的構圖讓整個畫面充滿了活力和力量。
-鮮明的色彩：何木火可能使用了鮮明的色彩來強調飛翔的自由和高峰的壯麗。藍天、白雲和雄偉的山峰形成了強烈的色彩對比，增強了畫面的視覺衝擊力。
-細膩的筆觸：雖然畫面動態十足，何木火依然保持了他一貫的細膩筆觸。飛鳥的羽毛、山峰的紋理、天空的層次都被精細地描繪出來，展示了他高超的繪畫技巧。
+            鮮明的色彩：何木火可能使用了鮮明的色彩來強調飛翔的自由和高峰的壯麗。藍天、白雲和雄偉的山峰形成了強烈的色彩對比，增強了畫面的視覺衝擊力。
+            細膩的筆觸：雖然畫面動態十足，何木火依然保持了他一貫的細膩筆觸。飛鳥的羽毛、山峰的紋理、天空的層次都被精細地描繪出來，展示了他高超的繪畫技巧。
             <h4>作品內容</h4>
             《飛向高峰》描繪了一群或一隻飛鳥在高空中翱翔，目標是遠方的高峰。畫面中的飛鳥展翅高飛，充滿了力量和自由的象徵。背景中的高山巍峨壯麗，象徵著人生中的目標和挑戰。
             <br>
             <h4>藝術價值</h4>
             象徵意義：這幅作品通過飛鳥和高峰的意象，象徵了追求卓越和超越自我的精神。飛鳥代表了自由和追求，而高峰則象徵著目標和成就。
-情感表達：作品中流露出一種積極向上的情感，激勵觀者追求自己的夢想和目標。這種情感表達讓作品具有更深的藝術價值和情感共鳴。
-技術高超：何木火在色彩運用和筆觸表現上的高超技藝，使得這幅作品在視覺上具有極高的真實感和震撼力，提升了整體的藝術價值。
+            情感表達：作品中流露出一種積極向上的情感，激勵觀者追求自己的夢想和目標。這種情感表達讓作品具有更深的藝術價值和情感共鳴。
+            技術高超：何木火在色彩運用和筆觸表現上的高超技藝，使得這幅作品在視覺上具有極高的真實感和震撼力，提升了整體的藝術價值。
             <br>
             <h4>展覽與收藏</h4>
             《飛向高峰》可能在各大藝術展覽中展出，並可能被私人收藏家或美術館收藏。何木火的作品因其獨特的風格和深刻的意境，受到廣泛的關注和讚譽。
             <br>
             總之，何木火的《飛向高峰》通過其動態的構圖、鮮明的色彩和深刻的象徵意義，展示了追求卓越和超越自我的精神，是一幅值得細細品味和欣賞的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption66"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="SongoftheMoonWorld"
-              src="image/何木火/月世界之歌.jpg"
-              alt="月世界之歌<br>140×350cm<br>紙本水墨 2007"
-              style="width: 100%"
-            />
-            <h4>月世界之歌</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal67" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img67" />
+        <div id="caption66"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="SongoftheMoonWorld" src="image/何木火/月世界之歌.jpg" alt="月世界之歌<br>140×350cm<br>紙本水墨 2007"
+            style="width: 100%" />
+          <h4>月世界之歌</h4>
         </div>
-        <div class="columns">
-          <p>《月世界之歌》是中國當代藝術家何木火創作的一幅作品。何木火以其對自然景觀和哲理意境的細膩描繪而聞名，《月世界之歌》通過月亮和大自然的意象，展示了他對宇宙之美和人生哲理的深刻理解。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal67" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img67" />
+          </div>
+          <div class="columns">
+            <p>《月世界之歌》是中國當代藝術家何木火創作的一幅作品。何木火以其對自然景觀和哲理意境的細膩描繪而聞名，《月世界之歌》通過月亮和大自然的意象，展示了他對宇宙之美和人生哲理的深刻理解。
+              <br>
             <h4>創作背景</h4>
             《月世界之歌》可能受到了中國傳統文化中對月亮意象的影響。在中國文化中，月亮常常象徵著思念、孤獨以及詩意的美感。這幅作品可能是何木火對這些意象的詮釋和再創造，試圖通過月亮和自然景觀，表達他對宇宙和人生的思考。
             <br>
             <h4>作品風格</h4>
             細膩的筆觸：何木火在這幅作品中使用了細膩的筆觸，描繪出月光下的自然景觀。每一個細節都被精心刻畫，包括月亮的光環、夜空的星辰以及地面上的陰影和光亮。
-柔和的色調：作品中使用了柔和的色調，如淡藍色、銀白色和柔和的灰色，這些色彩的運用營造出一種寧靜和詩意的氛圍，強調了月夜的靜謐之美。
-光影效果：月光是畫面的主要光源，何木火通過光影的變化來表現月夜的立體感和空間感。光影的對比使得畫面充滿了深度和神秘感。
+            柔和的色調：作品中使用了柔和的色調，如淡藍色、銀白色和柔和的灰色，這些色彩的運用營造出一種寧靜和詩意的氛圍，強調了月夜的靜謐之美。
+            光影效果：月光是畫面的主要光源，何木火通過光影的變化來表現月夜的立體感和空間感。光影的對比使得畫面充滿了深度和神秘感。
             <h4>作品內容</h4>
             《月世界之歌》描繪了一個靜謐的月夜景象，可能包括月亮、星空、山川河流等自然元素。畫面中的月亮高懸夜空，散發著柔和的光芒，照亮了大地。地面的景物在月光的映照下顯得清晰而富有詩意。
             <br>
@@ -3099,293 +2834,265 @@
             《月世界之歌》可能在各大藝術展覽中展出，並可能被私人收藏家或美術館收藏。何木火的作品因其獨特的風格和深刻的意境，受到廣泛的關注和讚譽。
             <br>
             總之，何木火的《月世界之歌》通過其細膩的筆觸、柔和的色調和深刻的哲理意境，展示了月夜的靜謐美感和宇宙之美，是一幅值得細細品味和欣賞的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption67"></div>
-        </div>
-
-        <div class="column people">
-          <div class="content">
-            <img
-              id="splendidlandscape"
-              src="image/何木火/金碧山水.jpg"
-              alt="金碧山水<br>120×240cm<br>紙本水墨 2007"
-              style="width: 100%"
-            />
-            <h4>金碧山水</h4>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal68" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img68" />
+        <div id="caption67"></div>
+      </div>
+
+      <div class="column people">
+        <div class="content">
+          <img id="splendidlandscape" src="image/何木火/金碧山水.jpg" alt="金碧山水<br>120×240cm<br>紙本水墨 2007"
+            style="width: 100%" />
+          <h4>金碧山水</h4>
         </div>
-        <div class="columns">
-          <p>《金碧山水》是中國當代藝術家何木火創作的一幅作品，該畫作結合了傳統中國山水畫的技法與當代藝術的表現手法，展示了自然景觀的壯麗與和諧。何木火以其細膩的筆觸和對自然景觀的深刻理解而著稱，他的作品往往能夠將觀者帶入一個寧靜且充滿詩意的世界。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal68" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img68" />
+          </div>
+          <div class="columns">
+            <p>
+              《金碧山水》是中國當代藝術家何木火創作的一幅作品，該畫作結合了傳統中國山水畫的技法與當代藝術的表現手法，展示了自然景觀的壯麗與和諧。何木火以其細膩的筆觸和對自然景觀的深刻理解而著稱，他的作品往往能夠將觀者帶入一個寧靜且充滿詩意的世界。
+              <br>
             <h4>創作背景</h4>
             《金碧山水》這幅作品可能受到中國傳統山水畫的啟發，特別是宋代和元代的山水畫。這些傳統畫作常常描繪壯麗的山川河流，並且以其細膩的筆法和豐富的層次感著稱。何木火在《金碧山水》中運用了類似的技法，但加入了現代藝術的元素，創造出獨特的視覺效果。
             <br>
             <h4>作品風格</h4>
             細膩的筆觸：何木火在這幅作品中使用了極其細膩的筆觸來描繪山水景觀。每一座山峰、每一條河流都被精心刻畫，展示了他高超的繪畫技巧和對自然細節的觀察力。
-豐富的色彩：雖然作品名為《金碧山水》，它的色彩可能不僅僅局限於金色和碧色。何木火可能使用了多種顏色，創造出層次豐富、視覺效果強烈的畫面。
-光影效果：通過光影的變化，何木火在畫面中營造出立體感和深度，使得整個山水景觀看起來更加真實和生動。
+            豐富的色彩：雖然作品名為《金碧山水》，它的色彩可能不僅僅局限於金色和碧色。何木火可能使用了多種顏色，創造出層次豐富、視覺效果強烈的畫面。
+            光影效果：通過光影的變化，何木火在畫面中營造出立體感和深度，使得整個山水景觀看起來更加真實和生動。
             <h4>作品內容</h4>
             《金碧山水》描繪了一個壯麗的自然景觀，可能包括高山、河流、森林等元素。這些自然元素被巧妙地組合在一起，形成了一幅和諧而壯觀的畫面。作品中的每一個細節都被精心刻畫，展示了何木火對自然的深刻理解和熱愛。
             <br>
             <h4>藝術價值</h4>
             傳統與現代的結合：這幅作品成功地將傳統中國山水畫的技法與現代藝術的表現手法結合在一起，創造出獨特的視覺效果，展示了何木火在藝術創作上的創新和探索。
-自然美的讚頌：通過對自然景觀的細膩描繪，何木火表達了對自然美的讚頌，讓觀者能夠感受到自然的壯麗與和諧。
-技術高超：何木火在這幅作品中展示了他在繪畫技法上的高超水平，包括細膩的筆觸、豐富的色彩運用和精妙的光影處理，使得整個畫面充滿了藝術感染力。
+            自然美的讚頌：通過對自然景觀的細膩描繪，何木火表達了對自然美的讚頌，讓觀者能夠感受到自然的壯麗與和諧。
+            技術高超：何木火在這幅作品中展示了他在繪畫技法上的高超水平，包括細膩的筆觸、豐富的色彩運用和精妙的光影處理，使得整個畫面充滿了藝術感染力。
             <br>
             <h4>展覽與收藏</h4>
             《金碧山水》可能在各大藝術展覽中展出，並可能被私人收藏家或美術館收藏。何木火的作品因其獨特的風格和深刻的意境，受到了廣泛的關注和讚譽。
             <br>
             總之，何木火的《金碧山水》通過其細膩的筆觸、豐富的色彩和深刻的光影效果，展示了自然景觀的壯麗和和諧，是一幅值得細細品味和欣賞的藝術作品。</p>
-        </div>
-      </div>
-          <div id="caption68"></div>
-        </div>
-
-        
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="Landscapewithrainbow"
-              src="image/弗里德里希/Landscape with rainbow.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>彩虹風景</h4>
-            <p>Landscape with rainbow</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal69" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img69" />
+        <div id="caption68"></div>
+      </div>
+
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="Landscapewithrainbow" src="image/弗里德里希/Landscape with rainbow.jpg" alt="" style="width: 100%" />
+          <h4>彩虹風景</h4>
+          <p>Landscape with rainbow</p>
         </div>
-        <div class="columns">
-          <p>《Landscape with Rainbow》（彩虹風景）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David Friedrich）創作的一幅著名風景畫。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品往往蘊含著濃厚的情感和哲學意義。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal69" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img69" />
+          </div>
+          <div class="columns">
+            <p>《Landscape with Rainbow》（彩虹風景）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David
+              Friedrich）創作的一幅著名風景畫。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品往往蘊含著濃厚的情感和哲學意義。
+              <br>
             <h4>創作背景</h4>
             這幅畫作描繪了一個壯麗的自然景觀，彩虹橫跨天空，象徵著希望與和平。這幅作品展示了弗里德里希對大自然的崇敬和對人類希望的表達。
             <br>
             <h4>畫作風格</h4>
-            - **浪漫主義風格**：弗里德里希的作品帶有強烈的浪漫主義特徵，強調情感的表達和對自然的敬畏。在《Landscape with Rainbow》中，他運用了浪漫主義的元素，通過自然景觀的描繪表達了對希望和和平的追求。
-- **光影效果**：弗里德里希巧妙地運用了光影效果來增強畫面的氛圍。彩虹的色彩和光線穿透雲層，照耀在整個景觀上，增強了畫面的深度和層次感，使得整個畫面顯得格外生動。
-- **自然景觀**：弗里德里希對自然景觀的描繪細膩入微，畫面中的每一個細節都展現了他對自然的敏銳觀察和深厚感情。廣闊的天空、茂密的樹林和遼闊的土地共同構成了一幅和諧而壯麗的自然畫卷。
+            - **浪漫主義風格**：弗里德里希的作品帶有強烈的浪漫主義特徵，強調情感的表達和對自然的敬畏。在《Landscape with
+            Rainbow》中，他運用了浪漫主義的元素，通過自然景觀的描繪表達了對希望和和平的追求。
+            - **光影效果**：弗里德里希巧妙地運用了光影效果來增強畫面的氛圍。彩虹的色彩和光線穿透雲層，照耀在整個景觀上，增強了畫面的深度和層次感，使得整個畫面顯得格外生動。
+            - **自然景觀**：弗里德里希對自然景觀的描繪細膩入微，畫面中的每一個細節都展現了他對自然的敏銳觀察和深厚感情。廣闊的天空、茂密的樹林和遼闊的土地共同構成了一幅和諧而壯麗的自然畫卷。
             <br>
             <h4>藝術價值</h4>
             - **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《Landscape with Rainbow》通過對自然景觀的描繪，表現了一種希望與和平的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和希望。
-- **哲學意義**：弗里德里希的畫作常常蘊含著深刻的哲學意義，他通過對自然的描繪，探索人與自然、個體與宇宙的關係。在這幅作品中，彩虹象徵著人類對希望和和平的追求，展示了弗里德里希對人類未來的美好願景。
-- **藝術創新**：弗里德里希以其獨特的視角和對光影的精妙運用，為浪漫主義風景畫帶來了新的表現手法。他的作品對後世的風景畫和浪漫主義藝術產生了深遠的影響。
+            - **哲學意義**：弗里德里希的畫作常常蘊含著深刻的哲學意義，他通過對自然的描繪，探索人與自然、個體與宇宙的關係。在這幅作品中，彩虹象徵著人類對希望和和平的追求，展示了弗里德里希對人類未來的美好願景。
+            - **藝術創新**：弗里德里希以其獨特的視角和對光影的精妙運用，為浪漫主義風景畫帶來了新的表現手法。他的作品對後世的風景畫和浪漫主義藝術產生了深遠的影響。
             <br>
             總之，卡斯帕·大衛·弗里德里希的《Landscape with Rainbow》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
-        </div>
-      </div>
-          <div id="caption69"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="MorningintheMountains"
-              src="image/弗里德里希/Morning in the Mountains.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>早晨在山間</h4>
-            <p>Morning in the Mountains</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal70" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img70" />
+        <div id="caption69"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="MorningintheMountains" src="image/弗里德里希/Morning in the Mountains.jpg" alt="" style="width: 100%" />
+          <h4>早晨在山間</h4>
+          <p>Morning in the Mountains</p>
         </div>
-        <div class="columns">
-          <p>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal70" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img70" />
+          </div>
+          <div class="columns">
+            <p>
             <h4>描述</h4>
             這幅畫描繪了清晨的山間景象，陽光剛剛升起，山峰在晨霧中若隱若現，給人一種寧靜而神秘的感覺。
             <br>
             <h4>主題</h4>
             通過對大自然的描繪，弗裡德里希表達了人類對自然的敬畏和對崇高精神的追求。</p>
-        </div>
-      </div>
-          <div id="caption70"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="RockyReefontheSeashore"
-              src="image/弗里德里希/Rocky Reef on the Seashore.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>海岸上的岩礁</h4>
-            <p>Rocky Reef on the Seashore</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal71" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img71" />
+        <div id="caption70"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="RockyReefontheSeashore" src="image/弗里德里希/Rocky Reef on the Seashore.jpg" alt=""
+            style="width: 100%" />
+          <h4>海岸上的岩礁</h4>
+          <p>Rocky Reef on the Seashore</p>
         </div>
-        <div class="columns">
-          <p>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal71" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img71" />
+          </div>
+          <div class="columns">
+            <p>
             <h4>描述</h4>
             這幅畫描繪了一個風暴過後的海岸景象，巨大的岩礁屹立在波濤洶湧的大海中，天空烏雲密佈，波濤拍打著岩石。
             <br>
             <h4>主題</h4>
             弗裡德里希通過這種對比強烈的景象，表達了大自然的力量和人類的渺小，突顯出一種崇高的美感。</p>
-        </div>
-      </div>
-          <div id="caption71"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="SolitaryTree"
-              src="image/弗里德里希/Solitary Tree.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>孤獨的樹</h4>
-            <p>Solitary Tree</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal72" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img72" />
+        <div id="caption71"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="SolitaryTree" src="image/弗里德里希/Solitary Tree.jpg" alt="" style="width: 100%" />
+          <h4>孤獨的樹</h4>
+          <p>Solitary Tree</p>
         </div>
-        <div class="columns">
-          <p>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal72" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img72" />
+          </div>
+          <div class="columns">
+            <p>
             <h4>描述</h4>
             這幅畫展示了一棵孤獨的樹，屹立在廣闊的田野中。天空中雲朵飄過，遠處是連綿的山脈。
             <br>
             <h4>主題</h4>
             這幅作品象徵了個體在宇宙中的孤獨和堅韌，樹的形象常被弗裡德里希用來表達生命的韌性和持久。</p>
-        </div>
-      </div>
-          <div id="caption72"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="TheTimesOfDayTheEvening"
-              src="image/弗里德里希/The Times Of Day：The Evening.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>一天中的時刻：傍晚</h4>
-            <p>The Times Of Day：The Evening</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal73" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img73" />
+        <div id="caption72"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="TheTimesOfDayTheEvening" src="image/弗里德里希/The Times Of Day：The Evening.jpg" alt=""
+            style="width: 100%" />
+          <h4>一天中的時刻：傍晚</h4>
+          <p>The Times Of Day：The Evening</p>
         </div>
-        <div class="columns">
-          <p>《The Times of Day: The Evening》（一天中的時刻：傍晚）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David Friedrich）的一幅著名畫作之一。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品往往蘊含著濃厚的情感和哲學意義。
-            <br>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal73" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img73" />
+          </div>
+          <div class="columns">
+            <p>《The Times of Day: The Evening》（一天中的時刻：傍晚）是德國浪漫主義畫家卡斯帕·大衛·弗里德里希（Caspar David
+              Friedrich）的一幅著名畫作之一。弗里德里希以其對自然景觀的深刻理解和對光影效果的精妙運用而聞名，他的作品往往蘊含著濃厚的情感和哲學意義。
+              <br>
             <h4>創作背景</h4>
             這幅作品描繪了一個寧靜的傍晚場景，夕陽的餘暉柔和地灑在自然景觀上。弗里德里希以其獨特的視角和對自然的敏銳觀察，將這一場景生動地呈現在觀眾面前。
             <br>
             <h4>畫作風格</h4>
-            - **浪漫主義風格**：弗里德里希的作品通常帶有強烈的浪漫主義特徵，注重情感的表達和自然的神秘美。《The Times of Day: The Evening》通過對光影的細膩處理和對自然景觀的描繪，表現出一種寧靜而深邃的氛圍。
-- **光影效果**：在這幅畫作中，夕陽的光線溫暖而柔和，照亮了整個景觀。弗里德里希巧妙地運用了光影對比，增強了畫面的深度和層次感，使得整個畫面顯得格外迷人。
-- **自然景觀**：弗里德里希對自然景觀的描繪細緻入微，畫面中的每一個細節都展現了他對自然的熱愛和尊敬。山川、森林和河流共同構成了一幅和諧而壯麗的自然畫卷。
+            - **浪漫主義風格**：弗里德里希的作品通常帶有強烈的浪漫主義特徵，注重情感的表達和自然的神秘美。《The Times of Day: The
+            Evening》通過對光影的細膩處理和對自然景觀的描繪，表現出一種寧靜而深邃的氛圍。
+            - **光影效果**：在這幅畫作中，夕陽的光線溫暖而柔和，照亮了整個景觀。弗里德里希巧妙地運用了光影對比，增強了畫面的深度和層次感，使得整個畫面顯得格外迷人。
+            - **自然景觀**：弗里德里希對自然景觀的描繪細緻入微，畫面中的每一個細節都展現了他對自然的熱愛和尊敬。山川、森林和河流共同構成了一幅和諧而壯麗的自然畫卷。
             <br>
             <h4>藝術價值</h4>
-            - **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《The Times of Day: The Evening》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
-- **哲學意義**：弗里德里希的畫作常常蘊含著哲學意義，他通過對自然的描繪，探索人與自然、個體與宇宙的關係。在這幅作品中，傍晚的光線和寧靜的景觀象徵著人類對和平與安寧的追求。
-- **藝術創新**：弗里德里希以其獨特的視角和對光影的精妙運用，為浪漫主義繪畫帶來了新的表現手法。他的作品對後世的風景畫和浪漫主義藝術產生了深遠的影響。
+            - **情感表達**：弗里德里希的作品以其深刻的情感表達著稱。《The Times of Day: The
+            Evening》通過對自然景觀的描繪，表現了一種寧靜而沉思的情感，讓觀眾在欣賞畫作的同時，感受到內心的平靜和深思。
+            - **哲學意義**：弗里德里希的畫作常常蘊含著哲學意義，他通過對自然的描繪，探索人與自然、個體與宇宙的關係。在這幅作品中，傍晚的光線和寧靜的景觀象徵著人類對和平與安寧的追求。
+            - **藝術創新**：弗里德里希以其獨特的視角和對光影的精妙運用，為浪漫主義繪畫帶來了新的表現手法。他的作品對後世的風景畫和浪漫主義藝術產生了深遠的影響。
             <br>
-            總之，卡斯帕·大衛·弗里德里希的《The Times of Day: The Evening》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
-        </div>
-      </div>
-          <div id="caption73"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="TheTimesofDayTheMorning"
-              src="image/弗里德里希/The Times of Day：The Morning.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>一天中的時光：早晨</h4>
-            <p>The Times of Day：The Morning</p>
+            總之，卡斯帕·大衛·弗里德里希的《The Times of Day: The
+            Evening》通過其獨特的浪漫主義風格和對自然景觀的精細描繪，展示了畫家對自然和情感的深刻理解，是一幅具有高度藝術價值和哲學意義的經典之作。</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal74" class="modal">
-          <span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img74" />
+        <div id="caption73"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="TheTimesofDayTheMorning" src="image/弗里德里希/The Times of Day：The Morning.jpg" alt=""
+            style="width: 100%" />
+          <h4>一天中的時光：早晨</h4>
+          <p>The Times of Day：The Morning</p>
         </div>
-        <div class="columns">
-          <p>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal74" class="modal">
+        <span class="close" style="color: #fff;">&times;</span>
+        <div class="modal-content" style="color: #fff;">
+          <div class="columns">
+            <img class="modal-content" id="img74" />
+          </div>
+          <div class="columns">
+            <p>
             <h4>描述</h4>
             這幅作品是弗裡德里希對一天不同時間的描繪系列之一。畫面呈現了一個平靜的早晨，陽光灑在寧靜的景色上，象徵著一天的開始和新的希望。
             <br>
             <h4>主題</h4>
             通過對光線和自然環境的表現，弗裡德里希展現了人類與自然的和諧關係。</p>
-        </div>
-      </div>
-          <div id="caption74"></div>
-        </div>
-
-        <div class="column Friedrich">
-          <div class="content">
-            <img
-              id="TwoMenContemplatingtheMoon"
-              src="image/弗里德里希/Two Men Contemplating the Moon.jpg"
-              alt=""
-              style="width: 100%"
-            />
-            <h4>兩人凝望月亮</h4>
-            <p>Two Men Contemplating the Moon</p>
           </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal75" class="modal">
-          <<span class="close" style="color: #fff;">&times;</span>
-          <div class="modal-content" style="color: #fff;">
-            <div class="columns">
-          <img class="modal-content" id="img75" />
-        </div>
-        <div class="columns">
-          <p>
-            <h4>描述</h4>
-            畫中兩個人站在岩石上，凝望著遠處的月亮。夜空寧靜，月光灑在大地上，營造出一種神秘而安寧的氛圍。
-            <br>
-            <h4>主題</h4>
-            弗裡德里希通過這幅畫，表現了人類對宇宙和未知的沉思，以及人與自然之間的深刻聯繫。這幅作品也傳達了一種對超越現世的精神追求。</p>
+        <div id="caption74"></div>
+      </div>
+
+      <div class="column Friedrich">
+        <div class="content">
+          <img id="TwoMenContemplatingtheMoon" src="image/弗里德里希/Two Men Contemplating the Moon.jpg" alt=""
+            style="width: 100%" />
+          <h4>兩人凝望月亮</h4>
+          <p>Two Men Contemplating the Moon</p>
         </div>
       </div>
+      <!-- The Modal -->
+      <div id="myModal75" class="modal">
+        <<span class="close" style="color: #fff;">&times;</span>
+          <div class="modal-content" style="color: #fff;">
+            <div class="columns">
+              <img class="modal-content" id="img75" />
+            </div>
+            <div class="columns">
+              <p>
+              <h4>描述</h4>
+              畫中兩個人站在岩石上，凝望著遠處的月亮。夜空寧靜，月光灑在大地上，營造出一種神秘而安寧的氛圍。
+              <br>
+              <h4>主題</h4>
+              弗裡德里希通過這幅畫，表現了人類對宇宙和未知的沉思，以及人與自然之間的深刻聯繫。這幅作品也傳達了一種對超越現世的精神追求。</p>
+            </div>
+          </div>
           <div id="caption75"></div>
-        </div>
+      </div>
       <!-- END MAIN -->
     </div>
 
@@ -3447,11 +3154,8 @@
               </div>
             </div>
           </div>
-          <!-- row -->
         </div>
-        <!-- container -->
       </div>
-      <!-- footer widget -->
       <div class="copyright-area">
         <div class="container">
           <div class="row">
@@ -3459,25 +3163,60 @@
               <div class="copyright text-center">
                 <p>&copy; LeisurePace</p>
               </div>
-              <!-- copyright -->
             </div>
           </div>
-          <!-- row -->
         </div>
-        <!-- container -->
       </div>
-      <!-- copyright-area -->
     </footer>
+
+
+    <script>
+      // Firebase configuration
+      // 初始化 Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
+        authDomain: "leisurepace-a3d51.firebaseapp.com",
+        projectId: "leisurepace-a3d51",
+        storageBucket: "leisurepace-a3d51.appspot.com",
+        messagingSenderId: "955257567601",
+        appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      const auth = firebase.auth();
+
+      // 頁面載入時檢查用戶登錄狀態
+      window.onload = function () {
+        auth.onAuthStateChanged(function (user) {
+          if (user) {
+            // 獲取用戶的 UID
+            const userUID = user.uid;
+
+            // 從 Firestore 獲取用戶資料
+            const userRef = db.collection('users').doc(userUID);
+            userRef.get().then((doc) => {
+              if (doc.exists) {
+                const userProfile = doc.data();
+                // 更新頭像
+                const avatar = userProfile.avatar || "./image/default-avatar.png";
+                document.getElementById("profileImage").src = avatar;
+              }
+            }).catch((error) => {
+              console.error("Error fetching user data:", error);
+            });
+          } else {
+            // 如果未登錄，導向至登錄頁面
+            window.location.href = './login/login.html';
+          }
+        });
+      };
+    </script>
+
     <!-- footer 結束 -->
-     <!-- Import the basic jquery lib. -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>  
-    <!-- Import the associated firebase lib which the order is fixed. -->
-    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-storage.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
-    <!-- Set the firebsae config and initialize it. -->
-    <script defer src="./js/init-firebase.js"></script>
+
     <script src="js/bgstore.js"></script>
-  </body>
+</body>
+
 </html>
