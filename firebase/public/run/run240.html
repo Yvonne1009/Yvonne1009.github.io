@@ -1,151 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="run_css/run.css" />
-  <link rel="icon" href="../image/logo.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="run_css/bootstrap.min.css" />
-  <script src="./run_js/run240.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="run_css/run.css" />
+    <link rel="icon" href="../image/logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="run_css/bootstrap.min.css" />
+    <script src="./run_js/run240.js"></script>
 
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
 
-    
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
-  <!-- Title and Stylesheets -->
-  <title>LeisurePace_超慢跑</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+    <!-- Title and Stylesheets -->
+    <title>LeisurePace_超慢跑</title>
+  </head>
 
+  <body>
+    <!-- menu 開始 -->
+    <header id="masthead" class="site-header" role="banner">
+      <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target=".navbar-ex1-collapse"
+            ></button>
+            <a class="navbar-brand" href="../index.html"> LeisurePace </a>
+          </div>
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="../index.html">首頁</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  >關於LeisurePace
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="../about.html">LeisurePace</a></li>
+                  <li><a href="../about.html">超慢跑介紹</a></li>
+                </ul>
+              </li>
+              <li class="active" class="dropdown">
+                <a href="run150.html">超慢跑 </a>
+              </li>
+              <li class="dropdown">
+                <a href="../analyze.html">分析</a>
+              </li>
+              <li class="dropdown">
+                <a href="../task.html">紀錄 </a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img
+                    id="profileImage"
+                    src="../image/default-avatar.png"
+                    class="profile-picture"
+                    style="border-radius: 50%"
+                    alt="Profile Image"
+                  />
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="../bgstore.html">背景介紹</a></li>
+                  <li><a href="../personal.html">個人資料</a></li>
+                  <li><a href="../connect.html">聯絡我們</a></li>
+                  <li><a href="../login/login.html">登出</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- End of Menu -->
 
-</head>
+    <!-- Main Content -->
+    <div class="gray-container">
+      <br /><br />
 
+      <!-- BPM Selection and Controls -->
+      <div class="switch-button">
+        <div class="bpm">
+          <button onclick="toggleDropdown();" class="item" id="start">
+            開始
+          </button>
+          <div id="myDropdown" class="bpm-content">
+            <a href="run120.html">120bpm</a>
+            <a href="run150.html">150bpm</a>
+            <a href="run180.html">180bpm</a>
+            <a href="run210.html">210bpm</a>
+            <a
+              href="run240.html"
+              style="background-color: #606060; color: white"
+              >240bpm</a
+            >
+          </div>
+        </div>
 
-<body>
-   <!-- menu 開始 -->
-   <header id="masthead" class="site-header" role="banner">
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
+        <div class="guidebpm">
           <button
-            type="button"
-            class="navbar-toggle"
-            data-toggle="collapse"
-            data-target=".navbar-ex1-collapse"
-          ></button>
-          <a class="navbar-brand" href="../index.html"> LeisurePace </a>
+            onclick="window.location.href='../語音導覽/語音導覽240.html'"
+            class="item"
+            id="voice_guide"
+          >
+            語音導覽
+          </button>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../index.html">首頁</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                >關於LeisurePace
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="../about.html">LeisurePace</a></li>
-                <li><a href="../about.html">超慢跑介紹</a></li>
-              </ul>
-            </li>
-            <li class="active" class="dropdown">
-              <a href="run150.html">超慢跑 </a>
-            </li>
-            <li class="dropdown">
-              <a href="../analyze.html">分析</a>
-            </li>
-            <li class="dropdown">
-              <a href="../task.html">紀錄 </a>
-            </li>
-            <li class="dropdown ">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img id="profileImage" src="../image/default-avatar.png" class="profile-picture"
-                  style="border-radius: 50%" alt="Profile Image" />
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="../bgstore.html">背景介紹</a></li>
-                <li><a href="../personal.html">個人資料</a></li>
-                <li><a href="../connect.html">聯絡我們</a></li>
-                <li><a href="../login/login.html">登出</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <!-- End of Menu -->
 
-  <!-- Main Content -->
-  <div class="gray-container">
-    <br /><br />
+        <!-- Countdown Controls -->
+        <button
+          onclick="pauseResumeCountdown(); startCountdown(currentItemIndex)"
+        >
+          <i id="pauseIcon" class="fas fa-play"></i>
+        </button>
+        <button onclick="previousItem()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button
+          class="item"
+          id="itemButton"
+          onclick="startCountdown(currentItemIndex)"
+        >
+          240BPM/10分鐘
+        </button>
+        <button onclick="nextItem()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
 
-    <!-- BPM Selection and Controls -->
-    <div class="switch-button">
-      <div class="bpm">
-        <button onclick="toggleDropdown();" class="item" id="start">開始</button>
-        <div id="myDropdown" class="bpm-content">
-          <a href="run120.html" >120bpm</a>
-          <a href="run150.html">150bpm</a>
-          <a href="run180.html">180bpm</a>
-          <a href="run210.html">210bpm</a>
-          <a href="run240.html"style="background-color: #606060; color: white">240bpm</a>
+        <!-- Additional Info and Inputs -->
+        <div class="additional-info">
+          <label for="weight">體重：</label>
+          <input type="number" id="weight" placeholder="請輸入:" />
+          <button onclick="confirmWeight()">確認</button>
+          <span>步數：</span>
+          <span>距離：</span><span>m</span>
+          大卡：
+          <div id="numberElement">0</div>
+
+          <!-- Media Gallery -->
+          <div
+            id="media"
+            style="
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+            "
+          >
+            <img id="galleryButton" src="image.png" onclick="toggleGallery()" />
+            <div class="category-menu" id="categoryMenu"></div>
+            <div class="gallery" id="imageGallery"></div>
+          </div>
         </div>
       </div>
 
-      <div class="guidebpm">
-        <button onclick="window.location.href='../語音導覽/語音導覽240.html'" class="item" id="voice_guide">語音導覽</button>
+      <!-- Countdown Display -->
+      <div class="countdown-container">
+        <span>時間:</span>
+        <div id="countdownTimer" class="countdown-timer"></div>
       </div>
 
-      <!-- Countdown Controls -->
-      <button onclick="pauseResumeCountdown()">
-        <i id="pauseIcon" class="fas fa-pause"></i>
-      </button>
-      <button onclick="previousItem()">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <button class="item" id="itemButton" onclick="startCountdown(currentItemIndex)">
-        240BPM/10分鐘
-      </button>
-      <button onclick="nextItem()">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-
-      <!-- Additional Info and Inputs -->
-      <div class="additional-info">
-        <label for="weight">體重：</label>
-        <input type="number" id="weight" placeholder="請輸入:" />
-        <button onclick="confirmWeight()">確認</button>
-        <span>步數：</span>
-        <span>距離：</span><span>m</span>
-        大卡：
-        <div id="numberElement">0</div>
-
-        <!-- Media Gallery -->
-        <div id="media" style="display: flex; justify-content: flex-end; align-items: center;">
-          <img id="galleryButton" src="image.png" onclick="toggleGallery()" />
-          <div class="category-menu" id="categoryMenu"></div>
-          <div class="gallery" id="imageGallery"></div>
-        </div>
-      </div>
+      <!-- Video Display -->
+      <video id="video" autoplay></video>
+      <br /><br />
     </div>
 
-    <!-- Countdown Display -->
-    <div class="countdown-container">
-      <span>時間:</span>
-      <div id="countdownTimer" class="countdown-timer"></div>
-    </div>
-
-    <!-- Video Display -->
-    <video id="video" autoplay></video>
-    <br /><br />
-  </div>
-
-  <script>
-    // Firebase configuration
+    <script>
+      // Firebase configuration
       // 初始化 Firebase
       const firebaseConfig = {
         apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
@@ -155,43 +186,43 @@
         messagingSenderId: "955257567601",
         appId: "1:955257567601:web:2e06661d84707065fe9ed0",
       };
-    
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
       const db = firebase.firestore();
       const auth = firebase.auth();
-    
-    // 頁面載入時檢查用戶登錄狀態
-    window.onload = function () {
-  auth.onAuthStateChanged(function (user) {
-    if (user) {
-      const userUID = user.uid;
-      const userRef = db.collection('users').doc(userUID);
-      userRef.get().then((doc) => {
-        if (doc.exists) {
-          const userProfile = doc.data();
-          const avatar = userProfile.avatar || "./image/default-avatar.png";
-          document.getElementById("profileImage").src = avatar;
-        } else {
-          console.error("無法找到使用者文件");
-        }
-      }).catch((error) => {
-        console.error("取得使用者資料時發生錯誤:", error);
-      });
-    } else {
-      window.location.href = '../login/login.html';
-    }
-  });
-};
 
+      // 頁面載入時檢查用戶登錄狀態
+      window.onload = function () {
+        auth.onAuthStateChanged(function (user) {
+          if (user) {
+            const userUID = user.uid;
+            const userRef = db.collection("users").doc(userUID);
+            userRef
+              .get()
+              .then((doc) => {
+                if (doc.exists) {
+                  const userProfile = doc.data();
+                  const avatar =
+                    userProfile.avatar || "./image/default-avatar.png";
+                  document.getElementById("profileImage").src = avatar;
+                } else {
+                  console.error("無法找到使用者文件");
+                }
+              })
+              .catch((error) => {
+                console.error("取得使用者資料時發生錯誤:", error);
+              });
+          } else {
+            window.location.href = "../login/login.html";
+          }
+        });
+      };
+    </script>
 
-
-</script>
-
-  <!-- Additional Scripts -->
-  <script src="./run_js/SlowJogging_main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic"></script>
-</body>
-
+    <!-- Additional Scripts -->
+    <script src="./run_js/SlowJogging_main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic"></script>
+  </body>
 </html>
