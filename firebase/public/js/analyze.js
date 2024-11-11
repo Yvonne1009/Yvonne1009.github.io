@@ -104,6 +104,7 @@ const weightChart = new Chart(weightCtx, {
 //動動　　動動動動動動動　　　　　　　　　　動
 //動動動動動動動動動動動動動動動動動動動動動動-->
 // 初始化跑步時間圖表
+// 初始化跑步時間圖表
 const runCtx = document.getElementById('runChart').getContext('2d');
 const runChart = new Chart(runCtx, {
     type: 'line',
@@ -132,11 +133,12 @@ const runChart = new Chart(runCtx, {
                     display: true,
                     text: '跑步時間 (分鐘)'
                 },
-                beginAtZero: false
+                beginAtZero: true // 確保縱軸從零開始，避免負數
             }
         }
     }
 });
+
 
 // 獲取並顯示跑步時間數據
 function fetchRunData(userId, days, selectedYear, selectedMonth) {
@@ -268,14 +270,16 @@ function fetchWaterData(userId, days, selectedYear, selectedMonth) {
             const recordRef = db.collection("users").doc(userId)
                 .collection("Records").doc(date.toISOString().split('T')[0])
                 .collection("water");
+
             promises.push(
                 recordRef.get().then((querySnapshot) => {
-                    let waterAmount = null;
+                    let dailyWaterTotal = 0;
                     querySnapshot.forEach((doc) => {
-                        waterAmount = doc.data().water; // 假設欄位名稱是 `water`
+                        dailyWaterTotal += doc.data().water || 0; // 累加當天所有 `water` 數據
                     });
+                    
                     labels.unshift(dateString);
-                    data.unshift(waterAmount);
+                    data.unshift(dailyWaterTotal); // 儲存當天的總喝水量
                 })
             );
         }
