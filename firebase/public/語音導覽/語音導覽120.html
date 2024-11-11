@@ -119,8 +119,8 @@
         <div class="text-box">
           <p>這個頁面是語音導覽！選好BPM和時間之後按下開始會為你介紹藝術作品。</p>
         </div>
-         <button onclick="pauseResumeCountdown(); startCountdown(currentItemIndex)">
-          <i id="pauseIcon" class="fas fa-play"></i>
+        <button onclick="pauseResumeCountdown()">
+          <i id="pauseIcon" class="fas fa-pause"></i>
         </button>
         <button onclick="previousItem()">
           <i class="fas fa-chevron-left"></i>
@@ -139,8 +139,7 @@
           <label for="weight">體重：</label>
           <input type="number" id="weight" placeholder="請輸入:" />
           <button onclick="confirmWeight()">確認</button>
-          <span>步數：</span>
-          <span>距離：</span><span>m</span>
+          
           大卡：
           <div id="numberElement">0</div>
           <div
