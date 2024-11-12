@@ -6,12 +6,144 @@
     <link rel="stylesheet" href="css/personal.css" />
     <link rel="icon" href="image/logo.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
     <title>LeisurePace_個人資料</title>
   </head>
 
   <body>
+    <!-- Header -->
+    <header id="masthead" class="site-header" role="banner">
+      <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button
+              type="button"
+              class="navbar-toggle"
+              data-toggle="collapse"
+              data-target=".navbar-ex1-collapse"
+            ></button>
+            <a class="navbar-brand" href="index.html">LeisurePace</a>
+          </div>
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="index.html">首頁</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  >關於LeisurePace <i class="fa fa-angle-double-down"></i
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="about.html">LeisurePace</a></li>
+                  <li><a href="about.html">超慢跑介紹</a></li>
+                </ul>
+              </li>
+              <li><a href="./run/run180.html">超慢跑</a></li>
+              <li><a href="analyze.html">分析</a></li>
+              <li><a href="task.html">紀錄</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img
+                    id="profileImage"
+                    src="./image/default-avatar.png"
+                    class="profile-picture"
+                    style="border-radius: 50%"
+                    alt="Profile Image"
+                  />
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="bgstore.html">背景介紹</a></li>
+                  <li><a href="personal.html">個人資料</a></li>
+                  <li><a href="connect.html">聯絡我們</a></li>
+                  <li><a href="./login/login.html">登出</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
     <main class="main-content">
       <h2>我的檔案</h2>
+      <p>管理你的檔案以保護你的帳戶</p>
+
+      <!-- 頭像選擇器 Modal -->
+      <div
+        id="avatarModal"
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="avatarModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h5 class="modal-title" id="avatarModalLabel">選擇頭像</h5>
+            </div>
+            <div class="modal-body text-center">
+              <img
+                src="./image/頭像1.jpg"
+                class="selectable-avatar"
+                data-avatar="./image/頭像1.jpg"
+              />
+              <img
+                src="./image/頭像2.jpg"
+                class="selectable-avatar"
+                data-avatar="./image/頭像2.jpg"
+              />
+              <img
+                src="./image/頭像3.jpg"
+                class="selectable-avatar"
+                data-avatar="./image/頭像3.jpg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 更換頭像的按鈕 -->
+      <div class="change-avatar-container">
+        <img
+          id="avatarPreview"
+          src="./image/default-avatar.png"
+          alt="頭像預覽"
+          class="profile-picture"
+          style="
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+          "
+        />
+        <button id="changeAvatarBtn" class="btn btn-primary">更換頭像</button>
+        <input
+          type="file"
+          id="avatarFile"
+          accept="image/*"
+          style="display: none"
+        />
+      </div>
+
+      <p></p>
+
+      <!-- 表單開始 -->
       <form id="profileForm">
         <div class="form-group">
           <label for="username">使用者帳號</label>
@@ -19,21 +151,23 @@
         </div>
         <div class="form-group">
           <label for="name">姓名</label>
-          <input type="text" id="name" required maxlength="50" />
+          <input type="text" id="name" required />
         </div>
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" required />
+          <a href="em_chag.html" aria-label="Change email">變更</a>
         </div>
         <div class="form-group">
           <label for="phone">手機號碼</label>
-          <input type="text" id="phone" required maxlength="15" />
+          <input type="text" id="phone" required />
+          <a href="ph_chag.html" aria-label="Change phone number">變更</a>
         </div>
         <div class="form-group">
           <label>性別</label>
           <input type="radio" id="male" name="gender" value="男" />
           <label for="male">男性</label>
-          <input type="radio" id="female" name="gender" value="女" />
+          <input type="radio" id="female" name="gender" value="女" checked />
           <label for="female">女性</label>
           <input type="radio" id="other" name="gender" value="其他" />
           <label for="other">其他</label>
@@ -42,28 +176,37 @@
           <label for="birthDate">生日</label>
           <input type="date" id="birthDate" name="birthDate" required />
         </div>
+
+        <!-- 體重欄位 -->
         <div class="form-group">
           <label for="weight">體重 (公斤)</label>
           <input
             type="number"
             id="weight"
             name="weight"
-            min="0"
-            max="500"
+            min="1"
+            max="300"
+            step="0.1"
+            placeholder="請輸入體重"
             required
           />
         </div>
+
+        <!-- 身高欄位 -->
         <div class="form-group">
           <label for="height">身高 (公分)</label>
           <input
             type="number"
             id="height"
             name="height"
-            min="0"
-            max="300"
+            min="30"
+            max="250"
+            step="0.1"
+            placeholder="請輸入身高"
             required
           />
         </div>
+        <!-- 運動頻率欄位 -->
         <div class="form-group">
           <label for="exerciseFrequency">運動頻率</label>
           <select id="exerciseFrequency" name="exerciseFrequency" required>
@@ -75,6 +218,7 @@
         <button type="submit">儲存</button>
       </form>
     </main>
+
     <!-- Footer -->
     <footer id="footer" class="footer-area">
       <div class="footer-widget pt-80">
@@ -144,33 +288,33 @@
       </div>
     </footer>
 
-    <!-- Initialize Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+    <!---------------- JavaScript--------------- -->
     <script>
+      // Firebase configuration
       const firebaseConfig = {
         apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
         authDomain: "leisurepace-a3d51.firebaseapp.com",
         projectId: "leisurepace-a3d51",
         storageBucket: "leisurepace-a3d51.appspot.com",
         messagingSenderId: "955257567601",
-        appId: "1:955257567601:web:2e06661d84707065fe9ed0",
+        appId: "1:955257567601:web:87073b209d8f2544d68d5b",
+        measurementId: "G-D8HL3GZ4L3",
       };
 
+      // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       const db = firebase.firestore();
       const auth = firebase.auth();
 
-      // Load user data on page load
+      // 当页面加载时检查用户登录状态
       window.onload = function () {
         auth.onAuthStateChanged(function (user) {
           if (user) {
             const userUID = user.uid;
             document.getElementById("username").value =
-              user.displayName || user.email;
+              user.displayName || user.email; // 可显示用户名或email
 
-            // Load user profile
+            // 从 Firestore 获取用户资料
             const userRef = db.collection("users").doc(userUID);
             userRef
               .get()
@@ -187,62 +331,252 @@
                     `input[name="gender"][value="${userProfile.gender}"]`
                   ).checked = true;
                   document.getElementById("birthDate").value =
-                    userProfile.birthDate
-                      ? userProfile.birthDate
-                          .toDate()
-                          .toISOString()
-                          .substring(0, 10)
-                      : "";
+                    userProfile.birthDate || "";
                   document.getElementById("weight").value =
-                    userProfile.weight || "";
+                    userProfile.weight || ""; // 體重
                   document.getElementById("height").value =
-                    userProfile.height || "";
-                  document.getElementById("exerciseFrequency").value =
-                    userProfile.exerciseFrequency || "";
+                    userProfile.height || ""; // 身高
+
+                  // 更新頭像
+                  const avatar =
+                    userProfile.avatar || "./image/default-avatar.png";
+                  document.getElementById("avatarPreview").src = avatar;
+                  document.getElementById("profileImage").src = avatar;
                 } else {
                   console.log("No user profile found.");
                 }
               })
               .catch((error) => {
                 console.error("Error fetching user data:", error);
+                alert(
+                  "There was an error fetching your profile. Please try again."
+                );
               });
           } else {
-            window.location.href = "./login.html";
+            // 如果未登录，导向至登录页面
+            window.location.href = "./login/login.html";
           }
         });
       };
 
-      // Save form data to Firestore on submit
+      // 獲取表單中的元素
+      const exerciseFrequencySelect =
+        document.getElementById("exerciseFrequency");
+
+      // 頁面載入時，從 Firestore 獲取使用者資料
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          db.collection("users")
+            .doc(user.uid)
+            .get()
+            .then((doc) => {
+              if (doc.exists) {
+                const data = doc.data();
+
+                // 如果有運動頻率的資料，設為選中的選項
+                if (data.exerciseFrequency) {
+                  exerciseFrequencySelect.value = data.exerciseFrequency;
+                }
+              }
+            })
+            .catch((error) => {
+              console.error("Error fetching user data:", error);
+            });
+        } else {
+          console.log("User is not logged in");
+        }
+      });
+
+      // 头像选择逻辑
+      document.addEventListener("DOMContentLoaded", function () {
+        // 为更换头像按钮添加事件监听器
+        document
+          .getElementById("changeAvatarBtn")
+          .addEventListener("click", function () {
+            $("#avatarModal").modal("show"); // 显示头像选择器 Modal
+          });
+
+        // 为每个头像图片添加事件监听器
+        const selectableAvatars =
+          document.querySelectorAll(".selectable-avatar");
+        selectableAvatars.forEach((avatar) => {
+          avatar.addEventListener("click", function () {
+            const selectedAvatar = this.dataset.avatar; // 获取选择的头像 URL
+            const avatarPreview = document.getElementById("avatarPreview");
+            const profileImage = document.getElementById("profileImage"); // 获取导航栏中的头像元素
+
+            // 更新预览头像和导航栏头像
+            avatarPreview.src = selectedAvatar;
+            profileImage.src = selectedAvatar;
+            $("#avatarModal").modal("hide"); // 关闭 Modal
+
+            // 保存头像到 Firestore
+            const userUID = auth.currentUser.uid; // 获取当前用户的 UID
+            db.collection("users")
+              .doc(userUID)
+              .update({
+                avatar: selectedAvatar, // 保存头像 URL
+              })
+              .then(() => {
+                console.log("Avatar updated successfully!");
+              })
+              .catch((error) => {
+                console.error("Error updating avatar:", error);
+              });
+          });
+        });
+      });
+
+      // 登出功能：登出并清空表单内容
+      document
+        .querySelector('.dropdown-menu a[href="./login/login.html"]')
+        .addEventListener("click", () => {
+          auth
+            .signOut()
+            .then(() => {
+              document.getElementById("profileForm").reset(); // 清空表单资料
+              console.log("User signed out.");
+            })
+            .catch((error) => {
+              console.error("Sign out error:", error);
+            });
+        });
+
+      // 设置档表单提交事件监听器
+      // 设置档表单提交事件监听器
       document
         .getElementById("profileForm")
         .addEventListener("submit", function (e) {
-          e.preventDefault();
+          e.preventDefault(); // Prevent page refresh
 
-          const userProfile = {
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value,
-            gender: document.querySelector('input[name="gender"]:checked')
-              .value,
-            birthDate: firebase.firestore.Timestamp.fromDate(
-              new Date(document.getElementById("birthDate").value)
-            ),
-            weight: parseFloat(document.getElementById("weight").value),
-            height: parseFloat(document.getElementById("height").value),
-            exerciseFrequency:
-              document.getElementById("exerciseFrequency").value,
-          };
+          // 获取表单输入值
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const phone = document.getElementById("phone").value;
+          const gender = document.querySelector(
+            'input[name="gender"]:checked'
+          ).value;
+          const birthDate = document.getElementById("birthDate").value;
+          const weight = document.getElementById("weight").value;
+          const height = document.getElementById("height").value;
+          const exerciseFrequency =
+            document.getElementById("exerciseFrequency").value;
 
+          // 确保所有必填字段已填写
+          if (
+            name &&
+            email &&
+            phone &&
+            birthDate &&
+            weight &&
+            height &&
+            exerciseFrequency
+          ) {
+            const userProfile = {
+              name,
+              email,
+              phone,
+              gender,
+              birthDate,
+              weight,
+              height,
+              exerciseFrequency,
+            };
+
+            // 使用 UID 将用户档资料保存到 Firestore
+            db.collection("users")
+              .doc(auth.currentUser.uid)
+              .set(userProfile, { merge: true })
+              .then(() => {
+                alert("Profile updated successfully!");
+              })
+              .catch((error) => {
+                console.error("Error updating profile:", error);
+                alert(
+                  "There was an error updating your profile. Please try again."
+                );
+              });
+          } else {
+            alert("Please fill out all required fields.");
+          }
+        });
+
+      // JavaScript 代码
+      document.addEventListener("DOMContentLoaded", function () {
+        // 为更换头像按钮添加事件监听器
+        document
+          .getElementById("changeAvatarBtn")
+          .addEventListener("click", function () {
+            $("#avatarModal").modal("show"); // 显示头像选择器 Modal
+          });
+
+        // 为每个头像图片添加事件监听器
+        const selectableAvatars =
+          document.querySelectorAll(".selectable-avatar");
+        selectableAvatars.forEach((avatar) => {
+          avatar.addEventListener("click", function () {
+            const selectedAvatar = this.dataset.avatar; // 获取选择的头像 URL
+            const avatarPreview = document.getElementById("avatarPreview");
+
+            // 更新预览头像
+            avatarPreview.src = selectedAvatar; // 仅更新图片源
+            $("#avatarModal").modal("hide"); // 关闭 Modal
+          });
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // 为更换头像按钮添加事件监听器
+        document
+          .getElementById("changeAvatarBtn")
+          .addEventListener("click", function () {
+            $("#avatarModal").modal("show"); // 显示头像选择器 Modal
+          });
+
+        // 为每个头像图片添加事件监听器
+        const selectableAvatars =
+          document.querySelectorAll(".selectable-avatar");
+        selectableAvatars.forEach((avatar) => {
+          avatar.addEventListener("click", function () {
+            const selectedAvatar = this.dataset.avatar; // 获取选择的头像 URL
+            const avatarPreview = document.getElementById("avatarPreview");
+            const profileImage = document.getElementById("profileImage"); // 获取导航栏中的头像元素
+
+            // 更新预览头像
+            avatarPreview.src = selectedAvatar; // 仅更新图片源
+            profileImage.src = selectedAvatar; // 更新导航栏头像
+            $("#avatarModal").modal("hide"); // 关闭 Modal
+          });
+        });
+      });
+      // 为每个头像图片添加事件监听器
+      const selectableAvatars = document.querySelectorAll(".selectable-avatar");
+      selectableAvatars.forEach((avatar) => {
+        avatar.addEventListener("click", function () {
+          const selectedAvatar = this.dataset.avatar; // 获取选择的头像 URL
+          const avatarPreview = document.getElementById("avatarPreview");
+          const profileImage = document.getElementById("profileImage"); // 获取导航栏中的头像元素
+
+          // 更新预览头像
+          avatarPreview.src = selectedAvatar; // 仅更新图片源
+          profileImage.src = selectedAvatar; // 更新导航栏头像
+          $("#avatarModal").modal("hide"); // 关闭 Modal
+
+          // 保存头像到 Firestore
+          const userUID = auth.currentUser.uid; // 获取当前用户的 UID
           db.collection("users")
-            .doc(auth.currentUser.uid)
-            .set(userProfile, { merge: true })
+            .doc(userUID)
+            .update({
+              avatar: selectedAvatar, // 保存头像 URL
+            })
             .then(() => {
-              alert("Profile updated successfully!");
+              console.log("Avatar updated successfully!");
             })
             .catch((error) => {
-              console.error("Error updating profile:", error);
+              console.error("Error updating avatar:", error);
             });
         });
+      });
     </script>
   </body>
 </html>
