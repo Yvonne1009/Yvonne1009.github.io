@@ -12,7 +12,7 @@
       <div class="column">
         <!-- 表單字段 -->
         <label for="name">姓名:</label>
-        <input type="text" id="name" name="name" required />
+        <input type="text" id="name" name="name" required maxlength="50" />
 
         <label for="birthday">生日:</label>
         <input type="date" id="birthDate" name="birthDate" required />
@@ -23,10 +23,24 @@
         <label><input type="radio" name="gender" value="其他" /> 其他</label>
 
         <label for="height">身高 (cm):</label>
-        <input type="number" id="height" name="height" required />
+        <input
+          type="number"
+          id="height"
+          name="height"
+          required
+          min="0"
+          max="300"
+        />
 
         <label for="weight">體重 (kg):</label>
-        <input type="number" id="weight" name="weight" required />
+        <input
+          type="number"
+          id="weight"
+          name="weight"
+          required
+          min="0"
+          max="500"
+        />
 
         <label>運動頻率:</label>
         <select id="exerciseFrequency" name="exerciseFrequency">
@@ -36,7 +50,7 @@
         </select>
 
         <label for="phone">電話:</label>
-        <input type="text" id="phone" name="phone" required />
+        <input type="text" id="phone" name="phone" required maxlength="15" />
       </div>
       <button type="submit">提交</button>
     </form>
@@ -70,16 +84,16 @@
         e.preventDefault(); // 防止表單提交刷新頁面
 
         // 收集表單資料
-        const name = document.getElementById("name").value;
-        const birthDate = document.getElementById("birthDate").value;
+        const name = document.getElementById("name").value; // string, maxlength: 50
+        const birthDate = document.getElementById("birthDate").value; // timestamp
         const gender = document.querySelector(
           'input[name="gender"]:checked'
-        )?.value;
-        const height = document.getElementById("height").value;
-        const weight = document.getElementById("weight").value;
+        )?.value; // string
+        const height = parseFloat(document.getElementById("height").value); // number
+        const weight = parseFloat(document.getElementById("weight").value); // number
         const exerciseFrequency =
-          document.getElementById("exerciseFrequency").value;
-        const phone = document.getElementById("phone").value;
+          document.getElementById("exerciseFrequency").value; // string
+        const phone = document.getElementById("phone").value; // string, maxlength: 15
 
         // 獲取當前登入使用者
         const user = auth.currentUser;
@@ -92,8 +106,8 @@
               name: name,
               birthDate: birthDate,
               gender: gender,
-              height: parseFloat(height), // 確保身高和體重作為數字保存
-              weight: parseFloat(weight),
+              height: height, // number
+              weight: weight, // number
               exerciseFrequency: exerciseFrequency,
               phone: phone,
               email: user.email, // 保存使用者的電子郵件
