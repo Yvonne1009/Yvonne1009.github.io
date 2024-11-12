@@ -1,3 +1,23 @@
+//體體體體體體體體體體體體體體體體體體體體體
+//體體體體體體體體體體體體體　　　　體體體體
+//體體　　　　　　　　　　　　　　　體體體體
+//體體體　　　　體體　　　體體體體體體體體體
+//體體體體體體體體體　　　體體體體體體體體體
+//體　　　　　　　　　　　　　　　　　　　體
+//體體體體體體體體體　　　體體體體體體體體體
+//體體體　　　　　　　　　　　　　　體體體體
+//體體體體　　　　　　　　　　　　　體體體體
+//體體體體　　　體體　　　體體　　　體體體體
+//體體體體　　　　　　　　　　　　　體體體體
+//體體體體　　　體體　　　體體　　　體體體體
+//體體體體　　　　　　　　　　　　　體體體體
+//體體體體體體體體體　　　體體體體體體體體體
+//體體體體體體體體體　　　體體體體體體體體體
+//體體體　　　　　　　　　　　　　　　體體體
+//體體體體體體體體體　　　體體體體體體體體體
+//體　　　　　　　　　　　　　　　　　　　體
+//體體體體體體體體體體體體體體體體體體體體體
+
 // 獲取並顯示體重數據
 function fetchWeightData(userId, days, selectedYear, selectedMonth) {
     const labels = [];
@@ -75,7 +95,7 @@ const weightChart = new Chart(weightCtx, {
                     display: true,
                     text: '體重 (kg)'
                 },
-                beginAtZero: false
+                beginAtZero: true // 確保縱軸從零開始，避免負數
             }
         }
     }
@@ -251,7 +271,7 @@ const waterChart = new Chart(waterCtx, {
                     display: true,
                     text: '喝水量 (毫升)'
                 },
-                beginAtZero: false
+                beginAtZero: true // 確保縱軸從零開始，避免負數
             }
         }
     }

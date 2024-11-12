@@ -238,6 +238,8 @@
         const selectedYear = parseInt(document.getElementById('yearSelect').value);
         const selectedMonth = parseInt(document.getElementById('monthSelect').value);
         updateAllCharts(userUID, 30, selectedYear, selectedMonth);
+        // 調用以添加事件監聽器
+        addEventListeners();
       } else {
         // 如果未登錄，導向至登錄頁面
         window.location.href = './login/login.html';
