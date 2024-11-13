@@ -10,53 +10,66 @@ var items = [
   "120BPM/60分鐘",
 ]; // 替換為您的選項
 
-let countdownInterval; // Interval variable for countdown
-let countdownEndTime; // Variable to store countdown end time
-let remainingTime; // Variable to store remaining time of countdown
-let paused = false; // Variable to track pause state
-let isFirstMinutePassed = false;
-var audio = new Audio("bpm/120bpm.mp3"); // 請替換為您的音樂檔案路徑
-let imageRotationInterval; // Interval variable for image rotation
-let currentImageIndex = 0; // Index of the current image being displayed
-let selectedImages = []; // Array to store the images of the selected category
+let countdownInterval;
+let countdownEndTime;
+let remainingTime;
+let paused = false;
+let audio = new Audio("bpm/120bpm.mp3"); // 替換為您的音樂檔案
+let imageRotationInterval;
+let currentImageIndex = 0;
+let currentCategoryImages = [];
+let currentCategoryTexts = [];
+let speechSynthesisInstance;
+let isSpeechPaused = false;
 
-// Start countdown
-function startCountdown(index) {
-  const minutes = [10, 15, 20, 30, 40, 50, 60]; // 對應到每個選項的分鐘數
-  const selectedMinutes = minutes[index];
-  countdownEndTime = new Date().getTime() + selectedMinutes * 60 * 1000; // Calculate end time
-  remainingTime = selectedMinutes * 60; // Calculate remaining time in seconds
-  updateCountdown(); // Update countdown immediately
-  countdownInterval = setInterval(updateCountdown, 1000); // Update countdown every second
-
-  // 撥放音樂
-  playPauseMusic();
-
-  if (!imageRotationInterval) {
-    startImageRotation(); // 启动图片轮播
+// 語音播放功能
+function speakText(text) {
+  if ("speechSynthesis" in window) {
+    if (speechSynthesisInstance) {
+      speechSynthesis.cancel(); // 取消當前的語音播放
+    }
+    speechSynthesisInstance = new SpeechSynthesisUtterance(text);
+    speechSynthesisInstance.lang = "zh-TW";
+    speechSynthesisInstance.onend = () => (isSpeechPaused = false);
+    window.speechSynthesis.speak(speechSynthesisInstance);
+  } else {
+    alert("您的瀏覽器不支援語音合成");
   }
+}
+
+// 開始計時器和音樂、圖片輪播
+function startCountdown(index) {
+  const minutes = [10, 15, 20, 30, 40, 50, 60];
+  const selectedMinutes = minutes[index];
+  countdownEndTime = new Date().getTime() + selectedMinutes * 60 * 1000;
+  remainingTime = selectedMinutes * 60;
+  updateCountdown();
+  countdownInterval = setInterval(updateCountdown, 1000);
+  playMusic();
+  startImageRotation();
+  speakText(currentCategoryTexts[currentImageIndex]);
 }
 
 // Function to play or pause music based on countdown state
 function playPauseMusic() {
   const pauseIcon = document.getElementById("pauseIcon");
   if (!paused && countdownEndTime > Date.now()) {
-    playMusic(); // If not paused and countdown is running, play music
+    playMusic();
     pauseIcon.classList.remove("fa-play");
     pauseIcon.classList.add("fa-pause");
   } else {
-    stopMusic(); // If paused or countdown has ended, stop music
+    stopMusic();
     pauseIcon.classList.remove("fa-pause");
     pauseIcon.classList.add("fa-play");
   }
 }
 
-// Function to play music
+// 播放音樂
 function playMusic() {
   audio.play();
 }
 
-// Function to stop music
+// 停止音樂
 function stopMusic() {
   audio.pause();
 }
@@ -65,45 +78,47 @@ function stopMusic() {
 function pauseResumeCountdown() {
   const pauseIcon = document.getElementById("pauseIcon");
   if (!paused) {
-    clearInterval(countdownInterval); // Pause countdown if running
+    clearInterval(countdownInterval);
+    clearInterval(imageRotationInterval);
+    stopMusic();
+    window.speechSynthesis.pause();
+    isSpeechPaused = true;
     pauseIcon.classList.remove("fa-pause");
     pauseIcon.classList.add("fa-play");
-    stopMusic(); // Pause music
   } else {
-    countdownEndTime = new Date().getTime() + remainingTime * 1000; // Update end time for resuming countdown
-    countdownInterval = setInterval(updateCountdown, 1000); // Restart countdown
+    countdownEndTime = new Date().getTime() + remainingTime * 1000;
+    countdownInterval = setInterval(updateCountdown, 1000);
+    startImageRotation();
+    if (isSpeechPaused) {
+      window.speechSynthesis.resume();
+    } else {
+      speakText(currentCategoryTexts[currentImageIndex]);
+    }
+    playMusic();
     pauseIcon.classList.remove("fa-play");
     pauseIcon.classList.add("fa-pause");
-    playMusic(); // Resume music
   }
-  paused = !paused; // Toggle pause state
-  playPauseMusic(); // Play or pause music
+  paused = !paused;
 }
 
-// Update countdown
+// 更新計時器顯示
 function updateCountdown() {
   if (!paused) {
-    const now = new Date().getTime(); // Get current time
-    const distance = countdownEndTime - now; // Calculate the remaining time
+    const now = new Date().getTime();
+    const distance = countdownEndTime - now;
     if (distance >= 0) {
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); // Calculate minutes
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000); // Calculate seconds
-
-      // Check if the first minute has passed
-      if (minutes >= 1 && !isFirstMinutePassed) {
-        isFirstMinutePassed = true;
-      }
-
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
       document.getElementById("countdownTimer").innerHTML =
-        minutes + " 分 " + seconds + " 秒"; // Display countdown
-      remainingTime = Math.ceil(distance / 1000); // Update remaining time
+        minutes + " 分 " + seconds + " 秒";
+      remainingTime = Math.ceil(distance / 1000);
     } else {
-      clearInterval(countdownInterval); // Clear interval when countdown is finished
-      document.getElementById("countdownTimer").innerHTML = "計時結束"; // Display message when countdown is finished
-      stopMusic(); // Stop music when countdown is finished
+      clearInterval(countdownInterval);
+      document.getElementById("countdownTimer").innerHTML = "計時結束";
+      stopMusic();
     }
   } else {
-    stopMusic(); // Stop music when countdown is paused or when time is paused
+    stopMusic();
   }
 }
 
@@ -117,18 +132,43 @@ function updateItem() {
 function previousItem() {
   currentItemIndex = (currentItemIndex - 1 + items.length) % items.length;
   updateItem();
-  clearInterval(countdownInterval); // Clear interval when switching items
-  paused = false; // Reset pause state when switching items
-  pauseResumeCountdown(); // Pause or resume countdown to update remaining time
+  clearInterval(countdownInterval);
+  paused = false;
+  pauseResumeCountdown();
 }
 
 // Move to next item
 function nextItem() {
   currentItemIndex = (currentItemIndex + 1) % items.length;
   updateItem();
-  clearInterval(countdownInterval); // Clear interval when switching items
-  paused = false; // Reset pause state when switching items
-  pauseResumeCountdown(); // Pause or resume countdown to update remaining time
+  clearInterval(countdownInterval);
+  paused = false;
+  pauseResumeCountdown();
+}
+
+// Update text and trigger text-to-speech
+function updateText(text) {
+  var textBox = document.querySelector(".語音導覽120 p");
+  textBox.textContent = text;
+  speakText(text);
+}
+
+// 啟動圖片輪播
+function startImageRotation() {
+  if (imageRotationInterval) clearInterval(imageRotationInterval);
+
+  imageRotationInterval = setInterval(() => {
+    currentImageIndex = (currentImageIndex + 1) % currentCategoryImages.length;
+    displayImage(currentCategoryImages[currentImageIndex]);
+    updateText(currentCategoryTexts[currentImageIndex]);
+  }, 20000);
+}
+
+// 更新文字並播放語音
+function updateText(text) {
+  var textBox = document.querySelector(".語音導覽120 p");
+  textBox.textContent = text;
+  speakText(text);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -148,7 +188,7 @@ function toggleGallery() {
     gallery.style.display = "block";
 
     // 建立類別按鈕
-    var categories = ["雷諾瓦", "莫內",  "畢卡索", "弗里德里希","何木火"];
+    var categories = ["雷諾瓦", "莫內", "畢卡索", "弗里德里希", "何木火"];
     categories.forEach((category) => {
       var button = document.createElement("button");
       button.textContent = category;
@@ -354,7 +394,6 @@ function showCategory(category) {
       "弗里德里希/The Times of Day：The Morning.jpg",
     ];
     texts = [
-      
       "《兩人凝望月亮》（Two Men Contemplating the Moon）弗裡德里希通過這幅畫，表現了人類對宇宙和未知的沉思，以及人與自然之間的深刻聯繫。\n這幅作品也傳達了一種對超越現世的精神追求。畫中兩個人站在岩石上，凝望著遠處的月亮。夜空寧靜，月光灑在大地上，營造出一種神秘而安寧的氛圍。",
       "《波希米亞景觀》（Bohemian Landscape）這幅畫作展現了弗里德里希對自然的熱愛和他獨特的藝術風格，以其深刻的情感表達和細膩的景觀描繪著稱。\n波希米亞位於今天的捷克共和國西部，擁有壯麗的自然景觀和豐富的歷史文化。弗里德里希受到這些景觀的啟發，創作了這幅畫作，捕捉了波希米亞自然景觀的美麗和神秘。\n弗里德里希擅長運用光影效果來增強畫面的氛圍和情感表達。這種細膩的描繪使得畫作更加生動，讓觀眾仿佛置身於波希米亞的壯麗景色中。",
       "《傍晚港口的船隻》（Boats in the Harbour at Evening）浪漫主義時期的畫家們熱衷於描繪自然景觀，並通過自然表達內心的情感和哲思。作品描繪了一個寧靜的港口，傍晚的光線柔和地灑在水面和船隻上。\n弗里德里希以其獨特的視角和對自然的敏銳觀察，將這一場景呈現在觀眾面前。這幅畫作通過對光影的細膩處理和對自然景觀的描繪，表現出一種寧靜而深邃的氛圍。\n傍晚的光線柔和而溫暖，船隻和水面的倒影在微弱的光線中顯得格外迷人。弗里德里希巧妙地運用了光影對比，增強了畫面的深度和層次感。",
@@ -407,7 +446,7 @@ function startImageRotation() {
     }
     displayImage(currentCategoryImages[currentImageIndex]);
     updateText(currentCategoryTexts[currentImageIndex]);
-  }, 60000); // 每60秒切換一次圖片
+  }, 20000); // 每20秒切換一次圖片
 }
 
 // 每分钟更新燃烧的卡路里数
@@ -468,16 +507,11 @@ function confirmWeight() {
   const confirmButton = document.getElementById("confirmButton");
   const weight = parseFloat(weightInput.value);
 
-  // 检查是否有效输入了体重
   if (!isNaN(weight) && weight > 0) {
-    // 禁用体重输入字段和确认按钮
     weightInput.disabled = true;
     confirmButton.disabled = true;
-
-    // 如果需要，在这里可以调用启动计时器函数
-    // startTimer();
   } else {
-    alert("請输入有效的體重！");
+    alert("請輸入有效的體重！");
   }
 }
 

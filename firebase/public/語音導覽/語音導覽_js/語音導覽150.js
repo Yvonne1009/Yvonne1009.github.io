@@ -148,7 +148,7 @@ function toggleGallery() {
     gallery.style.display = "block";
 
     // 建立類別按鈕
-    var categories = ["雷諾瓦", "莫內",  "畢卡索", "弗里德里希","何木火"];
+    var categories = ["雷諾瓦", "莫內", "畢卡索", "弗里德里希", "何木火"];
     categories.forEach((category) => {
       var button = document.createElement("button");
       button.textContent = category;
@@ -405,7 +405,7 @@ function startImageRotation() {
     }
     displayImage(currentCategoryImages[currentImageIndex]);
     updateText(currentCategoryTexts[currentImageIndex]);
-  }, 60000); // 每60秒切換一次圖片
+  }, 20000); // 每20秒切換一次圖片
 }
 
 // 每分钟更新燃烧的卡路里数
