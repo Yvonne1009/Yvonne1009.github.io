@@ -308,6 +308,93 @@ function fetchWaterData(userId, days, selectedYear, selectedMonth) {
     return Promise.all(promises).then(() => ({ labels, data }));
 }
 
+//路路路路路路路路路路路路路路路路路路路路路
+//路路路路路路路路　　　　路路路路路路路路路
+//路路路路路路路路　　　路路路路路路路路路路
+//路路路路路路路路　　　路路路路路路路路路路
+//路路路路路路路路　　　　　　　　　　路路路
+//路路路路路路路路　　　路路路路路路路路路路
+//路路路路路路路路　　　路路路路路路路路路路
+//路路路路路路路路　　　路路路路路路路路路路
+//路　　　　　　　　　　　　　　　　　　　路
+//路路路路路路路路　　　路路路路路路路　　路
+//路路路路路路路路　　　路路路路路路路路路路
+//路路路路路路路路　　　　　　路路路路路路路
+//路路路路路路路路　　　　　　　路路路路路路
+//路路路路路路路路　　　路路　　　　路路路路
+//路路路路路路路路　　　路路路　　　　路路路
+//路路路路路路路路　　　路路路路　　路路路路
+//路路路路路路路路　　　　路路路路路路路路路
+//路路路路路路路路　　　　路路路路路路路路路
+//路路路路路路路路　　　　路路路路路路路路路
+//路路路路路路路路路路路路路路路路路路路路路
+// 初始化卡路里圖表
+const calorieCtx = document.getElementById('calorieChart').getContext('2d');
+const calorieChart = new Chart(calorieCtx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: '卡路里 (cal)',
+            data: [],
+            fill: false,
+            borderColor: '#6698C4',
+            backgroundColor: '#6698C4',
+            tension: 0.1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: '日期'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: '卡路里 (cal)'
+                },
+                beginAtZero: true // 確保縱軸從零開始，避免負數
+            }
+        }
+    }
+});
+
+// 獲取並顯示卡路里數據
+function fetchCalorieData(userId, days, selectedYear, selectedMonth) {
+    const labels = [];
+    const data = [];
+    const promises = [];
+
+    if (days === 7 || days === 30) {
+        for (let i = 0; i < days; i++) {
+            const date = new Date(selectedYear, selectedMonth, new Date().getDate() - i);
+            const dateString = date.toISOString().slice(5, 10); // 僅顯示 MM-DD
+            const recordRef = db.collection("users").doc(userId)
+                .collection("Records").doc(date.toISOString().split('T')[0])
+                .collection("cal");
+
+            promises.push(
+                recordRef.get().then((querySnapshot) => {
+                    let dailyCalorieTotal = 0;
+                    querySnapshot.forEach((doc) => {
+                        dailyCalorieTotal += doc.data().cal || 0; // 累加當天所有 `calories` 數據
+                    });
+                    
+                    labels.unshift(dateString);
+                    data.unshift(dailyCalorieTotal); // 儲存當天的總卡路里
+                })
+            );
+        }
+    }
+
+    return Promise.all(promises).then(() => ({ labels, data }));
+}
+
+
 //圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖
 //圖圖圖圖圖圖圖圖圖　　　圖圖圖圖圖圖圖圖圖
 //圖圖圖圖圖圖圖圖圖　　　圖圖圖圖圖圖圖圖圖
@@ -328,6 +415,7 @@ function fetchWaterData(userId, days, selectedYear, selectedMonth) {
 //圖圖圖圖圖圖　　　　圖圖圖圖圖　　　　　圖
 //圖圖圖圖圖圖　　　圖圖圖圖圖圖圖圖圖圖圖圖
 //圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖圖
+
 // 更新體重圖表
 function updateWeightChart(userId, days, selectedYear, selectedMonth) {
     fetchWeightData(userId, days, selectedYear, selectedMonth).then((weightData) => {
@@ -355,11 +443,21 @@ function updateWaterChart(userId, days, selectedYear, selectedMonth) {
     });
 }
 
+// 更新卡路里圖表
+function updatecalChart(userId, days, selectedYear, selectedMonth) {
+    fetchCalorieData(userId, days, selectedYear, selectedMonth).then((calorieData) => {
+        calorieChart.data.labels = calorieData.labels;
+        calorieChart.data.datasets[0].data = calorieData.data;
+        calorieChart.update();
+    });
+}
+
 // 更新所有圖表
 function updateAllCharts(userId, days, selectedYear, selectedMonth) {
     updateWeightChart(userId, days, selectedYear, selectedMonth);
     updateRunChart(userId, days, selectedYear, selectedMonth);
     updateWaterChart(userId, days, selectedYear, selectedMonth);
+    updatecalChart(userId, days, selectedYear, selectedMonth);
 }
 
 // 添加事件監聽器來更新圖表
