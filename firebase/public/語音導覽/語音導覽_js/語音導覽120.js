@@ -36,6 +36,31 @@ function speakText(text) {
     alert("您的瀏覽器不支援語音合成");
   }
 }
+function speakText(text) {
+  if ("speechSynthesis" in window) {
+    if (speechSynthesisInstance) {
+      speechSynthesis.cancel(); // 取消當前的語音播放
+    }
+    speechSynthesisInstance = new SpeechSynthesisUtterance(text);
+    speechSynthesisInstance.lang = "zh-TW";
+
+    // 當語音播放完成時切換到下一張圖片
+    speechSynthesisInstance.onend = () => {
+      currentImageIndex++;
+      if (currentImageIndex >= currentCategoryImages.length) {
+        currentImageIndex = 0; // 重頭播放
+      }
+      displayImage(currentCategoryImages[currentImageIndex]);
+      updateText(currentCategoryTexts[currentImageIndex]);
+      speakText(currentCategoryTexts[currentImageIndex]); // 播放下一句
+    };
+
+    window.speechSynthesis.speak(speechSynthesisInstance);
+  } else {
+    alert("您的瀏覽器不支援語音合成");
+  }
+}
+
 
 // 開始計時器和音樂、圖片輪播
 function startCountdown(index) {
@@ -155,14 +180,12 @@ function updateText(text) {
 
 // 啟動圖片輪播
 function startImageRotation() {
-  if (imageRotationInterval) clearInterval(imageRotationInterval);
-
-  imageRotationInterval = setInterval(() => {
-    currentImageIndex = (currentImageIndex + 1) % currentCategoryImages.length;
-    displayImage(currentCategoryImages[currentImageIndex]);
-    updateText(currentCategoryTexts[currentImageIndex]);
-  }, 20000);
+  currentImageIndex = 0; // 確保從第一張圖片開始
+  displayImage(currentCategoryImages[currentImageIndex]);
+  updateText(currentCategoryTexts[currentImageIndex]);
+  speakText(currentCategoryTexts[currentImageIndex]);
 }
+
 
 // 更新文字並播放語音
 function updateText(text) {
@@ -409,7 +432,6 @@ function showCategory(category) {
       "《孤獨的樹》（Solitary Tree）這幅畫展示了一棵孤獨的樹，屹立在廣闊的田野中。天空中雲朵飄過，遠處是連綿的山脈。\n象徵了個體在宇宙中的孤獨和堅韌，樹的形象常被弗裡德里希用來表達生命的韌性和持久。",
     ];
   }
-
   currentCategoryImages = selectedImages;
   currentCategoryTexts = texts;
   currentImageIndex = 0;
@@ -429,6 +451,7 @@ function displayImage(imageSrc) {
   img.src = imageSrc;
 }
 
+
 function updateText(text) {
   var textBox = document.querySelector(".text-box p");
   textBox.textContent = text;
@@ -439,14 +462,6 @@ function startImageRotation() {
     clearInterval(imageRotationInterval);
   }
 
-  imageRotationInterval = setInterval(() => {
-    currentImageIndex++;
-    if (currentImageIndex >= currentCategoryImages.length) {
-      currentImageIndex = 0;
-    }
-    displayImage(currentCategoryImages[currentImageIndex]);
-    updateText(currentCategoryTexts[currentImageIndex]);
-  }, 20000); // 每20秒切換一次圖片
 }
 
 // 每分钟更新燃烧的卡路里数
