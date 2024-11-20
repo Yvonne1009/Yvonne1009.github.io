@@ -19,7 +19,7 @@
   <title>LeisurePace_紀錄</title>
 </head>
 
-</head>
+
 
 <body>
   <!-- menu 開始 -->
@@ -69,7 +69,7 @@
         </div>
       </div>
     </nav>
-  </header>
+
 
   <!---------------- 左側：月曆和待辦事項清單---------------->
   <div class="container main-container">
@@ -127,18 +127,7 @@
         </div>
       </div>
 
-      <div class="record-section">
-        <h1>步數</h1>
-        <div class="step-record">
-          <form id="stepForm">
-            <label for="stepInput"></label>
-            <input type="number" id="stepsInput" placeholder="輸入步數(steps)..." required />
-            <button class="btn-add" type="button" onclick="addSteps()">新增</button>
-          </form>
-          <h2>步數記錄</h2>
-          <div id="stepsList"></div>
-        </div>
-      </div>
+      
 
       <div class="record-section">
         <h1>超慢跑</h1>
@@ -152,6 +141,19 @@
           <div id="runList"></div>
         </div>
       </div>
+
+      <div class="record-section">
+        <h1>卡路里</h1>
+        <div class="cal-record">
+          <form id="calForm">
+            <label for="calInput"></label>
+            <input type="number" id="calInput" placeholder="輸入卡路里(cal)..." required />
+            <button class="btn-add" type="button" onclick="addcal()">新增</button>
+          </form>
+          <h2>卡路里記錄</h2>
+          <div id="calList"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -159,7 +161,7 @@
   <!--////////////////////////////////////////////以下JS///////////////////////////////////////////////////-->
   <!--////////////////////////////////////////////以下JS///////////////////////////////////////////////////-->
   <script>
-    // Firebase configuration
+    // Firebase 初始化
     const firebaseConfig = {
       apiKey: "AIzaSyCbujMaNQH4-KIuNbSglH2SriVqvvRRa1g",
       authDomain: "leisurepace-a3d51.firebaseapp.com",
@@ -275,7 +277,7 @@
         day.textContent = i;
         day.setAttribute("data-day", i);
 
-        // 点击日期时更新记录
+        // 點擊日期时更新记录
         day.addEventListener("click", () => {
           // 更新当前日期
           currentYear = year;
@@ -297,7 +299,7 @@
           getWaters();
           getSteps();
           getRuns();
-
+          getcal();
         });
 
 
@@ -322,6 +324,7 @@
       getWaters();
       getSteps();
       getRuns();
+      getcal();
     }
 
     // 當年份選擇變更時的處理函數
@@ -333,6 +336,7 @@
       getWaters();
       getSteps();
       getRuns();
+      getcal();
     }
 
     // 當選擇月份或年份時，自動生成對應的日曆
@@ -361,6 +365,7 @@
       getWaters();
       getSteps();
       getRuns();
+      getcal();
     }
 
     // 函数：显示下一个月份
@@ -379,6 +384,7 @@
       getWaters();
       getSteps();
       getRuns();
+      getcal();
     }
 
     // 绑定月份和年份选择器的事件
@@ -390,6 +396,7 @@
       getWaters();
       getSteps();
       getRuns();
+      getcal();
     });
 
     yearSelect.addEventListener("change", () => {
@@ -400,6 +407,7 @@
       getWaters();
       getSteps();
       getRuns();
+      getcal();
     });
 
     // 初始化日历
@@ -410,6 +418,7 @@
     getWaters();
     getSteps();
     getRuns();
+    getcal();
   </script>
 
 
@@ -423,9 +432,10 @@
         console.log("使用者已登入: ", user.email);
         getTasks(); // 取得清單
         getWeights();
-        getWater();
+        getWaters();
         getSteps();
         getRuns();
+        getcal();
       } else {
         console.log("使用者已登出或尚未登入");
         window.location.href = './login/login.html'; // 導向登入頁面
@@ -792,6 +802,7 @@
           console.error("檢查水分資料是否存在時出錯:", error);
         });
     }
+    getWaters();
   </script>
   <!--
 數數數數數數數數數數數數數數數數數數數數數
@@ -965,6 +976,7 @@
           console.error("檢查步數資料是否存在時出錯:", error);
         });
     }
+    getSteps();
   </script>
   <!--
 鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘鐘
@@ -1138,6 +1150,181 @@
           console.error("檢查跑步資料是否存在時出錯:", error);
         });
     }
+    getRuns();
+  </script>
+  <!--
+路路路路路路路路路路路路路路路路路路路路路
+路路路路路路路路　　　　路路路路路路路路路
+路路路路路路路路　　　路路路路路路路路路路
+路路路路路路路路　　　路路路路路路路路路路
+路路路路路路路路　　　　　　　　　　路路路
+路路路路路路路路　　　路路路路路路路路路路
+路路路路路路路路　　　路路路路路路路路路路
+路路路路路路路路　　　路路路路路路路路路路
+路　　　　　　　　　　　　　　　　　　　路
+路路路路路路路路　　　路路路路路路路　　路
+路路路路路路路路　　　路路路路路路路路路路
+路路路路路路路路　　　　　　路路路路路路路
+路路路路路路路路　　　　　　　路路路路路路
+路路路路路路路路　　　路路　　　　路路路路
+路路路路路路路路　　　路路路　　　　路路路
+路路路路路路路路　　　路路路路　　路路路路
+路路路路路路路路　　　　路路路路路路路路路
+路路路路路路路路　　　　路路路路路路路路路
+路路路路路路路路　　　　路路路路路路路路路
+路路路路路路路路路路路路路路路路路路路路路
+  -->
+  <script>
+    // 新增卡路里
+    function addcal() {
+      const calInput = document.getElementById("calInput");
+      const calValue = parseInt(calInput.value.trim()); // 將輸入轉為整數
+      if (isNaN(calValue)) return; // 檢查輸入是否為有效數字
+
+      const user = firebase.auth().currentUser;
+      if (user) {
+        const calDate = `${currentYear}-${currentMonth.toString().padStart(2, '0')}-${currentDay.toString().padStart(2, '0')}`;
+
+        const now = new Date();
+        const formattedTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+        firebase.firestore()
+          .collection("users")
+          .doc(user.uid)
+          .collection("Records")
+          .doc(calDate)
+          .collection("cal")
+          .doc(formattedTime)
+          .set({ cal: calValue }, { merge: true })
+          .then(() => {
+            console.log("卡路里資料已新增");
+            calInput.value = ""; // 清空輸入框
+            getcal(); // 新增後重新獲取卡路里資料
+          })
+          .catch((error) => {
+            console.error("新增卡路里資料時出錯:", error);
+          });
+      } else {
+        console.error("未登入用戶");
+      }
+    }
+
+    // 獲取卡路里資料
+    function getcal() {
+      const user = firebase.auth().currentUser;
+      if (user) {
+        const calDate = `${currentYear}-${currentMonth.toString().padStart(2, '0')}-${currentDay.toString().padStart(2, '0')}`;
+
+        firebase.firestore()
+          .collection("users")
+          .doc(user.uid)
+          .collection("Records")
+          .doc(calDate)
+          .collection("cal")
+          .get()
+          .then((snapshot) => {
+            const cal = [];
+
+            snapshot.forEach(doc => {
+              const time = doc.id;
+              const calData = doc.data();
+
+              if (calData.cal) {
+                cal.push({ time, cal: calData.cal });
+              }
+            });
+
+            if (Array.isArray(cal)) {
+              displaycal(currentYear, currentMonth, currentDay, cal);
+            } else {
+              console.error("卡路里資料不是陣列格式");
+              displaycal(currentYear, currentMonth, currentDay, []);
+            }
+          })
+          .catch((error) => {
+            console.error("獲取卡路里資料時出錯:", error);
+          });
+      } else {
+        console.error("使用者未登入");
+      }
+    }
+
+    // 顯示步數資料
+    function displaycal(year, month, day, cal) {
+      const calList = document.getElementById("calList");
+      calList.innerHTML = "";
+
+      if (!Array.isArray(cal)) {
+        console.error("預期卡路里資料為陣列");
+        return;
+      }
+
+      cal.forEach(({ time, cal }) => {
+        const calElement = document.createElement("div");
+        calElement.classList.add("cal");
+
+        const calTime = document.createElement("span");
+        calTime.textContent = time; // 顯示時間
+        calElement.appendChild(calTime);
+
+        const calText = document.createElement("span");
+        calText.textContent = `  ${cal} 大卡`; // 顯示卡路里
+        calElement.appendChild(calText);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "刪除";
+        deleteButton.classList.add("btn-del"); 
+        deleteButton.addEventListener("click", () => {
+          deletecal({ time, year, month, day });
+        });
+
+        calElement.appendChild(deleteButton);
+        calList.appendChild(calElement);
+      });
+    }
+
+    // 刪除步數資料
+    function deletecal({ time, year, month, day }) {
+      const user = firebase.auth().currentUser;
+      if (!user) {
+        console.error("使用者未登入");
+        return;
+      }
+
+      if (!time || !year || !month || !day) {
+        console.error("刪除資料所需的參數缺失:", { time, year, month, day });
+        return;
+      }
+
+      const calDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+      const calRef = firebase.firestore()
+        .collection("users")
+        .doc(user.uid)
+        .collection("Records")
+        .doc(calDate)
+        .collection("cal")
+        .doc(time);
+
+      calRef.get()
+        .then((doc) => {
+          if (doc.exists) {
+            calRef.delete()
+              .then(() => {
+                console.log("卡路里資料已刪除");
+                getcal(); // 刪除後重新獲取卡路里資料
+              })
+              .catch((error) => {
+                console.error("刪除卡路里資料時出錯:", error);
+              });
+          } else {
+            console.error("欲刪除的卡路里資料不存在");
+          }
+        })
+        .catch((error) => {
+          console.error("檢查卡路里資料是否存在時出錯:", error);
+        });
+    }
+    getcal(); 
   </script>
   <!---待辦事項JS
 辦辦辦辦辦辦辦辦辦辦辦辦辦辦辦辦辦辦辦辦辦
@@ -1332,8 +1519,12 @@
     // 初始化日曆
     generateCalendar(currentYear, currentMonth);
     updateHeader(currentYear, currentMonth, currentDate.getDate());
-    getTasks();
+    getTasks(); // 取得清單
     getWeights();
+    getWaters();
+    getSteps();
+    getRuns();
+    getcal();
   </script>
 
 
