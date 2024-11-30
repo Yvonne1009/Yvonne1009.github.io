@@ -22,6 +22,11 @@ let currentCategoryTexts = [];
 let speechSynthesisInstance;
 let isSpeechPaused = false;
 
+let stepCount = 0; // Variable to store step count
+let stepInterval; // Interval variable for step counter
+let distancePerStep = 0.7; // 每步的距離（公尺）
+let totalDistance = 0; // 總距離
+
 // 語音播放功能
 function speakText(text) {
   if ("speechSynthesis" in window) {
@@ -72,6 +77,7 @@ function startCountdown(index) {
   countdownInterval = setInterval(updateCountdown, 1000);
   playMusic();
   startImageRotation();
+  startStepCounter();
   speakText(currentCategoryTexts[currentImageIndex]);
 }
 
@@ -105,6 +111,7 @@ function pauseResumeCountdown() {
   if (!paused) {
     clearInterval(countdownInterval);
     clearInterval(imageRotationInterval);
+    clearInterval(stepInterval);
     stopMusic();
     window.speechSynthesis.pause();
     isSpeechPaused = true;
@@ -113,6 +120,7 @@ function pauseResumeCountdown() {
   } else {
     countdownEndTime = new Date().getTime() + remainingTime * 1000;
     countdownInterval = setInterval(updateCountdown, 1000);
+    startStepCounter(); 
     startImageRotation();
     if (isSpeechPaused) {
       window.speechSynthesis.resume();
@@ -139,6 +147,7 @@ function updateCountdown() {
       remainingTime = Math.ceil(distance / 1000);
     } else {
       clearInterval(countdownInterval);
+      clearInterval(stepInterval);
       document.getElementById("countdownTimer").innerHTML = "計時結束";
       stopMusic();
     }
@@ -158,6 +167,7 @@ function previousItem() {
   currentItemIndex = (currentItemIndex - 1 + items.length) % items.length;
   updateItem();
   clearInterval(countdownInterval);
+  clearInterval(stepInterval);
   paused = false;
   pauseResumeCountdown();
 }
@@ -167,6 +177,7 @@ function nextItem() {
   currentItemIndex = (currentItemIndex + 1) % items.length;
   updateItem();
   clearInterval(countdownInterval);
+  clearInterval(stepInterval);
   paused = false;
   pauseResumeCountdown();
 }
@@ -478,6 +489,18 @@ function updateNumberEveryMinute() {
     const numberElement = document.getElementById("numberElement"); // 获取用于显示卡路里数的元素
     numberElement.textContent = totalCaloriesBurned.toFixed(2); // 保留两位小数更新卡路里数
   }
+}
+
+// Start step counter
+function startStepCounter() {
+  stepInterval = setInterval(() => {
+    if (!paused) {
+      stepCount += 1; // Increase step count by 1 every second
+      totalDistance = stepCount * distancePerStep; // 計算總距離
+      document.getElementById("stepCounter").innerHTML = stepCount;
+      document.getElementById("distance").innerHTML = totalDistance.toFixed(1) + " 公尺"; // 更新顯示距離，保留兩位小數
+    }
+  }, 500); // Update every second
 }
 
 // 启动或恢复计时器

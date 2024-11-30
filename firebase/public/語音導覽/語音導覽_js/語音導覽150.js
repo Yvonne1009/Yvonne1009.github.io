@@ -10,53 +10,97 @@ var items = [
   "150BPM/60分鐘",
 ]; // 替換為您的選項
 
-let countdownInterval; // Interval variable for countdown
-let countdownEndTime; // Variable to store countdown end time
-let remainingTime; // Variable to store remaining time of countdown
-let paused = false; // Variable to track pause state
-let isFirstMinutePassed = false;
-var audio = new Audio("bpm/150bpm.mp3"); // 請替換為您的音樂檔案路徑
-let imageRotationInterval; // Interval variable for image rotation
-let currentImageIndex = 0; // Index of the current image being displayed
-let selectedImages = []; // Array to store the images of the selected category
+let countdownInterval;
+let countdownEndTime;
+let remainingTime;
+let paused = false;
+let audio = new Audio("bpm/150bpm.mp3"); // 替換為您的音樂檔案
+let imageRotationInterval;
+let currentImageIndex = 0;
+let currentCategoryImages = [];
+let currentCategoryTexts = [];
+let speechSynthesisInstance;
+let isSpeechPaused = false;
 
-// Start countdown
-function startCountdown(index) {
-  const minutes = [10, 15, 20, 30, 40, 50, 60]; // 對應到每個選項的分鐘數
-  const selectedMinutes = minutes[index];
-  countdownEndTime = new Date().getTime() + selectedMinutes * 60 * 1000; // Calculate end time
-  remainingTime = selectedMinutes * 60; // Calculate remaining time in seconds
-  updateCountdown(); // Update countdown immediately
-  countdownInterval = setInterval(updateCountdown, 1000); // Update countdown every second
+let stepCount = 0; // Variable to store step count
+let stepInterval; // Interval variable for step counter
+let distancePerStep = 0.7; // 每步的距離（公尺）
+let totalDistance = 0; // 總距離
 
-  // 撥放音樂
-  playPauseMusic();
-
-  if (!imageRotationInterval) {
-    startImageRotation(); // 启动图片轮播
+// 語音播放功能
+function speakText(text) {
+  if ("speechSynthesis" in window) {
+    if (speechSynthesisInstance) {
+      speechSynthesis.cancel(); // 取消當前的語音播放
+    }
+    speechSynthesisInstance = new SpeechSynthesisUtterance(text);
+    speechSynthesisInstance.lang = "zh-TW";
+    speechSynthesisInstance.onend = () => (isSpeechPaused = false);
+    window.speechSynthesis.speak(speechSynthesisInstance);
+  } else {
+    alert("您的瀏覽器不支援語音合成");
   }
+}
+function speakText(text) {
+  if ("speechSynthesis" in window) {
+    if (speechSynthesisInstance) {
+      speechSynthesis.cancel(); // 取消當前的語音播放
+    }
+    speechSynthesisInstance = new SpeechSynthesisUtterance(text);
+    speechSynthesisInstance.lang = "zh-TW";
+
+    // 當語音播放完成時切換到下一張圖片
+    speechSynthesisInstance.onend = () => {
+      currentImageIndex++;
+      if (currentImageIndex >= currentCategoryImages.length) {
+        currentImageIndex = 0; // 重頭播放
+      }
+      displayImage(currentCategoryImages[currentImageIndex]);
+      updateText(currentCategoryTexts[currentImageIndex]);
+      speakText(currentCategoryTexts[currentImageIndex]); // 播放下一句
+    };
+
+    window.speechSynthesis.speak(speechSynthesisInstance);
+  } else {
+    alert("您的瀏覽器不支援語音合成");
+  }
+}
+
+
+// 開始計時器和音樂、圖片輪播
+function startCountdown(index) {
+  const minutes = [10, 15, 20, 30, 40, 50, 60];
+  const selectedMinutes = minutes[index];
+  countdownEndTime = new Date().getTime() + selectedMinutes * 60 * 1000;
+  remainingTime = selectedMinutes * 60;
+  updateCountdown();
+  countdownInterval = setInterval(updateCountdown, 1000);
+  playMusic();
+  startImageRotation();
+  startStepCounter();
+  speakText(currentCategoryTexts[currentImageIndex]);
 }
 
 // Function to play or pause music based on countdown state
 function playPauseMusic() {
   const pauseIcon = document.getElementById("pauseIcon");
   if (!paused && countdownEndTime > Date.now()) {
-    playMusic(); // If not paused and countdown is running, play music
+    playMusic();
     pauseIcon.classList.remove("fa-play");
     pauseIcon.classList.add("fa-pause");
   } else {
-    stopMusic(); // If paused or countdown has ended, stop music
+    stopMusic();
     pauseIcon.classList.remove("fa-pause");
     pauseIcon.classList.add("fa-play");
   }
 }
 
-// Function to play music
+// 播放音樂
 function playMusic() {
   audio.play();
 }
 
-// Function to stop music
+// 停止音樂
 function stopMusic() {
   audio.pause();
 }
@@ -65,45 +109,50 @@ function stopMusic() {
 function pauseResumeCountdown() {
   const pauseIcon = document.getElementById("pauseIcon");
   if (!paused) {
-    clearInterval(countdownInterval); // Pause countdown if running
+    clearInterval(countdownInterval);
+    clearInterval(imageRotationInterval);
+    clearInterval(stepInterval);
+    stopMusic();
+    window.speechSynthesis.pause();
+    isSpeechPaused = true;
     pauseIcon.classList.remove("fa-pause");
     pauseIcon.classList.add("fa-play");
-    stopMusic(); // Pause music
   } else {
-    countdownEndTime = new Date().getTime() + remainingTime * 1000; // Update end time for resuming countdown
-    countdownInterval = setInterval(updateCountdown, 1000); // Restart countdown
+    countdownEndTime = new Date().getTime() + remainingTime * 1000;
+    countdownInterval = setInterval(updateCountdown, 1000);
+    startStepCounter(); 
+    startImageRotation();
+    if (isSpeechPaused) {
+      window.speechSynthesis.resume();
+    } else {
+      speakText(currentCategoryTexts[currentImageIndex]);
+    }
+    playMusic();
     pauseIcon.classList.remove("fa-play");
     pauseIcon.classList.add("fa-pause");
-    playMusic(); // Resume music
   }
-  paused = !paused; // Toggle pause state
-  playPauseMusic(); // Play or pause music
+  paused = !paused;
 }
 
-// Update countdown
+// 更新計時器顯示
 function updateCountdown() {
   if (!paused) {
-    const now = new Date().getTime(); // Get current time
-    const distance = countdownEndTime - now; // Calculate the remaining time
+    const now = new Date().getTime();
+    const distance = countdownEndTime - now;
     if (distance >= 0) {
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); // Calculate minutes
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000); // Calculate seconds
-
-      // Check if the first minute has passed
-      if (minutes >= 1 && !isFirstMinutePassed) {
-        isFirstMinutePassed = true;
-      }
-
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
       document.getElementById("countdownTimer").innerHTML =
-        minutes + " 分 " + seconds + " 秒"; // Display countdown
-      remainingTime = Math.ceil(distance / 1000); // Update remaining time
+        minutes + " 分 " + seconds + " 秒";
+      remainingTime = Math.ceil(distance / 1000);
     } else {
-      clearInterval(countdownInterval); // Clear interval when countdown is finished
-      document.getElementById("countdownTimer").innerHTML = "計時結束"; // Display message when countdown is finished
-      stopMusic(); // Stop music when countdown is finished
+      clearInterval(countdownInterval);
+      clearInterval(stepInterval);
+      document.getElementById("countdownTimer").innerHTML = "計時結束";
+      stopMusic();
     }
   } else {
-    stopMusic(); // Stop music when countdown is paused or when time is paused
+    stopMusic();
   }
 }
 
@@ -117,18 +166,43 @@ function updateItem() {
 function previousItem() {
   currentItemIndex = (currentItemIndex - 1 + items.length) % items.length;
   updateItem();
-  clearInterval(countdownInterval); // Clear interval when switching items
-  paused = false; // Reset pause state when switching items
-  pauseResumeCountdown(); // Pause or resume countdown to update remaining time
+  clearInterval(countdownInterval);
+  clearInterval(stepInterval);
+  paused = false;
+  pauseResumeCountdown();
 }
 
 // Move to next item
 function nextItem() {
   currentItemIndex = (currentItemIndex + 1) % items.length;
   updateItem();
-  clearInterval(countdownInterval); // Clear interval when switching items
-  paused = false; // Reset pause state when switching items
-  pauseResumeCountdown(); // Pause or resume countdown to update remaining time
+  clearInterval(countdownInterval);
+  clearInterval(stepInterval);
+  paused = false;
+  pauseResumeCountdown();
+}
+
+// Update text and trigger text-to-speech
+function updateText(text) {
+  var textBox = document.querySelector(".語音導覽120 p");
+  textBox.textContent = text;
+  speakText(text);
+}
+
+// 啟動圖片輪播
+function startImageRotation() {
+  currentImageIndex = 0; // 確保從第一張圖片開始
+  displayImage(currentCategoryImages[currentImageIndex]);
+  updateText(currentCategoryTexts[currentImageIndex]);
+  speakText(currentCategoryTexts[currentImageIndex]);
+}
+
+
+// 更新文字並播放語音
+function updateText(text) {
+  var textBox = document.querySelector(".語音導覽120 p");
+  textBox.textContent = text;
+  speakText(text);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -341,16 +415,17 @@ function showCategory(category) {
       "弗里德里希/Two Men Contemplating the Moon.jpg",
       "弗里德里希/Bohemian Landscape.jpg",
       "弗里德里希/Boats in the Harbour at Evening.jpg",
-      "弗里德里希/Evening.jpg",
-      "弗里德里希/Morning.jpg",
       "弗里德里希/Day.jpg",
       "弗里德里希/Landscape with rainbow.jpg",
       "弗里德里希/Landscape with Mountain Lake Morning.jpg",
-      "弗里德里希/Morning in the Mountains.jpg",
+      "弗里德里希/Morning.jpg",
       "弗里德里希/Hills and Ploughed Fields near Dresden.jpg",
       "弗里德里希/Landscape with Oak Trees and a Hunter.jpg",
       "弗里德里希/Rocky Reef on the Seashore.jpg",
       "弗里德里希/Solitary Tree.jpg",
+      "弗里德里希/Morning in the Mountains.jpg",
+      "弗里德里希/The Times Of Day：The Evening.jpg",
+      "弗里德里希/The Times of Day：The Morning.jpg",
     ];
     texts = [
       "《兩人凝望月亮》（Two Men Contemplating the Moon）弗裡德里希通過這幅畫，表現了人類對宇宙和未知的沉思，以及人與自然之間的深刻聯繫。\n這幅作品也傳達了一種對超越現世的精神追求。畫中兩個人站在岩石上，凝望著遠處的月亮。夜空寧靜，月光灑在大地上，營造出一種神秘而安寧的氛圍。",
@@ -368,7 +443,6 @@ function showCategory(category) {
       "《孤獨的樹》（Solitary Tree）這幅畫展示了一棵孤獨的樹，屹立在廣闊的田野中。天空中雲朵飄過，遠處是連綿的山脈。\n象徵了個體在宇宙中的孤獨和堅韌，樹的形象常被弗裡德里希用來表達生命的韌性和持久。",
     ];
   }
-
   currentCategoryImages = selectedImages;
   currentCategoryTexts = texts;
   currentImageIndex = 0;
@@ -388,6 +462,7 @@ function displayImage(imageSrc) {
   img.src = imageSrc;
 }
 
+
 function updateText(text) {
   var textBox = document.querySelector(".text-box p");
   textBox.textContent = text;
@@ -398,14 +473,6 @@ function startImageRotation() {
     clearInterval(imageRotationInterval);
   }
 
-  imageRotationInterval = setInterval(() => {
-    currentImageIndex++;
-    if (currentImageIndex >= currentCategoryImages.length) {
-      currentImageIndex = 0;
-    }
-    displayImage(currentCategoryImages[currentImageIndex]);
-    updateText(currentCategoryTexts[currentImageIndex]);
-  }, 20000); // 每20秒切換一次圖片
 }
 
 // 每分钟更新燃烧的卡路里数
@@ -422,6 +489,18 @@ function updateNumberEveryMinute() {
     const numberElement = document.getElementById("numberElement"); // 获取用于显示卡路里数的元素
     numberElement.textContent = totalCaloriesBurned.toFixed(2); // 保留两位小数更新卡路里数
   }
+}
+
+// Start step counter
+function startStepCounter() {
+  stepInterval = setInterval(() => {
+    if (!paused) {
+      stepCount += 1; // Increase step count by 1 every second
+      totalDistance = stepCount * distancePerStep; // 計算總距離
+      document.getElementById("stepCounter").innerHTML = stepCount;
+      document.getElementById("distance").innerHTML = totalDistance.toFixed(1) + " 公尺"; // 更新顯示距離，保留兩位小數
+    }
+  }, 400); // Update every second
 }
 
 // 启动或恢复计时器
@@ -466,16 +545,11 @@ function confirmWeight() {
   const confirmButton = document.getElementById("confirmButton");
   const weight = parseFloat(weightInput.value);
 
-  // 检查是否有效输入了体重
   if (!isNaN(weight) && weight > 0) {
-    // 禁用体重输入字段和确认按钮
     weightInput.disabled = true;
     confirmButton.disabled = true;
-
-    // 如果需要，在这里可以调用启动计时器函数
-    // startTimer();
   } else {
-    alert("請输入有效的體重！");
+    alert("請輸入有效的體重！");
   }
 }
 

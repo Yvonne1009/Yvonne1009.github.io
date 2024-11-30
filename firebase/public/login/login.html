@@ -16,18 +16,12 @@
       <input type="password" placeholder="Password..." id="password_field" />
       <a id="forget" href="./forget.html">忘記你的帳戶或密碼</a>
       <button onclick="login()">登入帳戶</button>
-      <div class="division-line">
-        <hr id="left-line" />
-        <span>OR</span>
-        <hr id="right-line" />
-        </div>
-      </div>
       <a href="register.html" id="create-account">尚未註冊？立即建立您的帳戶</a>
     </div>
 
     <div id="recaptcha-container"></div>
 
-    <div id="user_div" class="loggedin-div">
+    <div id="user_div" class="loggedin-div" style="display: none;">
       <h3>Welcome User</h3>
       <p id="user_para">
         Welcome to Firebase web login Example. You're currently logged in.
