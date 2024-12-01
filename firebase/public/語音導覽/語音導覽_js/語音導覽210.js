@@ -14,7 +14,7 @@ let countdownInterval;
 let countdownEndTime;
 let remainingTime;
 let paused = false;
-let audio = new Audio("bpm/210bpm.mp3"); // 替換為您的音樂檔案
+let audio = new Audio("bpm/210BPM.mp3"); // 替換為您的音樂檔案
 let imageRotationInterval;
 let currentImageIndex = 0;
 let currentCategoryImages = [];
@@ -106,6 +106,15 @@ function stopMusic() {
 }
 
 // Pause or resume countdown
+// 切換導覽列功能時停止語音
+function stopSpeechOnNavigation() {
+  if ("speechSynthesis" in window) {
+    speechSynthesis.cancel(); // 停止所有語音播放
+    isSpeechPaused = false; // 重置語音暫停狀態
+  }
+}
+
+// 暫停計時器並暫停語音播放
 function pauseResumeCountdown() {
   const pauseIcon = document.getElementById("pauseIcon");
   if (!paused) {
@@ -113,17 +122,19 @@ function pauseResumeCountdown() {
     clearInterval(imageRotationInterval);
     clearInterval(stepInterval);
     stopMusic();
-    window.speechSynthesis.pause();
+    if ("speechSynthesis" in window) {
+      speechSynthesis.pause(); // 暫停語音播放
+    }
     isSpeechPaused = true;
     pauseIcon.classList.remove("fa-pause");
     pauseIcon.classList.add("fa-play");
   } else {
     countdownEndTime = new Date().getTime() + remainingTime * 1000;
     countdownInterval = setInterval(updateCountdown, 1000);
-    startStepCounter(); 
+    startStepCounter();
     startImageRotation();
     if (isSpeechPaused) {
-      window.speechSynthesis.resume();
+      window.speechSynthesis.resume(); // 恢復語音播放
     } else {
       speakText(currentCategoryTexts[currentImageIndex]);
     }
@@ -133,6 +144,40 @@ function pauseResumeCountdown() {
   }
   paused = !paused;
 }
+
+// 添加事件監聽器到導覽列按鈕
+document.querySelectorAll(".nav-item").forEach((item) => {
+  item.addEventListener("click", stopSpeechOnNavigation);
+});
+
+// 停止計時器和語音播放（當需要時手動呼叫）
+function stopAll() {
+  clearInterval(countdownInterval);
+  clearInterval(stepInterval);
+  stopMusic();
+  if ("speechSynthesis" in window) {
+    speechSynthesis.cancel(); // 停止語音播放
+  }
+}
+function stopSpeechOnNavigation() {
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel(); // 停止所有語音播放
+    isSpeechPaused = false; // 重置語音暫停狀態
+  }
+}
+document.querySelectorAll(".nav-item").forEach((item) => {
+  item.addEventListener("click", () => {
+    stopSpeechOnNavigation(); // 切換頁面時停止語音
+  });
+});
+window.addEventListener("beforeunload", () => {
+  stopSpeechOnNavigation(); // 離開或刷新時停止語音
+});
+function navigateToPage(pageId) {
+  stopSpeechOnNavigation(); // 切換頁面前停止語音
+  // 其他切換頁面的邏輯...
+}
+
 
 // 更新計時器顯示
 function updateCountdown() {
@@ -500,7 +545,7 @@ function startStepCounter() {
       document.getElementById("stepCounter").innerHTML = stepCount;
       document.getElementById("distance").innerHTML = totalDistance.toFixed(1) + " 公尺"; // 更新顯示距離，保留兩位小數
     }
-  }, 285); // Update every second
+  }, 500); // Update every second
 }
 
 // 启动或恢复计时器
