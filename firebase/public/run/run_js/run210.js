@@ -30,29 +30,37 @@ let countdownEndTime; // Variable to store countdown end time
 let remainingTime; // Variable to store remaining time of countdown
 let paused = false; // Variable to track pause state
 let isFirstMinutePassed = false;
+var audio = new Audio("bpm/210bpm.mp3"); // 請替換為您的音樂檔案路徑
+let imageRotationInterval; // Interval variable for image rotation
+let currentImageIndex = 0; // Index of the current image being displayed
+let selectedImages = []; // Array to store the images of the selected category
+
+
 let stepCount = 0; // Variable to store step count
 let stepInterval; // Interval variable for step counter
 let distancePerStep = 0.7; // 每步的距離（公尺）
 let totalDistance = 0; // 總距離
+let isExerciseComplete = false; // 用來記錄運動是否已經完成
 
-var audio = new Audio("BPM/210bpm.mp3");
 
 // Start countdown
 function startCountdown(index) {
-  const minutes = [10, 15, 20, 30, 40, 50, 60]; // 對應到每個選項的分鐘數
+  const minutes = [1, 15, 20, 30, 40, 50, 60];
   const selectedMinutes = minutes[index];
-  countdownEndTime = new Date().getTime() + selectedMinutes * 60 * 1000; // Calculate end time
-  remainingTime = selectedMinutes * 60; // Calculate remaining time in seconds
-  updateCountdown(); // Update countdown immediately
-  countdownInterval = setInterval(updateCountdown, 1000); // Update countdown every second
-  startStepCounter();
 
-  // 撥放音樂
+  countdownEndTime = new Date().getTime() + selectedMinutes * 60 * 1000;
+  remainingTime = selectedMinutes * 60;
+  updateCountdown();
+  countdownInterval = setInterval(updateCountdown, 1000);
+  startStepCounter();
   playPauseMusic();
 
   if (!imageRotationInterval) {
-    startImageRotation(); // 語音導覽 // 启动图片轮播
+    startImageRotation();
   }
+
+  // 重設運動狀態
+  isExerciseComplete = false;
 }
 
 // Function to play or pause music based on countdown state
@@ -103,30 +111,40 @@ function pauseResumeCountdown() {
 // Update countdown
 function updateCountdown() {
   if (!paused) {
-    const now = new Date().getTime(); // Get current time
-    const distance = countdownEndTime - now; // Calculate the remaining time
-    if (distance >= 0) {
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); // Calculate minutes
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000); // Calculate seconds
+    const now = new Date().getTime();
+    const distance = countdownEndTime - now;
 
-      // Check if the first minute has passed
-      if (minutes >= 1 && !isFirstMinutePassed) {
-        isFirstMinutePassed = true;
-      }
+    if (distance >= 0) {
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       document.getElementById("countdownTimer").innerHTML =
-        minutes + " 分 " + seconds + " 秒"; // Display countdown
-      remainingTime = Math.ceil(distance / 1000); // Update remaining time
+        minutes + " 分 " + seconds + " 秒";
+
+      remainingTime = Math.ceil(distance / 1000);
     } else {
-      clearInterval(countdownInterval); // Clear interval when countdown is finished
+      clearInterval(countdownInterval);
       clearInterval(stepInterval);
-      document.getElementById("countdownTimer").innerHTML = "計時結束"; // Display message when countdown is finished
-      stopMusic(); // Stop music when countdown is finished
+      stopMusic();
+
+      if (imageRotationInterval) {
+        clearInterval(imageRotationInterval); // 停止圖片輪播
+      }
+
+      document.getElementById("countdownTimer").innerHTML = "計時結束";
+      
+      // 只在運動結束第一次顯示彈跳視窗
+      if (!isExerciseComplete) {
+        alert("恭喜！您已完成運動！");
+        saveDataToFirebase(); // 保存數據到 Firebase
+        isExerciseComplete = true; // 標記運動已完成
+      }
     }
   } else {
-    stopMusic(); // Stop music when countdown is paused or when time is paused
+    stopMusic();
   }
 }
+
 
 // Update item display
 function updateItem() {
@@ -153,6 +171,7 @@ function nextItem() {
   paused = false; // Reset pause state when switching items
   pauseResumeCountdown(); // Pause or resume countdown to update remaining time
 }
+
 /////////////////////////////////////////////////////////////////////////////////////////
 
 /*圖片背景按鈕*/
@@ -169,165 +188,206 @@ function toggleGallery() {
     // 顯示畫廊
     gallery.style.display = "block";
 
- // 建立類別按鈕
- var categories = [ "雷諾瓦","莫內", "畢卡索", "弗里德里希","何木火"];
- categories.forEach((category) => {
-   var button = document.createElement("button");
-   button.textContent = category;
-   button.addEventListener("click", function () {
-     showCategory(category);
-   });
-   gallery.appendChild(button);
- });
+    // 建立類別按鈕
+    var categories = ["雷諾瓦", "莫內",  "畢卡索", "弗里德里希","何木火"];
+    categories.forEach((category) => {
+      var button = document.createElement("button");
+      button.textContent = category;
+      button.addEventListener("click", function () {
+        showCategory(category);
+      });
+      gallery.appendChild(button);
+    });
 
- // 顯示類別選單
- categoryMenu.style.display = "block";
+    // 顯示類別選單
+    categoryMenu.style.display = "block";
 
- // 更新 isGalleryVisible
- isGalleryVisible = true;
-} else {
- // 隱藏圖庫和類別選單
- hideGallery();
-}
+    // 更新 isGalleryVisible
+    isGalleryVisible = true;
+  } else {
+    // 隱藏圖庫和類別選單
+    hideGallery();
+  }
 }
 
 // 背景參數
 function displayImage(imageSrc) {
-document.body.style.backgroundImage = 'url("' + imageSrc + '")';
-document.body.style.backgroundSize = "cover";
-document.body.style.backgroundPosition = "center 160px"; // 背景圖片向下移動
-document.body.style.backgroundRepeat = "no-repeat";
-hideGallery();
+  document.body.style.backgroundImage = 'url("' + imageSrc + '")';
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center 160px"; // 背景圖片向下移動
+  document.body.style.backgroundRepeat = "no-repeat";
+  hideGallery();
 }
 
 // 隐藏图片库和类别菜单
 function hideGallery() {
-var gallery = document.getElementById("imageGallery");
-var categoryMenu = document.getElementById("categoryMenu");
-gallery.style.display = "none";
-categoryMenu.style.display = "none";
-isGalleryVisible = false;
+  var gallery = document.getElementById("imageGallery");
+  var categoryMenu = document.getElementById("categoryMenu");
+  gallery.style.display = "none";
+  categoryMenu.style.display = "none";
+  if (imageRotationInterval) {
+    clearInterval(imageRotationInterval);
+  }
+  currentImageIndex = 0;
+
+  isGalleryVisible = false;
 }
 
 function showCategory(category) {
-var gallery = document.getElementById("imageGallery");
-gallery.innerHTML = "";
+  var gallery = document.getElementById("imageGallery");
+  gallery.innerHTML = "";
 
-var images = [];
-if (category === "雷諾瓦") {
- images = [
-  "雷諾瓦/Landscape near Pont Aven.jpg",
-  "雷諾瓦/Barges on the Seine.jpg",
-  "雷諾瓦/Field of Banana Trees.jpg",
-  "雷諾瓦/Forest Path.jpg",
-  "雷諾瓦/The Laundress.jpg",
-  "雷諾瓦/The Rose Garden at Wargemont.jpg",
-  "雷諾瓦/青蛙塘.jpg",
-  "雷諾瓦/Bouquets of Flowers.jpg",
-  "雷諾瓦/The Seine at Asnieres (The Skiff).jpg",
-  "雷諾瓦/Roses.jpg",
-  "雷諾瓦/House and Figure among the Trees.jpg",
-  "雷諾瓦/Vase Basket of Flowers and Fruit.jpg",
-]
-} else if (category === "莫內") {
- images = [  
-   "莫內/Jeanne-Marguerite Lecadre in the Garden.jpg",
-   "莫內/The Church at Varengeville and the Gorge of Les Moutiers.jpg",
-   "莫內/The Water-Lily Pond.jpg",
-   "莫內/Garden at Sainte-Adresse.jpg",
-   "莫內/Water Lilies, Evening Effect.jpg",
-   "莫內/Waterloo Bridge, Gray Weather.jpg",
-   "莫內/Windmills near Zaandam.jpg",
-   "莫內/The Chapel Notre-Dame de Grace at Honfleur.jpg",
-   "莫內/The Garden.jpg",
-   "莫內/The Boat Studio.jpg",
-   "莫內/Fruit Basket with Apples and Grapes.jpg",
-   "莫內/Anglers.jpg",
-   "莫內/In the Garden.jpg",
-   "莫內/The Luncheon.jpg",
-   "莫內/Chrysanthemums.jpg",
-   "莫內/A Farmyard in Normandy.jpg",
-   "莫內/The Bridge, Amsterdam.jpg",
-   "莫內/Impression Sunrise.jpg",
- ];
-} else if (category === "畢卡索") {
- images = [
-   "畢卡索/Square du Vert-Galant.jpg",
-   "畢卡索/Houses on the hill.jpg",
-   "畢卡索/Cafe Royan.jpg",
-   "畢卡索/格爾尼卡.jpg",
-   "畢卡索/Studio.jpg",
-   "畢卡索/Plaster head and arm.jpg",
-   "畢卡索/The sculptor.jpg",
-   "畢卡索/Fairground.jpg",
-   "畢卡索/Bathing.jpg",
-   "畢卡索/Harlequin family.jpg",
-   "畢卡索/The Kiss.jpg",
-   "畢卡索/Reclining Woman.jpg",
-   "畢卡索/Still life.jpg",
-   "畢卡索/Beach game and rescue.jpg",
- ];
-} else if (category === "弗里德里希") {
- images = [
-   "弗里德里希/Two Men Contemplating the Moon.jpg",
-   "弗里德里希/Bohemian Landscape.jpg",
-   "弗里德里希/Boats in the Harbour at Evening.jpg",
-   "弗里德里希/Day.jpg",
-   "弗里德里希/Landscape with rainbow.jpg",
-   "弗里德里希/Landscape with Mountain Lake Morning.jpg",
-   "弗里德里希/Hills and Ploughed Fields near Dresden.jpg",
-   "弗里德里希/Landscape with Oak Trees and a Hunter.jpg",
-   "弗里德里希/Rocky Reef on the Seashore.jpg",
-   "弗里德里希/Solitary Tree.jpg",
-   "弗里德里希/Morning in the Mountains.jpg",
-   "弗里德里希/The Times Of Day：The Evening.jpg",
-   "弗里德里希/The Times of Day：The Morning.jpg",
- ];
-} else if (category === "何木火") {
- images = [
-   "何木火/月世界之歌.jpg",
-   "何木火/月冷光寒.jpg",
-   "何木火/冰天雪地.png",
-   "何木火/金碧山水.jpg",
-   "何木火/紅塵夢.png",
-   "何木火/飛向高峰.jpg",
-   "何木火/高處不勝寒.png",
-   "何木火/野地清香.png",
-   "何木火/尋.png",
-   "何木火/絕塵.png",
-   "何木火/橫越沙塵.jpg",
-   "何木火/一葉知秋.jpg",
-   "何木火/人止關寫生.jpg",
- ];
+  var selectedImages = [];
+  var texts = [];
+
+  // Reset images and texts for the selected category
+
+  // 根据类别来选择对应的图片集
+  if (category === "何木火") {
+    selectedImages = [
+      "何木火/一葉知秋.jpg",
+      "何木火/人止關寫生.jpg",
+      "何木火/月世界之歌.jpg",
+      "何木火/月冷光寒.jpg",
+      "何木火/冰天雪地.png",
+      "何木火/金碧山水.jpg",
+      "何木火/紅塵夢.png",
+      "何木火/飛向高峰.jpg",
+      "何木火/高處不勝寒.png",
+      "何木火/野地清香.png",
+      "何木火/尋.png",
+      "何木火/絕塵.png",
+      "何木火/橫越沙塵.jpg",
+    ];
+   
+  } else if (category === "莫內") {
+    selectedImages = [
+      "莫內/Impression Sunrise.jpg",
+      "莫內/Jeanne-Marguerite Lecadre in the Garden.jpg",
+      "莫內/A Farmyard in Normandy.jpg",
+      "莫內/The Bridge, Amsterdam.jpg",
+      "莫內/The Church at Varengeville and the Gorge of Les Moutiers.jpg",
+      "莫內/The Water-Lily Pond.jpg",
+      "莫內/Garden at Sainte-Adresse.jpg",
+      "莫內/Water Lilies, Evening Effect.jpg",
+      "莫內/Waterloo Bridge, Gray Weather.jpg",
+      "莫內/Windmills near Zaandam.jpg",
+      "莫內/The Chapel Notre-Dame de Grace at Honfleur.jpg",
+      "莫內/The Garden.jpg",
+      "莫內/The Boat Studio.jpg",
+      "莫內/Fruit Basket with Apples and Grapes.jpg",
+      "莫內/Anglers.jpg",
+      "莫內/In the Garden.jpg",
+      "莫內/The Luncheon.jpg",
+      "莫內/Chrysanthemums.jpg",
+    ];
+
+  } else if (category === "雷諾瓦") {
+    selectedImages = [
+      "雷諾瓦/Barges on the Seine.jpg",
+      "雷諾瓦/Field of Banana Trees.jpg",
+      "雷諾瓦/Forest Path.jpg",
+      "雷諾瓦/Landscape near Pont Aven.jpg",
+      "雷諾瓦/The Laundress.jpg",
+      "雷諾瓦/The Rose Garden at Wargemont.jpg",
+      "雷諾瓦/青蛙塘.jpg",
+      "雷諾瓦/Bouquets of Flowers.jpg",
+      "雷諾瓦/The Seine at Asnieres (The Skiff).jpg",
+      "雷諾瓦/Roses.jpg",
+      "雷諾瓦/House and Figure among the Trees.jpg",
+      "雷諾瓦/Vase Basket of Flowers and Fruit.jpg",
+    ];
+
+  } else if (category === "畢卡索") {
+    selectedImages = [
+      "畢卡索/Houses on the hill.jpg",
+      "畢卡索/Cafe Royan.jpg",
+      "畢卡索/格爾尼卡.jpg",
+      "畢卡索/Square du Vert-Galant.jpg",
+      "畢卡索/Studio.jpg",
+      "畢卡索/Plaster head and arm.jpg",
+      "畢卡索/The sculptor.jpg",
+      "畢卡索/Fairground.jpg",
+      "畢卡索/Bathing.jpg",
+      "畢卡索/Harlequin family.jpg",
+      "畢卡索/The Kiss.jpg",
+      "畢卡索/Reclining Woman.jpg",
+      "畢卡索/Still life.jpg",
+      "畢卡索/Beach game and rescue.jpg",
+    ];
+  
+  } else if (category === "弗里德里希") {
+    selectedImages = [
+      "弗里德里希/Two Men Contemplating the Moon.jpg",
+      "弗里德里希/Bohemian Landscape.jpg",
+      "弗里德里希/Boats in the Harbour at Evening.jpg",
+      "弗里德里希/Day.jpg",
+      "弗里德里希/Landscape with rainbow.jpg",
+      "弗里德里希/Landscape with Mountain Lake Morning.jpg",
+      "弗里德里希/Morning.jpg",
+      "弗里德里希/Hills and Ploughed Fields near Dresden.jpg",
+      "弗里德里希/Landscape with Oak Trees and a Hunter.jpg",
+      "弗里德里希/Rocky Reef on the Seashore.jpg",
+      "弗里德里希/Solitary Tree.jpg",
+      "弗里德里希/Morning in the Mountains.jpg",
+      "弗里德里希/The Times Of Day：The Evening.jpg",
+      "弗里德里希/The Times of Day：The Morning.jpg",
+    ];
+
+  }
+
+  currentCategoryImages = selectedImages;
+  currentCategoryTexts = texts;
+  currentImageIndex = 0;
+
+  startImageRotation();
+
+  displayImage(selectedImages[currentImageIndex]);
+  updateText(texts[currentImageIndex]);
 }
 
-  images.forEach((img) => {
-    const button = document.createElement("button");
-    const image = document.createElement("img");
-    image.src = img;
-    image.style.width = "100px";
-    image.style.height = "100px";
-
-    button.addEventListener("click", function () {
-      displayImage(img);
-    });
-    button.appendChild(image);
-    gallery.appendChild(button);
-  });
+function displayImage(imageSrc) {
+  document.body.style.backgroundImage = 'url("' + imageSrc + '")';
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center 160px"; // 背景圖片向下移動
+  document.body.style.backgroundRepeat = "no-repeat";
+  var img = document.createElement("img");
+  img.src = imageSrc;
 }
 
-let isTimerRunning = true; // 标志变量，用于跟踪定时器是否正在运行
-let totalCaloriesBurned = 0; // 变量，用于跟踪总卡路里燃烧量
+function updateText(text) {
+  var textBox = document.querySelector(".text-box p");
+  textBox.textContent = text;
+}
+
+function startImageRotation() {
+  if (imageRotationInterval) {
+    clearInterval(imageRotationInterval);
+  }
+
+  imageRotationInterval = setInterval(() => {
+    currentImageIndex++;
+    if (currentImageIndex >= currentCategoryImages.length) {
+      currentImageIndex = 0;
+    }
+    displayImage(currentCategoryImages[currentImageIndex]);
+    updateText(currentCategoryTexts[currentImageIndex]);
+  }, 8000); // 每5秒切換一次圖片
+}
 
 // 每分钟更新燃烧的卡路里数
+let totalCaloriesBurned = 0;
+let isTimerRunning = false;
+
 function updateNumberEveryMinute() {
   if (isTimerRunning) {
     const weight = parseFloat(document.getElementById("weight").value); // 获取体重输入值
+
     const exerciseTime = 1; // 因为这个函数每分钟被调用一次，所以默认是运动了一分钟
     const calories = (6 * exerciseTime * weight) / 60; // 计算每分钟燃烧的卡路里数
     totalCaloriesBurned += calories; // 将本分钟燃烧的卡路里数添加到总数中
     const numberElement = document.getElementById("numberElement"); // 获取用于显示卡路里数的元素
-    numberElement.textContent = totalCaloriesBurned.toFixed(1); // 保留两位小数更新卡路里数
+    numberElement.textContent = totalCaloriesBurned.toFixed(2); // 保留两位小数更新卡路里数
   }
 }
 
@@ -342,7 +402,6 @@ function startStepCounter() {
     }
   }, 285); // Update every second
 }
-
 
 // 启动或恢复计时器
 function startTimer() {
@@ -365,7 +424,7 @@ startTimer();
 setTimeout(() => {
   pauseTimer();
   clearInterval(timerInterval); // 停止更新卡路里
-}, 30 * 60000); // 5分钟的毫秒数
+}, 30 * 60000); // 30分钟的毫秒数
 
 // 在 window 加载时运行的函数
 window.onload = function () {
@@ -417,3 +476,95 @@ window.onclick = function (event) {
     }
   }
 };
+
+// Function to save data to Firebase
+function saveDataToFirebase() {
+  auth.onAuthStateChanged(function (user) {
+    if (user) {
+      const userUID = user.uid;
+
+      // 獲取當前日期和時間
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const dd = String(now.getDate()).padStart(2, "0");
+      const hh = String(now.getHours()).padStart(2, "0");
+      const min = String(now.getMinutes()).padStart(2, "0");
+      const ss = String(now.getSeconds()).padStart(2, "0");
+
+      const dateStr = `${yyyy}-${mm}-${dd}`; // 日期 YYYY-MM-DD
+      const timeStr = `${hh}:${min}:${ss}`; // 時間 hh-mm-ss
+
+      // 保存數據到 `Records/YYYY-MM-DD/(步數、距離、大卡、時間)/時間`
+      db.collection("users")
+        .doc(userUID)
+        .collection("Records")
+        .doc(dateStr)
+        .collection("step")
+        .doc(timeStr)
+        .set({
+          value: Math.round(stepCount * 100) / 100, // 保留小數點後兩位
+          timestamp: firebase.firestore.Timestamp.now(),
+        })
+        .then(() => {
+          console.log("步數保存成功");
+        })
+        .catch((error) => {
+          console.error("保存步數時出現錯誤:", error);
+        });
+
+      db.collection("users")
+        .doc(userUID)
+        .collection("Records")
+        .doc(dateStr)
+        .collection("Distance")
+        .doc(timeStr)
+        .set({
+          value: Math.round(totalDistance * 100) / 100, // 保留小數點後兩位
+          timestamp: firebase.firestore.Timestamp.now(),
+        })
+        .then(() => {
+          console.log("距離保存成功");
+        })
+        .catch((error) => {
+          console.error("保存距離時出現錯誤:", error);
+        });
+
+      db.collection("users")
+        .doc(userUID)
+        .collection("Records")
+        .doc(dateStr)
+        .collection("cal")
+        .doc(timeStr)
+        .set({
+          value: Math.round(totalCaloriesBurned * 100) / 100, // 保留小數點後兩位
+          timestamp: firebase.firestore.Timestamp.now(),
+        })
+        .then(() => {
+          console.log("大卡保存成功");
+        })
+        .catch((error) => {
+          console.error("保存大卡時出現錯誤:", error);
+        });
+
+      db.collection("users")
+        .doc(userUID)
+        .collection("Records")
+        .doc(dateStr)
+        .collection("run")
+        .doc(timeStr)
+        .set({
+          value: Math.round(remainingTime * 100) / 100, // 保留小數點後兩位
+          timestamp: firebase.firestore.Timestamp.now(),
+        })
+        .then(() => {
+          console.log("時間保存成功");
+        })
+        .catch((error) => {
+          console.error("保存時間時出現錯誤:", error);
+        });
+    } else {
+      console.error("用戶未登錄");
+    }
+  });
+}
