@@ -30,7 +30,7 @@ let countdownEndTime; // Variable to store countdown end time
 let remainingTime; // Variable to store remaining time of countdown
 let paused = false; // Variable to track pause state
 let isFirstMinutePassed = false;
-var audio = new Audio("bpm/180bpm.mp3"); // 請替換為您的音樂檔案路徑
+var audio = new Audio("BPM/180bpm.mp3"); // 請替換為您的音樂檔案路徑
 let imageRotationInterval; // Interval variable for image rotation
 let currentImageIndex = 0; // Index of the current image being displayed
 let selectedImages = []; // Array to store the images of the selected category
