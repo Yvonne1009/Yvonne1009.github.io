@@ -14,7 +14,7 @@ let countdownInterval;
 let countdownEndTime;
 let remainingTime;
 let paused = false;
-let audio = new Audio("bpm/240BPM.mp3"); // 替換為您的音樂檔案
+let audio = new Audio("BPM/240bpm.mp3"); // 替換為您的音樂檔案
 let imageRotationInterval;
 let currentImageIndex = 0;
 let currentCategoryImages = [];
@@ -65,7 +65,6 @@ function speakText(text) {
     alert("您的瀏覽器不支援語音合成");
   }
 }
-
 
 // 開始計時器和音樂、圖片輪播
 function startCountdown(index) {
@@ -178,7 +177,6 @@ function navigateToPage(pageId) {
   // 其他切換頁面的邏輯...
 }
 
-
 // 更新計時器顯示
 function updateCountdown() {
   if (!paused) {
@@ -241,7 +239,6 @@ function startImageRotation() {
   updateText(currentCategoryTexts[currentImageIndex]);
   speakText(currentCategoryTexts[currentImageIndex]);
 }
-
 
 // 更新文字並播放語音
 function updateText(text) {
@@ -507,7 +504,6 @@ function displayImage(imageSrc) {
   img.src = imageSrc;
 }
 
-
 function updateText(text) {
   var textBox = document.querySelector(".text-box p");
   textBox.textContent = text;
@@ -517,7 +513,6 @@ function startImageRotation() {
   if (imageRotationInterval) {
     clearInterval(imageRotationInterval);
   }
-
 }
 
 // 每分钟更新燃烧的卡路里数
@@ -543,7 +538,8 @@ function startStepCounter() {
       stepCount += 1; // Increase step count by 1 every second
       totalDistance = stepCount * distancePerStep; // 計算總距離
       document.getElementById("stepCounter").innerHTML = stepCount;
-      document.getElementById("distance").innerHTML = totalDistance.toFixed(1) + " 公尺"; // 更新顯示距離，保留兩位小數
+      document.getElementById("distance").innerHTML =
+        totalDistance.toFixed(1) + " 公尺"; // 更新顯示距離，保留兩位小數
     }
   }, 500); // Update every second
 }
