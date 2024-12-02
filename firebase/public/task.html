@@ -1351,7 +1351,7 @@
   <script>
     function addTask() {
       const taskText = document.getElementById("taskInput").value.trim();
-      if (taskText === "") return; // 如果任務文本為空則返回
+      if (taskText === "") return; // 如果紀錄文本為空則返回
 
       const user = firebase.auth().currentUser; // 獲取當前用戶
       if (user) {
@@ -1365,22 +1365,22 @@
         const seconds = String(now.getSeconds()).padStart(2, '0');
         const formattedTime = `${hours}:${minutes}:${seconds}`; // 格式化為 hh:mm:ss
 
-        // 在特定日期的文檔的 Tasks 子集合中添加任務
+        // 在特定日期的文檔的 Tasks 子集合中添加紀錄
         firebase.firestore()
           .collection("users")
           .doc(user.uid)
           .collection("Records")
           .doc(taskDate) // 以日期作為文檔
           .collection("Tasks") // 子集合名為 Tasks
-          .doc(formattedTime) // 使用 hh:mm:ss 作為文檔 ID，這樣每個任務會有唯一ID
+          .doc(formattedTime) // 使用 hh:mm:ss 作為文檔 ID，這樣每個紀錄會有唯一ID
           .set({ task: taskText }, { merge: true }) // 使用 task 作為欄位名稱
           .then(() => {
-            console.log("任務已新增");
+            console.log("紀錄已新增");
             document.getElementById("taskInput").value = ""; // 清空輸入框
-            getTasks(); // 新增後重新獲取任務
+            getTasks(); // 新增後重新獲取紀錄
           })
           .catch((error) => {
-            console.error("新增任務時出錯:", error); // 捕捉錯誤
+            console.error("新增紀錄時出錯:", error); // 捕捉錯誤
           });
       } else {
         console.error("未找到登入使用者"); // 未登錄的提示
@@ -1394,7 +1394,7 @@
       if (user) {
         const taskDate = `${currentYear}-${currentMonth.toString().padStart(2, '0')}-${currentDay.toString().padStart(2, '0')}`;
 
-        // 獲取特定日期的任務（直接從日期文檔中獲取）
+        // 獲取特定日期的紀錄（直接從日期文檔中獲取）
         db.collection("users")
           .doc(user.uid)
           .collection("Records")
@@ -1402,7 +1402,7 @@
           .collection("Tasks") // 子集合名為 Tasks
           .get() // 获取该子集合中的所有文档
           .then((snapshot) => {
-            const tasks = []; // 儲存所有任務的陣列
+            const tasks = []; // 儲存所有紀錄的陣列
 
             // 遍历快照中的每个文档
             snapshot.forEach(doc => {
@@ -1417,14 +1417,14 @@
 
             // 确保 tasks 是数组，且在此处不會報錯
             if (Array.isArray(tasks)) {
-              displayTasks(currentYear, currentMonth, currentDay, tasks); // 顯示任務
+              displayTasks(currentYear, currentMonth, currentDay, tasks); // 顯示紀錄
             } else {
-              console.error("獲取的任務不是陣列");
+              console.error("獲取的紀錄不是陣列");
               displayTasks(currentYear, currentMonth, currentDay, []);
             }
           })
           .catch((error) => {
-            console.error("獲取任務時出錯:", error);
+            console.error("獲取紀錄時出錯:", error);
           });
       } else {
         console.error("未找到登入使用者");
@@ -1432,7 +1432,7 @@
     }
 
 
-    //函數：顯示任務列表  
+    //函數：顯示紀錄列表  
     function displayTasks(year, month, day, tasks) {
       const taskList = document.getElementById("taskList");
       taskList.innerHTML = ""; // 清空当前任务列表
@@ -1478,7 +1478,7 @@
     function deleteTask({ time, year, month, day }) {
       const user = firebase.auth().currentUser;
       if (!user) {
-        console.error("未登入用戶，無法刪除任務");
+        console.error("未登入用戶，無法刪除紀錄");
         return;
       }
 
@@ -1499,18 +1499,18 @@
             // 如果任务存在，删除它
             taskRef.delete()
               .then(() => {
-                console.log("任務已刪除");
-                getTasks(); // 刪除後重新獲取任務
+                console.log("紀錄已刪除");
+                getTasks(); // 刪除後重新獲取紀錄
               })
               .catch((error) => {
-                console.error("刪除任務時出錯:", error);
+                console.error("刪除紀錄時出錯:", error);
               });
           } else {
-            console.error("要刪除的任務不存在");
+            console.error("要刪除的紀錄不存在");
           }
         })
         .catch((error) => {
-          console.error("檢查任務是否存在時出錯:", error);
+          console.error("檢查紀錄是否存在時出錯:", error);
         });
     }
 
@@ -1575,7 +1575,7 @@
               <ul class="mt-15">
                 <li><a href="./run/run180.html">超慢跑</a></li>
                 <li><a href="analyze.html">分析</a></li>
-                <li><a href="task.html">任務</a></li>
+                <li><a href="task.html">紀錄</a></li>
               </ul>
             </div>
           </div>
