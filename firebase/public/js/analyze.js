@@ -219,14 +219,11 @@ function fetchRunData(userId, days, selectedYear, selectedMonth) {
                 .collection("run");
             promises.push(
                 recordRef.get().then((querySnapshot) => {
-                    let dailyRun = 0;
-                    let dailyCount = 0;
+                    let dailyrun = 0;
                     querySnapshot.forEach((doc) => {
-                        dailyRun += doc.data().run;
-                        dailyCount++;
+                        dailyrun += doc.data().run;
                     });
-                    let avgDailyRun = dailyCount > 0 ? dailyRun / dailyCount : 0;
-                    data.push(avgDailyRun);
+                    data.push(dailyrun);
                     labels.push(dateString);
                 })
             );
@@ -249,14 +246,11 @@ function fetchRunData(userId, days, selectedYear, selectedMonth) {
                 .collection("run");
             promises.push(
                 recordRef.get().then((querySnapshot) => {
-                    let dailyRun = 0;
-                    let dailyCount = 0;
+                    let dailyrun = 0;
                     querySnapshot.forEach((doc) => {
-                        dailyRun += doc.data().run;
-                        dailyCount++;
+                        dailyrun += doc.data().run;
                     });
-                    let avgDailyRun = dailyCount > 0 ? dailyRun / dailyCount : 0;
-                    data.push(avgDailyRun);
+                    data.push(dailyrun);
                     labels.push(dateString);
                 })
             );
@@ -265,6 +259,7 @@ function fetchRunData(userId, days, selectedYear, selectedMonth) {
 
     return Promise.all(promises).then(() => ({ labels, data }));
 }
+
 
 //喝喝喝喝喝喝喝喝喝喝喝喝喝喝喝喝喝喝喝喝喝喝
 //喝喝喝喝喝喝喝喝喝喝　　　喝喝喝喝喝喝喝喝喝
@@ -347,13 +342,10 @@ function fetchWaterData(userId, days, selectedYear, selectedMonth) {
             promises.push(
                 recordRef.get().then((querySnapshot) => {
                     let dailyWater = 0;
-                    let dailyCount = 0;
                     querySnapshot.forEach((doc) => {
                         dailyWater += doc.data().water;
-                        dailyCount++;
                     });
-                    let avgDailyWater = dailyCount > 0 ? dailyWater / dailyCount : 0;
-                    data.push(avgDailyWater);
+                    data.push(dailyWater);
                     labels.push(dateString);
                 })
             );
@@ -377,13 +369,10 @@ function fetchWaterData(userId, days, selectedYear, selectedMonth) {
             promises.push(
                 recordRef.get().then((querySnapshot) => {
                     let dailyWater = 0;
-                    let dailyCount = 0;
                     querySnapshot.forEach((doc) => {
                         dailyWater += doc.data().water;
-                        dailyCount++;
                     });
-                    let avgDailyWater = dailyCount > 0 ? dailyWater / dailyCount : 0;
-                    data.push(avgDailyWater);
+                    data.push(dailyWater);
                     labels.push(dateString);
                 })
             );
@@ -392,6 +381,7 @@ function fetchWaterData(userId, days, selectedYear, selectedMonth) {
 
     return Promise.all(promises).then(() => ({ labels, data }));
 }
+
 
 //路路路路路路路路路路路路路路路路路路路路路
 //路路路路路路路路　　　　路路路路路路路路路
@@ -473,13 +463,10 @@ function fetchCalorieData(userId, days, selectedYear, selectedMonth) {
             promises.push(
                 recordRef.get().then((querySnapshot) => {
                     let dailyCal = 0;
-                    let dailyCount = 0;
                     querySnapshot.forEach((doc) => {
                         dailyCal += doc.data().cal;
-                        dailyCount++;
                     });
-                    let avgDailyCal = dailyCount > 0 ? dailyCal / dailyCount : 0;
-                    data.push(avgDailyCal);
+                    data.push(dailyCal);
                     labels.push(dateString);
                 })
             );
@@ -503,13 +490,10 @@ function fetchCalorieData(userId, days, selectedYear, selectedMonth) {
             promises.push(
                 recordRef.get().then((querySnapshot) => {
                     let dailyCal = 0;
-                    let dailyCount = 0;
                     querySnapshot.forEach((doc) => {
                         dailyCal += doc.data().cal;
-                        dailyCount++;
                     });
-                    let avgDailyCal = dailyCount > 0 ? dailyCal / dailyCount : 0;
-                    data.push(avgDailyCal);
+                    data.push(dailyCal);
                     labels.push(dateString);
                 })
             );
