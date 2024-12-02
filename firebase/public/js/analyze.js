@@ -123,7 +123,7 @@ const weightChart = new Chart(weightCtx, {
 //動　　　　動　　　　　　　　　　　　　　　動
 //動動　　動動動動動動動　　　　　　　　　　動
 //動動動動動動動動動動動動動動動動動動動動動動-->
-// 初始化跑步時間圖表
+
 // 初始化跑步時間圖表
 const runCtx = document.getElementById('runChart').getContext('2d');
 const runChart = new Chart(runCtx, {
@@ -283,23 +283,53 @@ function fetchWaterData(userId, days, selectedYear, selectedMonth) {
     const data = [];
     const promises = [];
 
-    if (days === 7 || days === 30) {
+    if (days === 7) {
+        // 一週：逐天查詢
         for (let i = 0; i < days; i++) {
             const date = new Date(selectedYear, selectedMonth, new Date().getDate() - i);
             const dateString = date.toISOString().slice(5, 10); // 僅顯示 MM-DD
             const recordRef = db.collection("users").doc(userId)
                 .collection("Records").doc(date.toISOString().split('T')[0])
                 .collection("water");
-
             promises.push(
                 recordRef.get().then((querySnapshot) => {
-                    let dailyWaterTotal = 0;
+                    let water = null;
                     querySnapshot.forEach((doc) => {
-                        dailyWaterTotal += doc.data().water || 0; // 累加當天所有 `water` 數據
+                        water = doc.data().water; // 假設欄位名稱是 `run`
                     });
-                    
                     labels.unshift(dateString);
-                    data.unshift(dailyWaterTotal); // 儲存當天的總喝水量
+                    data.unshift(water);
+                })
+            );
+        }
+    } else if (days === 30) {
+        // 一個月：逐日查詢
+        const monthStartDate = new Date(selectedYear, selectedMonth, 1);
+        const dailywaters = [];
+
+        for (let day = 0; day < 30; day++) {
+            const date = new Date(monthStartDate);
+            date.setDate(date.getDate() + day);
+            const dateString = date.toISOString().slice(5, 10); // 僅顯示 MM-DD
+            const recordRef = db.collection("users").doc(userId)
+                .collection("Records").doc(date.toISOString().split('T')[0])
+                .collection("water");
+            promises.push(
+                recordRef.get().then((querySnapshot) => {
+                    let dailywater = 0;
+                    let dailyCount = 0;
+                    querySnapshot.forEach((doc) => {
+                        dailywater += doc.data().water;
+                        dailyCount++;
+                    });
+                    if (dailyCount > 0) {
+                        const avgDailywater = dailywater / dailyCount;
+                        dailywaters.push(avgDailywater);
+                        data.push(avgDailywater);
+                    } else {
+                        data.push(0);
+                    }
+                    labels.push(dateString);
                 })
             );
         }
@@ -369,23 +399,53 @@ function fetchCalorieData(userId, days, selectedYear, selectedMonth) {
     const data = [];
     const promises = [];
 
-    if (days === 7 || days === 30) {
+    if (days === 7) {
+        // 一週：逐天查詢
         for (let i = 0; i < days; i++) {
             const date = new Date(selectedYear, selectedMonth, new Date().getDate() - i);
             const dateString = date.toISOString().slice(5, 10); // 僅顯示 MM-DD
             const recordRef = db.collection("users").doc(userId)
                 .collection("Records").doc(date.toISOString().split('T')[0])
-                .collection("cal");
-
+                .collection("water");
             promises.push(
                 recordRef.get().then((querySnapshot) => {
-                    let dailyCalorieTotal = 0;
+                    let water = null;
                     querySnapshot.forEach((doc) => {
-                        dailyCalorieTotal += doc.data().cal || 0; // 累加當天所有 `calories` 數據
+                        water = doc.data().water; // 假設欄位名稱是 `run`
                     });
-                    
                     labels.unshift(dateString);
-                    data.unshift(dailyCalorieTotal); // 儲存當天的總卡路里
+                    data.unshift(water);
+                })
+            );
+        }
+    } else if (days === 30) {
+        // 一個月：逐日查詢
+        const monthStartDate = new Date(selectedYear, selectedMonth, 1);
+        const dailycals = [];
+
+        for (let day = 0; day < 30; day++) {
+            const date = new Date(monthStartDate);
+            date.setDate(date.getDate() + day);
+            const dateString = date.toISOString().slice(5, 10); // 僅顯示 MM-DD
+            const recordRef = db.collection("users").doc(userId)
+                .collection("Records").doc(date.toISOString().split('T')[0])
+                .collection("cal");
+            promises.push(
+                recordRef.get().then((querySnapshot) => {
+                    let dailycal = 0;
+                    let dailyCount = 0;
+                    querySnapshot.forEach((doc) => {
+                        dailycal += doc.data().cal;
+                        dailyCount++;
+                    });
+                    if (dailyCount > 0) {
+                        const avgDailycal = dailycal / dailyCount;
+                        dailycals.push(avgDailycal);
+                        data.push(avgDailycal);
+                    } else {
+                        data.push(0);
+                    }
+                    labels.push(dateString);
                 })
             );
         }
