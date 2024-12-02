@@ -14,7 +14,7 @@ let countdownInterval;
 let countdownEndTime;
 let remainingTime;
 let paused = false;
-let audio = new Audio("BPM/120bpm.mp3"); // 替換為您的音樂檔案
+let audio = new Audio("bpm/150BPM.mp3"); // 替換為您的音樂檔案
 let imageRotationInterval;
 let currentImageIndex = 0;
 let currentCategoryImages = [];
@@ -26,6 +26,7 @@ let stepCount = 0; // Variable to store step count
 let stepInterval; // Interval variable for step counter
 let distancePerStep = 0.7; // 每步的距離（公尺）
 let totalDistance = 0; // 總距離
+let isExerciseComplete = false; // 用來記錄運動是否已經完成
 
 // 語音播放功能
 function speakText(text) {
@@ -65,6 +66,7 @@ function speakText(text) {
     alert("您的瀏覽器不支援語音合成");
   }
 }
+
 
 // 開始計時器和音樂、圖片輪播
 function startCountdown(index) {
@@ -177,22 +179,38 @@ function navigateToPage(pageId) {
   // 其他切換頁面的邏輯...
 }
 
+
 // 更新計時器顯示
 function updateCountdown() {
   if (!paused) {
     const now = new Date().getTime();
     const distance = countdownEndTime - now;
+
     if (distance >= 0) {
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
       document.getElementById("countdownTimer").innerHTML =
         minutes + " 分 " + seconds + " 秒";
+
       remainingTime = Math.ceil(distance / 1000);
     } else {
       clearInterval(countdownInterval);
       clearInterval(stepInterval);
-      document.getElementById("countdownTimer").innerHTML = "計時結束";
       stopMusic();
+
+      if (imageRotationInterval) {
+        clearInterval(imageRotationInterval); // 停止圖片輪播
+      }
+
+      document.getElementById("countdownTimer").innerHTML = "計時結束";
+      stopAll();
+      saveDataToFirebase(); // 保存數據到 Firebase
+      // 只在運動結束第一次顯示彈跳視窗
+      if (!isExerciseComplete) {
+        alert("恭喜！您已完成運動！");
+        isExerciseComplete = true; // 標記運動已完成
+      }
     }
   } else {
     stopMusic();
@@ -232,13 +250,7 @@ function updateText(text) {
   speakText(text);
 }
 
-// 啟動圖片輪播
-function startImageRotation() {
-  currentImageIndex = 0; // 確保從第一張圖片開始
-  displayImage(currentCategoryImages[currentImageIndex]);
-  updateText(currentCategoryTexts[currentImageIndex]);
-  speakText(currentCategoryTexts[currentImageIndex]);
-}
+
 
 // 更新文字並播放語音
 function updateText(text) {
@@ -285,7 +297,7 @@ function toggleGallery() {
   }
 }
 
-// 背景參數
+// 顯示圖片函式
 function displayImage(imageSrc) {
   document.body.style.backgroundImage = 'url("' + imageSrc + '")';
   document.body.style.backgroundSize = "cover";
@@ -293,6 +305,23 @@ function displayImage(imageSrc) {
   document.body.style.backgroundRepeat = "no-repeat";
   hideGallery();
 }
+
+// 啟動圖片輪播
+function startImageRotation() {
+  currentImageIndex = currentCategoryImages && currentCategoryImages.length > 0 ? 0 : -1; // 確保從第一張圖片開始
+
+  // 檢查是否有可用的圖片，如果沒有則顯示預設圖片
+  if (currentCategoryImages && currentCategoryImages.length > 0) {
+    if (currentImageIndex >= 0) { displayImage(currentCategoryImages[currentImageIndex]); }
+    if (currentImageIndex >= 0) { updateText(currentCategoryTexts[currentImageIndex]); }
+    if (currentImageIndex >= 0) { speakText(currentCategoryTexts[currentImageIndex]); }
+  } else {
+    // 顯示預設圖片
+    const defaultImageUrl = "何木火/一葉知秋.jpg";
+    displayImage(defaultImageUrl);
+  }
+}
+
 
 // 隐藏图片库和类别菜单
 function hideGallery() {
@@ -504,6 +533,7 @@ function displayImage(imageSrc) {
   img.src = imageSrc;
 }
 
+
 function updateText(text) {
   var textBox = document.querySelector(".text-box p");
   textBox.textContent = text;
@@ -513,7 +543,9 @@ function startImageRotation() {
   if (imageRotationInterval) {
     clearInterval(imageRotationInterval);
   }
+
 }
+
 
 // 每分钟更新燃烧的卡路里数
 let totalCaloriesBurned = 0;
@@ -538,8 +570,7 @@ function startStepCounter() {
       stepCount += 1; // Increase step count by 1 every second
       totalDistance = stepCount * distancePerStep; // 計算總距離
       document.getElementById("stepCounter").innerHTML = stepCount;
-      document.getElementById("distance").innerHTML =
-        totalDistance.toFixed(1) + " 公尺"; // 更新顯示距離，保留兩位小數
+      document.getElementById("distance").innerHTML = totalDistance.toFixed(1) + " 公尺"; // 更新顯示距離，保留兩位小數
     }
   }, 500); // Update every second
 }
@@ -615,3 +646,94 @@ window.onclick = function (event) {
     }
   }
 };
+// Function to save data to Firebase
+function saveDataToFirebase() {
+  auth.onAuthStateChanged(function (user) {
+    if (user) {
+      const userUID = user.uid;
+
+      // 獲取當前日期和時間
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const dd = String(now.getDate()).padStart(2, "0");
+      const hh = String(now.getHours()).padStart(2, "0");
+      const min = String(now.getMinutes()).padStart(2, "0");
+      const ss = String(now.getSeconds()).padStart(2, "0");
+
+      const dateStr = `${yyyy}-${mm}-${dd}`; // 日期 YYYY-MM-DD
+      const timeStr = `${hh}:${min}:${ss}`; // 時間 hh-mm-ss
+
+      // 保存數據到 `Records/YYYY-MM-DD/(步數、距離、大卡、時間)/時間`
+      db.collection("users")
+        .doc(userUID)
+        .collection("Records")
+        .doc(dateStr)
+        .collection("step")
+        .doc(timeStr)
+        .set({
+          step: Math.round(stepCount * 100) / 100, // 保留小數點後兩位
+          timestamp: firebase.firestore.Timestamp.now(),
+        })
+        .then(() => {
+          console.log("步數保存成功");
+        })
+        .catch((error) => {
+          console.error("保存步數時出現錯誤:", error);
+        });
+
+      db.collection("users")
+        .doc(userUID)
+        .collection("Records")
+        .doc(dateStr)
+        .collection("Distance")
+        .doc(timeStr)
+        .set({
+          Distance: Math.round(totalDistance * 100) / 100, // 保留小數點後兩位
+          timestamp: firebase.firestore.Timestamp.now(),
+        })
+        .then(() => {
+          console.log("距離保存成功");
+        })
+        .catch((error) => {
+          console.error("保存距離時出現錯誤:", error);
+        });
+
+      db.collection("users")
+        .doc(userUID)
+        .collection("Records")
+        .doc(dateStr)
+        .collection("cal")
+        .doc(timeStr)
+        .set({
+          cal: Math.round(totalCaloriesBurned * 100) / 100, // 保留小數點後兩位
+          timestamp: firebase.firestore.Timestamp.now(),
+        })
+        .then(() => {
+          console.log("大卡保存成功");
+        })
+        .catch((error) => {
+          console.error("保存大卡時出現錯誤:", error);
+        });
+
+      db.collection("users")
+        .doc(userUID)
+        .collection("Records")
+        .doc(dateStr)
+        .collection("run")
+        .doc(timeStr)
+        .set({
+          run: Math.round(remainingTime * 100) / 100, // 保留小數點後兩位
+          timestamp: firebase.firestore.Timestamp.now(),
+        })
+        .then(() => {
+          console.log("時間保存成功");
+        })
+        .catch((error) => {
+          console.error("保存時間時出現錯誤:", error);
+        });
+    } else {
+      console.error("用戶未登錄");
+    }
+  });
+}
